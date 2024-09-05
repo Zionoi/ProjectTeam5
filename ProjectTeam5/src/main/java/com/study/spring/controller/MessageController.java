@@ -19,6 +19,7 @@ public class MessageController {
     @PostMapping("/send")
     public Message sendMessage(@RequestBody Message message) {
     	System.out.println("컨컨컨컨컨컨컨컨컨컨컨컨컨컨컨"+message);
+
     	return messageService.sendMessage(message);
     }
 

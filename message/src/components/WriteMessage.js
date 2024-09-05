@@ -11,13 +11,13 @@ const WriteMessage = () => {
   // 메시지 전송 함수
   const sendMessage = () => {
     axios.post('/api/messages/send', {
-      member: { memId: 'user1' },  // 발신자 ID
+      memId: localStorage.getItem('id'),  // 발신자 ID
       friendId: receiver,          // 수신자 ID
-      mContent: mContent            // 메시지 내용
+      mcontent: mContent            // 메시지 내용
     })
     .then(() => {
-      console.log('receiver----',receiver)
-      console.log('mContent----',mContent)
+      console.log('receiver----', receiver);
+      console.log('mContent----', mContent);
       alert('Message sent');
       setmContent('');  // 입력 필드 초기화
       setReceiver(''); // 수신자 입력 필드 초기화

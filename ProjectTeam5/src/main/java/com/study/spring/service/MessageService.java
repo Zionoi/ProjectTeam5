@@ -17,6 +17,7 @@ public class MessageService {
     // 메시지 전송
     public Message sendMessage(Message message) {
     	System.out.println("서"+message);
+    	
         return messageRepository.save(message);
     }
 
