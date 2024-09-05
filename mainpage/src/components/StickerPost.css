@@ -1,0 +1,71 @@
+/* StickerPost.css */
+.sticker-post-section {
+  width: 100%;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.sticker-post-section h2 {
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.privacy-setting {
+  margin-bottom: 15px;
+}
+
+.privacy-setting label {
+  margin-right: 10px;
+}
+
+#privacy-select {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.post-title,
+.post-content {
+  margin-bottom: 15px;
+}
+
+.post-title label,
+.post-content label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+#post-title-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+#post-content-textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  resize: vertical; /* 내용 영역의 크기를 조절할 수 있게 설정 */
+}
+
+.submit-button {
+  padding: 10px 20px;
+  background-color: #4a90e2;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.submit-button:hover {
+  background-color: #357ab8;
+}

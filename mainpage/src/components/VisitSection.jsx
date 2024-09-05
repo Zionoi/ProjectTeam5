@@ -1,6 +1,9 @@
 // src/components/VisitSection.js
 import React from 'react';
 import './VisitSection.css'; // 스타일 파일을 추가합니다.
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+</style>
 
 function VisitSection() {
   return (

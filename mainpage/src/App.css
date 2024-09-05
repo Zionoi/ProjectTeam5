@@ -2,7 +2,7 @@
 .app {
   display: flex;
   height: 100vh;
-  background-color: #e0f7f7; /* 배경색 설정 */
+  background-color: white; /* 배경색 설정 */
 }
 
 .main-content {
