@@ -1,0 +1,31 @@
+/* src/components/VisitSection.css */
+.visit-section {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .visit-section ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .visit-section li {
+    margin-bottom: 10px;
+  }
+  
+  .view-more {
+    margin-top: 10px;
+    background-color: #ffeb99;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .view-more:hover {
+    background-color: #ffd700;
+  }
+  

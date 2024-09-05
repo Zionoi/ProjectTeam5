@@ -1,0 +1,17 @@
+/* src/components/StickerSection.css */
+.sticker-section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #a0c4ff; /* 파란색 배경 */
+    border-radius: 20px;
+    padding: 20px;
+  }
+  
+  .sticker-content {
+    font-size: 1.5rem;
+    color: white;
+    text-align: center;
+  }
+  

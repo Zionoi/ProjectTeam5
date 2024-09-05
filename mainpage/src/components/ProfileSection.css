@@ -1,0 +1,53 @@
+/* src/components/ProfileSection.css */
+.profile-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 20px;
+    background-color: #ffffff; /* 흰색 배경 */
+    border-radius: 20px; /* 섹션의 테두리 둥글게 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+  }
+  
+  .profile-image {
+    width: 50px;
+    height: 50px;
+
+
+
+  }
+  
+  .profile-comment {
+    font-size: 1rem;
+    text-align: center;
+    color: #555; /* 텍스트 색상 */
+    line-height: 1.5;
+    margin-top: 10px;
+  }
+  
+  .profile-comment h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  
+  .profile-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  .profile-actions button {
+    background-color: #ffcccb;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .profile-actions button:hover {
+    background-color: #ffa1a1;
+  }
+  

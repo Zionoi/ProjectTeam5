@@ -1,0 +1,31 @@
+/* src/components/FriendsSection.css */
+.friends-section {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .friends-section ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .friends-section li {
+    margin-bottom: 10px;
+  }
+  
+  .request-button {
+    margin-top: 10px;
+    background-color: #d0e8ff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .request-button:hover {
+    background-color: #a6d1ff;
+  }
+  

@@ -1,0 +1,22 @@
+/* src/App.css */
+.app {
+  display: flex;
+  height: 100vh;
+  background-color: #e0f7f7; /* 배경색 설정 */
+}
+
+.main-content {
+  flex: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+}
+
+.right-side {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+}
