@@ -9,6 +9,8 @@ import InputDiary from '../diary/InputDiary';
 import GetDiary from '../diary/GetDiary';
 import BoardUpload from '../board/BoardUpload';
 import BoardDetail from '../board/BoardDetail';
+import Login from '../login/Login';
+
 
 function Sidebar() {
   return (
@@ -24,6 +26,7 @@ function Sidebar() {
       <div className="center-panel">
     <Routes>
       <Route path="/" element={<Home />} />
+      <Route path="/Login" element={<Login />} />
       <Route path="/diary" element={<Diary />} />
       <Route path="/board" element={<Board />} />
       <Route path="/boardUpload" element={<BoardUpload />} />
