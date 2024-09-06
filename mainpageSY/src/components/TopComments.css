@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+
+.homgepage-Co {
+    position:relative;
+    left:575px;
+    top:-5px;
+    font-family: "Noto Sans KR", sans-serif;
+    font-size: 15pt;  /*폰트 크기 변경*/
+    font-weight: bold;
+}
+.homgepage-Co-edit {
+    position:relative;
+    left:800px;
+    font-family: "Noto Sans KR", sans-serif;
+    font-size:7pt;
+    font-weight:500;
+    color:rgb(122, 122, 122);
+    border: none; background-color: transparent;
+}
+
+.homgepage-Co-edit:hover {
+    color:rgb(182, 182, 182);
+    cursor: pointer;
+}

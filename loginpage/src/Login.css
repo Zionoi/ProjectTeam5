@@ -1,0 +1,68 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #b2eff1; /*  배경색 */
+}
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
+  position: relative;
+}
+
+.cloud {
+  position: absolute;
+  width: 150px;
+  height: 80px;
+  background: white;
+  border-radius: 50%;
+  top: 20px;
+  left: 20px;
+}
+
+
+
+.input-field {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.login-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #457b9d;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.login-button:hover {
+  background-color: #1d3557;
+}
+
+.links {
+  margin-top: 15px;
+}
+
+.links a {
+  color: #457b9d;
+  margin: 0 10px;
+  text-decoration: none;
+}
+
+.description {
+  margin-top: 20px;
+  color: #333;
+}
+
+.illustration {
+  margin-top: 20px;
+}

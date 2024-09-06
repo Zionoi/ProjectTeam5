@@ -1,0 +1,41 @@
+/* src/App.css */
+
+.app {
+  position: relative;
+  display: flex;
+  width: 1280px;
+  height: 800px;
+  background-color: #e0f7f7; /* 배경색 설정 */
+}
+
+.topcomment {
+  position:absolute;
+  top:155px;
+}
+
+.sidebar {
+  flex:1;
+  
+}
+
+
+.main-content {
+  position:absolute;
+  top:185px;
+  flex: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.left-content {
+  position: absolute;
+}
+.right-side {
+  position:absolute;
+  top:185px; /* 전체 배경 기준*/
+  left:1060px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}

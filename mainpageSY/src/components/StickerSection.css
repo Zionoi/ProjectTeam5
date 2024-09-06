@@ -1,0 +1,22 @@
+/* src/components/StickerSection.css */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+.sticker-section {
+    position:absolute;
+    left:550px;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 500px;
+    height: 500px;
+    background-color: #a0c4ff; /* 파란색 배경 */
+    border-radius: 30px;
+  }
+
+  
+  .sticker-content {
+    font-size: 1.5rem;
+    color: white;
+    text-align: center;
+  }
+  
