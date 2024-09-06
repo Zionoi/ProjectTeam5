@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -32,18 +33,22 @@ public class MemberController {
 	@Autowired
     private MemberRepository memberRepository;
 	
-   @PostMapping("/signup")
-    public String signup(@RequestBody Member member, @RequestParam(value = "image", required = false) MultipartFile img) throws Exception {
-	   
-	    // 이미지가 있으면 처리, 없으면 그냥 넘어감
-	    if (img != null && !img.isEmpty()) {
-	    	memberService.insertMember(member, img);
-	    } else {
-	    	 memberService.insertMember(member);   // 이미지가 없는 경우
-	    }
-        
-        return "User registered successfully"; // 등록 성공 메시지
-    }
+	 	
+	@PostMapping("/signup")
+	public String signup(
+		    @RequestPart("member") Member member,  // 회원 정보를 JSON으로 받음
+		    @RequestPart(value = "image", required = false) MultipartFile img  // 이미지 파일은 Multipart로 받음
+		) throws Exception {
+
+		    // 이미지가 있으면 처리, 없으면 그냥 넘어감
+		    if (img != null && !img.isEmpty()) {
+		        memberService.insertMember(member, img);
+		    } else {
+		        memberService.insertMember(member);   // 이미지가 없는 경우
+		    }
+
+		    return "성공하였습니다."; // 등록 성공 메시지
+		}
 
     @PostMapping("/login")
     public List<Object> login(@RequestBody Member loginRequest) {
