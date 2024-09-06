@@ -1,0 +1,34 @@
+/* PostDetail.css */
+.post-detail {
+    padding: 20px;
+    margin: auto;
+    max-width: 800px;
+  }
+  
+  .slider-container {
+    display: flex;
+    overflow-x: auto;
+    margin-bottom: 20px;
+  }
+  
+  .slider-image {
+    width: 100%;
+    max-width: 500px;
+    margin-right: 10px;
+    border-radius: 8px;
+  }
+  
+  .button-group button {
+    margin-right: 10px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #684cce;
+  }
+  
+
+  

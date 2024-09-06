@@ -24,7 +24,7 @@ function App() {
       </main>
       <aside className="right-side">
       <MusicPlayer />
-      <button onClick={handleLogout} className="btn btn-outline-danger">로그아웃</button>
+      {/* <button onClick={handleLogout} className="btn btn-outline-danger">로그아웃</button> */}
         <VisitSection />
         <FriendsSection />
       </aside>

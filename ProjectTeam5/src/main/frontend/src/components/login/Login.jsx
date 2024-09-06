@@ -45,7 +45,7 @@ const Login = ({ onLoginSuccess }) => {
     setMessage('로그아웃 되었습니다.');
   };
 
-function Login() {
+
   return (
     <div>
       {localStorage.getItem('token') ? (
@@ -89,6 +89,6 @@ function Login() {
     </div>
   );
 }
-}
+
 
 export default Login;
