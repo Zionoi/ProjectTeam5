@@ -50,6 +50,9 @@ body {
   margin-right: 90px;
 }
 
+.signUp:hover,.find:hover { /* 회원가입, 아이디/비번 찾기 버튼 호버 */
+  color: #0397aa;
+}
 
 
 .login-button { /* 로그인 버튼 */
