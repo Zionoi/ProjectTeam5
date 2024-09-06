@@ -51,4 +51,5 @@ public class BoardController {
 	{
 		return boardService.detailBoard(bNum).get();
 	}
+	
 }
