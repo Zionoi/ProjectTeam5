@@ -46,6 +46,7 @@ const Login = ({ onLoginSuccess }) => {
     setMessage('로그아웃 되었습니다.');
   };
 
+
   const handleSignUp = () =>{
     navigate('/SignUpPage');
   }
