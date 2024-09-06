@@ -4,8 +4,14 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
+
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -65,4 +71,19 @@ public class BoardController {
 		return boardService.detailBoard(bNum).get();
 	}
 	
+	@DeleteMapping("/delete/{bnum}")
+	public String deleteBoard(@PathVariable Long bnum) {
+		boardService.deleteBoard(bnum);
+	    return "게시물이 삭제되었습니다.";
+	}
+    @PutMapping("/update")
+    public String updateBoard(
+            @ModelAttribute Board board,  // Board 객체로 묶어서 받음
+            @RequestParam(value = "image", required = false) MultipartFile image) {
+
+        // 서비스 계층에서 처리
+        boardService.updateBoard(board);
+
+        return "업데이트 완료";
+    }
 }
