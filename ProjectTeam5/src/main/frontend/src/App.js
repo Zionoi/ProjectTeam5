@@ -14,11 +14,13 @@ function App() {
     const token = localStorage.getItem('token');
     const id = localStorage.getItem('id');
     if (token && id) {
+      
       setIsLoggedIn(true);
     }
   }, []);
 
   const handleLogout = () => {
+    
     setIsLoggedIn(false); // 로그인 상태를 false로 설정
     localStorage.clear(); // 로컬 스토리지 클리어
   };
@@ -27,6 +29,7 @@ function App() {
     
       <div className="App">
         {isLoggedIn ? (
+          
           <MainPanel onLogout={handleLogout} /> // 로그아웃 핸들러를 전달
         ) : (
           <Login onLoginSuccess={() => setIsLoggedIn(true)} />
