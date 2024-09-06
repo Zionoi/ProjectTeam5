@@ -1,25 +1,26 @@
 /* src/components/Sidebar.css */
 .sidebar {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    padding: 20px;
-  }
-  
-  .icon {
-    width: 50px;
-    height: 50px;
-    background-color: #fff;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .icon:hover {
-    background-color: #a0d7d7;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 20px;
+  margin:185px 30px 115px 130px;
+}
+
+.icon {
+  width: 65px;
+  height: 65px;
+  background-color: #fff;
+  border-radius: 50%;
+  border: 2px solid #a0c4ff; /* 테두리 추가 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.icon:hover {
+  background-color: #a0c4ff;
+}

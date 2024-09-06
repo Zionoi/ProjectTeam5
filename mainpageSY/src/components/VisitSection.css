@@ -1,0 +1,50 @@
+/* src/components/VisitSection.css */
+.visit-section {
+    position:relative;
+    background-color: #ffffff;
+    width: 105px;
+    height: 245px;
+    border-radius: 30px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  .visit-title {
+    font-family: "Noto Sans KR", sans-serif;
+    font-size: 11pt;
+    font-weight: bold;
+    text-align: left;
+    color:rgb(58, 58, 58);
+    margin:25px 10px 0px 10px;
+  }
+  
+  .visit-section ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .visit-section li {
+    font-family: "Noto Sans KR", sans-serif;
+    font-size:9pt;
+    font-weight: 500;
+    text-align: left;
+    color:rgb(112, 112, 112); 
+    margin: 10px 10px 10px 10px;
+  }
+  
+  .view-more {
+    position: absolute;
+    top:210px;
+    left:55px;
+    font-family: "Noto Sans KR", sans-serif;
+    font-size:7pt;
+    font-weight:500;
+    text-align: right;
+    color:rgb(122, 122, 122);
+    border: none; background-color: transparent;
+  }
+  
+  .view-more:hover {
+    color:rgb(182, 182, 182);
+    cursor: pointer;
+  }
+  

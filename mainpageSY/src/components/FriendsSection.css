@@ -1,0 +1,47 @@
+/* src/components/FriendsSection.css */
+.friends-section {
+    position: relative;
+    background-color: #ffffff;
+    width: 105px;
+    height: 245px;
+    margin-top: 10px;
+    border-radius: 30px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .friends-section ul {
+    list-style: none;
+    padding: 0;
+  }
+  .friends-section h3 {
+    font-family: "Noto Sans KR", sans-serif;
+    font-size: 11pt;
+    font-weight: bold;
+    color:rgb(58, 58, 58);
+    margin:25px 10px 0px 10px;
+  }
+  .friends-section li {
+    font-family: "Noto Sans KR", sans-serif;
+    font-size:8pt;
+    font-weight: 500;
+    color:rgb(112, 112, 112); 
+    margin: 10px 10px 10px 10px;
+  }
+  
+  .request-button {
+    position: absolute;
+    top:210px;
+    left:50px;
+    font-family: "Noto Sans KR", sans-serif;
+    font-size:7pt;
+    font-weight:500;
+    text-align: right;
+    color:rgb(122, 122, 122);
+    border: none; background-color: transparent;
+  }
+  
+  .request-button:hover {
+    color:rgb(182, 182, 182);
+    cursor: pointer;
+  }
+  

@@ -1,30 +1,56 @@
 package com.study.spring.domain;
 
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.JoinColumn;
+import java.time.LocalDateTime;
+
+import io.micrometer.common.lang.NonNull;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "message")
 public class Message {
-	@Id
-	@SequenceGenerator (
-			name="mSEQ",
-			sequenceName = "m_SQ",
-			allocationSize = 1
-			)	
-	@GeneratedValue(generator="mSEQ")
-	private Long mNum;
-	
-	@ManyToOne
-    @JoinColumn(name = "memId") 
-    private Member member;
-	
-	private String mContent;
-	private String createSysdate;
-	private boolean isReading;
+
+    @Id
+    @SequenceGenerator(
+        name = "mSEQ",
+        sequenceName = "M_SQ",
+        allocationSize = 1
+    )
+    @GeneratedValue(generator = "mSEQ")
+    private Long mNum;
+
+    @Column(nullable = false)
+    private String memId;  // 발신자 ID
+
+    @NonNull
+    @Column(nullable = false)
+    private String friendId;  // 수신자 ID
+
+    @NonNull
+    @Column(nullable = false)
+    private String mcontent;  // 메시지 내용
+
+    @NonNull
+    @Column(nullable = false)
+    private LocalDateTime createSysdate;
+
+    @PrePersist
+    public void prePersist() {
+        this.createSysdate = LocalDateTime.now();
+    }
 }
+

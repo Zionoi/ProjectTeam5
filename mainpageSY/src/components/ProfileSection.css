@@ -1,0 +1,32 @@
+/* src/components/ProfileSection.css */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+.profile-section {
+    position:absolute;
+    top:0px;
+    left:315px;
+    display: flex;
+    flex-direction: column;
+    width: 225px;
+    height: 300px;
+    background-color: #ffffff; /* 흰색 배경 */
+    border-radius: 30px; /* 섹션의 테두리 둥글게 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+  }
+
+  .profile {
+    position:absolute;
+    top:-35px;
+    left:340px;
+    font-family: "Noto Sans KR", sans-serif;
+    font-size:15pt;
+    font-weight: bold;
+    color:rgb(63, 63, 63);
+  }
+  
+  .profile-image {
+    width: 225px;
+    height: 300px;
+    border-radius: 30px;
+  }
+  
+  
