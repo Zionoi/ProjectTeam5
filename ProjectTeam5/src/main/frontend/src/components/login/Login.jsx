@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
-<style>
+{/* <style>
 @import url('https://fonts.googleapis.com/css2?family=Asap:ital,wght@0,100..900;1,100..900&family=Noto+Sans+KR&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
-</style>
+</style> */}
 
 
 const Login = ({ onLoginSuccess }) => {
@@ -45,7 +45,7 @@ const Login = ({ onLoginSuccess }) => {
     setMessage('로그아웃 되었습니다.');
   };
 
-function Login() {
+
   return (
     <div>
       {localStorage.getItem('token') ? (
@@ -89,6 +89,6 @@ function Login() {
     </div>
   );
 }
-}
+
 
 export default Login;
