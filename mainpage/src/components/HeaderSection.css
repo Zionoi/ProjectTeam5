@@ -1,0 +1,27 @@
+/* src/components/HeaderSection.css */
+.header-section {
+    width: 200px; /* 헤더 높이 */
+    height: 250px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+  }
+  
+  .today {
+    font-size: 14px;
+    color: #164fa5;
+  }
+
+  .total {
+    font-size: 14px;
+    color: #333;
+  }
+  
+  .greeting {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+  }
+  
