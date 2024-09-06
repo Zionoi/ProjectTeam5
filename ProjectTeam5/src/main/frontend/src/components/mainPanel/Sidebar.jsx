@@ -10,6 +10,7 @@ import GetDiary from '../diary/GetDiary';
 import BoardUpload from '../board/BoardUpload';
 import BoardDetail from '../board/BoardDetail';
 import Login from '../login/Login';
+import SignUpPage from '../SignUpPage/SignUpPage';
 
 
 function Sidebar() {
@@ -27,6 +28,7 @@ function Sidebar() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/Login" element={<Login />} />
+      <Route path="/SignUpPage" element={<SignUpPage />} />
       <Route path="/diary" element={<Diary />} />
       <Route path="/board" element={<Board />} />
       <Route path="/boardUpload" element={<BoardUpload />} />
