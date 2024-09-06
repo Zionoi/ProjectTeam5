@@ -1,0 +1,115 @@
+/* src/components/Sidebar.css */
+.sidebar {
+    position:relative;
+    top:80px;
+    left:60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 22px;
+}
+.icon {
+    width: 65px;
+    height: 65px;
+    border-style: solid;
+    border-width: 3px;
+    border-color: #7982ff ;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+
+.icon.home {
+  background:url(../../img/home.png) no-repeat;
+  background-size: 50px;
+  background-position-x: center;
+  background-position-y: center;
+  background-color: rgb(255, 255, 255);
+}
+.icon.home:hover {
+  background:url(../../img/homeOnclick.png) no-repeat;
+  background-size: 50px;
+  background-position-x: center;
+  background-position-y: center;
+  background-color: #7982ff;
+}
+
+.icon.diary {
+  background:url(../../img/diary.png) no-repeat;
+  background-size: 50px;
+  background-position-x: center;
+  background-position-y: center;
+  background-color: rgb(255, 255, 255);
+}
+.icon.diary:hover {
+  background:url(../../img/diaryOnclick.png) no-repeat;
+  background-size: 50px;
+  background-position-x: center;
+  background-position-y: center;
+  background-color: #7982ff;
+}
+
+.icon.board {
+  background:url(../../img/board.png) no-repeat;
+  background-size: 50px;
+  background-position-x: center;
+  background-position-y: center;
+  background-color: rgb(255, 255, 255);
+}
+.icon.board:hover {
+  background:url(../../img/boardOnclick.png) no-repeat;
+  background-size: 50px;
+  background-position-x: center;
+  background-position-y: center;
+  background-color: #7982ff;
+}
+
+.icon.visit {
+  background:url(../../img/guestbook.png) no-repeat;
+  background-size: 50px;
+  background-position-x: center;
+  background-position-y: center;
+  background-color: rgb(255, 255, 255);
+}
+.icon.visit:hover {
+  background:url(../../img/guestbookOnclick.png) no-repeat;
+  background-size: 50px;
+  background-position-x: center;
+  background-position-y: center;
+  background-color: #7982ff;
+}
+
+.icon.walk {
+  background:url(../../img/walk.png) no-repeat;
+  background-size: 50px;
+  background-position-x: center;
+  background-position-y: center;
+  background-color: rgb(255, 255, 255);
+}
+.icon.walk:hover {
+  background:url(../../img/walkOnclick.png) no-repeat;
+  background-size: 50px;
+  background-position-x: center;
+  background-position-y: center;
+  background-color: #7982ff;
+}
+
+.icon.food {
+  background:url(../../img/restaurant.png) no-repeat;
+  background-size: 50px;
+  background-position-x: center;
+  background-position-y: center;
+  background-color: rgb(255, 255, 255);
+}
+.icon.food:hover {
+  background:url(../../img/restaurantOnclick.png) no-repeat;
+  background-size: 50px;
+  background-position-x: center;
+  background-position-y: center;
+  background-color: #7982ff;
+}

@@ -1,40 +1,44 @@
-.App {
-  text-align: center;
-  height: 700px;
-  width: 1000px;
+/* 게시판 slick 디자인 설정해주는 문구 */
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
+
+.app {
+  position: relative;
+  display: flex;
+  width: 1280px;
+  height: 800px;
+  background-color: #e0f7f7; /* 배경색 설정 */
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.topcomment {
+  position:absolute;
+  top:155px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.sidebar {
+  flex:1;
+  
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+
+.main-content {
+  position:absolute;
+  top:185px;
+  flex: 3;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.left-content {
+  position: absolute;
+}
+.right-side {
+  position:absolute;
+  top:185px; /* 전체 배경 기준*/
+  left:1060px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}

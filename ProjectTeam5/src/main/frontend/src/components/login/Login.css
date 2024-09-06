@@ -1,0 +1,82 @@
+body {
+  background-color: #6FE7C3; /* 배경색 설정 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.loginAccount { /* Login Account */
+  font-family: "Asap", sans-serif;
+  font-weight: 900;
+  font-size:22pt;
+  color: #0397aa;
+  margin-bottom: 50px;
+}
+
+.login-form {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input-field { /* 아이디/비밀번호 입력 칸 */
+  flex: 1;
+  padding: 7px 22px;
+  margin-top:2px;
+  margin-right:9px;
+  border: 1px solid #ddd;
+  border-radius: 15px;
+  outline: none;
+  color:#969696;
+}
+.input-field::placeholder { /* 아이디/비밀번호 홀더 폰트 */
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  color:#c0c0c0;
+}
+
+.signUp,.find { /* 회원가입, 아이디/비번 찾기 버튼 테이블 */
+  color: #ffffff;
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 400;
+  font-size:9pt;
+  text-decoration: none;
+}
+
+.bu { /* 회원가입, 아이디/비번 찾기 버튼 테이블 공백 */
+  margin-top: -8px;
+  margin-right: 90px;
+}
+
+.signUp:hover,.find:hover { /* 회원가입, 아이디/비번 찾기 버튼 호버 */
+  color: #0397aa;
+}
+
+
+.login-button { /* 로그인 버튼 */
+  padding: 25px 13px;
+  background-color: #0397aa;
+  font-family: "Roboto", sans-serif;
+  font-weight: 600;
+  font-size: 12pt;
+  color: white;
+  letter-spacing: 1px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
+.login-button:hover { /* 로그인 버튼 마우스 호버 */
+  background-color: #368aff;
+}
+
+
+.description {  /* 소개 글 */
+  margin-top: 40px;
+  font-family: "Noto Sans KR", sans-serif;
+  font-size:11pt;
+  line-height: 250%;
+  color: #555555;
+  text-align: center;
+}

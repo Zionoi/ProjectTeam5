@@ -1,0 +1,62 @@
+/* src/components/CommentsSection.css */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+
+.comments-section {
+    position:absolute;
+    top:310px;
+    left:240px;
+    background-color: #ffffff;
+    width: 300px;
+    height: 150px;
+    border-radius: 30px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .comments-co {
+    font-family: "Noto Sans KR", sans-serif;
+    font-size: 11pt;
+    font-weight: bold;
+    color:rgb(58, 58, 58);
+    margin:25px 25px 10px 25px;
+  }
+
+  .comments-contents{
+    font-family: "Noto Sans KR", sans-serif;
+    font-size:9pt;
+    color:rgb(112, 112, 112); 
+    margin: 0px 25px 25px 25px;
+  }
+
+  .comments-actions {
+    position: relative;
+    top:30px;
+    display: flex;
+    gap: 10px;
+    left:120px;
+  }
+  
+  .letter-button {
+    font-family: "Noto Sans KR", sans-serif;
+    font-size: 10pt;
+    font-weight: 600;
+    color:rgb(80, 80, 80);
+    border: none; background-color: transparent;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .letter-button:hover {
+    color:#7982ff;
+  }
+  
+  .letterIcon {
+    background: url(../../img/letterIcon.png) no-repeat;
+    background-size: contain;
+    border:none;
+  }
+  .letterIcon:hover {
+    cursor: pointer;
+    background: url(../../img/letterIconB.png) no-repeat;
+    background-size: contain;
+    border:none;
+  }

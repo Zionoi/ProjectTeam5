@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import '../App.css';
+import './Login.css';
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Asap:ital,wght@0,100..900;1,100..900&family=Noto+Sans+KR&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+</style>
+
 
 const Login = ({ onLoginSuccess }) => {
   const [userid, setUserid] = useState('');
@@ -42,6 +45,7 @@ const Login = ({ onLoginSuccess }) => {
     setMessage('로그아웃 되었습니다.');
   };
 
+function Login() {
   return (
     <div>
       {localStorage.getItem('token') ? (
@@ -50,25 +54,41 @@ const Login = ({ onLoginSuccess }) => {
           <button onClick={handleLogout}>로그아웃</button>
         </div>
       ) : (
-        <div>
-          <input
-            type="text"
-            placeholder="사용자 아이디"
-            value={userid}
-            onChange={(e) => setUserid(e.target.value)}
-          />
-          <input
-            type="password"
-            placeholder="비밀번호"
-            value={pass}
-            onChange={(e) => setPass(e.target.value)}
-          />
-          <button onClick={handleLogin}>로그인</button>
-        </div>
+      <div className="login-form">
+        <h2 className="loginAccount">Login Account</h2>
+        <table>
+          <tr>
+              <input type="text" placeholder="ID" className="input-field" 
+                      value={userid}
+                      onChange={(e) => setUserid(e.target.value)}/>
+          <tr>
+              <input type="password" placeholder="Password" className="input-field" 
+                      value={pass}
+                      onChange={(e) => setPass(e.target.value)}/>
+          </tr>
+              <td rowSpan="2"><button className="login-button" onClick={handleLogin}>Login</button></td>
+          </tr>
+        </table>
+        <table className="bu">
+          <tr>
+            <td><a href="#" className="signUp">회원가입</a></td>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td><a href="#"className="find">아이디/비밀번호 찾기</a></td>
+          </tr>
+        </table>
+        <p className="description">
+          친구들과 함께하는 소중한 일상, 이곳에서 기록하고 나누세요.
+          <br />
+          매일매일의 작은 순간들을 모아
+          <br/>
+          함께 웃고, 함께 공유하는 행복한 순간을 만끽하세요 !
+        </p>
+      </div>
       )}
       <p>{message}</p>
     </div>
   );
-};
+}
+}
 
 export default Login;
