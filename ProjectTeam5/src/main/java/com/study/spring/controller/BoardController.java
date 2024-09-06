@@ -64,4 +64,5 @@ public class BoardController {
 		System.out.println("보드 디테일 가져오기 bnum : " + bNum);
 		return boardService.detailBoard(bNum).get();
 	}
+	
 }
