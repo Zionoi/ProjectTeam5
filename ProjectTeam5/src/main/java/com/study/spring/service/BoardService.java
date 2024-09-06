@@ -1,6 +1,7 @@
 package com.study.spring.service;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -20,21 +21,27 @@ public class BoardService {
     private final String uploadDir = System.getProperty("user.dir") + "/uploadedFiles";
 
     //사진이 있는 경우
-    public void write(Board board, MultipartFile img) throws Exception {
+    public void write(Board board, MultipartFile[] img) throws Exception {
         // 파일 저장 경로 설정
         File dir = new File(uploadDir);
+        List<String> path = new ArrayList<String>();
+        List<String> name = new ArrayList<String>();
         if (!dir.exists()) {
             dir.mkdirs();  // 디렉토리가 없으면 생성
         }
-
-        String fileName = UUID.randomUUID().toString() + "_" + img.getOriginalFilename();
-        File saveFile = new File(dir, fileName);
-        img.transferTo(saveFile);
-
-        // 파일 경로 저장
-        board.setImgName(fileName);
-        board.setImgPath("/files/" + fileName);
-
+        for(int i=0 ; i<img.length;i++) {
+	        String fileName = UUID.randomUUID().toString() + "_" + img[i].getOriginalFilename();
+	        File saveFile = new File(dir, fileName);
+	        img[i].transferTo(saveFile);
+	        path.add("/files/" + fileName);
+	        name.add(fileName);
+	        // 파일 경로 저장
+	        System.out.println("보드서비스 여러장 업로드 board : " + img[i]+board);
+        }
+//        board.setImgName(fileName);
+//        board.setImgPath("/files/" + fileName);
+        board.setImgName(name);
+        board.setImgPath(path);
         boardRepository.save(board);
     }
     
