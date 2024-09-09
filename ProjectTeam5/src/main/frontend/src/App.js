@@ -28,11 +28,7 @@ function App() {
   return (
     
       <div className="App">
-        <Routes>
-        <Route path="/" element={<PostList />} /> {/* 게시글 목록 페이지 */}
-      <Route path="/post/:id" element={<PostDetail />} /> {/* 게시글 상세 페이지 */}
-      <Route path="/" element={<GuestbookPage />} /> {/* GuestbookPage를 기본 페이지로 설정 */}
-      </Routes>
+        
         {isLoggedIn ? (
           
           <MainPanel onLogout={handleLogout} /> // 로그아웃 핸들러를 전달

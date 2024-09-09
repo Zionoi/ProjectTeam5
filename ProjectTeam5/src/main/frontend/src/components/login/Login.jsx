@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
-import SignUpPage from '../SignUpPage/SignUpPage';
+// import SignUpPage from '../SignUpPage/SignUpPage';
 {/* <style>
 @import url('https://fonts.googleapis.com/css2?family=Asap:ital,wght@0,100..900;1,100..900&family=Noto+Sans+KR&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 </style> */}
@@ -47,9 +47,9 @@ const Login = ({ onLoginSuccess }) => {
   };
 
 
-  const handleSignUp = () =>{
-    navigate('/SignUpPage');
-  }
+  // const handleSignUp = () =>{
+  //   navigate('/SignUpPage');
+  // }
 
   return (
     <div>
@@ -76,7 +76,7 @@ const Login = ({ onLoginSuccess }) => {
         </table>
         <table className="bu">
           <tr>
-            <td><a href="../SignUpPage/SignUpPage" className="signUp" onClick={handleSignUp}>회원가입</a></td>
+            {/* <td><a href="/SignUpPage" className="signUp" onClick={handleSignUp}>회원가입</a></td> */}
             <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
             <td><a href="#"className="find">아이디/비밀번호 찾기</a></td>
           </tr>
