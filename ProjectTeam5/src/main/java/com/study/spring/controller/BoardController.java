@@ -4,14 +4,12 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
-
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
-
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -56,9 +54,7 @@ public class BoardController {
 	//모든 board를 가져옴
 	@GetMapping("/total")
 	public List<Board> totalBoard(){
-		System.out.println("보드컨트롤러 리스트 서비스시작전" );
 		List<Board> list = boardService.totalBoard();
-		System.out.println("보드컨트롤러 리스트 서비스실행 후: " + list);
 		return list;
 	}
 	
@@ -67,7 +63,6 @@ public class BoardController {
 	@GetMapping("/detail")
 	public Board detailBoard(@RequestParam("bNum") Long bNum)
 	{
-		System.out.println("보드 디테일 가져오기 bnum : " + bNum);
 		return boardService.detailBoard(bNum).get();
 	}
 	
@@ -76,14 +71,20 @@ public class BoardController {
 		boardService.deleteBoard(bnum);
 	    return "게시물이 삭제되었습니다.";
 	}
-    @PutMapping("/update")
-    public String updateBoard(
-            @ModelAttribute Board board,  // Board 객체로 묶어서 받음
-            @RequestParam(value = "image", required = false) MultipartFile image) {
+	
+	@PostMapping("/update")
+	public String updateBoard(
+	        Board board,  // Board 객체로 묶어서 받음
+	        @RequestParam(value = "image", required = false) MultipartFile[] images) throws Exception {
 
-        // 서비스 계층에서 처리
-        boardService.updateBoard(board);
+	
+	    // 이미지가 있으면 처리, 없으면 그냥 넘어감
+	    if (images != null && images.length > 0) {
+	        boardService.updateBoard(board, images);
+	    } else {
+	        boardService.updateBoard(board);  // 이미지가 없는 경우
+	    }
 
-        return "업데이트 완료";
-    }
+	    return "업데이트 완료";
+	}
 }

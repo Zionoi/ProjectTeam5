@@ -66,6 +66,7 @@ public class BoardService {
 		
 	}
 
+	//이미지가 없는 경우 수정
 	public void updateBoard(Board board) {
 		Board beforeBoard = boardRepository.findById(board.getBNum()).get();
 		
@@ -78,4 +79,40 @@ public class BoardService {
 		
 		
 	}
+	
+	//이미지가 있는 경우 수정
+	public void updateBoard(Board board, MultipartFile[] images) throws Exception {
+	    Board beforeBoard = boardRepository.findById(board.getBNum()).get();
+
+	    // 기존 데이터를 업데이트
+	    beforeBoard.setBTitle(board.getBTitle());
+	    beforeBoard.setBContent(board.getBContent());
+
+	    // 이미지가 있으면 새 이미지 저장
+	    if (images != null && images.length > 0) {
+	        File dir = new File(uploadDir);
+	        List<String> path = new ArrayList<>();
+	        List<String> name = new ArrayList<>();
+	        
+	        if (!dir.exists()) {
+	            dir.mkdirs();  // 디렉토리가 없으면 생성
+	        }
+	        
+	        // 새 이미지 저장 및 경로 저장
+	        for (MultipartFile image : images) {
+	            String fileName = UUID.randomUUID().toString() + "_" + image.getOriginalFilename();
+	            File saveFile = new File(dir, fileName);
+	            image.transferTo(saveFile);
+	            path.add("/files/" + fileName);
+	            name.add(fileName);
+	        }
+	        
+	        // 기존 이미지 대체 (기존 이미지를 덮어씌움)
+	        beforeBoard.setImgName(name);
+	        beforeBoard.setImgPath(path);
+	    }
+
+	    boardRepository.save(beforeBoard);
+	}
+
 }
