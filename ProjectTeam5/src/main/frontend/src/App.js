@@ -12,6 +12,7 @@ function App() {
   const navigate = useNavigate();
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [friensdHp, setfriensdHp] = useState(false);
 
     useEffect(() => {
       // 로컬 스토리지에서 로그인 상태 확인
@@ -28,6 +29,7 @@ function App() {
     const handleLogout = () => {
     
       setIsLoggedIn(false); // 로그인 상태를 false로 설정
+      setfriensdHp(false)
       localStorage.clear(); // 로컬 스토리지 클리어
     };
   return (
