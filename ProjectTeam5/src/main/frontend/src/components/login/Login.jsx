@@ -76,7 +76,7 @@ const Login = ({ onLoginSuccess }) => {
         </table>
         <table className="bu">
           <tr>
-            {/* <td><a href="/SignUpPage" className="signUp" onClick={handleSignUp}>회원가입</a></td> */}
+            <td><a href="/SignUpPage" className="signUp">회원가입</a></td>
             <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
             <td><a href="#"className="find">아이디/비밀번호 찾기</a></td>
           </tr>
