@@ -29,15 +29,12 @@ function Sidebar() {
       <div className="center-panel">
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/Login" element={<Login />} />
-      <Route path="/SignUpPage" element={<SignUpPage />} />
       <Route path="/diary" element={<Diary />} />
       <Route path="/board" element={<Board />} />
       <Route path="/boardUpload" element={<BoardUpload />} />
       <Route path="/boardDetail/:bNum" element={<BoardDetail />} />
       <Route path="/inputDiary/:date" element={<InputDiary />} /> {/* InputDiary 페이지 라우팅 */}
       <Route path="/getDiary/:dNum" element={<GetDiary />} />
-      <Route path="/SignUpPage" element={<SignUpPage />}/>
       <Route path="/GuestbookPage" element={<GuestbookPage />}/>
     </Routes>
   </div>
