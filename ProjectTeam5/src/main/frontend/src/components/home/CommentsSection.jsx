@@ -1,8 +1,8 @@
 // src/components/CommentsSection.js
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import WriteMessage from './message/WriteMessage';
-import Inbox from './message/Inbox';
+import WriteMessage from '../message/WriteMessage';
+import Inbox from '../message/Inbox';
 import './CommentsSection.css'; // 스타일 파일을 추가합니다.
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
