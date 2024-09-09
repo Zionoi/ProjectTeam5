@@ -9,10 +9,10 @@ import InputDiary from '../diary/InputDiary';
 import GetDiary from '../diary/GetDiary';
 import BoardUpload from '../board/BoardUpload';
 import BoardDetail from '../board/BoardDetail';
+import GuestbookPage from '../guestbookpage/GuestbookPage';
 
 // import Login from '../login/Login';
 // import SignUpPage from '../SignUpPage/SignUpPage';
-import GuestbookPage from '../guestbookpage/GuestbookPage';
 
 
 function Sidebar() {
@@ -22,7 +22,7 @@ function Sidebar() {
       <Link to="/Home"><div className="icon home"></div></Link>
       <Link to="/diary"><div className="icon diary"></div></Link>
       <Link to="/board"><div className="icon board"></div></Link>
-      <div className="icon visit"><a href="#"></a></div>
+      <Link to="/GuestbookPage"><div className="icon visit"></div></Link>
       <div className="icon walk"><a href="#"></a></div>
       <div className="icon food"><a href="#"></a></div>
     </nav>
