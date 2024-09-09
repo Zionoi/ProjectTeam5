@@ -6,9 +6,9 @@ import CommentsSection from './CommentsSection';
 
 // 쪽지관련 컴포넌트
 import { Routes, Route, useNavigate } from 'react-router-dom';  // 라우팅 관련 import
-import WriteMessage from './message/WriteMessage';
-import Inbox from './message/Inbox';
-import MessageDetail from './message/MessageDetail';
+import WriteMessage from '../message/WriteMessage';
+import Inbox from '../message/Inbox';
+import MessageDetail from '../message/MessageDetail';
 
 import '../../App.css';
 import TopCommnets from '../mainPanel/TopComments';
