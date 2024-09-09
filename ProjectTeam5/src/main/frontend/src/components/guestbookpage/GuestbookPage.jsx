@@ -1,73 +1,69 @@
 // GuestbookPage.js
 import React, { useState } from 'react';
-import './GuestbookPage.css'; // GuestbookPage 전용 스타일
+import './GuestbookPage.css';
 
 function GuestbookPage() {
-  const [postData, setPostData] = useState({
-    title: '',
-    content: '',
-    visibility: '전체공개',
-    files: [],
-  });
+  // 방명록 데이터 상태 관리
+  const [guestbookEntries, setGuestbookEntries] = useState([
+    { id: 1, username: 'USER01', date: '2024-09-01', message: '안녕하세요 잘 부탁드립니다!!' },
+    { id: 2, username: 'USER02', date: '2024-09-05', message: '쪽지 주셔서 놀랐어요. 항상 감사합니다.' },
+    { id: 3, username: 'USER03', date: '2024-08-25', message: '방가방가' },
+  ]);
+  const [newEntry, setNewEntry] = useState('');
 
+  // 방명록 추가 기능
+  const handleAddEntry = () => {
+    if (!newEntry.trim()) return; // 공백 방지
+    const newEntryObject = {
+      id: guestbookEntries.length + 1,
+      username: 'NEWUSER', // 로그인 기능이 없다면 고정된 값 사용
+      date: new Date().toISOString().split('T')[0],
+      message: newEntry,
+    };
+    setGuestbookEntries([newEntryObject, ...guestbookEntries]);
+    setNewEntry('');
+  };
+
+  // 입력 핸들러
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setPostData({ ...postData, [name]: value });
+    setNewEntry(e.target.value);
   };
 
-  const handleFileChange = (e) => {
-    setPostData({ ...postData, files: Array.from(e.target.files) });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('게시글 데이터:', postData);
-    // 게시글 등록 로직 추가
+  // 방명록 정렬 (최신순/오래된순)
+  const handleSort = (order) => {
+    const sortedEntries = [...guestbookEntries].sort((a, b) => {
+      if (order === 'newest') return new Date(b.date) - new Date(a.date);
+      else return new Date(a.date) - new Date(b.date);
+    });
+    setGuestbookEntries(sortedEntries);
   };
 
   return (
     <div className="guestbook-container">
-      <h1>사용자 홈페이지 인삿말</h1>
-      <form onSubmit={handleSubmit}>
-        <div className="file-upload-section">
-          <label>이미지, 동영상 업로드</label>
-          <input
-            type="file"
-            name="files"
-            onChange={handleFileChange}
-            multiple
-            accept="image/*,video/*"
-          />
+      <h2>사용자 홈페이지 인삿말</h2>
+      <div className="guestbook-list">
+        <div className="sort-options">
+          <span onClick={() => handleSort('newest')}>최신순</span> |{' '}
+          <span onClick={() => handleSort('oldest')}>오래된순</span>
         </div>
-        <input
-          type="text"
-          name="title"
-          placeholder="제목을 입력하세요."
-          value={postData.title}
-          onChange={handleChange}
-          required
-        />
+        {guestbookEntries.map((entry) => (
+          <div key={entry.id} className="guestbook-entry">
+            <div className="entry-header">
+              <span className="username">{entry.username}</span>
+              <span className="date">{entry.date}</span>
+            </div>
+            <p className="message">{entry.message}</p>
+          </div>
+        ))}
+      </div>
+      <div className="guestbook-input">
         <textarea
-          name="content"
-          placeholder="내용을 입력하세요."
-          value={postData.content}
+          value={newEntry}
           onChange={handleChange}
-          required
-        />
-        <div className="visibility-selection">
-          <label>공개범위</label>
-          <select
-            name="visibility"
-            value={postData.visibility}
-            onChange={handleChange}
-          >
-            <option value="전체공개">전체공개</option>
-            <option value="친구공개">친구공개</option>
-            <option value="비공개">비공개</option>
-          </select>
-        </div>
-        <button type="submit">게시글 등록</button>
-      </form>
+          placeholder="내용을 입력해 주세요."
+        ></textarea>
+        <button onClick={handleAddEntry}>완료</button>
+      </div>
     </div>
   );
 }
