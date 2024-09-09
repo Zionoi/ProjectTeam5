@@ -31,13 +31,13 @@ const Login = ({ onLoginSuccess }) => {
         localStorage.setItem('token', response.data[0]);
         setMessage('로그인 성공!');
         onLoginSuccess(); // 로그인 성공 시 호출
-        navigate('/'); // 메인 페이지로 리다이렉트
+        navigate('/Home'); // 메인 페이지로 리다이렉트
       } else {
         setMessage('잘못된 사용자 이름 또는 비밀번호');
       }
     } catch (error) {
       console.error('로그인 오류:', error);
-      setMessage('로그인 실패');
+      setMessage('로그인 실패asdf');
     }
   };
 
