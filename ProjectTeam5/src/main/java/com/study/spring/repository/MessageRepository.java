@@ -10,6 +10,8 @@ import org.springframework.data.domain.Sort;
 
 import com.study.spring.domain.Message;
 
+import jakarta.transaction.Transactional;
+
 @Repository
 public interface MessageRepository extends JpaRepository<Message, Long> {
 
@@ -18,6 +20,7 @@ public interface MessageRepository extends JpaRepository<Message, Long> {
 
     // 메시지 읽음 처리
     @Modifying
+    @Transactional
     @Query("UPDATE Message m SET m.isReading = 0 WHERE m.mNum = :mNum")
     void markMessageAsRead(@Param("mNum") Long mNum);
 
