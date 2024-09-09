@@ -4,7 +4,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -63,6 +65,29 @@ public class BoardController {
 	{
 		System.out.println("보드 디테일 가져오기 bnum : " + bNum);
 		return boardService.detailBoard(bNum).get();
+	}
+	
+	
+	@DeleteMapping("/delete/{bnum}")
+	public String deleteBoard(@PathVariable Long bnum) {
+		boardService.deleteBoard(bnum);
+	    return "게시물이 삭제되었습니다.";
+	}
+	
+	@PostMapping("/update")
+	public String updateBoard(
+	        Board board,  // Board 객체로 묶어서 받음
+	        @RequestParam(value = "image", required = false) MultipartFile[] images) throws Exception {
+
+	
+	    // 이미지가 있으면 처리, 없으면 그냥 넘어감
+	    if (images != null && images.length > 0) {
+	        boardService.updateBoard(board, images);
+	    } else {
+	        boardService.updateBoard(board);  // 이미지가 없는 경우
+	    }
+
+	    return "업데이트 완료";
 	}
 	
 }
