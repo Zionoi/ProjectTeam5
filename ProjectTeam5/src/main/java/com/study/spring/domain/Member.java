@@ -16,6 +16,7 @@ public class Member {
 	private String pass;
 	@NonNull
 	private String nickname;
+	private String name;
 	private String phone;
 	private String birthday;
 	private String email;

@@ -1,23 +1,38 @@
 // GuestbookPage.js
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './GuestbookPage.css';
+import axios from 'axios';
 
 function GuestbookPage() {
   // 방명록 데이터 상태 관리
-  const [guestbookEntries, setGuestbookEntries] = useState([
-    { id: 1, username: 'USER01', date: '2024-09-01', message: '안녕하세요 잘 부탁드립니다!!' },
-    { id: 2, username: 'USER02', date: '2024-09-05', message: '쪽지 주셔서 놀랐어요. 항상 감사합니다.' },
-    { id: 3, username: 'USER03', date: '2024-08-25', message: '방가방가' },
-  ]);
+  const [guestbookEntries, setGuestbookEntries] = useState([]);
   const [newEntry, setNewEntry] = useState('');
+
+  // [
+  //   { id: 1, username: 'USER01', date: '2024-09-01', message: '안녕하세요 잘 부탁드립니다!!' },
+  //   { id: 2, username: 'USER02', date: '2024-09-05', message: '쪽지 주셔서 놀랐어요. 항상 감사합니다.' },
+  //   { id: 3, username: 'USER03', date: '2024-08-25', message: '방가방가' },
+  // ]
+  //방명록 리스트 불러오기
+  useEffect(() => {
+    axios
+      .get('/guestbook/total')
+      .then((response) => {
+        console.log("Fetched images:", response.data);
+        setGuestbookEntries(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching images:", error);
+        alert("이미지 목록을 가져오는 중 오류가 발생했습니다.");
+      });
+  }, []);
 
   // 방명록 추가 기능
   const handleAddEntry = () => {
     if (!newEntry.trim()) return; // 공백 방지
     const newEntryObject = {
-      id: guestbookEntries.length + 1,
-      username: 'NEWUSER', // 로그인 기능이 없다면 고정된 값 사용
-      date: new Date().toISOString().split('T')[0],
+      memId: localStorage.getItem('hostUserId'), // 방명록이 달리는 페이지의 주인 아이디
+      nickname: 'NEWUSER', // 방명록을 다는 유저
       message: newEntry,
     };
     setGuestbookEntries([newEntryObject, ...guestbookEntries]);

@@ -1,5 +1,10 @@
 package com.study.spring.domain;
 
+import java.time.LocalDateTime;
+
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -19,13 +24,13 @@ public class Guestbook {
 			allocationSize = 1
 			)	
 	@GeneratedValue(generator="gSEQ")
-	private Long gNum;
+	private Long gbNum;
+	private String memId;	//방명록이 달리는 페이지의 주인의 아이디
+	private String nickname;	// 방명록을 다는 사람의 아이디
+	private String gbContent;
+	@CreatedDate
+    private LocalDateTime createDate;
+	@LastModifiedDate
+    private LocalDateTime updateDate;
 	
-	@ManyToOne
-    @JoinColumn(name = "memId") 
-    private Member member;
-
-	
-	private String nickname;
-	private String gContent;
 }

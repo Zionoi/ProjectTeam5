@@ -26,7 +26,7 @@ const WriteMessage = () => {
   // 메시지 전송 함수
   const sendMessage = () => {
     axios.post('/api/messages/send', {
-      memId: 'user02',  // 발신자 ID (예시)
+      memId: localStorage.getItem('id'),  // 발신자 ID (예시)
       friendId: receiver,  // 수신자 ID
       mcontent: mContent   // 메시지 내용
     })
