@@ -36,7 +36,7 @@ function Sidebar() {
       <Route path="/boardDetail/:bNum" element={<BoardDetail />} />
       <Route path="/inputDiary/:date" element={<InputDiary />} /> {/* InputDiary 페이지 라우팅 */}
       <Route path="/getDiary/:dNum" element={<GetDiary />} />
-      <Route path="SignUpPage" element={<SignUpPage />}/>
+      
     </Routes>
   </div>
     

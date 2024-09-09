@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Login.css';
 import SignUpPage from '../SignUpPage/SignUpPage';
 {/* <style>
@@ -76,7 +76,7 @@ const Login = ({ onLoginSuccess }) => {
         </table>
         <table className="bu">
           <tr>
-            <td><a href="../SignUpPage/SignUpPage" className="signUp" onClick={handleSignUp}>회원가입</a></td>
+          <Link to="/SignUpPage"><td>회원가입</td></Link>
             <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
             <td><a href="#"className="find">아이디/비밀번호 찾기</a></td>
           </tr>
