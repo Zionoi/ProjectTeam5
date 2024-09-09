@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.buildship.ui.wizard.project.import">
-		<item key="project_location" value="C:\Users\Imseonhun\Documents\GitHub\ProjectTeam5\ProjectTeam5"/>
+		<item key="project_location" value="C:\uis\ProjectTeam5\ProjectTeam5"/>
 		<section name="ProjectImportWizard.dialogBounds">
 			<item key="DIALOG_X_ORIGIN" value="1026"/>
 			<item key="DIALOG_Y_ORIGIN" value="367"/>
