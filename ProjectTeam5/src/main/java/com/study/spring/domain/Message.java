@@ -5,10 +5,13 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.JoinColumn;
 import java.time.LocalDateTime;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import io.micrometer.common.lang.NonNull;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.SequenceGenerator;
@@ -48,9 +51,13 @@ public class Message {
     @Column(nullable = false)
     private LocalDateTime createSysdate;
 
+    @Column(nullable = false)
+    private int isReading = 1; // 읽음 여부 (1: 읽지 않음, 0: 읽음)
+
     @PrePersist
     public void prePersist() {
         this.createSysdate = LocalDateTime.now();
     }
 }
+
 

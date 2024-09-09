@@ -11,10 +11,6 @@ import BoardUpload from '../board/BoardUpload';
 import BoardDetail from '../board/BoardDetail';
 import GuestbookPage from '../guestbookpage/GuestbookPage';
 
-// import Login from '../login/Login';
-// import SignUpPage from '../SignUpPage/SignUpPage';
-
-
 function Sidebar() {
   return (
     <div style={{ display: 'flex' }}>
