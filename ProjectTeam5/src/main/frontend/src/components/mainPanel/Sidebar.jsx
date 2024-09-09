@@ -19,7 +19,7 @@ function Sidebar() {
   return (
     <div style={{ display: 'flex' }}>
       <nav className="sidebar">
-      <Link to="/"><div className="icon home"></div></Link>
+      <Link to="/Home"><div className="icon home"></div></Link>
       <Link to="/diary"><div className="icon diary"></div></Link>
       <Link to="/board"><div className="icon board"></div></Link>
       <div className="icon visit"><a href="#"></a></div>
@@ -28,9 +28,7 @@ function Sidebar() {
     </nav>
       <div className="center-panel">
     <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/Login" element={<Login />} />
-      <Route path="/SignUpPage" element={<SignUpPage />} />
+      <Route path="/Home" element={<Home />} />
       <Route path="/diary" element={<Diary />} />
       <Route path="/board" element={<Board />} />
       <Route path="/boardUpload" element={<BoardUpload />} />
