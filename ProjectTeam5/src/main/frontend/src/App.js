@@ -28,13 +28,10 @@ function App() {
   return (
     
       <div className="App">
+       
         
-        {isLoggedIn ? (
-          
-          <MainPanel onLogout={handleLogout} /> // 로그아웃 핸들러를 전달
-        ) : (
           <Login onLoginSuccess={() => setIsLoggedIn(true)} />
-        )}
+        
       </div>
     
   );
