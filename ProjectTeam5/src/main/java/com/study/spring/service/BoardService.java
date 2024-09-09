@@ -60,22 +60,4 @@ public class BoardService {
 		return boardRepository.findById(bNum);
 		
 	}
-
-	public void deleteBoard(Long bnum) {
-		boardRepository.deleteById(bnum);
-		
-	}
-
-	public void updateBoard(Board board) {
-		Board beforeBoard = boardRepository.findById(board.getBNum()).get();
-		
-		beforeBoard.setBTitle(board.getBTitle());
-		beforeBoard.setBContent(board.getBContent());
-		beforeBoard.setImgName(board.getImgName());
-		beforeBoard.setImgPath(board.getImgPath());
-		
-		boardRepository.save(beforeBoard);
-		
-		
-	}
 }
