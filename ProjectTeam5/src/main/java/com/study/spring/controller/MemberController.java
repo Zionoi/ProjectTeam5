@@ -104,9 +104,19 @@ public class MemberController {
     }
 
     // 사용자 정보 가져오기
+    //const [memId, setMemId] = useState(localStorage.getItem('id'));
     @GetMapping("/get/{memId}")
     public Member getMember(@PathVariable String memId) {
         return memberService.getMemberById(memId);
+    }
+    
+    // 인삿말을 수정하는 컨트롤러
+    @PostMapping("/greeting")
+    public String updateGreeting(@RequestParam("memId") String memId, @RequestParam("greeting") String greeting ) {
+    	
+    	memberService.updateGreeting(memId, greeting);
+    	
+    	return "인삿말 수정 완료";
     }
 
 }
