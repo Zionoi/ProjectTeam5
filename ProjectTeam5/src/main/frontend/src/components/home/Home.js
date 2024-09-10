@@ -18,6 +18,7 @@ function Home() {
 
           <ProfileSection />
           <TopCommnets/>
+          
           <StickerSection />
           <CommentsSection />
         </main>

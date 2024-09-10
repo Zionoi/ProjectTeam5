@@ -15,23 +15,24 @@ import MessageDetail from '../message/MessageDetail';
 
 function Sidebar() {
   const navigate = useNavigate();
-  const { friendId } = useParams(); // 친구 아이디 파라미터 가져오기
+  const { hostId } = useParams(); // 아이디 파라미터 가져오기
   const myId = localStorage.getItem('id'); // 내 아이디 로컬 스토리지에서 가져오기
 
   const goToMyHomePage = () => {
-    navigate(`/home`); // 내 홈페이지로 이동
+    hostId = localStorage.getItem('id');
+    navigate(`/${myId}/home`); // 내 홈페이지로 이동
   };
 
   return (
     <div style={{ display: 'flex' }}>
       <nav className="sidebar">
-        {friendId && (
+        {hostId && (
           <button onClick={goToMyHomePage} className="btn btn-primary">내 홈페이지로 돌아가기</button>
         )}
-        <Link to={friendId ? `/user/${friendId}/home` : `/home`}><div className="icon home"></div></Link>
-        <Link to={friendId ? `/user/${friendId}/diary` : `/diary`}><div className="icon diary"></div></Link>
-        <Link to={friendId ? `/user/${friendId}/board` : `/board`}><div className="icon board"></div></Link>
-        <Link to={friendId ? `/user/${friendId}/GuestbookPage` : `/GuestbookPage`}><div className="icon visit"></div></Link>
+        <Link to={`/${hostId}/home`}><div className="icon home"></div></Link>
+        <Link to={`/${hostId}/diary`}><div className="icon diary"></div></Link>
+        <Link to={`/${hostId}/board`}><div className="icon board"></div></Link>
+        <Link to={`/${hostId}/GuestbookPage`}><div className="icon visit"></div></Link>
         <div className="icon walk"><a href="#"></a></div>
         <div className="icon food"><a href="#"></a></div>
       </nav>
@@ -40,15 +41,15 @@ function Sidebar() {
         <Routes>
           {/* 내 홈/친구 홈 라우트 */}
           <Route path="/home" element={<Home />} />
-          <Route path="/user/:friendId/home" element={<Home />} />
+          <Route path="/:hostId/home" element={<Home />} />
 
           {/* 내/친구 다이어리 라우트 */}
           <Route path="/diary" element={<Diary />} />
-          <Route path="/user/:friendId/diary" element={<Diary />} />
+          <Route path="/:hostId/diary" element={<Diary />} />
 
           {/* 내/친구 게시판 라우트 */}
           <Route path="/board" element={<Board />} />
-          <Route path="/user/:friendId/board" element={<Board />} />
+          <Route path="/:hostId/board" element={<Board />} />
 
           {/* 기타 경로 처리 */}
           <Route path="/boardUpload" element={<BoardUpload />} />
