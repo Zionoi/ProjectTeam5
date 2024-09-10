@@ -10,6 +10,7 @@ import GetDiary from '../diary/GetDiary';
 import BoardUpload from '../board/BoardUpload';
 import BoardDetail from '../board/BoardDetail';
 import GuestbookPage from '../guestbookpage/GuestbookPage';
+import BulletinBoardPage from '../BulletinBoardPage/BulletinBoardPage'; 
 
 function Sidebar() {
   return (
@@ -32,6 +33,7 @@ function Sidebar() {
       <Route path="/inputDiary/:date" element={<InputDiary />} /> {/* InputDiary 페이지 라우팅 */}
       <Route path="/getDiary/:dNum" element={<GetDiary />} />
       <Route path="/GuestbookPage" element={<GuestbookPage />}/>
+      <Route path="/bulletin-board" element={<BulletinBoardPage />} /> 
     </Routes>
   </div>
     
