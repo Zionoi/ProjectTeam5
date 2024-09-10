@@ -14,12 +14,12 @@ const Login = ({ onLoginSuccess }) => {
   const [pass, setPass] = useState('');
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
-  const [hostId, setHostId] = useState('');
+  // const [hostId, setHostId] = useState('');
 
-  useEffect(() => {
-    setHostId(localStorage.getItem('id'));
-    console.log("host아이디adsfasdf :",localStorage.getItem('id'));
-  }, [message]);
+  // useEffect(() => {
+  //   setHostId(localStorage.getItem('id'));
+  //   console.log("host아이디adsfasdf :",localStorage.getItem('id'));
+  // }, [message]);
 
   const handleLogin = async () => {
     console.log('서버 응답:', userid, pass);

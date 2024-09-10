@@ -12,13 +12,13 @@ import { useEffect, useState } from 'react';
 
 // import MusicPlayer from './MusicPlayer.jsx';
 
-function MainPanel({onLogout}, {setHost}) { // onLogout props 추가
+function MainPanel({ onLogout, hostId, setHostId }) { // onLogout props 추가
   const navigate = useNavigate();
   
 
     const handleLogout = () => {
       onLogout(); // 부모 컴포넌트의 로그아웃 핸들러 호출
-      navigate('/login'); // 로그인 페이지로 리다이렉트
+      navigate('/'); // 로그인 페이지로 리다이렉트
     };
 
     
@@ -26,7 +26,7 @@ function MainPanel({onLogout}, {setHost}) { // onLogout props 추가
     return (
       <div className="app" style={{ display: 'flex' }}>
         <div className="left-panel">
-          <Sidebar setHost={setHost}/>
+          <Sidebar hostId={hostId} setHostId={setHostId} />
         </div>
       
       <div className="right-panel">
@@ -35,7 +35,7 @@ function MainPanel({onLogout}, {setHost}) { // onLogout props 추가
       <aside className="right-side">
       {/* <MusicPlayer /> */}
       <Profile />
-      <FriendsList/>
+      <FriendsList hostId={hostId} setHostId={setHostId}/>
         <VisitSection />
         <FriendsSection />
       </aside>

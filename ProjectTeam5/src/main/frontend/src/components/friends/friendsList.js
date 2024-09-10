@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './FriendsList.css'; // 스타일 파일 추가
 
-function FriendsList() {
+function FriendsList({hostId, setHostId}) {
   const [friends, setFriends] = useState([]);  // 친구 목록 상태
   const [isOpen, setIsOpen] = useState(false); // 목록이 열렸는지 상태
   const navigate = useNavigate(); // useNavigate 훅 사용
@@ -29,6 +29,7 @@ function FriendsList() {
   };
 
   const handleFriendClick = (friendId) => {
+    setHostId(friendId);
     navigate(`/home/${friendId}`); // 친구의 홈페이지로 이동
   };
 
