@@ -63,13 +63,13 @@ public class MemberController {
 		}
 
     @PostMapping("/login")
-    public List<Object> login(@RequestBody Member loginRequest) {
+    public List<String> login(@RequestBody Member loginRequest) {
     	
         Optional<Member> member = memberRepository.findById(loginRequest.getMemId()); // 사용자 조회
         System.out.println("loginRequest :" + loginRequest);
         
         if (member.isPresent() && member.get().getPass().equals(loginRequest.getPass())) {
-            List<Object> list = new ArrayList<>();  // ArrayList로 초기화
+            List<String> list = new ArrayList<>();  // ArrayList로 초기화
             
             // JwtUtil을 사용하여 JWT 생성
             String token = JwtUtil.generateToken(member.get().getMemId());

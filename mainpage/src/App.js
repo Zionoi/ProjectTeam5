@@ -9,6 +9,7 @@ import MainPage from './components/MainPage';
 import VisitSection from './components/VisitSection';
 import FriendsSection from './components/FriendsSection';
 import MusicPlayer from './components/MusicPlayer';
+import Profile from './components/Profile';
 import './App.css';
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
       <aside className="right-side">
       <MusicPlayer />
       {/* <button onClick={handleLogout} className="btn btn-outline-danger">로그아웃</button> */}
+        <Profile />
         <VisitSection />
         <FriendsSection />
       </aside>
