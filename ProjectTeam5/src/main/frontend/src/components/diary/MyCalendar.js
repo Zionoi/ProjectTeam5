@@ -46,20 +46,22 @@ function MyCalendar() {
     };
 
     return (
-        <div className="calendar-container">
-            <FullCalendar
-                plugins={[dayGridPlugin, interactionPlugin]} // 달력에 필요한 플러그인 설정
-                initialView="dayGridMonth" // 초기에는 월별 뷰로 표시
-                events={events.map(event => ({
-                    title: event.dTitle, // 이벤트 제목
-                    id: event.dnum, // 이벤트 ID
-                    start: event.start, // 이벤트 시작 시간
-                    end: event.end // 이벤트 종료 시간
-                }))}
-                dateClick={handleDateClick} // 날짜 클릭 시 핸들러
-                eventClick={handleEventClick} // 이벤트 클릭 시 핸들러
-                eventContent={eventContent} // 이벤트 내용 커스터마이즈
-            />
+        <div className="calendar-back"> 
+            <div className="calendar-container">
+                <FullCalendar
+                    plugins={[dayGridPlugin, interactionPlugin]} // 달력에 필요한 플러그인 설정
+                    initialView="dayGridMonth" // 초기에는 월별 뷰로 표시
+                    events={events.map(event => ({
+                        title: event.dTitle, // 이벤트 제목
+                        id: event.dnum, // 이벤트 ID
+                        start: event.start, // 이벤트 시작 시간
+                        end: event.end // 이벤트 종료 시간
+                    }))}
+                    dateClick={handleDateClick} // 날짜 클릭 시 핸들러
+                    eventClick={handleEventClick} // 이벤트 클릭 시 핸들러
+                    eventContent={eventContent} // 이벤트 내용 커스터마이즈
+                />
+            </div>
         </div>
     );
 }

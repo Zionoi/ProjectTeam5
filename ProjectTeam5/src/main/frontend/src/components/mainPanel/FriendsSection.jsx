@@ -6,12 +6,15 @@ function FriendsSection() {
   return (
     <div className="friends-section">
       <h3>친구추가</h3>
-      <ul>
+      <ul className="friends-box">
         <li>user02(25**)</li>
         <li>user03(B06**)</li>
         <li>user04(JAV1**)</li>
+
       </ul>
-      <button className="request-button">리퀘스트</button>
+        <div className="request-box">
+          <button className="request-button">리퀘스트</button>
+        </div>
     </div>
   );
 }

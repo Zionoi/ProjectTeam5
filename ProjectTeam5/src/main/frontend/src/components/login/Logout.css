@@ -1,0 +1,16 @@
+.logout-button {
+    position: absolute;
+    top:50px;
+    left:1100px;
+    border: none;
+    background-color: white;
+    font-family: "Noto Sans KR", sans-serif;
+    font-size: 11pt;
+    font-weight: 500;
+    color: #7982ff;
+    border-radius: 10px;
+}
+.logout-button:hover {
+    background-color:#7982ff;
+    color:white;
+}
