@@ -7,12 +7,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './components/login/Login.jsx';
 import SignUpPage from './components/SignUpPage/SignUpPage.jsx';
 
+
 function App() {
   // onLoginSuccess={() => setIsLoggedIn(true)}
   const navigate = useNavigate();
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [hostId, setHostId] = useState(localStorage.getItem('id'));
 
     useEffect(() => {
       // 로컬 스토리지에서 로그인 상태 확인

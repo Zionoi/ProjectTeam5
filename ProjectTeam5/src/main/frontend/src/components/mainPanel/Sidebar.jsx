@@ -65,7 +65,7 @@ function Sidebar() {
           <Route path="/inbox/:hostId" element={<Inbox />} />
           <Route path="/message/:mNum/:hostId" element={<MessageDetail />} />
           <Route path="/bulletin-board" element={<BulletinBoardPage />} /> 
-        </Routes>
+          </Routes>
       </div>
     </div>
   );
