@@ -15,15 +15,16 @@ import Inbox from '../message/Inbox';
 import MessageDetail from '../message/MessageDetail';
 
 
-function Sidebar() {
+function Sidebar({setHost}) {
   const navigate = useNavigate();
-  const { hostId: paramHostId } = useParams(); // 아이디 파라미터 가져오기
+  const { paramHostId } = useParams(); // 아이디 파라미터 가져오기
   const myId = localStorage.getItem('id'); // 내 아이디 로컬 스토리지에서 가져오기
   const [hostId, setHostId] = useState(paramHostId);
 
   useEffect(() => {
     setHostId(paramHostId);
-  }, [paramHostId]);
+    console.log("host아이디 사이드바 : ",paramHostId);
+  }, []);
 
   const goToMyHomePage = () => {
     navigate(`/home/${myId}`); // 내 홈페이지로 이동
@@ -64,8 +65,8 @@ function Sidebar() {
           <Route path="/write/:hostId" element={<WriteMessage />} />
           <Route path="/inbox/:hostId" element={<Inbox />} />
           <Route path="/message/:mNum/:hostId" element={<MessageDetail />} />
-          <Route path="/bulletin-board" element={<BulletinBoardPage />} /> 
-          </Routes>
+          <Route path="/bulletin-board/:hostId" element={<BulletinBoardPage />} /> 
+        </Routes>
       </div>
     </div>
   );

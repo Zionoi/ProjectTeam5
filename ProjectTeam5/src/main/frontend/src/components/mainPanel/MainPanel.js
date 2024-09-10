@@ -12,7 +12,7 @@ import { useEffect, useState } from 'react';
 
 // import MusicPlayer from './MusicPlayer.jsx';
 
-function MainPanel({onLogout}) { // onLogout props 추가
+function MainPanel({onLogout}, {setHost}) { // onLogout props 추가
   const navigate = useNavigate();
   
 
@@ -26,7 +26,7 @@ function MainPanel({onLogout}) { // onLogout props 추가
     return (
       <div className="app" style={{ display: 'flex' }}>
         <div className="left-panel">
-          <Sidebar />
+          <Sidebar setHost={setHost}/>
         </div>
       
       <div className="right-panel">
