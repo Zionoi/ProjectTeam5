@@ -9,6 +9,8 @@ function ProfileSection() {
   const [memId, setMemId] = useState(localStorage.getItem('id')); // 사용자 ID 가져오기
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+//테스트
+
 
   // 사용자 프로필 이미지와 코멘트 가져오기
   useEffect(() => {
