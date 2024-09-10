@@ -1,5 +1,5 @@
-// SignUpPage.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios'; // axios 임포트
 import './SignUpPage.css'; // SignUpPage 전용 스타일
 
 function SignUpPage() {
@@ -14,16 +14,77 @@ function SignUpPage() {
     phoneNumber: '',
     email: '',
   });
+  const [selectedFile, setSelectedFile] = useState(null); // 파일 선택 상태
+  const [isIdAvailable, setIsIdAvailable] = useState(null); // 아이디 중복 여부 상태
+  const [isSignUpDisabled, setIsSignUpDisabled] = useState(true); // 회원가입 버튼 비활성화 상태
+
+  // 아이디 글자가 5자 이상일 때 중복 확인 요청
+  useEffect(() => {
+    const checkUserId = async () => {
+      if (formData.userId.length >= 5) {
+        try {
+          const response = await axios.get('/member/checkId', {
+            params: { userId: formData.userId },
+          });
+          if (response.data) {
+            setIsIdAvailable(false); // 중복된 아이디
+            setIsSignUpDisabled(true); // 회원가입 비활성화
+          } else {
+            setIsIdAvailable(true); // 사용 가능한 아이디
+            setIsSignUpDisabled(false); // 회원가입 활성화
+          }
+        } catch (error) {
+          console.error('아이디 확인 중 오류 발생:', error);
+        }
+      } else {
+        setIsIdAvailable(null); // 글자 수가 5자 이하일 때는 상태 초기화
+        setIsSignUpDisabled(true); // 회원가입 비활성화
+      }
+    };
+
+    checkUserId();
+  }, [formData.userId]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleFileChange = (e) => {
+    setSelectedFile(e.target.files[0]); // 파일을 선택할 때 상태로 설정
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('회원가입 데이터:', formData);
-    // 회원가입 처리 로직 추가
+
+    const data = new FormData();
+    // FormData에 회원 정보 추가
+    data.append('member', new Blob([JSON.stringify({
+      memId: formData.userId,
+      pass: formData.password,
+      nickname: formData.nickname,
+      birthday: formData.birthDate,
+      address: formData.address,
+      gender: formData.gender,
+      phone: formData.phoneNumber,
+      email: formData.email,
+    })], { type: 'application/json' }));
+
+    // 파일이 있으면 FormData에 추가
+    if (selectedFile) {
+      data.append('image', selectedFile);
+    }
+
+    try {
+      await axios.post('/member/signup', data, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      alert('회원가입이 완료되었습니다.');
+    } catch (error) {
+      alert('회원가입 중 오류가 발생했습니다.');
+    }
   };
 
   return (
@@ -39,6 +100,13 @@ function SignUpPage() {
           onChange={handleChange}
           required
         />
+        {isIdAvailable === true && (
+          <p style={{ color: 'green' }}>사용할 수 있는 아이디입니다.</p>
+        )}
+        {isIdAvailable === false && (
+          <p style={{ color: 'red' }}>중복된 아이디입니다.</p>
+        )}
+
         <input
           type="password"
           name="password"
@@ -117,7 +185,9 @@ function SignUpPage() {
           value={formData.email}
           onChange={handleChange}
         />
-        <button type="submit">완료</button>
+
+        <button className="signup-submit" type="submit" disabled={isSignUpDisabled}>완료</button>
+
       </form>
     </div>
   );

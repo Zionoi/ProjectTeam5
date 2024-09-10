@@ -34,6 +34,17 @@ public class MemberController {
 	@Autowired
     private MemberRepository memberRepository;
 	
+	
+	//회원가입 떄 아이디가 이미 존재하는지 체크
+	@GetMapping("/checkId")
+	public boolean checkId(@RequestParam("userId") String userId) {
+		
+		
+		if(memberService.checkId(userId))
+			return true;
+		else 
+			return false;
+	}
 	 	
 	@PostMapping("/signup")
 	public String signup(
