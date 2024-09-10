@@ -1,6 +1,25 @@
 /* MyCalendar.css */
+
+.diary-title {
+    position:relative;
+    top:130px;
+    left:300px;
+    font-family: "Noto Sans KR", sans-serif;
+    font-size:15pt;
+    font-weight: bold;
+    color:rgb(63, 63, 63);
+}
+
+.calendar-back {
+    position:absolute;
+    width: 600px;
+    height: 500px;
+    top: 180px;
+    left: 300px;
+}
+
 .calendar-container {
-    width: 100%; /* 달력 컨테이너가 부모 요소의 전체 너비를 차지하도록 설정 */
+     /* 달력 컨테이너가 부모 요소의 전체 너비를 차지하도록 설정 */
 }
 
 .fc .fc-daygrid-day-number {

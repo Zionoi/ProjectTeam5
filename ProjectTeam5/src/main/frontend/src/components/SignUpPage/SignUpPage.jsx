@@ -185,7 +185,9 @@ function SignUpPage() {
           value={formData.email}
           onChange={handleChange}
         />
-        <button type="submit" disabled={isSignUpDisabled}>완료</button>
+
+        <button className="signup-submit" type="submit" disabled={isSignUpDisabled}>완료</button>
+
       </form>
     </div>
   );

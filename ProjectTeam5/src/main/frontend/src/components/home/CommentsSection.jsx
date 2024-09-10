@@ -30,8 +30,9 @@ function CommentsSection() {
       <p className="comments-contents">{comment}</p>  {/* 사용자 코멘트 출력 */}
       <div className="comments-actions">
 
-        <button onClick={() => openModal('writeMessage')}>쪽지 보내기</button>  {/* 모달 */}
-        <button onClick={() => openModal('inbox')}>쪽지함</button>   {/* 모달 */}
+        <button className="letter-button" onClick={() => openModal('writeMessage')}>쪽지 보내기</button>  {/* 모달 */}
+        <button className="letter-button" onClick={() => openModal('inbox')}>쪽지함</button>   {/* 모달 */}
+
         <button className="letterIcon"></button>
 
       </div>

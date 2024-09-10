@@ -10,17 +10,18 @@
 
 .homgepage-Co {
     position:relative;
-    left:575px;
-    top:-5px;
+    left:225px;
+    top:-40px;
     font-family: "Noto Sans KR", sans-serif;
     font-size: 15pt;  /*폰트 크기 변경*/
     font-weight: bold;
 }
 .homgepage-Co-edit {
     position:relative;
-    left:600px;
+    left:445px;
+    top:-35px;
     font-family: "Noto Sans KR", sans-serif;
-    font-size:7pt;
+    font-size:8pt;
     font-weight:500;
     color:rgb(122, 122, 122);
     border: none; 
