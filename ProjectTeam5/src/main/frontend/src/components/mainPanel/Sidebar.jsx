@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, Routes, Route, Link, useParams } from 'react-router-dom';
 import Home from '../home/Home';
 import Board from '../board/Board';
@@ -15,20 +15,27 @@ import MessageDetail from '../message/MessageDetail';
 
 function Sidebar() {
   const navigate = useNavigate();
-  let { hostId } = useParams(); // 아이디 파라미터 가져오기
+  const { hostId: paramHostId } = useParams(); // 아이디 파라미터 가져오기
   const myId = localStorage.getItem('id'); // 내 아이디 로컬 스토리지에서 가져오기
+  const [hostId, setHostId] = useState(paramHostId);
+
+  useEffect(() => {
+    setHostId(paramHostId);
+  }, [paramHostId]);
 
   const goToMyHomePage = () => {
-    hostId = localStorage.getItem('id');
-    navigate(`/home/${hostId}`); // 내 홈페이지로 이동
+    navigate(`/home/${myId}`); // 내 홈페이지로 이동
   };
+
+  console.log('hostId:', hostId);
+  console.log('myId:', myId);
 
   return (
     <div style={{ display: 'flex' }}>
       <nav className="sidebar">
-        {hostId !== myId ? (
+      {hostId !== myId && (
           <button onClick={goToMyHomePage} className="btn btn-primary">내 홈페이지로 돌아가기</button>
-        ) : <></>}
+        )}
         <Link to={`/home/${hostId}`}><div className="icon home"></div></Link>
         <Link to={`/diary/${hostId}`}><div className="icon diary"></div></Link>
         <Link to={`/board/${hostId}`}><div className="icon board"></div></Link>

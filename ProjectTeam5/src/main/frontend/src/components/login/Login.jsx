@@ -13,6 +13,7 @@ const Login = ({ onLoginSuccess }) => {
   const [pass, setPass] = useState('');
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
+  const [hostId, setHostId] = useState('');
 
   const handleLogin = async () => {
     console.log('서버 응답:', userid, pass);
@@ -30,9 +31,10 @@ const Login = ({ onLoginSuccess }) => {
         localStorage.clear();
         localStorage.setItem('id', response.data[1]); // memId 저장
         localStorage.setItem('token', response.data[0]); // 토큰 저장
+        setHostId(response.data[1]);
         setMessage('로그인 성공!');
         onLoginSuccess(); // 로그인 성공 시 호출
-        navigate('/Home'); // 메인 페이지로 리다이렉트
+        navigate(`/home/${hostId}`); // 메인 페이지로 리다이렉트
       } else {
         setMessage('잘못된 사용자 이름 또는 비밀번호');
       }
