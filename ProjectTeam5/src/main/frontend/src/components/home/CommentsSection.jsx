@@ -1,6 +1,6 @@
 // src/components/CommentsSection.js
 
-import Modal from '../message1/Modal'; // 모달 컴포넌트 추가
+import Modal from '../message/Modal'; // 모달 컴포넌트 추가
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';

@@ -10,9 +10,9 @@ import BoardUpload from '../board/BoardUpload';
 import BoardDetail from '../board/BoardDetail';
 import GuestbookPage from '../guestbookpage/GuestbookPage';
 import BulletinBoardPage from '../BulletinBoardPage/BulletinBoardPage'; 
-import WriteMessage from '../message1/WriteMessage';
-import Inbox from '../message1/Inbox';
-import MessageDetail from '../message1/MessageDetail';
+import WriteMessage from '../message/WriteMessage';
+import Inbox from '../message/Inbox';
+import MessageDetail from '../message/MessageDetail';
 
 
 function Sidebar() {
@@ -49,13 +49,10 @@ function Sidebar() {
       <div className="center-panel">
 
         <Routes>
-          {/* 내 홈/친구 홈 라우트 */}
+          
+          {/* 메인탭 경로 */}
           <Route path="/home/:hostId" element={<Home />} />
-
-          {/* 내/친구 다이어리 라우트 */}
           <Route path="/diary/:hostId" element={<Diary />} />
-
-          {/* 내/친구 게시판 라우트 */}
           <Route path="/board/:hostId" element={<Board />} />
 
           {/* 기타 경로 처리 */}
