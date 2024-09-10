@@ -9,6 +9,7 @@ import ProfileSection from '../home/ProfileSection.jsx';
 import StickerSection from '../home/StickerSection.jsx';
 import CommentsSection from '../home/CommentsSection.jsx';
 import TopCommnets from './TopComments.jsx';
+import '../login/Logout.css';
 
 import { useEffect, useState } from 'react';
 
@@ -26,15 +27,13 @@ function MainPanel({onLogout}) { // onLogout props 추가
     
   
     return (
-      
-
       <div className="app" style={{ display: 'flex' }}>
         <div className="left-panel">
           <Sidebar />
         </div>
       
       <div className="right-panel">
-        <button onClick={handleLogout} className="btn btn-outline-danger">로그아웃</button>
+        <button onClick={handleLogout} className="logout-button">로그아웃</button>
       </div>
       <aside className="right-side">
       {/* <MusicPlayer /> */}

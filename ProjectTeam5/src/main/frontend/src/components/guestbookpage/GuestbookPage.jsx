@@ -77,7 +77,7 @@ function GuestbookPage() {
           onChange={handleChange}
           placeholder="내용을 입력해 주세요."
         ></textarea>
-        <button onClick={handleAddEntry}>완료</button>
+        <button className="guestsubmit" onClick={handleAddEntry}>완료</button>
       </div>
     </div>
   );
