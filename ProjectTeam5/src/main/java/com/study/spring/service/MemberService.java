@@ -111,4 +111,13 @@ public class MemberService {
 		
 	}
 
+	public boolean checkId(String userId) {
+		Optional<Member> member = memberRepository.findById(userId);
+		if(member.isPresent())
+			return true;
+		else
+			return false;
+		
+	}
+
 }
