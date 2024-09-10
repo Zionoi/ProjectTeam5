@@ -29,4 +29,6 @@ public class Member {
 	private String imgName;
 	private String imgPath;	
 	
+	private String comments;
+	
 }
