@@ -9,9 +9,9 @@ import GetDiary from '../diary/GetDiary';
 import BoardUpload from '../board/BoardUpload';
 import BoardDetail from '../board/BoardDetail';
 import GuestbookPage from '../guestbookpage/GuestbookPage';
-import WriteMessage from '../message1/WriteMessage';
-import Inbox from '../message1/Inbox';
-import MessageDetail from '../message1/MessageDetail';
+import WriteMessage from '../message/WriteMessage';
+import Inbox from '../message/Inbox';
+import MessageDetail from '../message/MessageDetail';
 
 function Sidebar() {
   const navigate = useNavigate();

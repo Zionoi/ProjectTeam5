@@ -1,6 +1,6 @@
 // src/components/CommentsSection.js
 import React, { useState } from 'react';
-import Modal from '../message1/Modal'; // 모달 컴포넌트 추가
+import Modal from '../message/Modal'; // 모달 컴포넌트 추가
 import './CommentsSection.css'; // 스타일 파일을 추가합니다.
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');

@@ -22,8 +22,6 @@ function Home() {
           <CommentsSection />
         </main>
 
-     
-        
       </div>
     );
   }
