@@ -4,12 +4,8 @@ import Board from '../board/Board.js';
 import Sidebar from './Sidebar';
 import VisitSection from './VisitSection';
 import FriendsSection from './FriendsSection';
-import HeaderSection from './HeaderSection.jsx';
-import ProfileSection from '../home/ProfileSection.jsx';
-import StickerSection from '../home/StickerSection.jsx';
-import CommentsSection from '../home/CommentsSection.jsx';
-import TopCommnets from './TopComments.jsx';
 
+import FriendsList from './../friends/friendsList';
 import { useEffect, useState } from 'react';
 
 // import MusicPlayer from './MusicPlayer.jsx';
@@ -38,6 +34,7 @@ function MainPanel({onLogout}) { // onLogout props 추가
       </div>
       <aside className="right-side">
       {/* <MusicPlayer /> */}
+      <FriendsList/>
         <VisitSection />
         <FriendsSection />
       </aside>
