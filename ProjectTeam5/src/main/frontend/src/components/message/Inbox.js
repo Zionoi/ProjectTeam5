@@ -1,21 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Modal from '../message/Modal'; // 모달 컴포넌트 추가
 
-// npm i axios
-// npm i react-router-dom
-
-const Inbox = () => {
+const Inbox = ({ setContent, isModalOpen, closeModal }) => {
   const [messages, setMessages] = useState([]);  // 받은 메시지 상태
   const [newMessages, setNewMessages] = useState(false);  // 새로운 메시지 확인 상태
-
-  const navigate = useNavigate();
+  const [selectedMessage, setSelectedMessage] = useState(null); // 선택된 메시지
 
   // 메시지 조회 함수
   const fetchMessages = () => {
     axios.get(`/api/messages/received/user01`)
       .then(response => {
-        console.log("Received messages:", response.data);  // 응답 데이터 콘솔 출력
         setMessages(response.data);
         if (response.data.some(message => message.isReading === 1)) {
           setNewMessages(true);  // 새 메시지 알림 설정
@@ -24,70 +19,38 @@ const Inbox = () => {
       .catch(error => console.error("Error fetching messages:", error));
   };
 
-  // 메시지 읽음 처리 함수
-  const markAsRead = (mNum) => {
-    axios.post(`/api/messages/read/${mNum}`)
-      .then(() => {
-        console.log(`Message ${mNum} marked as read`);
-        fetchMessages();  // 읽음 처리 후 목록 새로고침
-      })
-      .catch(error => console.error("Error marking message as read:", error));
-  };
-
   // 페이지 로드 시 받은 메시지 불러오기
   useEffect(() => {
     fetchMessages();
   }, []);
 
-  // 쪽지 클릭 시 상세 페이지로 이동
-  const viewMessageDetail = (mNum) => {
-    markAsRead(mNum);  // 메시지 읽음 처리
-    navigate(`/message/${mNum}`);
-  };
+  // 메시지 세부사항 열기
+  const openMessageDetail = (message) => {
+    setSelectedMessage(message.mnum); // 메시지의 고유 ID(mNum)만 저장
+    console.log(message.mnum);  // 콘솔확인
+    setContent('messageDetail');      // 모달 전환
+  };  
 
   // 메시지 삭제 함수
   const deleteMessage = (mNum) => {
     axios.delete(`/api/messages/delete/${mNum}`)
-      .then(() => {
-        console.log(`Message deleted`);
-      })
+      .then(() => fetchMessages())
       .catch(error => console.error("Error deleting message:", error));
   };
 
-  // 페이지 맨위로 이동
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
-  // 페이지 맨아래로 이동
-  const scrollToBottom = () => {
-    window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
-  };
- 
   return (
     <div>
       <h2>쪽지함</h2>
 
-      <div className="btns">
-        <button className="moveBottomBtn" onClick={scrollToBottom}>🔽</button>
-      </div>
-
       <div>
         {messages.length === 0 ? (
-          <div>쪽지가 없습니다.~(&gt;_&lt;。)＼</div>  // 이미지 넣어주기
+          <div>쪽지가 없습니다.~(&gt;_&lt;。)＼</div>
         ) : (
           messages.map((message, index) => (
-            
-            <div key={index}>
-              <br /><br /><br />  
-              <div key={index} onClick={() => viewMessageDetail(message.mnum)} 
-                                          style={{ cursor: 'pointer', padding: '10px', border: '1px solid black', marginBottom: '5px' }}>
-                {message.memId}님이 보낸 쪽지가 도착했습니다!&emsp;
-                <p><strong>{message.isReading === 1 ? "읽지 않음" : "읽음"}</strong></p>
-              </div>
-              {/* <button onClick={() => handleReply(message)}>답장</button> 답장 버튼 */}
-              <button onClick={() => deleteMessage(message.mnum)}>삭제</button> {/* 삭제 버튼 */}
-              <br /><br /><br />
+            <div key={index} onClick={() => openMessageDetail(message)} style={{ cursor: 'pointer', marginBottom: '10px' }}>
+              {message.memId}님이 보낸 쪽지가 도착했습니다!&emsp;
+              <button onClick={() => deleteMessage(message.mnum)}>삭제</button> &emsp;
+              {message.isReading === 1 ? "읽지 않음" : "읽음"}
             </div>
           ))
         )}
@@ -100,12 +63,18 @@ const Inbox = () => {
         </div>
       )}
 
-      <div className="btns">
-        <button className="moveTopBtn" onClick={scrollToTop}>🔼</button>
-      </div>
-
+      {/* 모달을 통해 MessageDetail로 이동 */}
+      {isModalOpen && (
+        <Modal 
+          isOpen={isModalOpen} 
+          onClose={closeModal} 
+          content="messageDetail" 
+          selectedMessage={selectedMessage}
+          fetchMessages={fetchMessages} // fetchMessages 전달
+        />
+      )}
     </div>
   );
-}
+};
 
 export default Inbox;

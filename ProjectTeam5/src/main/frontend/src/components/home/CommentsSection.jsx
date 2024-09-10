@@ -1,4 +1,6 @@
 // src/components/CommentsSection.js
+
+import Modal from '../message1/Modal'; // 모달 컴포넌트 추가
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -11,37 +13,31 @@ function CommentsSection() {
   const memId = localStorage.getItem('id');  // 로그인한 사용자 ID를 localStorage에서 가져옴
   const navigate = useNavigate();  // 페이지 이동을 위한 네비게이트 훅
 
-  // 코멘트 가져오기
-  useEffect(() => {
-    if (!memId) {
-      setError('로그인이 필요합니다.');
-      setLoading(false);
-      return;
-    }
+  const [isModalOpen, setIsModalOpen] = useState(false); // 모달 상태 관리
+  const [modalContent, setModalContent] = useState('inbox'); // 모달 내 페이지 전환 관리
 
-    // 서버에서 사용자 코멘트를 가져오는 요청
-    axios.get(`/member/get/${memId}`)
-      .then(response => {
-        setComment(response.data.comments || ''); // 서버에서 받은 코멘트 설정
-        setLoading(false);
-      })
-      .catch(() => {
-        setError('사용자 코멘트를 가져오는 중 오류가 발생했습니다.');
-        setLoading(false);
-      });
-  }, [memId]);
+  const openModal = (content) => {
+    setModalContent(content); // 모달 내용을 설정 (inbox, writeMessage 등)
+    setIsModalOpen(true); // 모달 열기
+  };
 
-  if (loading) return <div>Loading...</div>;  // 로딩 중일 때 표시
-  if (error) return <div>{error}</div>;  // 에러가 있을 때 표시
+  const closeModal = () => setIsModalOpen(false);
+
 
   return (
     <div className="comments-section">
       <h3 className="comments-co">사용자 코멘트</h3>
       <p className="comments-contents">{comment}</p>  {/* 사용자 코멘트 출력 */}
       <div className="comments-actions">
-        <button onClick={() => navigate('/write')}>쪽지 보내기</button>  
-        <button onClick={() => navigate('/inbox')}>쪽지함</button>
+
+        <button onClick={() => openModal('writeMessage')}>쪽지 보내기</button>  {/* 모달 */}
+        <button onClick={() => openModal('inbox')}>쪽지함</button>   {/* 모달 */}
+        <button className="letterIcon"></button>
+
       </div>
+
+      {/* 모달을 통해 쪽지 보내기 또는 쪽지함 표시 */}
+      <Modal isOpen={isModalOpen} onClose={closeModal} content={modalContent} setContent={setModalContent} />
     </div>
   );
 }
