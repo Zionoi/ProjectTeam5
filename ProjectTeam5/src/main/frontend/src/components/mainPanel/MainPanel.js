@@ -4,6 +4,7 @@ import Board from '../board/Board.js';
 import Sidebar from './Sidebar';
 import VisitSection from './VisitSection';
 import FriendsSection from './FriendsSection';
+import Profile from './Profile';
 
 
 import FriendsList from './../friends/friendsList';
@@ -33,6 +34,7 @@ function MainPanel({onLogout}, {setHost}) { // onLogout props 추가
       </div>
       <aside className="right-side">
       {/* <MusicPlayer /> */}
+      <Profile />
       <FriendsList/>
         <VisitSection />
         <FriendsSection />

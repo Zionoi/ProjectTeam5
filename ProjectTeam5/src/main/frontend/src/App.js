@@ -7,6 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './components/login/Login.jsx';
 import SignUpPage from './components/SignUpPage/SignUpPage.jsx';
 
+
 function App() {
   // onLoginSuccess={() => setIsLoggedIn(true)}
   const navigate = useNavigate();
