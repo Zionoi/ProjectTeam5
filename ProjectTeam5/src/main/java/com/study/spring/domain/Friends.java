@@ -23,8 +23,8 @@ public class Friends {
 	private Long fNum;
 	@ManyToOne
     @JoinColumn(name = "memId") 
-    private Member member;
+    private Member member;		
 	@NonNull
-	private String friendId;
+	private String friendId;		// 친구 아이디
 
 }

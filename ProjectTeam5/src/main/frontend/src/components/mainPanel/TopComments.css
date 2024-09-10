@@ -1,4 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+.homgepage-Co-input {
+    position:relative;
+    left:575px;
+    top:-5px;
+    font-family: "Noto Sans KR", sans-serif;
+    font-size: 15pt;
+    font-weight: bold;
+    width: 200px;
+}
 
 .homgepage-Co {
     position:relative;
@@ -16,7 +24,8 @@
     font-size:8pt;
     font-weight:500;
     color:rgb(122, 122, 122);
-    border: none; background-color: transparent;
+    border: none; 
+    background-color: transparent;
 }
 
 .homgepage-Co-edit:hover {

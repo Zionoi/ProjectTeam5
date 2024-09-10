@@ -12,10 +12,12 @@ function App() {
   const navigate = useNavigate();
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [friensdHp, setfriensdHp] = useState(false);
+  const [hostId, setHostId] = useState(localStorage.getItem('id'));
 
     useEffect(() => {
       // 로컬 스토리지에서 로그인 상태 확인
+      localStorage.setItem('id', 'user01');
+      localStorage.setItem('token', "response.data[0]");
       const token = localStorage.getItem('token');
       const id = localStorage.getItem('id');
       if (token && id) {
@@ -29,7 +31,6 @@ function App() {
     const handleLogout = () => {
     
       setIsLoggedIn(false); // 로그인 상태를 false로 설정
-      setfriensdHp(false)
       localStorage.clear(); // 로컬 스토리지 클리어
     };
   return (

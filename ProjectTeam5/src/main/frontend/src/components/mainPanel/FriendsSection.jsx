@@ -7,9 +7,10 @@ function FriendsSection() {
     <div className="friends-section">
       <h3>친구추가</h3>
       <ul className="friends-box">
-        <li>USER01(25**)</li>
-        <li>OBJEC(B06**)</li>
-        <li>JAV(JAV1**)</li>
+        <li>user02(25**)</li>
+        <li>user03(B06**)</li>
+        <li>user04(JAV1**)</li>
+
       </ul>
         <div className="request-box">
           <button className="request-button">리퀘스트</button>
