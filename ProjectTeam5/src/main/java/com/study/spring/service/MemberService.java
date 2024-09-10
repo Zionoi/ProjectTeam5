@@ -1,7 +1,11 @@
 package com.study.spring.service;
 
 import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,5 +52,72 @@ public class MemberService {
     public List<Member> searchMembersByNickname(String keyword) {
         return memberRepository.findByNicknameContaining(keyword);
     }
+    
+    // 프로필 이미지를 저장하고 DB에 이미지 경로 업데이트
+    public void saveProfileImage(String memId, MultipartFile profileImage, String comment) throws Exception {
+        String fileName = UUID.randomUUID().toString() + "_" + profileImage.getOriginalFilename();
+        Path filePath = Paths.get(uploadDir + File.separator + fileName);
+
+        
+        // 기존 이미지 파일 삭제 로직 (이미지가 존재할 경우)
+        Optional<Member> memberOptional = memberRepository.findById(memId);
+        
+        if (memberOptional.isPresent()) {
+            Member member = memberOptional.get();
+            member.setComments(comment);
+            if (member.getImgPath() != null) {
+            	File oldFile = new File(uploadDir + File.separator + member.getImgName());
+                if (oldFile.exists()) {
+                    oldFile.delete(); // 기존 파일 삭제
+                }
+            }
+
+            // 새 파일 저장
+            Files.copy(profileImage.getInputStream(), filePath);
+
+            // DB에 새 이미지 경로 업데이트
+            member.setImgName(fileName);
+            member.setImgPath("/files/" + fileName);
+            memberRepository.save(member);
+        } else {
+            throw new IllegalArgumentException("해당 사용자를 찾을 수 없습니다.");
+        }
+    }
+
+    //프로필 사진을 업로드하지 않고 코멘트만 변경
+    public void updateComment(String memId, String comment) {
+        Optional<Member> memberOptional = memberRepository.findById(memId);
+        if (memberOptional.isPresent()) {
+            Member member = memberOptional.get();
+            member.setComments(comment);  // 코멘트 업데이트
+            memberRepository.save(member);  // DB에 저장
+        } else {
+            throw new IllegalArgumentException("해당 사용자를 찾을 수 없습니다.");
+        }
+    }
+    
+    //memId로 맴버 객체를 찾는 서비스
+    public Member getMemberById(String memId) {
+        return memberRepository.findById(memId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 사용자를 찾을 수 없습니다."));
+    }
+
+	public void updateGreeting(String memId, String greeting) {
+		Member beforeMember = memberRepository.findById(memId).get();
+		
+		beforeMember.setGreeting(greeting);
+		
+		memberRepository.save(beforeMember);
+		
+	}
+
+	public boolean checkId(String userId) {
+		Optional<Member> member = memberRepository.findById(userId);
+		if(member.isPresent())
+			return true;
+		else
+			return false;
+		
+	}
 
 }

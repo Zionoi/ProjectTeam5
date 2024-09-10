@@ -12,6 +12,7 @@ function App() {
   const navigate = useNavigate();
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [hostId, setHostId] = useState(localStorage.getItem('id'));
 
     useEffect(() => {
       // 로컬 스토리지에서 로그인 상태 확인

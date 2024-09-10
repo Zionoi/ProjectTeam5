@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -76,7 +77,7 @@ public class BoardController {
 	
 	@PostMapping("/update")
 	public String updateBoard(
-	        Board board,  // Board 객체로 묶어서 받음
+			@ModelAttribute Board board,  // Board 객체로 묶어서 받음
 	        @RequestParam(value = "image", required = false) MultipartFile[] images) throws Exception {
 
 	
