@@ -31,6 +31,7 @@ const Login = ({ onLoginSuccess }) => {
         localStorage.clear();
         localStorage.setItem('id', response.data[1]); // memId 저장
         localStorage.setItem('token', response.data[0]); // 토큰 저장
+
         setHostId(response.data[1]);
         setMessage('로그인 성공!');
         onLoginSuccess(); // 로그인 성공 시 호출
