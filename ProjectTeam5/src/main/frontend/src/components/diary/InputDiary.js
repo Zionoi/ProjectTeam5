@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
+import './InputDiary.css';
 
 function InputDiary() {
     const { date } = useParams(); // URL에서 날짜를 가져옴
@@ -42,29 +43,32 @@ function InputDiary() {
     };
 
     return (
-        <div>
-            <h2>일기 작성</h2>
+        <div className="note">
+            <h2 className="inputdiary-title">일기 작성</h2>
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
-                    <label htmlFor="title">제목</label>
-                    <input
-                        type="text"
+                    {/* <label htmlFor="title">제목</label> */}
+                    <input className="input-title"
+                        placeholder="제목을 입력하세요."
+                        // type="text"
                         id="title"
                         value={dTitle}
                         onChange={(e) => setDTitle(e.target.value)}
                         required
                     />
                 </div>
-                <div className="form-group">
-                    <label htmlFor="content">내용</label>
-                    <textarea
+                <div className="form-content">
+                    {/* <label htmlFor="content">내용</label> */}
+                    <textarea className="input-content"
+                        placeholder="일기장 내용을 입력하세요."
                         id="content"
                         value={dContent}
                         onChange={(e) => setDContent(e.target.value)}
                         required
                     />
                 </div>
-                <button type="submit">등록</button>
+                <button>전체공개</button>
+                <button type="submit" className="diarysubmit">등록</button>
             </form>
         </div>
     );
