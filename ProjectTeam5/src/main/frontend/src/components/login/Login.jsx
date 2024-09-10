@@ -13,31 +13,35 @@ const Login = ({ onLoginSuccess }) => {
   const [pass, setPass] = useState('');
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
+  const [hostId, setHostId] = useState('');
 
   const handleLogin = async () => {
     console.log('서버 응답:', userid, pass);
     try {
       const response = await axios.post('/member/login', {
-        memId:userid,
-        pass:pass,
+        memId: userid,
+        pass: pass,
       });
 
       console.log('서버 응답:', response);
       console.log('응답 데이터:', response.data);
 
-      if (response.data) {
+      if (response.data && response.data.length >= 2 && response.data[0]) {
+        // 응답 데이터가 존재하고, 토큰이 존재할 때만 로그인 성공으로 처리
         localStorage.clear();
-        localStorage.setItem('id', response.data[1]);
-        localStorage.setItem('token', response.data[0]);
+        localStorage.setItem('id', response.data[1]); // memId 저장
+        localStorage.setItem('token', response.data[0]); // 토큰 저장
+
+        setHostId(response.data[1]);
         setMessage('로그인 성공!');
         onLoginSuccess(); // 로그인 성공 시 호출
-        navigate('/Home'); // 메인 페이지로 리다이렉트
+        navigate(`/home/${hostId}`); // 메인 페이지로 리다이렉트
       } else {
         setMessage('잘못된 사용자 이름 또는 비밀번호');
       }
     } catch (error) {
       console.error('로그인 오류:', error);
-      setMessage('로그인 실패asdf');
+      setMessage('로그인 실패: 서버 오류가 발생했습니다.');
     }
   };
 

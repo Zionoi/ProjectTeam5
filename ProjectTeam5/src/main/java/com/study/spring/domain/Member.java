@@ -29,6 +29,9 @@ public class Member {
 	private String imgName;
 	private String imgPath;	
 	
+	//코멘트
 	private String comments;
+	//인삿말
+	private String greeting;
 	
 }
