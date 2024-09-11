@@ -9,6 +9,7 @@ import Profile from './Profile';
 
 import FriendsList from './../friends/friendsList';
 import { useEffect, useState } from 'react';
+import Visit from './visit.js';
 
 // import MusicPlayer from './MusicPlayer.jsx';
 
@@ -26,6 +27,7 @@ function MainPanel({ onLogout, hostId, setHostId }) { // onLogout props 추가
     return (
       <div className="app" style={{ display: 'flex' }}>
         <div className="left-panel">
+          <Visit hostId={hostId} setHostId={setHostId}/>
           <Sidebar hostId={hostId} setHostId={setHostId} />
         </div>
       
