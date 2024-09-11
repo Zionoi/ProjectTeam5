@@ -9,6 +9,10 @@ import com.study.spring.domain.Friends;
 
 @Repository
 public interface FriendsRepository extends JpaRepository<Friends, Long> {
-    // Member의 memId로 친구 목록 조회
-    List<Friends> findByMember_MemId(String memId);
+    	 // 특정 사용자(memId)의 친구 요청 상태가 특정 상태일 때 조회
+	 List<Friends> findByMemberMemIdAndStatus(String memId, String status);
+	
+	 // 친구 요청을 받은 사용자(friendId)의 친구 요청 상태가 특정 상태일 때 조회
+	 List<Friends> findByFriendIdAndStatus(String friendId, String status);
 }
+
