@@ -8,9 +8,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -121,22 +119,5 @@ public class MemberService {
 			return false;
 		
 	}
-	
-	 // 방문자 수 업데이트
-    public void updateMember(Member member) {
-        memberRepository.save(member);  // 변경된 값을 저장
-    }
-    
-    
-	 // 매일 오전 9시 20분에 일일 방문자 수를 0으로 초기화
-	    @Scheduled(cron = "0 20 9 * * ?")
-	    public void resetDailyVisits() {
-	        // 모든 회원의 todayVisit을 0으로 초기화
-	        List<Member> allMembers = memberRepository.findAll();
-	        for (Member member : allMembers) {
-	            member.setTodayVisit(0L);
-	            memberRepository.save(member);  // 변경된 정보 저장
-	        }
-	    }
 
 }

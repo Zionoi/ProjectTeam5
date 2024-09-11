@@ -129,18 +129,5 @@ public class MemberController {
     	
     	return "인삿말 수정 완료";
     }
-    
-    @GetMapping("/visitCountUp/{memId}")  // userId를 경로에서 받아옴
-    public void visitCountUp(@PathVariable String userId) {
-        // 회원 정보 가져오기
-        Member member = memberService.getMemberById(userId);
-        
-        // todayVisit과 totalVisit 값 증가
-        member.setTodayVisit(member.getTodayVisit() + 1);
-        member.setTotalVisit(member.getTotalVisit() + 1);
-        
-        // 변경된 정보를 저장
-        memberService.updateMember(member);
-    }
 
 }
