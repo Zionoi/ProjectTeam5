@@ -31,6 +31,7 @@ function App() {
 
     const handleLogin = () =>{
       setIsLoggedIn(true);
+      setHostId(localStorage.getItem('id'));
     }
     const handleLogout = () => {
     
@@ -41,11 +42,11 @@ function App() {
     
       <div className="App">
         { isLoggedIn ?
-         <MainPanel onLogout={handleLogout} setHost={setHost}/>
+         <MainPanel onLogout={handleLogout} hostId={hostId} setHostId={setHostId}/>
          : 
       <div>
         <Routes>
-          <Route path="/login" element={<Login onLoginSuccess={handleLogin}/>} />
+          <Route path="/" element={<Login onLoginSuccess={handleLogin}/>} />
           <Route path="/SignUpPage" element={<SignUpPage />}/>
         </Routes>
       </div>
