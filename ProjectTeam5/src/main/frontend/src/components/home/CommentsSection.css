@@ -4,7 +4,7 @@
 .comments-section {
     position:absolute;
     top:310px;
-    left:30px;
+    left:240px;
     background-color: #ffffff;
     width: 300px;
     height: 150px;
@@ -22,20 +22,17 @@
 
   .comments-contents{
     font-family: "Noto Sans KR", sans-serif;
-    font-size:9pt;
+    font-size:10pt;
     color:rgb(112, 112, 112); 
     margin: 0px 25px 25px 25px;
   }
 
   .comments-actions {
-
-    position: absolute;
-    top:165px; left:120px;
+    position: relative;
+    top:5px; left:120px;
     display: flex;
     gap: 10px;
-    left:120px;
   }
-  
   .letter-button {
     font-family: "Noto Sans KR", sans-serif;
     font-size: 10pt;
@@ -53,11 +50,16 @@
   .letterIcon {
     background: url(../../img/letterIcon.png) no-repeat;
     background-size: contain;
+    background-size: 12px;
     border:none;
+    position: relative;
+    top:2px;
+    left:5px;
   }
   .letterIcon:hover {
     cursor: pointer;
     background: url(../../img/letterIconB.png) no-repeat;
     background-size: contain;
+    background-size: 12px;
     border:none;
   }

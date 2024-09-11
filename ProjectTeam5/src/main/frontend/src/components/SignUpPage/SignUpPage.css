@@ -35,7 +35,7 @@
     margin-bottom: 10px;
   }
   
-  button {
+  .signup-submit {
     width: 100%;
     padding: 12px;
     background-color: #7a63ff;
@@ -47,7 +47,7 @@
     margin-top: 10px;
   }
   
-  button:hover {
+  .signup-submit:hover {
     background-color: #684cce;
   }
-  
+

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Modal from '../message/Modal'; // 모달 컴포넌트 추가
+import Modal from './Modal'; // 모달 컴포넌트 추가
 
 const Inbox = ({ setContent, isModalOpen, closeModal }) => {
   const [messages, setMessages] = useState([]);  // 받은 메시지 상태

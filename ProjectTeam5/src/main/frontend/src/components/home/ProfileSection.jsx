@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import "./ProfileSection.css";
 
 function ProfileSection() {
   const [profileImage, setProfileImage] = useState(''); // 프로필 이미지 경로 상태
@@ -8,6 +9,8 @@ function ProfileSection() {
   const [memId, setMemId] = useState(localStorage.getItem('id')); // 사용자 ID 가져오기
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+//테스트
+
 
   // 사용자 프로필 이미지와 코멘트 가져오기
   useEffect(() => {
@@ -55,6 +58,7 @@ function ProfileSection() {
         headers: { 'Content-Type': 'multipart/form-data' }
       });
       alert('프로필 사진 및 코멘트가 성공적으로 변경되었습니다.');
+      window.location.reload();
     } catch (error) {
       alert('프로필 사진 및 코멘트 업로드 중 오류가 발생했습니다.');
     }

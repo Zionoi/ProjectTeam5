@@ -1,0 +1,21 @@
+.friends-list {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-out;
+  }
+  
+  .friends-list.open {
+    max-height: 300px; /* 목록이 열릴 때의 최대 높이 */
+    transition: max-height 0.5s ease-in;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
