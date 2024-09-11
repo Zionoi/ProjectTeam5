@@ -36,13 +36,17 @@ function Sidebar({hostId, setHostId}) {
 
   return (
     <div style={{ display: 'flex' }}>
-      <nav className="sidebar">
-      {hostId !== myId && (
-          <button onClick={goToMyHomePage} className="btn btn-primary">내 홈페이지로 돌아가기</button>
+            {hostId !== myId && (
+          <div className="button-container">
+            <button onClick={goToMyHomePage} className="btn-myhome"></button>
+            <div class="tooltip">내 홈페이지로 이동</div>
+          </div>
+          
         )}
+      <nav className="sidebar">
         <Link to={`/home/${hostId}`}><div className="icon home"></div></Link>
         <Link to={`/diary/${hostId}`}><div className="icon diary"></div></Link>
-        <Link to={`/board/${hostId}`}><div className="icon board"></div></Link>
+        <Link to={`/bulletin-board/${hostId}`}><div className="icon board"></div></Link>
         <Link to={`/GuestbookPage/${hostId}`}><div className="icon visit"></div></Link>
         <div className="icon walk"><a href="#"></a></div>
         <div className="icon food"><a href="#"></a></div>
@@ -66,7 +70,7 @@ function Sidebar({hostId, setHostId}) {
           <Route path="/write/:hostId" element={<WriteMessage />} />
           <Route path="/inbox/:hostId" element={<Inbox />} />
           <Route path="/message/:mNum/:hostId" element={<MessageDetail />} />
-          <Route path="/bulletin-board/:hostId" element={<BulletinBoardPage />} /> 
+          <Route path="/bulletin-board/:hostId" element={<BulletinBoardPage hostId={hostId}/>} /> 
         </Routes>
       </div>
     </div>

@@ -2,7 +2,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
 .profile-section {
     position:absolute;
-    top: 185px;
     left:105px;
     display: flex;
     flex-direction: column;

@@ -5,6 +5,7 @@ import Sidebar from './Sidebar';
 import VisitSection from './VisitSection';
 import FriendsSection from './FriendsSection';
 import Profile from './Profile';
+import '../login/Logout.css';
 
 
 import FriendsList from './../friends/friendsList';
