@@ -1,5 +1,32 @@
 /* src/components/FriendsSection.css */
-.friends-section {
+/* 
+  .friends-section ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .friends-section li {
+    font-family: "Noto Sans KR", sans-serif;
+    font-size:8pt;
+    font-weight: 500;
+    color:rgb(112, 112, 112); 
+    margin: 10px 10px 10px 10px;
+  }
+  
+  .request-button {
+    position: absolute;
+    top:210px;
+    left:50px;
+    font-family: "Noto Sans KR", sans-serif;
+    font-size:7pt;
+    font-weight:500;
+    text-align: right;
+    color:rgb(122, 122, 122);
+    border: none; background-color: transparent;
+  }
+   */
+
+   .friends-section {
     position: relative;
     background-color: #ffffff;
     width: 105px;
@@ -9,44 +36,44 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   }
   
-  .friends-box {
-    list-style: none;
-    padding: 0;
-    position: absolute;
-    width: 85px;height: 150px;
-    left:10px;
-  }
   .friends-section h3 {
     font-family: "Noto Sans KR", sans-serif;
     font-size: 11pt;
     font-weight: bold;
     color:rgb(58, 58, 58);
-    margin:25px 10px 10px 10px;
+    margin:25px 10px 0px 10px;
   }
-  .friends-section li {
-    font-family: "Noto Sans KR", sans-serif;
-    font-size:9pt;
-    font-weight: 500;
-    color:rgb(112, 112, 112); 
-    margin: 0px 10px 10px 0px;
+
+  .button-container {
+    display: flex;
+    justify-content: flex-end; /* 버튼들을 오른쪽에 정렬 */
+    gap: 10px; /* 버튼 간의 간격 추가 */
+    width: 105px;
   }
-  .request-box{
-    position:absolute;
-    width: 60px; height: 20px;
-    top:200px; left: 50px;
-    margin-right: 10px;
-  }
+  
   .request-button {
-    font-family: "Noto Sans KR", sans-serif;
+    padding: 10px 20px;
+    background-color: #6a67e9;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 30%;
+    height: 10%;
     font-size:8pt;
     font-weight:500;
-    text-align: right;
-    color:rgb(122, 122, 122);
-    border: none; background-color: transparent;
   }
   
   .request-button:hover {
     color:rgb(182, 182, 182);
     cursor: pointer;
+  } 
+  
+  ul {
+    list-style-type: none;
   }
+  
+  ul li {
+    margin: 5px 0;
+  }
+  
   
