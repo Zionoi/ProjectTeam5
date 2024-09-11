@@ -20,6 +20,9 @@
     position:relative;
     left:445px;
     top:-35px;
+    position:absolute;
+    left:775px;top:-25px;
+    width: 50px;
     font-family: "Noto Sans KR", sans-serif;
     font-size:8pt;
     font-weight:500;
