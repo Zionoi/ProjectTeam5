@@ -128,15 +128,41 @@ public class MemberService {
     }
     
     
-	 // 매일 오전 9시 20분에 일일 방문자 수를 0으로 초기화
-	    @Scheduled(cron = "0 20 9 * * ?")
-	    public void resetDailyVisits() {
-	        // 모든 회원의 todayVisit을 0으로 초기화
-	        List<Member> allMembers = memberRepository.findAll();
-	        for (Member member : allMembers) {
-	            member.setTodayVisit(0L);
-	            memberRepository.save(member);  // 변경된 정보 저장
-	        }
-	    }
+    // 매일 오전 9시 20분에 일일 방문자 수를 0으로 초기화
+    @Scheduled(cron = "0 20 9 * * ?")
+    public void resetDailyVisits() {
+        // 모든 회원의 todayVisit을 0으로 초기화
+        List<Member> allMembers = memberRepository.findAll();
+        for (Member member : allMembers) {
+            member.setTodayVisit(0L);
+            memberRepository.save(member);  // 변경된 정보 저장
+        }
+    }
+    
+	public Member findId(String name, String birthday, String phone) {
+		return memberRepository.findByNameAndBirthdayAndPhone(name, birthday, phone).get(0);
+			
+	}
+
+	public boolean findPassword(String userId, String name, String birthday, String phone) {
+		
+		List<Member> list = memberRepository.findByMemIdAndNameAndBirthdayAndPhone(userId, name, birthday, phone);
+		
+		if(list.size() > 0)
+			return true;
+		else
+			return false;
+	}
+
+	public boolean resetPassword(String memId, String pass) {
+		
+		Member member = memberRepository.findById(memId).get();
+		member.setPass(pass);
+		if(memberRepository.save(member) != null)
+			return true;
+		else 
+			return false;
+		
+	}
 
 }

@@ -6,6 +6,8 @@ import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-route
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './components/login/Login.jsx';
 import SignUpPage from './components/SignUpPage/SignUpPage.jsx';
+import FindIdPassword from './components/FindIdPassword/FindIdPassword';
+import ResetPassword from './components/FindIdPassword/ResetPassword';
 
 
 function App() {
@@ -48,6 +50,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Login onLoginSuccess={handleLogin}/>} />
           <Route path="/SignUpPage" element={<SignUpPage />}/>
+          <Route path="/FindIdPassword" element={<FindIdPassword />}/>
+          <Route path="/resetPassword" element={<ResetPassword />} />
         </Routes>
       </div>
         }
