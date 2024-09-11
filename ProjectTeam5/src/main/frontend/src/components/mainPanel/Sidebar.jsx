@@ -21,10 +21,10 @@ function Sidebar({hostId, setHostId}) {
   const myId = localStorage.getItem('id'); // 내 아이디 로컬 스토리지에서 가져오기
   // const [hostId, setHostId] = useState(paramHostId);
 
-  useEffect(() => {
-    setHostId(paramHostId);
-    console.log("host아이디 사이드바 : ",paramHostId);
-  }, [paramHostId, setHostId]);
+  // useEffect(() => {
+  //   setHostId(paramHostId);
+  //   console.log("host아이디 사이드바 : ",paramHostId);
+  // }, [paramHostId, setHostId]);
 
   const goToMyHomePage = () => {
     setHostId(myId);

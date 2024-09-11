@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Profile.css'; // 스타일 파일
 
 function Profile() {
@@ -6,11 +6,15 @@ function Profile() {
 
   // 메뉴 토글 함수
   const toggleMenu = () => {
-    setMenuOpen((prev) => !prev);
+    console.log('수정버튼 확인');
+    setMenuOpen(!menuOpen);
+    console.log('menuOpen :',menuOpen);
   };
+  
 
   // 회원 정보 수정 핸들러
   const handleEditProfile = () => {
+    
     alert('회원정보 수정 페이지로 이동합니다.');
     // 회원정보 수정 페이지로 이동하는 로직 추가
   };
@@ -23,9 +27,10 @@ function Profile() {
 
   return (
     <div className="profile-container">
+      
       <img
-        src="../../img/profile-icon.png"
-        alt="Profile Icon" 
+        src="/profile-icon.png"
+        alt="Profile Icon"
         className="profile-icon"
         onClick={toggleMenu}
       />
