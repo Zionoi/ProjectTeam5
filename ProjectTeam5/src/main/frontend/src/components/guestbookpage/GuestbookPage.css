@@ -46,7 +46,7 @@ select {
   border-radius: 5px;
 }
 
-button {
+.guestsubmit {
   width: 100%;
   padding: 12px;
   background-color: #7a63ff;
@@ -57,7 +57,7 @@ button {
   cursor: pointer;
 }
 
-button:hover {
+.guestsubmit:hover {
   background-color: #684cce;
 }
 /* GuestbookPage.css */
@@ -127,7 +127,7 @@ border: 1px solid #ccc;
 padding: 10px;
 }
 
-button {
+.guestsubmit {
 padding: 10px 15px;
 border: none;
 border-radius: 5px;
@@ -136,6 +136,6 @@ color: white;
 cursor: pointer;
 }
 
-button:hover {
+.guestsubmit:hover {
 background-color: #684cce;
 }

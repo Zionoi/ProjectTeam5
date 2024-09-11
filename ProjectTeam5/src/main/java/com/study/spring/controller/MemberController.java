@@ -34,6 +34,17 @@ public class MemberController {
 	@Autowired
     private MemberRepository memberRepository;
 	
+	
+	//회원가입 떄 아이디가 이미 존재하는지 체크
+	@GetMapping("/checkId")
+	public boolean checkId(@RequestParam("userId") String userId) {
+		
+		
+		if(memberService.checkId(userId))
+			return true;
+		else 
+			return false;
+	}
 	 	
 	@PostMapping("/signup")
 	public String signup(
@@ -52,13 +63,13 @@ public class MemberController {
 		}
 
     @PostMapping("/login")
-    public List<Object> login(@RequestBody Member loginRequest) {
+    public List<String> login(@RequestBody Member loginRequest) {
     	
         Optional<Member> member = memberRepository.findById(loginRequest.getMemId()); // 사용자 조회
         System.out.println("loginRequest :" + loginRequest);
         
         if (member.isPresent() && member.get().getPass().equals(loginRequest.getPass())) {
-            List<Object> list = new ArrayList<>();  // ArrayList로 초기화
+            List<String> list = new ArrayList<>();  // ArrayList로 초기화
             
             // JwtUtil을 사용하여 JWT 생성
             String token = JwtUtil.generateToken(member.get().getMemId());
@@ -104,9 +115,19 @@ public class MemberController {
     }
 
     // 사용자 정보 가져오기
+    //const [memId, setMemId] = useState(localStorage.getItem('id'));
     @GetMapping("/get/{memId}")
     public Member getMember(@PathVariable String memId) {
         return memberService.getMemberById(memId);
+    }
+    
+    // 인삿말을 수정하는 컨트롤러
+    @PostMapping("/greeting")
+    public String updateGreeting(@RequestParam("memId") String memId, @RequestParam("greeting") String greeting ) {
+    	
+    	memberService.updateGreeting(memId, greeting);
+    	
+    	return "인삿말 수정 완료";
     }
 
 }

@@ -1,12 +1,17 @@
 // src/components/CommentsSection.js
-import React, { useState } from 'react';
+
 import Modal from '../message/Modal'; // 모달 컴포넌트 추가
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import './CommentsSection.css'; // 스타일 파일을 추가합니다.
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
-</style>
 
 function CommentsSection() {
+  const [comment, setComment] = useState('');  // 코멘트 상태
+  const [loading, setLoading] = useState(true); // 로딩 상태
+  const [error, setError] = useState(null);  // 에러 상태
+  const memId = localStorage.getItem('id');  // 로그인한 사용자 ID를 localStorage에서 가져옴
+  const navigate = useNavigate();  // 페이지 이동을 위한 네비게이트 훅
 
   const [isModalOpen, setIsModalOpen] = useState(false); // 모달 상태 관리
   const [modalContent, setModalContent] = useState('inbox'); // 모달 내 페이지 전환 관리
@@ -18,14 +23,18 @@ function CommentsSection() {
 
   const closeModal = () => setIsModalOpen(false);
 
+
   return (
     <div className="comments-section">
       <h3 className="comments-co">사용자 코멘트</h3>
-      <p className="comments-contents">국가는 노인과 청소년의 복지향상을 위한 정책을 실시할 의무를 진다. 언론·출판에 대한 허가나 검열과 집회·결사에 대한 허가는 인정되지 아니한다.</p>
+      <p className="comments-contents">{comment}</p>  {/* 사용자 코멘트 출력 */}
       <div className="comments-actions">
-        <button onClick={() => openModal('writeMessage')}>쪽지 보내기</button>  {/* 모달 */}
-        <button onClick={() => openModal('inbox')}>쪽지함</button>   {/* 모달 */}
+
+        <button className="letter-button" onClick={() => openModal('writeMessage')}>쪽지 보내기</button>  {/* 모달 */}
+        <button className="letter-button" onClick={() => openModal('inbox')}>쪽지함</button>   {/* 모달 */}
+
         <button className="letterIcon"></button>
+
       </div>
 
       {/* 모달을 통해 쪽지 보내기 또는 쪽지함 표시 */}
