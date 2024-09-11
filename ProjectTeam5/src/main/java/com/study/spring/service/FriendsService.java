@@ -17,7 +17,7 @@ public class FriendsService {
 
     // 친구 요청을 보내는 메서드
     public void addFriendRequest(Friends friends) {
-        friends.setStatus("pending"); // 요청 상태를 '대기(pending)'로 설정
+        friends.setStatus("대기"); // 요청 상태를 '대기(pending)'로 설정
         friendsRepository.save(friends); // DB에 저장
     }
 
@@ -36,7 +36,7 @@ public class FriendsService {
         Optional<Friends> friendRequest = friendsRepository.findById(fNum);
         if (friendRequest.isPresent()) {
             Friends friends = friendRequest.get();
-            friends.setStatus("accepted"); // 상태를 '수락(accepted)'으로 변경
+            friends.setStatus("수락"); // 상태를 '수락(accepted)'으로 변경
             friendsRepository.save(friends); // DB에 저장
         }
     }
@@ -46,7 +46,7 @@ public class FriendsService {
         Optional<Friends> friendRequest = friendsRepository.findById(fNum);
         if (friendRequest.isPresent()) {
             Friends friends = friendRequest.get();
-            friends.setStatus("rejected"); // 상태를 '거절(rejected)'으로 변경
+            friends.setStatus("거절"); // 상태를 '거절(rejected)'으로 변경
             friendsRepository.save(friends); // DB에 저장
         }
     }
