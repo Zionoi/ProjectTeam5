@@ -7,7 +7,7 @@ import FriendsSection from './FriendsSection';
 import Profile from './Profile';
 
 
-import FriendsList from './../friends/friendsList';
+import FriendsList from '../friends/FriendsList.js';
 import { useEffect, useState } from 'react';
 
 // import MusicPlayer from './MusicPlayer.jsx';
