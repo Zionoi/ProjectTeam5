@@ -71,13 +71,12 @@ function TopComments() {
     <div>
       {!isEditing ? (
         <div>
-          <a className="homgepage-Co">{greeting || '사용자 홈페이지 인삿말'}</a>
+          <h3 className="homgepage-Co">{greeting || '사용자 홈페이지 인삿말'}</h3>
           <button className="homgepage-Co-edit" onClick={toggleEdit}>수정</button>
         </div>
       ) : (
         <div>
           <input 
-            type="text" 
             value={newGreeting} 
             onChange={handleInputChange} 
             className="homgepage-Co-input"
