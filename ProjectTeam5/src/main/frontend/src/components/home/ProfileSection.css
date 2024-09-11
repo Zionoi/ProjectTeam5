@@ -14,7 +14,7 @@
 
   .profile {
     position:absolute;
-    top:-32px;
+    top:-35px;
     left:340px;
     font-family: "Noto Sans KR", sans-serif;
     font-size:15pt;
@@ -23,8 +23,9 @@
   }
   
   .profile-image {
-    width: 200px;
-    height: 100%;
+    width: 225px;
+    height: 300px;
     border-radius: 30px;
   }
+  
   

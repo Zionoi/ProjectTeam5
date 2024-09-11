@@ -1,3 +1,4 @@
+
 .homgepage-Co-input {
     position:absolute;
     left:357px;
@@ -23,15 +24,15 @@
     font-weight: bold;
 }
 .homgepage-Co-edit {
+
     position:absolute;
     left:775px;top:-25px;
     width: 50px;
     font-family: "Noto Sans KR", sans-serif;
-    font-size:8pt;
+    font-size:7pt;
     font-weight:500;
     color:rgb(122, 122, 122);
-    border: none; 
-    background-color: transparent;
+    border: none; background-color: transparent;
 }
 
 .homgepage-Co-edit:hover {
