@@ -104,6 +104,7 @@ public class MemberService {
                 .orElseThrow(() -> new IllegalArgumentException("해당 사용자를 찾을 수 없습니다."));
     }
 
+<<<<<<< HEAD
 	public void updateGreeting(String memId, String greeting) {
 		Member beforeMember = memberRepository.findById(memId).get();
 		
@@ -139,4 +140,6 @@ public class MemberService {
 	        }
 	    }
 
+=======
+>>>>>>> 1a9a9cd94edc35146a70813c0f57038ebc6b4252
 }

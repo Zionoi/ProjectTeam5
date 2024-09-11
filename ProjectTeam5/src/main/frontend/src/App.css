@@ -10,17 +10,24 @@
   background-color: #e0f7f7; /* 배경색 설정 */
 }
 
-.sidebar {
-  position: relative;
-  flex:1;
-  
+.topcomment {
+  position:absolute;
+  top:155px;
 }
 
+.sidebar {
+  flex:1;
+}
+
+
 .main-content {
-  position:relative;
+  position:absolute;
   top:185px;
+  left: 210px;
   flex: 3;
   display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .left-content {

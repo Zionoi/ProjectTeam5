@@ -29,10 +29,7 @@ public class Member {
 	private String imgName;
 	private String imgPath;	
 	
-	//코멘트
 	private String comments;
-	//인삿말
-	private String greeting;
 	
 	//일일방문자수 (날짜변경시 0으로 초기화)
 	private Long todayVisit;

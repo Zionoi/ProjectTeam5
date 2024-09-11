@@ -7,13 +7,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './components/login/Login.jsx';
 import SignUpPage from './components/SignUpPage/SignUpPage.jsx';
 
-
 function App() {
   // onLoginSuccess={() => setIsLoggedIn(true)}
   const navigate = useNavigate();
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [hostId, setHostId] = useState(localStorage.getItem(''));
+  const [friensdHp, setfriensdHp] = useState(false);
 
     useEffect(() => {
       // 로컬 스토리지에서 로그인 상태 확인
@@ -24,29 +23,24 @@ function App() {
         setIsLoggedIn(true);
       }
     }, []);
-
-    const setHost = (e) => {
-      setHostId(e.target.value);
-    }
-
     const handleLogin = () =>{
       setIsLoggedIn(true);
-      setHostId(localStorage.getItem('id'));
     }
     const handleLogout = () => {
     
       setIsLoggedIn(false); // 로그인 상태를 false로 설정
+      setfriensdHp(false)
       localStorage.clear(); // 로컬 스토리지 클리어
     };
   return (
     
       <div className="App">
         { isLoggedIn ?
-         <MainPanel onLogout={handleLogout} hostId={hostId} setHostId={setHostId}/>
+         <MainPanel onLogout={handleLogout}/>
          : 
       <div>
         <Routes>
-          <Route path="/" element={<Login onLoginSuccess={handleLogin}/>} />
+          <Route path="/login" element={<Login onLoginSuccess={handleLogin}/>} />
           <Route path="/SignUpPage" element={<SignUpPage />}/>
         </Routes>
       </div>
