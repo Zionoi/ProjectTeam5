@@ -17,9 +17,7 @@
     font-weight: bold;
 }
 .homgepage-Co-edit {
-    position:relative;
-    left:445px;
-    top:-35px;
+
     position:absolute;
     left:775px;top:-25px;
     width: 50px;
