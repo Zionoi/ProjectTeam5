@@ -29,5 +29,5 @@ public class Friends {
     private String friendId; // 친구 요청을 받은 회원의 ID
 
     @NonNull
-    private String status; // 요청 상태: 'pending', 'accepted', 'rejected'
+    private String status; // 요청 상태: '대기(pending)', '수락(accepted)', '거절(rejected)'
 }

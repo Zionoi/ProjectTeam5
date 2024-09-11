@@ -1,4 +1,4 @@
-// src/components/FriendsSection.js
+// // src/components/FriendsSection.js
 // import React from 'react';
 // import './FriendsSection.css'; // 스타일 파일을 추가합니다.
 
@@ -18,38 +18,41 @@
 
 // export default FriendsSection;
 
+// src/components/FriendsSection.js
 import React, { useState } from 'react';
-import axios from 'axios';
+import FriendsRequest from '../friends/FriendsRequest'; // 친구 요청 컴포넌트
+import PendingRequests from '../friends/PendingRequests'; // 대기중인 요청 컴포넌트
+import FriendsList from '../friends/FriendsList'; // 친구 목록 컴포넌트
+import './FriendsSection.css'; // 스타일 파일
 
 function FriendsSection() {
-  const [friendId, setFriendId] = useState(''); // 친구 ID를 입력받기 위한 상태
-  const [message, setMessage] = useState(''); // 요청 결과 메시지를 저장하기 위한 상태
-
-  const sendFriendRequest = () => {
-    axios.post('/friends/sendRequest', null, {
-      params: {
-        memId: 'yourMemId', // 실제 로그인된 사용자 ID
-        friendId: friendId, // 검색한 친구의 ID
-      },
-    })
-    .then(response => setMessage(response.data)) // 성공 메시지 설정
-    .catch(error => setMessage('Error sending request')); // 실패 메시지 설정
-  };
+  const [view, setView] = useState(''); // 현재 보여줄 컴포넌트를 관리하는 상태
 
   return (
     <div className="friends-section">
-      <h3>친구추가</h3>
-      <input
-        type="text"
-        placeholder="Search by Friend ID" // 친구 ID 입력 필드
-        value={friendId} // 입력값을 상태로 연결
-        onChange={e => setFriendId(e.target.value)} // 입력값이 변경되면 상태 업데이트
-      />
-      <button onClick={sendFriendRequest}>친구 요청</button> {/* 버튼 클릭 시 요청 전송 */}
-      {message && <p>{message}</p>} {/* 결과 메시지 출력 */}
+      <h3>친구 관리</h3>
+      
+      {/* 버튼들 */}
+      <div className="button-container">
+        <button className="request-button" onClick={() => setView('friendsList')}>
+          친구 목록
+        </button>
+        <button className="request-button" onClick={() => setView('friendsRequest')}>
+          친구 추가
+        </button>
+        <button className="request-button" onClick={() => setView('pendingRequests')}>
+          대기 중인 요청
+        </button>
+      </div>
+      
+      {/* 조건에 따라 컴포넌트 표시 */}
+      <div>
+        {view === 'friendsList' && <FriendsList />}
+        {view === 'friendsRequest' && <FriendsRequest />}
+        {view === 'pendingRequests' && <PendingRequests />}
+      </div>
     </div>
   );
 }
 
 export default FriendsSection;
-

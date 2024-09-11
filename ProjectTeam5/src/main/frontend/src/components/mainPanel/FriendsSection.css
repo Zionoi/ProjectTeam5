@@ -1,25 +1,10 @@
 /* src/components/FriendsSection.css */
-.friends-section {
-    position: relative;
-    background-color: #ffffff;
-    width: 105px;
-    height: 245px;
-    margin-top: 10px;
-    border-radius: 30px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  }
-  
+/* 
   .friends-section ul {
     list-style: none;
     padding: 0;
   }
-  .friends-section h3 {
-    font-family: "Noto Sans KR", sans-serif;
-    font-size: 11pt;
-    font-weight: bold;
-    color:rgb(58, 58, 58);
-    margin:25px 10px 0px 10px;
-  }
+  
   .friends-section li {
     font-family: "Noto Sans KR", sans-serif;
     font-size:8pt;
@@ -39,9 +24,56 @@
     color:rgb(122, 122, 122);
     border: none; background-color: transparent;
   }
+   */
+
+   .friends-section {
+    position: relative;
+    background-color: #ffffff;
+    width: 105px;
+    height: 245px;
+    margin-top: 10px;
+    border-radius: 30px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .friends-section h3 {
+    font-family: "Noto Sans KR", sans-serif;
+    font-size: 11pt;
+    font-weight: bold;
+    color:rgb(58, 58, 58);
+    margin:25px 10px 0px 10px;
+  }
+
+  .button-container {
+    display: flex;
+    justify-content: flex-end; /* 버튼들을 오른쪽에 정렬 */
+    gap: 10px; /* 버튼 간의 간격 추가 */
+    width: 105px;
+  }
+  
+  .request-button {
+    padding: 10px 20px;
+    background-color: #6a67e9;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 30%;
+    height: 10%;
+    font-size:8pt;
+    font-weight:500;
+  }
   
   .request-button:hover {
     color:rgb(182, 182, 182);
     cursor: pointer;
+  } 
+  
+  ul {
+    list-style-type: none;
   }
+  
+  ul li {
+    margin: 5px 0;
+  }
+  
   
