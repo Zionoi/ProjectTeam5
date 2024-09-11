@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
-import MainPanel from '../mainPanel/MainPanel';
 // import SignUpPage from '../SignUpPage/SignUpPage';
 {/* <style>
 @import url('https://fonts.googleapis.com/css2?family=Asap:ital,wght@0,100..900;1,100..900&family=Noto+Sans+KR&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
@@ -14,36 +13,31 @@ const Login = ({ onLoginSuccess }) => {
   const [pass, setPass] = useState('');
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
-  // const [hostId, setHostId] = useState('');
-
-  // useEffect(() => {
-  //   setHostId(localStorage.getItem('id'));
-  //   console.log("host아이디adsfasdf :",localStorage.getItem('id'));
-  // }, [message]);
 
   const handleLogin = async () => {
     console.log('서버 응답:', userid, pass);
-    try { axios.post('/member/login', {
-        memId: userid,
-        pass: pass,
-      }).then(result => {
-      if (result.data && result.data.length >= 2 && result.data[0]) {
-        // 응답 데이터가 존재하고, 토큰이 존재할 때만 로그인 성공으로 처리
-        localStorage.clear();
-        localStorage.setItem('id', result.data[1]); // memId 저장
-        localStorage.setItem('token', result.data[0]); // 토큰 저장
-        
+    try {
+      const response = await axios.post('/member/login', {
+        memId:userid,
+        pass:pass,
+      });
 
-        
+      console.log('서버 응답:', response);
+      console.log('응답 데이터:', response.data);
+
+      if (response.data) {
+        localStorage.clear();
+        localStorage.setItem('id', response.data[1]);
+        localStorage.setItem('token', response.data[0]);
         setMessage('로그인 성공!');
         onLoginSuccess(); // 로그인 성공 시 호출
-        navigate(`/home/${result.data[1]}`); // 메인 페이지로 리다이렉트
+        navigate('/Home'); // 메인 페이지로 리다이렉트
       } else {
         setMessage('잘못된 사용자 이름 또는 비밀번호');
-      }})    
+      }
     } catch (error) {
       console.error('로그인 오류:', error);
-      setMessage('로그인 실패: 서버 오류가 발생했습니다.');
+      setMessage('로그인 실패asdf');
     }
   };
 
@@ -61,7 +55,8 @@ const Login = ({ onLoginSuccess }) => {
     <div>
       {localStorage.getItem('token') ? (
         <div>
-          <MainPanel/>
+          <p>안녕하세요, {localStorage.getItem('id')}님</p>
+          <button onClick={handleLogout}>로그아웃</button>
         </div>
       ) : (
       <div className="login-form">

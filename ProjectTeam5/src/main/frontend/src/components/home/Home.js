@@ -11,20 +11,17 @@ import { Routes, Route, useNavigate } from 'react-router-dom';  // 라우팅 관
 import '../../App.css';
 import TopCommnets from '../mainPanel/TopComments';
 
-function Home({hostId, setHostId}) {
+function Home() {
     return (
       <div className="">
         <main className="main-content">
 
           <ProfileSection />
           <TopCommnets/>
-          
           <StickerSection />
           <CommentsSection />
         </main>
 
-     
-        
       </div>
     );
   }
