@@ -55,10 +55,10 @@ function Sidebar({hostId, setHostId}) {
           {/* 메인탭 경로 */}
           <Route path="/home/:hostId" element={<Home hostId={hostId} setHostId={setHostId}/>} />
           <Route path="/diary/:hostId" element={<Diary />} />
-          <Route path="/board/:hostId" element={<Board />} />
+          <Route path="/board/:hostId" element={<Board hostId={hostId} setHostId={setHostId}/>} />
 
           {/* 기타 경로 처리 */}
-          <Route path="/boardUpload/:hostId" element={<BoardUpload />} />
+          <Route path="/boardUpload/:hostId" element={<BoardUpload hostId={hostId} setHostId={setHostId} />} />
           <Route path="/boardDetail/:bNum/:hostId" element={<BoardDetail />} />
           <Route path="/inputDiary/:date/:hostId" element={<InputDiary />} />
           <Route path="/getDiary/:dNum/:hostId" element={<GetDiary />} />
