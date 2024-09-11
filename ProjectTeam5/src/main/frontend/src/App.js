@@ -13,7 +13,17 @@ function App() {
   const navigate = useNavigate();
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [hostId, setHostId] = useState(localStorage.getItem(''));
+  const [hostId, setHostId] = useState('');
+
+  // useEffect(() => {
+  //   // 서버가 재시작했는지 여부를 확인할 수 있는 상태를 체크하는 로직이 있다고 가정
+  //   const isServerRestarted = checkServerStatus(); // 서버 상태 확인 로직
+  
+  //   if (isServerRestarted) {
+  //     // 서버가 재시작되었다면 로컬 스토리지 클리어
+  //     localStorage.clear();
+  //   }
+  // }, []);
 
     useEffect(() => {
       // 로컬 스토리지에서 로그인 상태 확인
@@ -25,9 +35,6 @@ function App() {
       }
     }, []);
 
-    const setHost = (e) => {
-      setHostId(e.target.value);
-    }
 
     const handleLogin = () =>{
       setIsLoggedIn(true);
