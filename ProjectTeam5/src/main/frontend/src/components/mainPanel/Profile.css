@@ -5,8 +5,9 @@
   }
   
   .profile-icon {
-    width: 40px; /* 아이콘 크기 */
-    height: 40px;
+    background: url(../../img/profile-icon.png) no-repeat;
+    width: 50px; /* 아이콘 크기 */
+    height: 50px;
     cursor: pointer;
   }
   
@@ -22,7 +23,7 @@
   
   .menu-item {
     color: black;
-    padding: 12px 16px;
+    padding: 20px 20px;
     text-decoration: none;
     display: block;
     border: none;

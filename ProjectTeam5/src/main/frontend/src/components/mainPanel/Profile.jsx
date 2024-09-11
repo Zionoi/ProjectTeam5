@@ -24,8 +24,8 @@ function Profile() {
   return (
     <div className="profile-container">
       <img
-        src="./img/profile-icon.png"
-        // alt="Profile Icon"
+        src="../../img/profile-icon.png"
+        alt="Profile Icon" 
         className="profile-icon"
         onClick={toggleMenu}
       />
