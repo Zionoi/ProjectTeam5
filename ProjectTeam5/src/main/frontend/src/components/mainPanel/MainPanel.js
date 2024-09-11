@@ -28,8 +28,12 @@ function MainPanel({onLogout}) { // onLogout props 추가
 
       <div className="app" style={{ display: 'flex' }}>
         <div className="left-panel">
-
+<<<<<<< HEAD
+          <Visit hostId={hostId} setHostId={setHostId}/>
+          <Sidebar hostId={hostId} setHostId={setHostId} />
+=======
           <Sidebar />
+>>>>>>> 1a9a9cd94edc35146a70813c0f57038ebc6b4252
         </div>
       
       <div className="right-panel">
