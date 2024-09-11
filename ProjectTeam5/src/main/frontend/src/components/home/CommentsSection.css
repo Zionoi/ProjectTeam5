@@ -4,7 +4,7 @@
 .comments-section {
     position:absolute;
     top:310px;
-    left:240px;
+    left:30px;
     background-color: #ffffff;
     width: 300px;
     height: 150px;
@@ -28,8 +28,9 @@
   }
 
   .comments-actions {
-    position: relative;
-    top:30px;
+
+    position: absolute;
+    top:165px; left:120px;
     display: flex;
     gap: 10px;
     left:120px;

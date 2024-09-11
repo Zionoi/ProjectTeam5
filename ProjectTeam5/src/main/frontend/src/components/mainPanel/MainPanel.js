@@ -4,11 +4,8 @@ import Board from '../board/Board.js';
 import Sidebar from './Sidebar';
 import VisitSection from './VisitSection';
 import FriendsSection from './FriendsSection';
-import HeaderSection from './HeaderSection.jsx';
-import ProfileSection from '../home/ProfileSection.jsx';
-import StickerSection from '../home/StickerSection.jsx';
-import CommentsSection from '../home/CommentsSection.jsx';
-import TopCommnets from './TopComments.jsx';
+import Profile from './Profile';
+import '../login/Logout.css';
 
 import { useEffect, useState } from 'react';
 

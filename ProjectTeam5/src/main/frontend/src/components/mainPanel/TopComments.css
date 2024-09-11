@@ -1,16 +1,33 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+
+.homgepage-Co-input {
+    position:absolute;
+    left:357px;
+    top:-41px;
+    width:400px; height: 35px;
+    font-family: "Noto Sans KR", sans-serif;
+    font-size: 15pt;
+    font-weight: bold;
+    border:none; border-radius: 30px;
+    color:#7982ff;
+}
+.homgepage-Co-input:focus {
+    outline: none;
+}
 
 .homgepage-Co {
-    position:relative;
-    left:575px;
-    top:-5px;
+    position:absolute;
+    width: 450px;
+    left: 365px;
+    top:-30px;
     font-family: "Noto Sans KR", sans-serif;
     font-size: 15pt;  /*폰트 크기 변경*/
     font-weight: bold;
 }
 .homgepage-Co-edit {
-    position:relative;
-    left:800px;
+
+    position:absolute;
+    left:775px;top:-25px;
+    width: 50px;
     font-family: "Noto Sans KR", sans-serif;
     font-size:7pt;
     font-weight:500;

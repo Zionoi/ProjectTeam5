@@ -17,13 +17,13 @@
 
 .sidebar {
   flex:1;
-  
 }
 
 
 .main-content {
   position:absolute;
   top:185px;
+  left: 210px;
   flex: 3;
   display: flex;
   flex-direction: column;

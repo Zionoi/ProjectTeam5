@@ -24,14 +24,18 @@ function Sidebar() {
 
   return (
     <div style={{ display: 'flex' }}>
-      <nav className="sidebar">
-        {friendId && (
-          <button onClick={goToMyHomePage} className="btn btn-primary">내 홈페이지로 돌아가기</button>
+            {hostId !== myId && (
+          <div className="button-container">
+            <button onClick={goToMyHomePage} className="btn-myhome"></button>
+            <div class="tooltip">내 홈페이지로 이동</div>
+          </div>
+          
         )}
-        <Link to={friendId ? `/user/${friendId}/home` : `/home`}><div className="icon home"></div></Link>
-        <Link to={friendId ? `/user/${friendId}/diary` : `/diary`}><div className="icon diary"></div></Link>
-        <Link to={friendId ? `/user/${friendId}/board` : `/board`}><div className="icon board"></div></Link>
-        <Link to={friendId ? `/user/${friendId}/GuestbookPage` : `/GuestbookPage`}><div className="icon visit"></div></Link>
+      <nav className="sidebar">
+        <Link to={`/home/${hostId}`}><div className="icon home"></div></Link>
+        <Link to={`/diary/${hostId}`}><div className="icon diary"></div></Link>
+        <Link to={`/bulletin-board/${hostId}`}><div className="icon board"></div></Link>
+        <Link to={`/GuestbookPage/${hostId}`}><div className="icon visit"></div></Link>
         <div className="icon walk"><a href="#"></a></div>
         <div className="icon food"><a href="#"></a></div>
       </nav>
@@ -51,14 +55,15 @@ function Sidebar() {
           <Route path="/user/:friendId/board" element={<Board />} />
 
           {/* 기타 경로 처리 */}
-          <Route path="/boardUpload" element={<BoardUpload />} />
-          <Route path="/boardDetail/:bNum" element={<BoardDetail />} />
-          <Route path="/inputDiary/:date" element={<InputDiary />} />
-          <Route path="/getDiary/:dNum" element={<GetDiary />} />
-          <Route path="/GuestbookPage" element={<GuestbookPage />} />
-          <Route path="/write" element={<WriteMessage />} />
-          <Route path="/inbox" element={<Inbox />} />
-          <Route path="/message/:mNum" element={<MessageDetail />} />
+          <Route path="/boardUpload/:hostId" element={<BoardUpload />} />
+          <Route path="/boardDetail/:bNum/:hostId" element={<BoardDetail />} />
+          <Route path="/inputDiary/:date/:hostId" element={<InputDiary />} />
+          <Route path="/getDiary/:dNum/:hostId" element={<GetDiary />} />
+          <Route path="/GuestbookPage/:hostId" element={<GuestbookPage />} />
+          <Route path="/write/:hostId" element={<WriteMessage />} />
+          <Route path="/inbox/:hostId" element={<Inbox />} />
+          <Route path="/message/:mNum/:hostId" element={<MessageDetail />} />
+          <Route path="/bulletin-board/:hostId" element={<BulletinBoardPage hostId={hostId}/>} /> 
         </Routes>
       </div>
     </div>
