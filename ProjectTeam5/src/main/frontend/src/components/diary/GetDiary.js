@@ -9,7 +9,7 @@ function GetDiary() {
     console.log('dnum 겟다이어리:', dnum);
     
     useEffect(() => {
-        if (dnum) {
+        if (dnum && hostId) {
             axios.get(`/api/events/getDiary/${dnum}/${hostId}`) // dNum을 URL 파라미터로 사용하여 데이터 요청
                 .then(response => {
                     console.log('겟다이어리',diary)
