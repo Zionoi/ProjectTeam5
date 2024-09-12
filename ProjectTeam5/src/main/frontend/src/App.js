@@ -26,13 +26,12 @@ function App() {
   //     localStorage.clear();
   //   }
   // }, []);
-
     useEffect(() => {
       // 로컬 스토리지에서 로그인 상태 확인
       const token = localStorage.getItem('token');
       const id = localStorage.getItem('id');
       if (token && id) {
-        
+        setHostId(localStorage.getItem('id'))
         setIsLoggedIn(true);
       }
     }, []);

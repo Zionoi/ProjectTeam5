@@ -17,6 +17,7 @@ import HeaderSection from './HeaderSection.jsx';
 function MainPanel({ onLogout, hostId, setHostId }) { // onLogout props 추가
   const navigate = useNavigate();
   
+  
 
     const handleLogout = () => {
       onLogout(); // 부모 컴포넌트의 로그아웃 핸들러 호출
