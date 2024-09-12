@@ -5,13 +5,13 @@ import Sidebar from './Sidebar';
 import FortuneSection from './FortuneSection';
 import FriendsSection from './FriendsSection';
 import Profile from './Profile';
-import MusicPlayer from './MusicPlayer.jsx';
+// import MusicPlayer from './MusicPlayer.jsx';
 
 
 import FriendsList from '../friends/FriendsList.js';
 import { useEffect, useState } from 'react';
+import MusicPlayer from '../music/MusicPlayer.jsx';
 
-// import MusicPlayer from './MusicPlayer.jsx';
 
 function MainPanel({ onLogout, hostId, setHostId }) { // onLogout props 추가
   const navigate = useNavigate();
@@ -34,7 +34,7 @@ function MainPanel({ onLogout, hostId, setHostId }) { // onLogout props 추가
           <button onClick={handleLogout} className="logout-button">로그아웃</button>
         </div>
         <aside className="right-side">
-        {/* <MusicPlayer /> */}
+        <MusicPlayer/>
         <Profile />
         {/* <FriendsList hostId={hostId} setHostId={setHostId}/> */}
           {/* <VisitSection /> */}
