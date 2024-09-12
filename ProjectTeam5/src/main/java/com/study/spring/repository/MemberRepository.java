@@ -10,4 +10,8 @@ import com.study.spring.domain.Member;
 @Repository
 public interface MemberRepository extends JpaRepository<Member, String>{
 	List<Member> findByNicknameContaining(String keyword);
+	
+	List<Member> findByNameAndBirthdayAndPhone(String name, String birthday, String phone);
+
+	List<Member> findByMemIdAndNameAndBirthdayAndPhone(String userId, String name, String birthday, String phone);
 }

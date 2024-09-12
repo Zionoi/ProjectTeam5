@@ -17,10 +17,10 @@ function Home({hostId, setHostId}) {
         <main className="main-content">
 
           <ProfileSection />
-          <TopCommnets/>
+          <TopCommnets hostId={hostId} setHostId={setHostId}/>
           
           <StickerSection />
-          <CommentsSection />
+          <CommentsSection hostId={hostId} setHostId={setHostId}/>
         </main>
 
      

@@ -1,14 +1,19 @@
 package com.study.spring.domain;
 
+import java.time.LocalDateTime;
+
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import io.micrometer.common.lang.NonNull;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
 import jakarta.persistence.Id;
 import lombok.Data;
 
 @Data
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 public class Member {
 	@Id
 	private String memId;
@@ -23,7 +28,7 @@ public class Member {
 	private String address;
 	private String gender;
 	@CreatedDate
-	private String createDate;
+	private LocalDateTime createDate;
 	
 	//사진 추가 경로
 	private String imgName;
