@@ -34,21 +34,14 @@ function MainPanel({ onLogout, hostId, setHostId }) { // onLogout props 추가
           <button onClick={handleLogout} className="logout-button">로그아웃</button>
         </div>
         <aside className="right-side">
-        <MusicPlayer />
+        {/* <MusicPlayer /> */}
         <Profile />
         {/* <FriendsList hostId={hostId} setHostId={setHostId}/> */}
-          <VisitSection />
+          {/* <VisitSection /> */}
           <FriendsSection />
         </aside>
       </div>
-      <aside className="right-side">
-      {/* <MusicPlayer /> */}
-      <Profile />
-      <FriendsList hostId={hostId} setHostId={setHostId}/>
-        <FriendsSection />
-        <FortuneSection />
-      </aside>
-    </div>
+     
     );
   }
   
