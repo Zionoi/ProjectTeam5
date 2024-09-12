@@ -31,7 +31,7 @@ function InputDiary() {
         })
         .then(() => {
             alert('일기가 등록되었습니다.');
-            navigate('/Diary'); // 등록 후 다이어리로 리다이렉트
+            navigate(`/diary/${localStorage.getItem('id')}`); // 등록 후 다이어리로 리다이렉트
         })
         .catch(error => {
             console.error('Error adding diary entry:', error);

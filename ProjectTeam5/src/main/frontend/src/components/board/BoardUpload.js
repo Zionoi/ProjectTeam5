@@ -27,8 +27,8 @@ function BoardUpload({hostId, setHostId}) {
     event.preventDefault(); // 기본 제출 동작 방지
 
     const formData = new FormData();
-    formData.append("bTitle", bTitle);
-    formData.append("bContent", bContent);
+    formData.append("btitle", bTitle);
+    formData.append("bcontent", bContent);
     formData.append("memId", hostId);
     
     // 각 이미지를 FormData에 추가
