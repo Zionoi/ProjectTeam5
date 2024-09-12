@@ -49,4 +49,3 @@ function MainPanel({ onLogout, hostId, setHostId }) { // onLogout props 추가
   }
   
   export default MainPanel;
-  

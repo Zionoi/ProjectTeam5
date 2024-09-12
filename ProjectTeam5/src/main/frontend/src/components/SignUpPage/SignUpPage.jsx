@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios'; // axios 임포트
 import './SignUpPage.css'; // SignUpPage 전용 스타일
+import { useNavigate } from 'react-router-dom';
 
 function SignUpPage() {
   const [formData, setFormData] = useState({
@@ -17,6 +18,8 @@ function SignUpPage() {
   const [selectedFile, setSelectedFile] = useState(null); // 파일 선택 상태
   const [isIdAvailable, setIsIdAvailable] = useState(null); // 아이디 중복 여부 상태
   const [isSignUpDisabled, setIsSignUpDisabled] = useState(true); // 회원가입 버튼 비활성화 상태
+
+  const navigate = useNavigate();
 
   // 아이디 글자가 5자 이상일 때 중복 확인 요청
   useEffect(() => {
@@ -82,6 +85,7 @@ function SignUpPage() {
         },
       });
       alert('회원가입이 완료되었습니다.');
+      navigate("/");
     } catch (error) {
       alert('회원가입 중 오류가 발생했습니다.');
     }
