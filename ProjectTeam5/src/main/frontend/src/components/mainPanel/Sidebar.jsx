@@ -105,7 +105,7 @@ function Sidebar({hostId, setHostId}) {
           <Route path="/boardUpload/:hostId" element={<BoardUpload hostId={hostId} setHostId={setHostId} />} />
           <Route path="/boardDetail/:bNum/:hostId" element={<BoardDetail hostId={hostId} setHostId={setHostId}/>} />
           <Route path="/inputDiary/:date/:hostId" element={<InputDiary hostId={hostId} setHostId={setHostId}/>} />
-          <Route path="/getDiary/:dNum/:hostId" element={<GetDiary hostId={hostId} setHostId={setHostId}/>} />
+          <Route path="/getDiary/:dnum/:hostId" element={<GetDiary hostId={hostId} setHostId={setHostId}/>} />
           <Route path="/GuestbookPage/:hostId" element={<GuestbookPage hostId={hostId} setHostId={setHostId}/>} />
           <Route path="/write/:hostId" element={<WriteMessage hostId={hostId} setHostId={setHostId}/>} />
           <Route path="/inbox/:hostId" element={<Inbox hostId={hostId} setHostId={setHostId}/>} />
