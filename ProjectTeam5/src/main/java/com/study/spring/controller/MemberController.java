@@ -156,4 +156,36 @@ public class MemberController {
         return memberService.checkIfMemberExists(memId);
     }
 
+    //아이디를 찾는 컨트롤러
+    @GetMapping("/findId")
+    public Member findId(@RequestParam("name") String name,
+    					 @RequestParam("birthday") String birthday,
+    					 @RequestParam("phone") String phone) {
+    	
+    	Member member = memberService.findId(name, birthday, phone);
+    	
+    	return member;
+    }
+    //비밀번호를 찾는 컨트롤러
+    @GetMapping("/findPassword")
+    public boolean findPassword(@RequestParam("userId") String userId,
+    							@RequestParam("name") String name,
+    							@RequestParam("birthday") String birthday,
+    							@RequestParam("phone") String phone) {
+    	
+    	if(memberService.findPassword(userId, name, birthday, phone))
+    		return true;
+    	else
+    		return false;
+    }
+    //비밀번호 재설정
+    @PostMapping("/resetPassword")
+    public String resetPassword(@RequestParam("memId") String memId,
+    							@RequestParam("pass") String pass) {
+    	if(memberService.resetPassword(memId, pass))
+    		return "success";
+    	else
+    		return "실패";
+    }
+    
 }

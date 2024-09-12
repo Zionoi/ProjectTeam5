@@ -38,13 +38,16 @@ public class BoardController {
 //	}
 	//board db에 여러개 작성
 	@PostMapping("/write")
-	public String write(Board board, @RequestParam(value = "image", required = false) MultipartFile[] img) throws Exception {
+	public String write(Board board, 
+						@RequestParam(value = "image", 
+						required = false) MultipartFile[] img,
+						@RequestParam("memId") String memId) throws Exception {
 		System.out.println("보드컨트롤러 여러장 업로드 img : " + Arrays.toString(img));
 		// 이미지가 있으면 처리, 없으면 그냥 넘어감
 		if (img != null && img.length > 0) {
-			boardService.write(board, img);
+			boardService.write(board, img, memId);
 		} else {
-			boardService.write(board);  // 이미지가 없는 경우
+			boardService.write(board, memId);  // 이미지가 없는 경우
 		}
 		
 		return "작성완료";
@@ -52,9 +55,9 @@ public class BoardController {
 	
 	//모든 board를 가져옴
 	@GetMapping("/total")
-	public List<Board> totalBoard(){
+	public List<Board> totalBoard(@RequestParam("memId") String memberId){
 		System.out.println("보드컨트롤러 리스트 서비스시작전" );
-		List<Board> list = boardService.totalBoard();
+		List<Board> list = boardService.totalBoard(memberId);
 		System.out.println("보드컨트롤러 리스트 서비스실행 후: " + list);
 		return list;
 	}

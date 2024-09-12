@@ -11,17 +11,25 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.study.spring.domain.Board;
+import com.study.spring.domain.Member;
 import com.study.spring.repository.BoardRepository;
+import com.study.spring.repository.MemberRepository;
 
 @Service
 public class BoardService {
     @Autowired
     private BoardRepository boardRepository;
+    
+    @Autowired
+    private MemberRepository memberRepository;
 
     private final String uploadDir = System.getProperty("user.dir") + "/uploadedFiles";
 
     //사진이 있는 경우
-    public void write(Board board, MultipartFile[] img) throws Exception {
+    public void write(Board board, MultipartFile[] img, String memId) throws Exception {
+    	Member member = memberRepository.findById(memId).get();
+    	board.setMember(member);
+    	
         // 파일 저장 경로 설정
         File dir = new File(uploadDir);
         List<String> path = new ArrayList<String>();
@@ -46,13 +54,15 @@ public class BoardService {
     }
     
     //이미지가 없는 경우
-    public void write(Board board) {
-
+    public void write(Board board, String memId) {
+    	Member member = memberRepository.findById(memId).get();
+    	board.setMember(member);
         boardRepository.save(board);
     }
 
-    public List<Board> totalBoard() {
-        return boardRepository.findAll();
+    public List<Board> totalBoard(String memId) {
+    	Member member = memberRepository.findById(memId).get();
+        return boardRepository.findByMember(member);
     }
 
 	public Optional<Board> detailBoard(Long bNum) {

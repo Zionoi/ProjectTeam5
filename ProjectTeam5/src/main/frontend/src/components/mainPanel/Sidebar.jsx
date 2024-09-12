@@ -21,10 +21,10 @@ function Sidebar({hostId, setHostId}) {
   const myId = localStorage.getItem('id'); // 내 아이디 로컬 스토리지에서 가져오기
   // const [hostId, setHostId] = useState(paramHostId);
 
-  useEffect(() => {
-    setHostId(paramHostId);
-    console.log("host아이디 사이드바 : ",paramHostId);
-  }, [paramHostId, setHostId]);
+  // useEffect(() => {
+  //   setHostId(paramHostId);
+  //   console.log("host아이디 사이드바 : ",paramHostId);
+  // }, [paramHostId, setHostId]);
 
   const goToMyHomePage = () => {
     setHostId(myId);
@@ -55,10 +55,10 @@ function Sidebar({hostId, setHostId}) {
           {/* 메인탭 경로 */}
           <Route path="/home/:hostId" element={<Home hostId={hostId} setHostId={setHostId}/>} />
           <Route path="/diary/:hostId" element={<Diary />} />
-          <Route path="/board/:hostId" element={<Board />} />
+          <Route path="/board/:hostId" element={<Board hostId={hostId} setHostId={setHostId}/>} />
 
           {/* 기타 경로 처리 */}
-          <Route path="/boardUpload/:hostId" element={<BoardUpload />} />
+          <Route path="/boardUpload/:hostId" element={<BoardUpload hostId={hostId} setHostId={setHostId} />} />
           <Route path="/boardDetail/:bNum/:hostId" element={<BoardDetail />} />
           <Route path="/inputDiary/:date/:hostId" element={<InputDiary />} />
           <Route path="/getDiary/:dNum/:hostId" element={<GetDiary />} />

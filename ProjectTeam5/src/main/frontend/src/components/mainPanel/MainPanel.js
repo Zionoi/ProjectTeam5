@@ -2,7 +2,7 @@ import { useNavigate, Routes, Route, Link } from 'react-router-dom';
 import Home from '../home/Home.js';
 import Board from '../board/Board.js';
 import Sidebar from './Sidebar';
-import VisitSection from './VisitSection';
+import FortuneSection from './FortuneSection';
 import FriendsSection from './FriendsSection';
 import Profile from './Profile';
 import MusicPlayer from './MusicPlayer.jsx';
@@ -41,6 +41,14 @@ function MainPanel({ onLogout, hostId, setHostId }) { // onLogout props 추가
           <FriendsSection />
         </aside>
       </div>
+      <aside className="right-side">
+      {/* <MusicPlayer /> */}
+      <Profile />
+      <FriendsList hostId={hostId} setHostId={setHostId}/>
+        <FriendsSection />
+        <FortuneSection />
+      </aside>
+    </div>
     );
   }
   
