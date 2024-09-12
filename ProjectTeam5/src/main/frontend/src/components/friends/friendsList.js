@@ -8,7 +8,7 @@ function FriendsList() {
   useEffect(() => {
     // 서버에서 친구 목록 가져오기
     axios.get('/friends/total', {
-      params: { memId: 'user02' }, // 실제 로그인된 사용자 ID  // 하드 코딩
+      params: { memId: localStorage.getItem('id') }, // 실제 로그인된 사용자 ID  // 하드 코딩
     })
     .then(response => {
       console.log('친구 목록을 받았습니다:', response.data); // 서버에서 받은 데이터 확인
@@ -27,6 +27,7 @@ function FriendsList() {
     .then(() => {
       console.log(`친구를 삭제했습니다: ${fNum}`);
       setFriends(friends.filter(friend => friend.fNum !== fNum)); // 친구 목록에서 제거
+      window.location.reload();
     })
     .catch(error => {
       console.error('친구 삭제 중 오류가 발생했습니다', error);

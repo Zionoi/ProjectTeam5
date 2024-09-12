@@ -32,8 +32,10 @@ public class FriendsController {
 
         friends.setMember(member); // Member 객체를 Friends 엔티티에 설정
         friends.setFriendId(friendId); // 요청을 받을 사용자의 ID 설정
-        friendsService.addFriendRequest(friends); // 친구 요청 추가
-        return "친구 요청 성공!";
+        if(friendsService.addFriendRequest(friends))// 친구 요청 추가
+        	return "친구 요청 성공!";
+        else
+        	return "이미 친구 요청하였습니다";
     }
 
     // 내가 보낸 대기 상태의 친구 요청을 조회하는 엔드포인트

@@ -25,13 +25,12 @@ function FriendsRequest({ memId = 'user02' }) { // loggedInUser로 로그인한 
 
         axios.post('/friends/sendRequest', null, {
           params: {
-            memId: 'user02', // 실제 로그인된 사용자 ID
+            memId: localStorage.getItem('id'), // 실제 로그인된 사용자 ID
             friendId: friendId, // 입력한 친구의 ID
           },
         })
         .then(response => {
-          console.log("친구 요청 성공: ", response.data);
-          setMessage('친구 요청을 보냈습니다.');
+          setMessage(response.data);
         })
         .catch(error => {
           console.error("친구 요청 실패: ", error);
