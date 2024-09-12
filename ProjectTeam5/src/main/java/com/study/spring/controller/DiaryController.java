@@ -36,11 +36,11 @@ public class DiaryController {
         return diaryService.createEvent(event);
     }
 
-    @GetMapping("/getDiary/{dnum}/{memId}")
-    public Diary getDiary(@PathVariable Long dnum, @PathVariable String memId) {
+    @GetMapping("/getDiary/{dnum}/{hostId}")
+    public Diary getDiary(@PathVariable Long dnum, @PathVariable String hostId) {
        
-       System.out.println("겟다이어리 : "+diaryService.findByDnumAndMemId(dnum, memId));
-        return diaryService.findByDnumAndMemId(dnum, memId);
+       System.out.println("겟다이어리 : "+diaryService.findByDnumAndMemId(dnum, hostId));
+        return diaryService.findByDnumAndMemId(dnum, hostId);
     }
 
 
