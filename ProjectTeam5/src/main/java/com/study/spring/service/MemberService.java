@@ -142,4 +142,28 @@ public class MemberService {
 	    return memberRepository.existsByMemId(memId);
 	}
 
+	public void deleteImage(String memId) {
+		Member member = memberRepository.findById(memId).get();
+		
+		member.setImgName("");
+		member.setImgPath("");
+		
+		memberRepository.save(member);
+	}
+
+	public void updateProfile(Member m) {
+		Member member = memberRepository.findById(m.getMemId()).get();
+		
+		member.setNickname(m.getNickname());
+		member.setEmail(m.getEmail());
+		member.setName(m.getName());
+		member.setPass(m.getPass());
+		member.setPhone(m.getPhone());
+		member.setAddress(m.getAddress());
+		
+		memberRepository.save(member);
+		
+		
+	}
+
 }

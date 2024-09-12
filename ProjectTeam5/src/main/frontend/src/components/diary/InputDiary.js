@@ -19,10 +19,8 @@ function InputDiary() {
         const diaryEntry = {
             dTitle : dTitle,
             dContent : dContent,
-            member: {
-                memId: userId // 로컬 스토리지에서 가져온 사용자 ID
-            },
-            start: startDate,
+            memId : userId, // 로컬 스토리지에서 가져온 사용자 ID
+            start : startDate,
             end: startDate // 종료일은 시작일과 동일하게 설정
         };
         console.log('통신전 diaryEntry : ', diaryEntry)

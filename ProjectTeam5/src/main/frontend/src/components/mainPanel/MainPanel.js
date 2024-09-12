@@ -2,19 +2,21 @@ import { useNavigate, Routes, Route, Link } from 'react-router-dom';
 import Home from '../home/Home.js';
 import Board from '../board/Board.js';
 import Sidebar from './Sidebar';
-import VisitSection from './VisitSection';
+import FortuneSection from './FortuneSection';
 import FriendsSection from './FriendsSection';
 import Profile from './Profile';
-import MusicPlayer from './MusicPlayer.jsx';
+// import MusicPlayer from './MusicPlayer.jsx';
 
 
 import FriendsList from '../friends/FriendsList.js';
 import { useEffect, useState } from 'react';
+import MusicPlayer from '../music/MusicPlayer.jsx';
+import HeaderSection from './HeaderSection.jsx';
 
-// import MusicPlayer from './MusicPlayer.jsx';
 
 function MainPanel({ onLogout, hostId, setHostId }) { // onLogout props 추가
   const navigate = useNavigate();
+  
   
 
     const handleLogout = () => {
@@ -33,16 +35,17 @@ function MainPanel({ onLogout, hostId, setHostId }) { // onLogout props 추가
         <div className="right-panel">
           <button onClick={handleLogout} className="logout-button">로그아웃</button>
         </div>
+        <HeaderSection hostId={hostId}/>
         <aside className="right-side">
-        <MusicPlayer />
-        <Profile />
+        <MusicPlayer/>
+        <Profile hostId={hostId}/>
         {/* <FriendsList hostId={hostId} setHostId={setHostId}/> */}
-          <VisitSection />
+          {/* <VisitSection /> */}
           <FriendsSection />
         </aside>
       </div>
+     
     );
   }
   
   export default MainPanel;
-  
