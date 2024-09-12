@@ -8,7 +8,7 @@ function FriendsList() {
   useEffect(() => {
     // 서버에서 친구 목록 가져오기
     axios.get('/friends/total', {
-      params: { memId: 'user04' }, // 실제 로그인된 사용자 ID  // 하드 코딩
+      params: { memId: 'user02' }, // 실제 로그인된 사용자 ID  // 하드 코딩
     })
     .then(response => {
       console.log('친구 목록을 받았습니다:', response.data); // 서버에서 받은 데이터 확인
