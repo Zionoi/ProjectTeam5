@@ -3,22 +3,24 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 
 
-function Board() {
+function Board({hostId, setHostId}) {
   const [images, setImages] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios
-      .get('/board/total')
-      .then((response) => {
-        console.log("Fetched images:", response.data);
-        setImages(response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching images:", error);
-        alert("이미지 목록을 가져오는 중 오류가 발생했습니다.");
-      });
-  }, []);
+    if (hostId) {
+      axios
+        .get('/board/total', { params: { memId: hostId } })
+        .then((response) => {
+          console.log("Fetched images:", response.data);
+          setImages(response.data);
+        })
+        .catch((error) => {
+          console.error("Error fetching images:", error);
+          alert("이미지 목록을 가져오는 중 오류가 발생했습니다.");
+        });
+    }
+  }, [hostId]);
 
   const handleImageClick = (bnum) => {
     console.log("Fetched images bnum:", bnum);

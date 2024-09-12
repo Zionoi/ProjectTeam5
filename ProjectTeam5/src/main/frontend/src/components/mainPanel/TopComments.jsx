@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './TopComments.css';
 
-function TopComments() {
+function TopComments({hostId, setHostId}) {
   const [isEditing, setIsEditing] = useState(false); // 수정 모드 상태
   const [greeting, setGreeting] = useState('인삿말 '); // 인삿말 상태
   const [newGreeting, setNewGreeting] = useState(''); // 입력된 새로운 인삿말 상태
   const [selectedFile, setSelectedFile] = useState(null); // 파일 상태 (선택한 이미지 파일)
-  const memId = localStorage.getItem('id'); // 사용자 ID 가져오기 (로컬 저장소에서)
+  const memId = hostId; // 사용자 ID 가져오기 (로컬 저장소에서)
 
   // 서버에서 사용자 인삿말 가져오기
   useEffect(() => {

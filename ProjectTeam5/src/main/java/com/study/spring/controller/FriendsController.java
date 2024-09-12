@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.study.spring.domain.Friends;
+import com.study.spring.domain.Member;
 import com.study.spring.service.FriendsService;
 
 @RestController

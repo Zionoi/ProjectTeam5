@@ -6,11 +6,11 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './CommentsSection.css'; // 스타일 파일을 추가합니다.
 
-function CommentsSection() {
+function CommentsSection({hostId, setHostId}) {
   const [comment, setComment] = useState('');  // 코멘트 상태
   const [loading, setLoading] = useState(true); // 로딩 상태
   const [error, setError] = useState(null);  // 에러 상태
-  const memId = localStorage.getItem('id');  // 로그인한 사용자 ID를 localStorage에서 가져옴
+  const memId = hostId;  //게시판 주인에 따라 아이디를 다르게 가져옴
   const navigate = useNavigate();  // 페이지 이동을 위한 네비게이트 훅
 
   const [isModalOpen, setIsModalOpen] = useState(false); // 모달 상태 관리
@@ -23,6 +23,26 @@ function CommentsSection() {
 
   const closeModal = () => setIsModalOpen(false);
 
+
+  // 사용자 프로필 이미지와 코멘트 가져오기
+  useEffect(() => {
+    if (!memId) {
+      setError('로그인이 필요합니다.');
+      setLoading(false);
+      return;
+    }
+
+    axios.get(`/member/get/${memId}`)
+      .then(response => {
+        setComment(response.data.comments || ''); // 서버에서 받은 코멘트 설정
+        setLoading(false);
+      })
+      .catch(() => {
+        setError('사용자 정보를 가져오는 중 오류가 발생했습니다.');
+        setLoading(false);
+      });
+  }, [memId]);
+  
 
   return (
     <div className="comments-section">

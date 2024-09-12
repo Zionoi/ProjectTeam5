@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function BoardUpload() {
+function BoardUpload({hostId, setHostId}) {
   const [selectedImages, setSelectedImages] = useState([]);
   const [bTitle, setBTitle] = useState('');
   const [bContent, setBContent] = useState('');
@@ -29,6 +29,7 @@ function BoardUpload() {
     const formData = new FormData();
     formData.append("bTitle", bTitle);
     formData.append("bContent", bContent);
+    formData.append("memId", hostId);
     
     // 각 이미지를 FormData에 추가
     selectedImages.forEach((image, index) => {
