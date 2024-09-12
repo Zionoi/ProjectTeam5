@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 
-function GetDiary({hostId}) {
-    const { dnum } = useParams(); // URL에서 dNum을 추출
+function GetDiary() {
+    const { dnum, hostId } = useParams(); // URL에서 dNum을 추출
     const navigate = useNavigate();
     const [diary, setDiary] = useState({});
     console.log('dnum 겟다이어리:', dnum);
     
-    useEffect((hostId) => {
+    useEffect(() => {
         if (dnum) {
             axios.get(`/api/events/getDiary/${dnum}/${hostId}`) // dNum을 URL 파라미터로 사용하여 데이터 요청
                 .then(response => {
