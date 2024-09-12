@@ -11,9 +11,11 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   }
   
-  .visit-section h3 { /* 오늘의 운세*/
+  .fortune-section { /* 오늘의 운세*/
+    position: absolute;
+    top:300px;
+    width: 200px;
     font-size: 16px;
-    margin-bottom: 30px;
   }
   
   

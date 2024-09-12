@@ -1,6 +1,7 @@
 // src/components/FriendsList.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import './FriendsList.css';
 
 function FriendsList() {
   const [friends, setFriends] = useState([]); // 친구 목록을 저장하는 상태
@@ -36,7 +37,7 @@ function FriendsList() {
 
   return (
     <div>
-      <h3>친구 목록</h3>
+      <h6 className="list-friends">친구 목록</h6>
       <ul>
         {friends.map(friend => (
           <li key={friend.fNum}>

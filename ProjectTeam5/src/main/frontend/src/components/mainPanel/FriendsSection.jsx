@@ -41,7 +41,7 @@ function FriendsSection() {
           친구 추가
         </button>
         <button className="request-button" onClick={() => setView('pendingRequests')}>
-          대기 중인 요청
+          친구 요청
         </button>
       </div>
       

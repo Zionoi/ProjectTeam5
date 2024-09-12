@@ -1,13 +1,16 @@
 /* src/components/MusicPlayer.css */
 .music-player {
+    position: absolute;
+    top:0px;
+    width: 200px;
     background-color: #ffffff;
-    padding: 10px;
+    padding: 16px;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     display: flex;
     align-items: center;
     justify-content: space-around;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
   }
   
   .player-controls {
