@@ -13,6 +13,8 @@ import BulletinBoardPage from '../BulletinBoardPage/BulletinBoardPage';
 import WriteMessage from '../message/WriteMessage';
 import Inbox from '../message/Inbox';
 import MessageDetail from '../message/MessageDetail';
+import Restaurant from '../restaurant/Restaurant';
+import LikeList from '../restaurant/LikeList';
 
 
 function Sidebar({hostId, setHostId}) {
@@ -45,7 +47,7 @@ function Sidebar({hostId, setHostId}) {
         <Link to={`/board/${hostId}`}><div className="icon board"></div></Link>
         <Link to={`/GuestbookPage/${hostId}`}><div className="icon visit"></div></Link>
         <div className="icon walk"><a href="#"></a></div>
-        <div className="icon food"><a href="#"></a></div>
+        <Link to={`/restaurants/${hostId}`}><div className="icon food"></div></Link>
       </nav>
 
       <div className="center-panel">
@@ -56,6 +58,7 @@ function Sidebar({hostId, setHostId}) {
           <Route path="/home/:hostId" element={<Home hostId={hostId} setHostId={setHostId}/>} />
           <Route path="/diary/:hostId" element={<Diary />} />
           <Route path="/board/:hostId" element={<Board />} />
+          <Route path="/restaurants/:hostId" element={<Restaurant />} /> 
 
           {/* 기타 경로 처리 */}
           <Route path="/boardUpload/:hostId" element={<BoardUpload />} />
@@ -63,6 +66,9 @@ function Sidebar({hostId, setHostId}) {
           <Route path="/inputDiary/:date/:hostId" element={<InputDiary />} />
           <Route path="/getDiary/:dNum/:hostId" element={<GetDiary />} />
           <Route path="/GuestbookPage/:hostId" element={<GuestbookPage />} />
+          
+          <Route path="/like/:hostId" element={<LikeList />} />
+          
           <Route path="/write/:hostId" element={<WriteMessage />} />
           <Route path="/inbox/:hostId" element={<Inbox />} />
           <Route path="/message/:mNum/:hostId" element={<MessageDetail />} />
