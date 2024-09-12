@@ -9,8 +9,6 @@ function ProfileSection() {
   const [memId, setMemId] = useState(localStorage.getItem('id')); // 사용자 ID 가져오기
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-//테스트
-
 
   // 사용자 프로필 이미지와 코멘트 가져오기
   useEffect(() => {
@@ -64,6 +62,20 @@ function ProfileSection() {
     }
   };
 
+  // 프로필 사진 삭제 처리
+  const handleDeleteImage = async () => {
+    try {
+      await axios.delete(`/member/deleteImage`, {
+        params: { memId }
+      });
+      alert('프로필 이미지가 성공적으로 삭제되었습니다.');
+      setProfileImage(''); // 이미지를 삭제했으니 상태 초기화
+      window.location.reload();
+    } catch (error) {
+      alert('프로필 이미지 삭제 중 오류가 발생했습니다.');
+    }
+  };
+
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
 
@@ -71,11 +83,15 @@ function ProfileSection() {
     <div className="profile-section">
       <h2>프로필</h2>
       <div className="profile-image-container">
-        <img 
-          src={profileImage} 
-          alt="프로필 사진" 
-          className="profile-image" 
-        />
+        {profileImage ? (
+          <img 
+            src={profileImage} 
+            alt="프로필 사진" 
+            className="profile-image" 
+          />
+        ) : (
+          <p>이미지 없음</p>
+        )}
       </div>
       <input type="file" accept="image/*" onChange={handleFileChange} />
       
@@ -87,6 +103,10 @@ function ProfileSection() {
       />
       
       <button onClick={handleUpload}>프로필 수정</button>
+      
+      {profileImage && (
+        <button onClick={handleDeleteImage} className="delete-button">이미지 삭제</button>
+      )}
     </div>
   );
 }

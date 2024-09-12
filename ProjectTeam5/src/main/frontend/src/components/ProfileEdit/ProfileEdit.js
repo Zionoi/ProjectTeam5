@@ -1,6 +1,7 @@
-// ProfileEdit.js
 import React, { useState } from 'react';
+import axios from 'axios'; // axios 임포트
 import './ProfileEdit.css'; // 스타일 파일
+import { useNavigate } from 'react-router-dom';
 
 function ProfileEdit() {
   const [form, setForm] = useState({
@@ -13,6 +14,12 @@ function ProfileEdit() {
     address: '',
   });
 
+  const [errorMessage, setErrorMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
+  const [userId, setUserId] = useState(localStorage.getItem('id'))
+
+  const navigate = useNavigate();
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm((prevForm) => ({
@@ -21,10 +28,45 @@ function ProfileEdit() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // form 제출 로직 추가
-    console.log('Submitted:', form);
+
+    // 필수 입력 필드 체크
+    if (!form.nickname || !form.name || !form.password) {
+      setErrorMessage('닉네임, 이름, 비밀번호는 필수 입력 항목입니다.');
+      return;
+    }
+
+    // 비밀번호 확인 체크
+    if (form.password !== form.confirmPassword) {
+      setErrorMessage('비밀번호가 일치하지 않습니다.');
+      return;
+    }
+
+    axios.post('/member/updateProfile', {
+      memId: userId,  // 현재 로그인된 사용자 ID
+      nickname: form.nickname,
+      email: form.email,
+      name: form.name,
+      pass: form.password,
+      phone: form.phone,
+      address: form.address,
+    })
+    .then((response) => {
+      if (response.data === 'success') {
+        setSuccessMessage('정보가 성공적으로 수정되었습니다.');
+        setErrorMessage(''); // 성공 시 에러 메시지 초기화
+        navigate(`/home/${userId}`)
+      } else {
+        setErrorMessage('정보 수정 중 문제가 발생했습니다.');
+        setSuccessMessage(''); // 실패 시 성공 메시지 초기화
+      }
+    })
+    .catch((error) => {
+      setErrorMessage('서버와의 통신 중 오류가 발생했습니다.');
+      setSuccessMessage('');
+      console.error('Error:', error);
+    });
   };
 
   return (
@@ -45,6 +87,7 @@ function ProfileEdit() {
             value={form.nickname}
             onChange={handleChange}
             className="profile-input"
+            required
           />
           <input
             type="email"
@@ -61,6 +104,7 @@ function ProfileEdit() {
             value={form.name}
             onChange={handleChange}
             className="profile-input"
+            required
           />
           <input
             type="password"
@@ -69,6 +113,7 @@ function ProfileEdit() {
             value={form.password}
             onChange={handleChange}
             className="profile-input"
+            required
           />
           <input
             type="password"
@@ -77,6 +122,7 @@ function ProfileEdit() {
             value={form.confirmPassword}
             onChange={handleChange}
             className="profile-input"
+            required
           />
           <input
             type="tel"
@@ -96,10 +142,14 @@ function ProfileEdit() {
           />
         </div>
         <div className="profile-edit-buttons">
-          <button type="button" className="profile-button cancel">취소</button>
+          <button type="button" className="profile-button cancel" onClick={() => {
+            navigate(-1);
+          }}>취소</button>
           <button type="submit" className="profile-button save">완료</button>
         </div>
       </form>
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
+      {successMessage && <p className="success-message">{successMessage}</p>}
     </div>
   );
 }
