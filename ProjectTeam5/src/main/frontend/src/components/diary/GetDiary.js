@@ -33,7 +33,7 @@ function GetDiary({hostId}) {
             axios.delete(`/api/delete/${dnum}/${hostId}`)
                 .then(() => {
                     alert('일기가 삭제되었습니다.');
-                    navigate('/'); // 삭제 후 홈으로 리다이렉트
+                    navigate(`/home/${hostId}`); // 삭제 후 홈으로 리다이렉트
                 })
                 .catch(error => {
                     console.error('Error deleting diary:', error);
