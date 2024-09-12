@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -113,6 +114,15 @@ public class MemberController {
             return "프로필 사진 및 코멘트 수정 중 오류가 발생했습니다.";
         }
     }
+    // 프로필 사진 업로드 및 갱신
+    @DeleteMapping("/deleteImage")
+    public String deleteImage(@RequestParam String memId) {
+    	memberService.deleteImage(memId);
+    	
+    	return "프로필 이미지 삭제가 완료되었습니다.";
+    	
+    }
+    
 
     // 사용자 정보 가져오기
     //const [memId, setMemId] = useState(localStorage.getItem('id'));
@@ -186,6 +196,13 @@ public class MemberController {
     		return "success";
     	else
     		return "실패";
+    }
+    
+    @PostMapping("/updateProfile")
+    public String updateProfile(@RequestBody Member m) {
+    	memberService.updateProfile(m);
+    	
+    	return "success";
     }
     
 }

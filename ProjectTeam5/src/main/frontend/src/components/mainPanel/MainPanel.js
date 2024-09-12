@@ -11,6 +11,7 @@ import Profile from './Profile';
 import FriendsList from '../friends/FriendsList.js';
 import { useEffect, useState } from 'react';
 import MusicPlayer from '../music/MusicPlayer.jsx';
+import HeaderSection from './HeaderSection.jsx';
 
 
 function MainPanel({ onLogout, hostId, setHostId }) { // onLogout props 추가
@@ -33,9 +34,10 @@ function MainPanel({ onLogout, hostId, setHostId }) { // onLogout props 추가
         <div className="right-panel">
           <button onClick={handleLogout} className="logout-button">로그아웃</button>
         </div>
+        <HeaderSection hostId={hostId}/>
         <aside className="right-side">
         <MusicPlayer/>
-        <Profile />
+        <Profile hostId={hostId}/>
         {/* <FriendsList hostId={hostId} setHostId={setHostId}/> */}
           {/* <VisitSection /> */}
           <FriendsSection />
@@ -46,4 +48,3 @@ function MainPanel({ onLogout, hostId, setHostId }) { // onLogout props 추가
   }
   
   export default MainPanel;
-  
