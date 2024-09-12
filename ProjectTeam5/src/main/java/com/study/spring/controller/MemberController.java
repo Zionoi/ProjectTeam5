@@ -149,5 +149,11 @@ public class MemberController {
 //        VisitData visitData = visitService.getVisitData(hostId);
 //        return ResponseEntity.ok(visitData);
 //    }
+    
+    // 친구 아이디 존재 여부 확인 엔드포인트
+    @GetMapping("/exists")
+    public boolean checkMemberExists(@RequestParam String memId) {
+        return memberService.checkIfMemberExists(memId);
+    }
 
 }

@@ -26,8 +26,6 @@ public class MemberService {
 
 	//사진이 없는 경우 저장
 	public void insertMember(Member member) {
-		
-		
 		memberRepository.save(member);
 	}
 
@@ -138,5 +136,10 @@ public class MemberService {
 	            memberRepository.save(member);  // 변경된 정보 저장
 	        }
 	    }
+	    
+	// 친구 요청시 아이디 존재여부 
+	public boolean checkIfMemberExists(String memId) {
+	    return memberRepository.existsByMemId(memId);
+	}
 
 }

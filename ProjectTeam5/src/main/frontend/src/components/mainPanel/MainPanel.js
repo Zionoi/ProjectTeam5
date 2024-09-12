@@ -5,6 +5,7 @@ import Sidebar from './Sidebar';
 import VisitSection from './VisitSection';
 import FriendsSection from './FriendsSection';
 import Profile from './Profile';
+import MusicPlayer from './MusicPlayer.jsx';
 
 
 import FriendsList from '../friends/FriendsList.js';
@@ -29,17 +30,17 @@ function MainPanel({ onLogout, hostId, setHostId }) { // onLogout props 추가
           <Sidebar hostId={hostId} setHostId={setHostId} />
         </div>
       
-      <div className="right-panel">
-        <button onClick={handleLogout} className="logout-button">로그아웃</button>
+        <div className="right-panel">
+          <button onClick={handleLogout} className="logout-button">로그아웃</button>
+        </div>
+        <aside className="right-side">
+        <MusicPlayer />
+        <Profile />
+        {/* <FriendsList hostId={hostId} setHostId={setHostId}/> */}
+          <VisitSection />
+          <FriendsSection />
+        </aside>
       </div>
-      <aside className="right-side">
-      {/* <MusicPlayer /> */}
-      <Profile />
-      <FriendsList hostId={hostId} setHostId={setHostId}/>
-        <VisitSection />
-        <FriendsSection />
-      </aside>
-    </div>
     );
   }
   
