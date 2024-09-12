@@ -6,7 +6,7 @@ import ProfileSection from './components/ProfileSection';
 import StickerSection from './components/StickerSection';
 import CommentsSection from './components/CommentsSection';
 import MainPage from './components/MainPage';
-import VisitSection from './components/VisitSection';
+import FortuneSection from './components/FortuneSection';
 import FriendsSection from './components/FriendsSection';
 import MusicPlayer from './components/MusicPlayer';
 import Profile from './components/Profile';
@@ -27,7 +27,7 @@ function App() {
       <MusicPlayer />
       {/* <button onClick={handleLogout} className="btn btn-outline-danger">로그아웃</button> */}
         <Profile />
-        <VisitSection />
+        <FortuneSection />
         <FriendsSection />
       </aside>
     </div>

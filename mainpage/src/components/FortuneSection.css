@@ -1,0 +1,32 @@
+.visit-section {
+  position:absolute;
+  top:350px;
+  width: 120px; /* 프로필 이미지의 너비 조정 */
+  height: 150px; /* 방문 섹션 높이 조정 */
+  background-color: #fff;
+  border-radius: 30px;
+  padding: 15px;
+  margin-top: 10px;
+  margin: 0.01px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.visit-section h3 { /* 오늘의 운세*/
+  font-size: 16px;
+  margin-bottom: 30px;
+}
+
+
+.fortune-section li { 
+  margin-bottom: 50px;
+}
+
+.fortune button {
+  background-color: white;
+  color: #a3a3a3;
+  border: none;
+  cursor: pointer;
+  font-size: 25px;
+}
+
+
