@@ -17,9 +17,19 @@ public class FriendsService {
     private FriendsRepository friendsRepository;
 
      // 친구 요청을 보내는 메서드
-    public void addFriendRequest(Friends friends) {
-        friends.setStatus("대기"); // 요청 상태를 '대기'로 설정
-        friendsRepository.save(friends); // DB에 저장
+    public boolean addFriendRequest(Friends friends) {
+        // memId와 friendId로 이미 친구 요청이 있는지 확인
+        Optional<Friends> existingFriendRequest = friendsRepository.findByMember_MemIdAndFriendId(
+                friends.getMember().getMemId(), friends.getFriendId());
+
+        // 이미 친구 요청이 있으면 false 반환, 없으면 요청을 저장
+        if (!existingFriendRequest.isPresent()) {
+            friends.setStatus("대기"); // 요청 상태를 '대기'로 설정
+            friendsRepository.save(friends); // DB에 저장
+            return true;
+        } else {
+            return false; // 이미 친구 요청이 존재
+        }
     }
 
     // 내가 보낸 대기 상태의 친구 요청을 조회하는 메서드
@@ -67,7 +77,17 @@ public class FriendsService {
 
     // 친구 관계를 삭제하는 메서드
     public void deleteFriend(Long fNum) {
-        friendsRepository.deleteById(fNum); // DB에서 해당 친구 관계를 삭제
+        // 해당 친구 관계를 가져옴
+        Friends friends = friendsRepository.findById(fNum).orElseThrow(() -> new IllegalArgumentException("해당 친구 관계를 찾을 수 없습니다."));
+
+        // 상대방이 저장한 친구 관계를 찾음 (friendId가 내 memId인 경우)
+        Optional<Friends> friendOfFriends = friendsRepository.findByMember_MemIdAndFriendId(friends.getFriendId(), friends.getMember().getMemId());
+
+        // 상대방의 친구 관계가 존재하면 삭제
+        friendOfFriends.ifPresent(friend -> friendsRepository.deleteById(friend.getFNum()));
+
+        // 내 친구 관계 삭제
+        friendsRepository.deleteById(fNum);
     }
 
     // 사용자의 모든 친구 목록을 조회하는 메서드 (수락된 친구만 조회)

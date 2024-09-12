@@ -131,7 +131,7 @@ public class MemberService {
 	// 친구 요청시 아이디 존재여부 
 	public boolean checkIfMemberExists(String memId) {
 	    return memberRepository.existsByMemId(memId);
-
+	}
     // 매일 오전 9시 20분에 일일 방문자 수를 0으로 초기화
     @Scheduled(cron = "0 20 9 * * ?")
     public void resetDailyVisits() {

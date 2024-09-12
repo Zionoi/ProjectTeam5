@@ -7,7 +7,7 @@ function PendingRequests({ memId }) { // loggedInUser로 로그인한 사용자 
   useEffect(() => {
     // 서버에서 대기 중인 친구 요청 목록 가져오기
     axios.get('/friends/pendingReceivedRequests', {
-      params: { friendId: 'user01' }, // 로그인된 사용자 ID
+      params: { friendId: localStorage.getItem('id') }, // 로그인된 사용자 ID
     })
     .then(response => {
       console.log("Received pending requests:", response.data);
@@ -24,6 +24,7 @@ function PendingRequests({ memId }) { // loggedInUser로 로그인한 사용자 
       .then(() => {
         console.log(`Friend request accepted with fNum: ${fNum}`);
         setRequests(requests.filter(req => req.fNum !== fNum)); // 요청 목록에서 제거
+        window.location.reload();
       })
       .catch(error => {
         console.error('Error accepting friend request', error);
@@ -36,6 +37,7 @@ function PendingRequests({ memId }) { // loggedInUser로 로그인한 사용자 
       .then(() => {
         console.log(`Friend request rejected with fNum: ${fNum}`);
         setRequests(requests.filter(req => req.fNum !== fNum)); // 요청 목록에서 제거
+        window.location.reload();
       })
       .catch(error => {
         console.error('Error rejecting friend request', error);
