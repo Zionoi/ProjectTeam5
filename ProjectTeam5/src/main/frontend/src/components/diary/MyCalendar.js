@@ -33,6 +33,7 @@ function MyCalendar({hostId}) {
     // 이벤트를 클릭했을 때 호출되는 핸들러
     const handleEventClick = (arg) => {
         console.log('Clicked event:', arg); // 클릭된 이벤트의 정보를 로그로 출력합니다.
+        console.log('Clicked event arg.event.id:', arg.event.id);
         navigate(`/getDiary/${arg.event.id}/${hostId}`); // 클릭된 이벤트의 ID를 URL 파라미터로 전달하여 페이지 이동
     };
 
