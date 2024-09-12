@@ -2,16 +2,18 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 
-function GetDiary() {
-    const { dNum } = useParams(); // URL에서 dNum을 추출
+function GetDiary({hostId}) {
+    const { dnum } = useParams(); // URL에서 dNum을 추출
     const navigate = useNavigate();
-    const [diary, setDiary] = useState(null);
-    console.log('dNum 겟다이어리:', dNum);
+    const [diary, setDiary] = useState({});
+    console.log('dnum 겟다이어리:', dnum);
     
-    useEffect(() => {
-        if (dNum) {
-            axios.get(`/api/events/getDiary/${dNum}`) // dNum을 URL 파라미터로 사용하여 데이터 요청
+    useEffect((hostId) => {
+        if (dnum) {
+            axios.get(`/api/events/getDiary/${dnum}/${hostId}`) // dNum을 URL 파라미터로 사용하여 데이터 요청
                 .then(response => {
+                    console.log('겟다이어리',diary)
+                    console.log('리스폰스다이어리',response)
                     if (response.data) {
                         console.log('response:', response);
                         setDiary(response.data);
@@ -24,11 +26,11 @@ function GetDiary() {
                     setDiary(null); // 오류 발생 시 null로 설정
                 });
         }
-    }, [dNum]);
+    }, [dnum]);
 
     const handleDelete = () => {
         if (window.confirm('해당 일기를 삭제하시겠습니까?')) {
-            axios.delete(`/api/delete/${dNum}`)
+            axios.delete(`/api/delete/${dnum}/${hostId}`)
                 .then(() => {
                     alert('일기가 삭제되었습니다.');
                     navigate('/'); // 삭제 후 홈으로 리다이렉트
