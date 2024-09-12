@@ -7,9 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.study.spring.domain.Diary;
-import com.study.spring.domain.Member;
 import com.study.spring.repository.DiaryRepository;
 import com.study.spring.repository.MemberRepository;
+
+import jakarta.transaction.Transactional;
 
 @Service
 public class DiaryService {
@@ -26,9 +27,10 @@ public class DiaryService {
     public Diary createEvent(Diary event) {
         return diaryRepository.save(event);
     }
-
-    public void deleteEvent(Long dnum) {
-        diaryRepository.deleteById(dnum);
+    
+    @Transactional
+    public void deleteByDnumAndMemId(Long dnum, String hostId) {
+        diaryRepository.deleteByDnumAndMemId(dnum, hostId);
     }
 
     public Optional<Diary> getById(Long dnum) {
