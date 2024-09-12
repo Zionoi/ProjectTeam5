@@ -73,7 +73,7 @@ public class FriendsController {
     public String deleteFriend(@RequestParam Long fNum) {
         System.out.println("친구 삭제: fNum = " + fNum); // 데이터 확인용 로그
         friendsService.deleteFriend(fNum);
-        return "친구 삭제";
+        return "success";
     }
 
     // 친구 목록을 조회하는 엔드포인트

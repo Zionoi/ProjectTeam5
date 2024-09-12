@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,8 +23,8 @@ import com.study.spring.repository.MemberRepository;
 import com.study.spring.service.MemberService;
 import com.study.spring.util.JwtUtil;
 
+//@CrossOrigin(origins = "http://localhost:3000") // CORS 설정
 @RestController
-@CrossOrigin(origins = "http://localhost:3003") // CORS 설정
 @RequestMapping("/member")
 public class MemberController {
 	
@@ -113,6 +114,15 @@ public class MemberController {
             return "프로필 사진 및 코멘트 수정 중 오류가 발생했습니다.";
         }
     }
+    // 프로필 사진 업로드 및 갱신
+    @DeleteMapping("/deleteImage")
+    public String deleteImage(@RequestParam String memId) {
+    	memberService.deleteImage(memId);
+    	
+    	return "프로필 이미지 삭제가 완료되었습니다.";
+    	
+    }
+    
 
     // 사용자 정보 가져오기
     //const [memId, setMemId] = useState(localStorage.getItem('id'));
@@ -130,25 +140,24 @@ public class MemberController {
     	return "인삿말 수정 완료";
     }
     
+    //방문자 수 증가
     @GetMapping("/visitCountUp/{memId}")  // userId를 경로에서 받아옴
-    public void visitCountUp(@PathVariable String userId) {
+    public void visitCountUp(@PathVariable String memId) {
         // 회원 정보 가져오기
-        Member member = memberService.getMemberById(userId);
-        
+        Member member = memberService.getMemberById(memId);
+        System.out.println("변경전member.getTotalVisit() "+ member.getTotalVisit() );
+        System.out.println("변경전member.getTodayVisit() "+ member.getTodayVisit() );
         // todayVisit과 totalVisit 값 증가
         member.setTodayVisit(member.getTodayVisit() + 1);
         member.setTotalVisit(member.getTotalVisit() + 1);
+        
+        System.out.println("변경후member.getTodayVisit() "+ member.getTodayVisit() );
+        System.out.println("변경후member.getTotalVisit() "+ member.getTotalVisit() );
         
         // 변경된 정보를 저장
         memberService.updateMember(member);
     }
     
-//    @GetMapping("/api/visit")
-//    public ResponseEntity<VisitData> getVisitData(@RequestParam("hostId") String hostId) {
-//        // hostId에 해당하는 방문자 데이터 가져오기
-//        VisitData visitData = visitService.getVisitData(hostId);
-//        return ResponseEntity.ok(visitData);
-//    }
     
     // 친구 아이디 존재 여부 확인 엔드포인트
     @GetMapping("/exists")
@@ -186,6 +195,13 @@ public class MemberController {
     		return "success";
     	else
     		return "실패";
+    }
+    
+    @PostMapping("/updateProfile")
+    public String updateProfile(@RequestBody Member m) {
+    	memberService.updateProfile(m);
+    	
+    	return "success";
     }
     
 }

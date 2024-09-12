@@ -14,6 +14,7 @@ function ProfileSection() {
   const defaultProfileImage = '../../img/basicProfile.png'; // 기본 이미지 경로
   const [nick, setNick]= useState(localStorage.getItem('nickName')); // 사용자 닉네임 가져오기
 
+
   // 사용자 프로필 이미지와 코멘트 가져오기
   useEffect(() => {
     if (!memId) {
@@ -85,6 +86,7 @@ function ProfileSection() {
     setIsEditing(!isEditing);
   };
 
+
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
 
@@ -139,6 +141,7 @@ function ProfileSection() {
           <button onClick={toggleEditMode} className="profile-edit-btn">프로필 수정</button>
         )}
       </div>
+
     </div>
   );
 }

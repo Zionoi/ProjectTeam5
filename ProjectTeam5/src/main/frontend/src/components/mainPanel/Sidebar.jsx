@@ -13,6 +13,7 @@ import BulletinBoardPage from '../BulletinBoardPage/BulletinBoardPage';
 import WriteMessage from '../message/WriteMessage';
 import Inbox from '../message/Inbox';
 import MessageDetail from '../message/MessageDetail';
+import ProfileEdit from '../ProfileEdit/ProfileEdit';
 
 
 function Sidebar({hostId, setHostId}) {
@@ -96,19 +97,25 @@ function Sidebar({hostId, setHostId}) {
           
           {/* 메인탭 경로 */}
           <Route path="/home/:hostId" element={<Home hostId={hostId} setHostId={setHostId}/>} />
-          <Route path="/diary/:hostId" element={<Diary />} />
-          <Route path="/board/:hostId" element={<Board />} />
+
+          <Route path="/diary/:hostId" element={<Diary hostId={hostId} setHostId={setHostId}/>} />
+          <Route path="/board/:hostId" element={<Board hostId={hostId} setHostId={setHostId}/>} />
 
           {/* 기타 경로 처리 */}
-          <Route path="/boardUpload/:hostId" element={<BoardUpload />} />
-          <Route path="/boardDetail/:bNum/:hostId" element={<BoardDetail />} />
-          <Route path="/inputDiary/:date/:hostId" element={<InputDiary />} />
-          <Route path="/getDiary/:dNum/:hostId" element={<GetDiary />} />
-          <Route path="/GuestbookPage/:hostId" element={<GuestbookPage />} />
-          <Route path="/write/:hostId" element={<WriteMessage />} />
-          <Route path="/inbox/:hostId" element={<Inbox />} />
-          <Route path="/message/:mNum/:hostId" element={<MessageDetail />} />
-          <Route path="/bulletin-board/:hostId" element={<BulletinBoardPage hostId={hostId}/>} /> 
+          <Route path="/boardUpload/:hostId" element={<BoardUpload hostId={hostId} setHostId={setHostId} />} />
+          <Route path="/boardDetail/:bNum/:hostId" element={<BoardDetail hostId={hostId} setHostId={setHostId}/>} />
+          <Route path="/inputDiary/:date/:hostId" element={<InputDiary hostId={hostId} setHostId={setHostId}/>} />
+          <Route path="/getDiary/:dNum/:hostId" element={<GetDiary hostId={hostId} setHostId={setHostId}/>} />
+          <Route path="/GuestbookPage/:hostId" element={<GuestbookPage hostId={hostId} setHostId={setHostId}/>} />
+          <Route path="/write/:hostId" element={<WriteMessage hostId={hostId} setHostId={setHostId}/>} />
+          <Route path="/inbox/:hostId" element={<Inbox hostId={hostId} setHostId={setHostId}/>} />
+          <Route path="/message/:mNum/:hostId" element={<MessageDetail hostId={hostId} setHostId={setHostId}/>} />
+          <Route path="/bulletin-board/:hostId" element={<BulletinBoardPage hostId={hostId} setHostId={setHostId}/>} /> 
+          
+
+          {/* 프로필 수정 */}
+          <Route path="/ProfileEdit/:hostId" element={<ProfileEdit hostId={hostId} setHostId={setHostId}/>} /> 
+
         </Routes>
       </div>
     </div>
