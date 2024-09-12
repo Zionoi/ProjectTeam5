@@ -33,11 +33,11 @@ public class Diary {
         allocationSize = 1
     )	
     @GeneratedValue(generator = "dSEQ")
-    private Long dNum;
+    private Long dnum;
 	
-    @ManyToOne
-    @JoinColumn(name = "memId") 
-    private Member member;
+    @NonNull
+    @Column(name = "memId")
+    private String memId;
 	
     @NonNull
     @JsonProperty("dTitle")

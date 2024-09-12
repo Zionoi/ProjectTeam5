@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.study.spring.domain.Diary;
+import com.study.spring.domain.Member;
 import com.study.spring.repository.DiaryRepository;
 import com.study.spring.repository.MemberRepository;
 
@@ -18,28 +19,28 @@ public class DiaryService {
     @Autowired
     private MemberRepository memberRepository; // Add this field
 
-    public List<Diary> getAllEvents() {
-        return diaryRepository.findAll();
+    public List<Diary> findByMemId(String memId) {
+        return diaryRepository.findByMemId(memId);
     }
 
     public Diary createEvent(Diary event) {
         return diaryRepository.save(event);
     }
 
-    public void deleteEvent(Long dNum) {
-        diaryRepository.deleteById(dNum);
+    public void deleteEvent(Long dnum) {
+        diaryRepository.deleteById(dnum);
     }
 
-    public Optional<Diary> getById(Long dNum) {
-        return diaryRepository.findById(dNum);
+    public Optional<Diary> getById(Long dnum) {
+        return diaryRepository.findById(dnum);
     }
 
-    public Diary getDiaryBydNum(Long dNum) {
+    public Diary findByDnumAndMemId(Long dnum, String memId) {
         // Find Member by memId
 //        Optional<Member> member = memberRepository.findById(memId);
 //        if (member.isPresent()) {
             // Use the Member object to find the Diary
-            return diaryRepository.findBydNum(dNum).orElse(null);
+            return diaryRepository.findByDnumAndMemId(dnum, memId).orElse(null);
 //        }
 //        return null;
     }

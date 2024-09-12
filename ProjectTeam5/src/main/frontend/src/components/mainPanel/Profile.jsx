@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import './Profile.css'; // 스타일 파일
+import { useNavigate } from 'react-router-dom';
 
 function Profile() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   // 메뉴 토글 함수
   const toggleMenu = () => {
@@ -14,8 +16,8 @@ function Profile() {
 
   // 회원 정보 수정 핸들러
   const handleEditProfile = () => {
-    
-    alert('회원정보 수정 페이지로 이동합니다.');
+    navigate(`/ProfileEdit/${localStorage.getItem('id')}`);
+   
     // 회원정보 수정 페이지로 이동하는 로직 추가
   };
 
@@ -35,7 +37,7 @@ function Profile() {
         onClick={toggleMenu}
       />
       {menuOpen && (
-        <div className="dropdown-menu">
+        <div >
           <button className="menu-item" onClick={handleEditProfile}>
             회원정보 수정
           </button>
