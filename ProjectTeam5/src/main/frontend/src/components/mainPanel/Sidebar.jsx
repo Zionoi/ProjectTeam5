@@ -22,10 +22,17 @@ function Sidebar({hostId, setHostId}) {
   const myId = localStorage.getItem('id'); // 내 아이디 로컬 스토리지에서 가져오기
   // const [hostId, setHostId] = useState(paramHostId);
 
-  // useEffect(() => {
-  //   setHostId(paramHostId);
-  //   console.log("host아이디 사이드바 : ",paramHostId);
-  // }, [paramHostId, setHostId]);
+  // 클릭된 아이콘의 인덱스를 관리하는 상태
+  const [activeIcon, setActiveIcon] = useState(0); //초기값 0으로 설정하여 홈화면 버튼이 시작부터 활성화
+     // 아이콘 클릭 이벤트 핸들러
+  const handleIconClick = (index) => {
+    setActiveIcon(index); // 클릭된 아이콘의 인덱스를 상태로 저장
+  };
+
+  useEffect(() => {
+    setHostId(paramHostId);
+    console.log("host아이디 사이드바 : ",paramHostId);
+  }, [paramHostId, setHostId]);
 
   const goToMyHomePage = () => {
     setHostId(myId);
@@ -37,16 +44,51 @@ function Sidebar({hostId, setHostId}) {
 
   return (
     <div style={{ display: 'flex' }}>
-      <nav className="sidebar">
       {hostId !== myId && (
-          <button onClick={goToMyHomePage} className="btn btn-primary">내 홈페이지로 돌아가기</button>
-        )}
-        <Link to={`/home/${hostId}`}><div className="icon home"></div></Link>
-        <Link to={`/diary/${hostId}`}><div className="icon diary"></div></Link>
-        <Link to={`/board/${hostId}`}><div className="icon board"></div></Link>
-        <Link to={`/GuestbookPage/${hostId}`}><div className="icon visit"></div></Link>
-        <div className="icon walk"><a href="#"></a></div>
-        <div className="icon food"><a href="#"></a></div>
+        <div className=".myHomebutton-container">
+          <button onClick={goToMyHomePage} className="btn-myhome"></button>
+          <div className="myHometooltip">내 홈페이지로 이동</div>
+        </div>
+      )}
+
+      <nav className="sidebar">
+        <Link to={`/home/${hostId}`}>
+          <div
+            className={`icon home ${activeIcon === 0 ? 'active' : ''}`}
+            onClick={() => handleIconClick(0)}
+          ></div>
+        </Link>
+
+        <Link to={`/diary/${hostId}`}>
+          <div
+            className={`icon diary ${activeIcon === 1 ? 'active' : ''}`}
+            onClick={() => handleIconClick(1)}
+          ></div>
+        </Link>
+
+        <Link to={`/bulletin-board/${hostId}`}>
+          <div
+            className={`icon board ${activeIcon === 2 ? 'active' : ''}`}
+            onClick={() => handleIconClick(2)}
+          ></div>
+        </Link>
+
+        <Link to={`/GuestbookPage/${hostId}`}>
+          <div
+            className={`icon visit ${activeIcon === 3 ? 'active' : ''}`}
+            onClick={() => handleIconClick(3)}
+          ></div>
+        </Link>
+
+        <div
+          className={`icon walk ${activeIcon === 4 ? 'active' : ''}`}
+          onClick={() => handleIconClick(4)}
+        ></div>
+
+        <div
+          className={`icon food ${activeIcon === 5 ? 'active' : ''}`}
+          onClick={() => handleIconClick(5)}
+        ></div>
       </nav>
 
       <div className="center-panel">
@@ -55,6 +97,7 @@ function Sidebar({hostId, setHostId}) {
           
           {/* 메인탭 경로 */}
           <Route path="/home/:hostId" element={<Home hostId={hostId} setHostId={setHostId}/>} />
+
           <Route path="/diary/:hostId" element={<Diary hostId={hostId} setHostId={setHostId}/>} />
           <Route path="/board/:hostId" element={<Board hostId={hostId} setHostId={setHostId}/>} />
 

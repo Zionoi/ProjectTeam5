@@ -19,3 +19,7 @@
     border-bottom: 1px solid #ddd;
   }
   
+  .list-friends {
+    position: relative;
+    top:-80px;
+  }

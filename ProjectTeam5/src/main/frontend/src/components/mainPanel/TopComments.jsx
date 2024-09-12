@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './TopComments.css';
 
-function TopComments({hostId, setHostId}) {
+function TopComments() {
   const [isEditing, setIsEditing] = useState(false); // 수정 모드 상태
   const [greeting, setGreeting] = useState('인삿말 '); // 인삿말 상태
   const [newGreeting, setNewGreeting] = useState(''); // 입력된 새로운 인삿말 상태
   const [selectedFile, setSelectedFile] = useState(null); // 파일 상태 (선택한 이미지 파일)
-  const memId = hostId; // 사용자 ID 가져오기 (로컬 저장소에서)
+  const memId = localStorage.getItem('id'); // 사용자 ID 가져오기 (로컬 저장소에서)
 
+  
   // 서버에서 사용자 인삿말 가져오기
   useEffect(() => {
     if (!memId) {
@@ -66,12 +67,16 @@ function TopComments({hostId, setHostId}) {
       alert('인삿말 저장 중 오류가 발생했습니다.');
     }
   };
-
+    // 수정 모드 토글 함수
+    const toggleEditMode = () => {
+      setIsEditing(!isEditing);
+    };
+  
   return (
     <div>
       {!isEditing ? (
         <div>
-          <a className="homgepage-Co">{greeting || '사용자 홈페이지 인삿말'}</a>
+          <h4 className="homgepage-Co">{greeting || '사용자 홈페이지 인삿말'}</h4>
           <button className="homgepage-Co-edit" onClick={toggleEdit}>수정</button>
         </div>
       ) : (
@@ -79,8 +84,8 @@ function TopComments({hostId, setHostId}) {
           <input 
             type="text" 
             value={newGreeting} 
-            onChange={handleInputChange} 
-            className="homgepage-Co-input"
+            onChange={handleInputChange}
+            className={`Top-co-input ${isEditing ? 'editing' : ''}`} // 수정 모드일 때 불투명도 적용 
           />
           <button className="homgepage-Co-edit" onClick={saveGreeting}>저장</button>
         </div>
