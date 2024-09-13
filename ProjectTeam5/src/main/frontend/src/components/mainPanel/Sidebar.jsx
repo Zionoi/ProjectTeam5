@@ -15,6 +15,8 @@ import Inbox from '../message/Inbox';
 import MessageDetail from '../message/MessageDetail';
 import ProfileEdit from '../ProfileEdit/ProfileEdit';
 import BoardEdit from './../board/BoardEdit';
+import Restaurant from '../restaurant/Restaurant';
+import LikeList from '../restaurant/LikeList';
 
 
 function Sidebar({hostId, setHostId}) {
@@ -48,7 +50,8 @@ function Sidebar({hostId, setHostId}) {
     navigate(`/home/${myId}`); // 내 홈페이지로 이동
   };
 
- 
+  console.log('hostId:', hostId);
+  console.log('myId:', myId);
 
   return (
     <div style={{ display: 'flex' }}>
@@ -93,10 +96,12 @@ function Sidebar({hostId, setHostId}) {
           onClick={() => handleIconClick(4)}
         ></div>
 
-        <div
-          className={`icon food ${activeIcon === 5 ? 'active' : ''}`}
-          onClick={() => handleIconClick(5)}
-        ></div>
+        <Link to={`/restaurants/${hostId}`}>
+          <div
+            className={`icon food ${activeIcon === 5 ? 'active' : ''}`}
+            onClick={() => handleIconClick(5)}
+          ></div>
+        </Link>
       </nav>
 
       <div className="center-panel">
@@ -108,6 +113,7 @@ function Sidebar({hostId, setHostId}) {
 
           <Route path="/diary/:hostId" element={<Diary hostId={hostId} setHostId={setHostId}/>} />
           <Route path="/board/:hostId" element={<Board hostId={hostId} setHostId={setHostId}/>} />
+          <Route path="/restaurants/:hostId" element={<Restaurant hostId={hostId} setHostId={setHostId}/>} />
 
           {/* 기타 경로 처리 */}
           <Route path="/boardUpload/:hostId" element={<BoardUpload hostId={hostId} setHostId={setHostId} />} />
@@ -116,6 +122,9 @@ function Sidebar({hostId, setHostId}) {
           <Route path="/inputDiary/:date/:hostId" element={<InputDiary hostId={hostId} setHostId={setHostId}/>} />
           <Route path="/getDiary/:dnum/:hostId" element={<GetDiary hostId={hostId} setHostId={setHostId}/>} />
           <Route path="/GuestbookPage/:hostId" element={<GuestbookPage hostId={hostId} setHostId={setHostId}/>} />
+
+          <Route path="/like/:hostId" element={<LikeList hostId={hostId} setHostId={setHostId}/>} />
+
           <Route path="/write/:hostId" element={<WriteMessage hostId={hostId} setHostId={setHostId}/>} />
           <Route path="/inbox/:hostId" element={<Inbox hostId={hostId} setHostId={setHostId}/>} />
           <Route path="/message/:mNum/:hostId" element={<MessageDetail hostId={hostId} setHostId={setHostId}/>} />

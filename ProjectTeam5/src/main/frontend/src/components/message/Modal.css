@@ -15,19 +15,19 @@
 }
 
 .modal-content {
-  background: rgb(50, 194, 134);
+  background: rgb(40, 194, 66);
   padding: 20px;
   border-radius: 10px;
   width: 80%;
   max-width: 500px;
+  max-height: 40vh; /* 모달의 최대 높이를 고정 */
+  overflow: auto; /* 콘텐츠가 넘칠 경우 스크롤이 가능하도록 설정 */
   z-index: 1000;
 
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);  /* 그림자 효과 */
 
   /* 모달 내용은 여전히 클릭 가능 */
   pointer-events: all;
-
-  
 }
   
 .modal-close {
