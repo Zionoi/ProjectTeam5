@@ -1,6 +1,6 @@
 /* src/components/FriendsSection.css */
 .friends-section {
-  position:absolute;
+  position:relative;
   top:435px;
   background-color: #ffffff;
   padding: 20px;
