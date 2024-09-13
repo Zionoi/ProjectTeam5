@@ -23,7 +23,7 @@ function MainPanel({ onLogout, hostId, setHostId }) { // onLogout props 추가
   //    setHostId(paramHostId);
   //   sessionStorage.setItem('hostId', hostId)
     
-  // }, [hostId, paramHostId, setHostId]);
+  // }, [paramHostId, setHostId]);
 
     const handleLogout = () => {
       onLogout(); // 부모 컴포넌트의 로그아웃 핸들러 호출

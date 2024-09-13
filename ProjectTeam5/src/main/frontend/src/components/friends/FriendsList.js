@@ -38,7 +38,7 @@ function FriendsList({hostId, setHostId}) {
   };
   // 친구 홈페이지로 이동
   const goFriendHome = (friendId) => {
-    setHostId(friendId)
+   setHostId(friendId)
     navigate(`/home/${friendId}`); // 친구의 홈으로 이동
   };
 
