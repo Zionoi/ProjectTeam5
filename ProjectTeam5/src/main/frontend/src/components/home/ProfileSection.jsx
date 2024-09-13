@@ -21,8 +21,13 @@ function ProfileSection({ hostId }) {
       setLoading(false);
       return;
     }
+<<<<<<< newSeongHumIm
     console.log('홈 :', memId);
     setMemId(hostId);
+=======
+    setMemId(hostId)
+    console.log('홈 :',hostId)
+>>>>>>> main
     axios.get(`/member/get/${hostId}`)
       .then(response => {
         setProfileImage(response.data.imgPath || defaultProfileImage); // 서버에서 받은 이미지 경로 설정

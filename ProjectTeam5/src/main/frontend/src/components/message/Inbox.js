@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Modal from './Modal'; // 모달 컴포넌트 추가
+import MessageDetail from '../message/MessageDetail'; // MessageDetail 컴포넌트 추가
 
-const Inbox = ({ setContent }) => {
+const Inbox = ({ setContent, setSelectedMessage, checkUnreadMessages }) => {
   const [messages, setMessages] = useState([]);  // 받은 메시지 상태
   const [newMessages, setNewMessages] = useState(false);  // 새로운 메시지 확인 상태
-  const [selectedMessage, setSelectedMessage] = useState(null); // 선택된 메시지
-  const [isModalOpen, setIsModalOpen] = useState(false); // 모달 열기 상태
 
   // 메시지 조회 함수
   const fetchMessages = () => {
@@ -25,10 +23,24 @@ const Inbox = ({ setContent }) => {
     fetchMessages();
   }, []);
 
-  // 메시지 세부사항 열기
+  // 메시지 세부사항 열기 및 읽음 처리
   const openMessageDetail = (message) => {
-    setSelectedMessage(message);  // 메시지 전체를 전달
-    setIsModalOpen(true);         // 모달 열기
+    setSelectedMessage(message);  // 선택한 메시지 설정
+    setContent('messageDetail');  // 모달 내 콘텐츠를 'messageDetail'로 변경
+
+    // 읽음 처리 API 호출
+    if (message.isReading === 1) {
+      axios.post(`/api/messages/read/${message.mnum}`)
+        .then(() => {
+          // 메시지 리스트를 다시 불러와 상태를 업데이트
+          const updatedMessages = messages.map((msg) =>
+            msg.mnum === message.mnum ? { ...msg, isReading: 0 } : msg
+          );
+          setMessages(updatedMessages);  // 로컬 상태 업데이트
+          checkUnreadMessages();  // 읽지 않은 메시지가 남아있는지 체크
+        })
+        .catch(error => console.error("Error marking message as read:", error));
+    }
   };
 
   // 메시지 삭제 함수
@@ -57,24 +69,6 @@ const Inbox = ({ setContent }) => {
           ))
         )}
       </div>
-
-      {/* 새로운 메시지 알림 */}
-      {newMessages && (
-        <div style={{ color: 'red' }}>
-          <p>You have new messages!</p>
-        </div>
-      )}
-
-      {/* 모달을 통해 MessageDetail로 이동 */}
-      {isModalOpen && (
-        <Modal 
-          isOpen={isModalOpen} 
-          onClose={() => setIsModalOpen(false)} 
-          content="messageDetail" 
-          selectedMessage={selectedMessage}
-          fetchMessages={fetchMessages}
-        />
-      )}
     </div>
   );
 };
