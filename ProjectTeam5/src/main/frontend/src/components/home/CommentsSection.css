@@ -4,11 +4,11 @@
 .comments-section {
     position:absolute;
     top:310px;
-    left:240px;
+    left:110px;
     background-color: #ffffff;
     width: 300px;
     height: 150px;
-    border-radius: 30px;
+    border-radius: 16px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   }
   
@@ -29,8 +29,8 @@
 
   .comments-actions {
     position: absolute;
-    top:165px; left:120px;
-
+    width: 225px;
+    top:470px; left:220px;
     display: flex;
     gap: 10px;
   }

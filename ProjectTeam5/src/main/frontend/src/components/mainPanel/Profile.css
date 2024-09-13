@@ -5,8 +5,10 @@
 }
 
 .profile-icon {
-  width: 40px; /* 아이콘 크기 */
-  height: 40px;
+  position: relative;
+  top:-60px; left:10px;
+  width: 50px; /* 아이콘 크기 */
+  height: 50px;
   cursor: pointer;
 }
 

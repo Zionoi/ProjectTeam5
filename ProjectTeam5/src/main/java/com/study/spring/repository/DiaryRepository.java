@@ -14,4 +14,6 @@ public interface DiaryRepository extends JpaRepository<Diary, Long> {
     Optional<Diary> findByDnumAndMemId(Long dnum, String memId);
 
     List<Diary> findByMemId(String memId);
+
+	void deleteByDnumAndMemId(Long dnum, String hostId);
 }

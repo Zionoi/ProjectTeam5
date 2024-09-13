@@ -5,6 +5,7 @@ import Sidebar from './Sidebar';
 import FortuneSection from './FortuneSection';
 import FriendsSection from './FriendsSection';
 import Profile from './Profile';
+import './Logout.css';
 // import MusicPlayer from './MusicPlayer.jsx';
 
 
@@ -35,11 +36,13 @@ function MainPanel({ onLogout, hostId, setHostId }) { // onLogout props 추가
         <div className="right-panel">
           <button onClick={handleLogout} className="logout-button">로그아웃</button>
         </div>
+
         <HeaderSection hostId={hostId}/>
         <aside className="right-side">
         <MusicPlayer/>
         <Profile hostId={hostId}/>
-        {/* <FriendsList hostId={hostId} setHostId={setHostId}/> */}
+        <FriendsList hostId={hostId} setHostId={setHostId}/>
+        <FortuneSection />
           {/* <VisitSection /> */}
           <FriendsSection />
         </aside>

@@ -9,7 +9,7 @@ function GetDiary() {
     console.log('dnum 겟다이어리:', dnum);
     
     useEffect(() => {
-        if (dnum) {
+        if (dnum && hostId) {
             axios.get(`/api/events/getDiary/${dnum}/${hostId}`) // dNum을 URL 파라미터로 사용하여 데이터 요청
                 .then(response => {
                     console.log('겟다이어리',diary)
@@ -30,10 +30,10 @@ function GetDiary() {
 
     const handleDelete = () => {
         if (window.confirm('해당 일기를 삭제하시겠습니까?')) {
-            axios.delete(`/api/delete/${dnum}/${hostId}`)
+            axios.delete(`/api/events/delete/${dnum}/${hostId}`)
                 .then(() => {
                     alert('일기가 삭제되었습니다.');
-                    navigate(`/home/${hostId}`); // 삭제 후 홈으로 리다이렉트
+                    navigate(`/diary/${hostId}`); // 삭제 후 홈으로 리다이렉트
                 })
                 .catch(error => {
                     console.error('Error deleting diary:', error);

@@ -1,12 +1,14 @@
 .music__inner {
+    position: absolute;
+    top:10px; left:500px;
     width: 300px;  /* 전체 플레이어의 너비를 고정 */
-    height: 170px;  /* 전체 플레이어의 높이를 고정 */
+    height: 120px;  /* 전체 플레이어의 높이를 고정 */
     display: flex;
     flex-direction: column;
     align-items: center;
     background-color: #ffffff;  /* 흰색 배경 */
-    border-radius: 10px;  /* 둥근 모서리 */
-    padding: 20px;  /* 내부 여백 */
+    border-radius: 12px;  /* 둥근 모서리 */
+    padding: 4px;  /* 내부 여백 */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);  /* 그림자 효과 */
   }
   
@@ -22,11 +24,15 @@
   }
   
   .music__song {
+    font-family: "Noto Sans KR", sans-serif;
+    font-size: 9pt;
+    font-weight: bold;
+    color:rgb(58, 58, 58);
     width: 100%;  /* 곡 제목과 가수명 영역의 너비를 고정 */
     overflow: hidden;  /* 텍스트가 넘칠 경우 숨김 */
     white-space: nowrap;  /* 텍스트를 한 줄로 표시 */
     text-align: center;  /* 텍스트를 중앙 정렬 */
-    margin: 10px 0;  /* 상하단 여백 */
+    margin-bottom: 10px;  /* 상하단 여백 */
   }
   
   .music__song p {
@@ -45,8 +51,8 @@
   }
   
   audio {
-    width: 100%;  /* 오디오 컨트롤의 너비를 고정 */
-    margin: 20px 0;  /* 오디오 컨트롤 상하단 여백 */
+    width: 270px;  /* 오디오 컨트롤의 너비를 고정 */
+    margin: 0px 5px 0px 5px;  /* 오디오 컨트롤 상하단 여백 */
   }
   
   .music__progress {
@@ -58,7 +64,7 @@
   
   .music__progress button {
     font-size: 20px;  /* 버튼의 글꼴 크기를 고정 */
-    padding: 10px;
+    padding: 4px;
     background-color: transparent;  /* 버튼 배경색을 투명으로 설정 */
     border: none;  /* 버튼 테두리 제거 */
     cursor: pointer;  /* 커서를 포인터로 변경 */

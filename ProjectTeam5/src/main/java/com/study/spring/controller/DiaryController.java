@@ -44,8 +44,8 @@ public class DiaryController {
     }
 
 
-    @DeleteMapping("/delete/{dnum}")
-    public void deleteEvent(@PathVariable Long dnum) {
-        diaryService.deleteEvent(dnum);
+    @DeleteMapping("/delete/{dnum}/{hostId}")
+    public void deleteByDnumAndMemId(@PathVariable Long dnum, @PathVariable String hostId) {
+        diaryService.deleteByDnumAndMemId(dnum, hostId);
     }
 }

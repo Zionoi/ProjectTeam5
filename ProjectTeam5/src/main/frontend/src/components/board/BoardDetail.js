@@ -51,7 +51,7 @@ function BoardDetail() {
             <img
               src={img}
               alt={`Image ${index + 1}`}
-              style={{ maxWidth: "500px", maxHeight: "500px", objectFit: "cover" }}
+              style={{ maxWidth: "200px", maxHeight: "200px", objectFit: "cover" }}
             />
           </div>
         ))}
