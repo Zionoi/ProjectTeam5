@@ -85,7 +85,7 @@ function GuestbookPage({hostId, setHostId}) {
 
   return (
     <div className="guestbook-container">
-      <h2>사용자 홈페이지 인삿말</h2>
+      <h2>방명록</h2>
       {errorMessage && <p className="error-message">{errorMessage}</p>}
       <div className="guestbook-list">
         {guestbookEntries.map((entry) => (
