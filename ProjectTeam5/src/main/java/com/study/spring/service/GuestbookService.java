@@ -32,4 +32,16 @@ public class GuestbookService {
 		
 		return guestbookRepository.findById(gNum);
 	}
+	
+    public void deleteGuestbookEntry(Long gbNum) {
+        guestbookRepository.deleteById(gbNum);
+    }
+
+	public void updateGuestbook(Long gbNum, Guestbook updatedGuestbook) {
+		Guestbook guestbook =  guestbookRepository.findById(gbNum).get();
+		
+		guestbook.setGbContent(updatedGuestbook.getGbContent());
+		
+		guestbookRepository.save(guestbook);
+	}
 }

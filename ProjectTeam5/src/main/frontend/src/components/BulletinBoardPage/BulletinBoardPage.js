@@ -48,9 +48,13 @@ function BulletinBoardPage({hostId}) {
   return (
     <div className="bulletin-board-container">
       <h2>게시판</h2>
-      <Link to={`/boardUpload/${hostId}`}><button className="add-post-button" onClick={handleAddPost}>
-        게시글 등록
-      </button></Link>
+      {hostId === localStorage.getItem('id') && (
+        <Link to={`/boardUpload/${hostId}`}>
+          <button className="add-post-button">
+            게시글 등록
+          </button>
+        </Link>
+      )}
       <div className="posts-grid">
         {images.map((post) => (
           <div key={post.bNum} className="post-card" onClick={() => handleImageClick(post.bnum)}>

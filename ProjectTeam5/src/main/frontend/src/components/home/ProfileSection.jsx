@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import "./ProfileSection.css";
 
-function ProfileSection({hostId}) {
+function ProfileSection({ hostId }) {
   const [profileImage, setProfileImage] = useState(''); // 프로필 이미지 경로 상태
   const [selectedFile, setSelectedFile] = useState(null); // 파일 상태
   const [comment, setComment] = useState(''); // 코멘트 상태
@@ -12,8 +12,7 @@ function ProfileSection({hostId}) {
   const [isEditing, setIsEditing] = useState(false); // 수정 모드 상태
 
   const defaultProfileImage = '../../img/basicProfile.png'; // 기본 이미지 경로
-  const [nick, setNick]= useState(localStorage.getItem('nickName')); // 사용자 닉네임 가져오기
-
+  const [nick, setNick] = useState(localStorage.getItem('nickName')); // 사용자 닉네임 가져오기
 
   // 사용자 프로필 이미지와 코멘트 가져오기
   useEffect(() => {
@@ -22,9 +21,9 @@ function ProfileSection({hostId}) {
       setLoading(false);
       return;
     }
-    console.log('홈 :',memId)
-    setMemId(hostId)
-    axios.get(`/member/get/${memId}`)
+    console.log('홈 :', memId);
+    setMemId(hostId);
+    axios.get(`/member/get/${hostId}`)
       .then(response => {
         setProfileImage(response.data.imgPath || defaultProfileImage); // 서버에서 받은 이미지 경로 설정
         setComment(response.data.comments || ''); // 서버에서 받은 코멘트 설정
@@ -50,7 +49,7 @@ function ProfileSection({hostId}) {
       alert('이미지나 코멘트를 입력해주세요.');
       return;
     }
-    
+
     const formData = new FormData();
     if (selectedFile) {
       formData.append('profileImage', selectedFile);
@@ -73,7 +72,7 @@ function ProfileSection({hostId}) {
   // 프로필 이미지 삭제 처리
   const handleDeleteProfileImage = async () => {
     try {
-      await axios.delete('/member/deleteImage', {params : { memId :memId }}); // 서버에 이미지 삭제 요청
+      await axios.delete('/member/deleteImage', { params: { memId: memId } }); // 서버에 이미지 삭제 요청
       setProfileImage(defaultProfileImage); // 기본 이미지로 변경
       setSelectedFile(null); // 선택한 파일 초기화
       alert('프로필 사진이 삭제되었습니다.');
@@ -87,7 +86,6 @@ function ProfileSection({hostId}) {
     setIsEditing(!isEditing);
   };
 
-
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
 
@@ -99,8 +97,8 @@ function ProfileSection({hostId}) {
           <div className="basic-profile">
             <img
               id="basic-profile"
-              src={profileImage || defaultProfileImage} 
-              alt="프로필 사진" 
+              src={profileImage || defaultProfileImage}
+              alt="프로필 사진"
               className={`profile-image ${isEditing ? 'editing' : ''}`} // 수정 모드일 때 불투명도 적용
             />
           </div>
@@ -110,11 +108,11 @@ function ProfileSection({hostId}) {
         {isEditing && (
           <>
             <label className="file-box" htmlFor="input-file">프로필 이미지 넣기</label>
-            <input 
-              type="file" 
-              accept="image/*" 
-              onChange={handleFileChange} 
-              id="input-file" 
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleFileChange}
+              id="input-file"
             />
             <div className="ImgDbutton-container">
               <button onClick={handleDeleteProfileImage} className="profile-delete-btn"></button>
@@ -123,8 +121,8 @@ function ProfileSection({hostId}) {
           </>
         )}
         <div className="label-container" cellspacing="0">
-            <label className="nickname-label">{nick}</label>
-            <label className="memId-label">({memId})</label>
+          <label className="nickname-label">{nick}</label>
+          <label className="memId-label">({memId})</label>
         </div>
         <textarea
           placeholder="코멘트를 입력해주세요."
@@ -132,17 +130,18 @@ function ProfileSection({hostId}) {
           onChange={(e) => setComment(e.target.value)}
           rows="4"
           disabled={!isEditing}
-          className={`textareabox ${isEditing ? 'editing' : ''}`} // 수정 모드일 떄만 박스 표시
+          className={`textareabox ${isEditing ? 'editing' : ''}`} // 수정 모드일 때만 박스 표시
         />
 
-        {/* 수정 모드에 따라 버튼 표시 */}
-        {isEditing ? (
-          <button onClick={handleUpload} className="profile-save-btn">저장</button>
-        ) : (
-          <button onClick={toggleEditMode} className="profile-edit-btn">프로필 수정</button>
+        {/* 접속 아이디와 hostId가 같을 때만 프로필 수정 버튼 표시 */}
+        {localStorage.getItem("id") === hostId && (
+          isEditing ? (
+            <button onClick={handleUpload} className="profile-save-btn">저장</button>
+          ) : (
+            <button onClick={toggleEditMode} className="profile-edit-btn">프로필 수정</button>
+          )
         )}
       </div>
-
     </div>
   );
 }

@@ -29,6 +29,7 @@ public class Guestbook {
 	@GeneratedValue(generator="gSEQ")
 	private Long gbNum;
 	private String memId;	//방명록이 달리는 페이지의 주인의 아이디
+	private String commenter; // 방명록을 쓴 글 주인
 	private String nickname;	// 방명록을 다는 사람의 아이디
 	private String gbContent;
 	@CreatedDate
