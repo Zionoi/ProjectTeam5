@@ -1,58 +1,79 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const MessageDetail = ({ message, setContent, fetchMessages }) => {
+const MessageDetail = ({ message, onClose, fetchMessages }) => {
   const [messageDetail, setMessageDetail] = useState(null); // 메시지 상세 상태
+  const [replyMode, setReplyMode] = useState(false); // 답장 모드 상태
+  const [replyContent, setReplyContent] = useState(''); // 답장 내용 상태
 
   // 메시지 가져오기
   useEffect(() => {
-    if (message) {
-      axios.get(`/api/messages/detail/${message}`) // message는 mNum임
-        .then(response => {
-          setMessageDetail(response.data); // 메시지 상세 데이터를 설정
-        })
+    if (message && message.mnum) {
+      axios.get(`/api/messages/detail/${message.mnum}`) // mnum을 기반으로 메시지 정보 가져오기
+        .then(response => setMessageDetail(response.data))
         .catch(error => console.error("Error fetching message:", error));
     }
   }, [message]);
-
-  if (!message) {
-    return <div>Error: 메시지가 없습니다.</div>; // message가 없을 때 처리
-  }
 
   if (!messageDetail) {
     return <div>Loading...</div>; // 로딩 중 표시
   }
 
-  // 답장 기능: 답장하기 버튼을 클릭하면 WriteMessage로 이동하고, 수신자를 자동 설정
-  const handleReply = () => {
-    setContent('writeMessage', messageDetail.memId);  // 쪽지보내기 화면으로 전환하고, 수신자 ID를 넘겨줌
+  const handleReplyMode = () => {
+    setReplyMode(true); // 답장 모드 활성화
   };
 
-  // 삭제 기능: 쪽지를 삭제하고 쪽지 목록으로 이동
+  const handleReply = () => {
+    // 답장 전송 로직
+    axios.post('/api/messages/send', {
+      memId: messageDetail.friendId, // 답장할 사람의 ID
+      friendId: messageDetail.memId, // 발신자의 ID
+      mcontent: replyContent,
+    })
+    .then(() => {
+      alert('답장이 전송되었습니다.');
+      setReplyContent(''); // 답장 내용 초기화
+      setReplyMode(false); // 답장 모드 비활성화
+      onClose(); // 모달 닫기
+    })
+    .catch(error => console.error('Error sending reply:', error));
+  };
+
   const handleDelete = () => {
-    axios.delete(`/api/messages/delete/${message}`)
+    axios.delete(`/api/messages/delete/${message.mnum}`)
       .then(() => {
         alert('쪽지가 삭제되었습니다.');
-        fetchMessages();  // 쪽지 목록 새로고침
-        setContent('inbox');  // 쪽지 목록으로 돌아가기
+        fetchMessages(); // 쪽지 목록 새로고침
+        onClose();        // 모달 닫기
       })
       .catch(error => console.error("Error deleting message:", error));
   };
 
   return (
     <div>
-      <div>
-        <h2>쪽지 세부 사항</h2>
-        <p><strong>발신자:</strong> {messageDetail.memId}</p>
-        <p><strong>내용:</strong> {messageDetail.mcontent}</p>
-        <p><strong>수신자:</strong> {messageDetail.friendId}</p>
-        <p><strong>보낸 시간:</strong> {new Date(messageDetail.createSysdate).toLocaleString()}</p>
-      </div>
+      <h2>쪽지 세부 사항</h2>
+      <p><strong>발신자:</strong> {messageDetail.memId}</p>
+      <p><strong>내용:</strong> {messageDetail.mcontent}</p>
+      <p><strong>수신자:</strong> {messageDetail.friendId}</p>
+      <p><strong>보낸 시간:</strong> {new Date(messageDetail.createSysdate).toLocaleString()}</p>
 
       <div>
-        <button onClick={() => setContent('inbox')}>쪽지목록</button>  {/* 쪽지 목록으로 돌아가기 */}
-        <button onClick={handleReply}>답장</button>  {/* 답장 버튼 */}
+        {!replyMode ? (
+          <button onClick={handleReplyMode}>답장하기</button>  
+        ) : (
+          <div>
+            <textarea
+              placeholder="답장 내용을 입력하세요..."
+              value={replyContent}
+              onChange={e => setReplyContent(e.target.value)}
+              rows="4"
+              style={{ width: '100%' }}
+            ></textarea>
+            <button onClick={handleReply}>답장 전송</button>  {/* 답장 전송 버튼 */}
+          </div>
+        )}
         <button onClick={handleDelete}>삭제</button>  {/* 삭제 버튼 */}
+        <button onClick={onClose}>닫기</button>  {/* 모달 닫기 버튼 */}
       </div>
     </div>
   );

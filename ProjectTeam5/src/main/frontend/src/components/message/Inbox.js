@@ -2,14 +2,15 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Modal from './Modal'; // 모달 컴포넌트 추가
 
-const Inbox = ({ setContent, isModalOpen, closeModal }) => {
+const Inbox = ({ setContent }) => {
   const [messages, setMessages] = useState([]);  // 받은 메시지 상태
   const [newMessages, setNewMessages] = useState(false);  // 새로운 메시지 확인 상태
   const [selectedMessage, setSelectedMessage] = useState(null); // 선택된 메시지
+  const [isModalOpen, setIsModalOpen] = useState(false); // 모달 열기 상태
 
   // 메시지 조회 함수
   const fetchMessages = () => {
-    axios.get(`/api/messages/received/user01`)
+    axios.get(`/api/messages/received/${localStorage.getItem("id")}`)
       .then(response => {
         setMessages(response.data);
         if (response.data.some(message => message.isReading === 1)) {
@@ -26,10 +27,9 @@ const Inbox = ({ setContent, isModalOpen, closeModal }) => {
 
   // 메시지 세부사항 열기
   const openMessageDetail = (message) => {
-    setSelectedMessage(message.mnum); // 메시지의 고유 ID(mNum)만 저장
-    console.log(message.mnum);  // 콘솔확인
-    setContent('messageDetail');      // 모달 전환
-  };  
+    setSelectedMessage(message);  // 메시지 전체를 전달
+    setIsModalOpen(true);         // 모달 열기
+  };
 
   // 메시지 삭제 함수
   const deleteMessage = (mNum) => {
@@ -47,8 +47,10 @@ const Inbox = ({ setContent, isModalOpen, closeModal }) => {
           <div>쪽지가 없습니다.~(&gt;_&lt;。)＼</div>
         ) : (
           messages.map((message, index) => (
-            <div key={index} onClick={() => openMessageDetail(message)} style={{ cursor: 'pointer', marginBottom: '10px' }}>
-              {message.memId}님이 보낸 쪽지가 도착했습니다!&emsp;
+            <div key={index} style={{ cursor: 'pointer', marginBottom: '10px' }}>
+              <span onClick={() => openMessageDetail(message)}>
+                {message.memId}님이 보낸 쪽지가 도착했습니다!&emsp;
+              </span>
               <button onClick={() => deleteMessage(message.mnum)}>삭제</button> &emsp;
               {message.isReading === 1 ? "읽지 않음" : "읽음"}
             </div>
@@ -67,10 +69,10 @@ const Inbox = ({ setContent, isModalOpen, closeModal }) => {
       {isModalOpen && (
         <Modal 
           isOpen={isModalOpen} 
-          onClose={closeModal} 
+          onClose={() => setIsModalOpen(false)} 
           content="messageDetail" 
           selectedMessage={selectedMessage}
-          fetchMessages={fetchMessages} // fetchMessages 전달
+          fetchMessages={fetchMessages}
         />
       )}
     </div>

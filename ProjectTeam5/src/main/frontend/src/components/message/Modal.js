@@ -40,7 +40,7 @@ const Modal = ({ isOpen, onClose, content, setContent, selectedMessage, recipien
       case 'inbox':
         return <Inbox setContent={setContent} />;
       case 'messageDetail':
-        return <MessageDetail message={selectedMessage} setContent={setContent} fetchMessages={fetchMessages} />;
+        return <MessageDetail message={selectedMessage} onClose={onClose} fetchMessages={fetchMessages} />;
       default:
         return null;
     }
