@@ -1,37 +1,12 @@
 /* src/components/CommentsSection.css */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
 
-.comments-section {
-    position:absolute;
-    top:310px;
-    left:110px;
-    background-color: #ffffff;
-    width: 300px;
-    height: 150px;
-    border-radius: 16px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  }
-  
-  .comments-co {
-    font-family: "Noto Sans KR", sans-serif;
-    font-size: 11pt;
-    font-weight: bold;
-    color:rgb(58, 58, 58);
-    margin:25px 25px 10px 25px;
-  }
-
-  .comments-contents{
-    font-family: "Noto Sans KR", sans-serif;
-    font-size:10pt;
-    color:rgb(112, 112, 112); 
-    margin: 0px 25px 25px 25px;
-  }
-
   .comments-actions {
     position: absolute;
+    top: 470px; left: 180px;
     width: 225px;
-    top:470px; left:220px;
     display: flex;
+    justify-content: center;
     gap: 10px;
   }
   .letter-button {
@@ -56,6 +31,7 @@
     position: relative;
     top:2px;
     left:5px;
+    margin-left: 10px;
   }
   .letterIcon:hover {
     cursor: pointer;
