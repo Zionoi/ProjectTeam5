@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import MainPanel from './components/mainPanel/MainPanel';
-import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, useNavigate, useParams } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './components/login/Login.jsx';
 import SignUpPage from './components/SignUpPage/SignUpPage.jsx';
@@ -13,9 +13,10 @@ import ResetPassword from './components/FindIdPassword/ResetPassword';
 function App() {
   // onLoginSuccess={() => setIsLoggedIn(true)}
   const navigate = useNavigate();
-
+  
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [hostId, setHostId] = useState('');
+  const { paramHostId } = useParams();
 
   // useEffect(() => {
   //   // 서버가 재시작했는지 여부를 확인할 수 있는 상태를 체크하는 로직이 있다고 가정
@@ -35,6 +36,9 @@ function App() {
         setIsLoggedIn(true);
       }
     }, []);
+  //  useEffect(()=>{
+  //   setHostId(paramHostId);
+  //  },[paramHostId])
 
 
     const handleLogin = () =>{
@@ -46,6 +50,15 @@ function App() {
       setIsLoggedIn(false); // 로그인 상태를 false로 설정
       localStorage.clear(); // 로컬 스토리지 클리어
     };
+
+      //서버 로그인한상태로 껐다가 다시켰을때 빈 메인페널만 보이던 문제 수정 코드
+      useEffect(()=>{
+        if(!sessionStorage.getItem('login')){
+          setIsLoggedIn(false); // 로그인 상태를 false로 설정
+          localStorage.clear(); // 로컬 스토리지 클리어
+        }
+      })
+      
   return (
     
       <div className="App">

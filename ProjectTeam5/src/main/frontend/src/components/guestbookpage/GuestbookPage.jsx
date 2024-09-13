@@ -85,7 +85,15 @@ function GuestbookPage({hostId, setHostId}) {
 
   return (
     <div className="guestbook-container">
-      <h2>사용자 홈페이지 인삿말</h2>
+      <h2>방명록</h2>
+      <div className="guestbook-input">
+        <textarea
+          value={newEntry}
+          onChange={(e) => setNewEntry(e.target.value)}
+          placeholder="내용을 입력해 주세요."
+        ></textarea>
+        <button className="guestsubmit" onClick={handleAddEntry}>완료</button>
+      </div>
       {errorMessage && <p className="error-message">{errorMessage}</p>}
       <div className="guestbook-list">
         {guestbookEntries.map((entry) => (
@@ -97,14 +105,6 @@ function GuestbookPage({hostId, setHostId}) {
             <p className="message">{entry.gbContent}</p>
           </div>
         ))}
-      </div>
-      <div className="guestbook-input">
-        <textarea
-          value={newEntry}
-          onChange={(e) => setNewEntry(e.target.value)}
-          placeholder="내용을 입력해 주세요."
-        ></textarea>
-        <button className="guestsubmit" onClick={handleAddEntry}>완료</button>
       </div>
       {/* 페이지 네이션 버튼 */}
       <div className="pagination">
