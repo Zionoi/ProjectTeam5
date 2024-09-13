@@ -1,24 +1,73 @@
 .music-list {
   display: flex;  /* Flexbox를 사용하여 리스트 아이템을 유연하게 배치 */
   flex-direction: column;  /* 리스트를 수직으로 배치 */
-  align-items: center;  /* 리스트 아이템들을 중앙에 정렬 */
-  padding: 20px;  /* 리스트의 내부 여백을 20px로 설정 */
-  background-color: #f0f0f0;  /* 리스트의 배경색을 밝은 회색으로 설정 */
+  padding: 0px;  /* 리스트의 내부 여백을 20px로 설정 */
+  background-color: #ffffff;  /* 리스트의 배경색을 밝은 회색으로 설정 */
   border-radius: 8px;  /* 리스트의 모서리를 둥글게 만듦 */
   max-width: 300px;  /* 리스트의 최대 너비를 300px로 제한 */
   height: 80vh;  /* 페이지 높이의 80%를 리스트의 높이로 설정 */
   overflow-y: auto;  /* 리스트가 길어질 경우 세로 스크롤을 추가 */
 }
 
+.music-search-box { /* 리스트 상단 박스 */
+  position: relative;
+  width: 100%; height: 52px;
+  background-color: #ffffff;
+}
+.music-list-label { /* 플레이리스트 */
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 10pt;
+  font-weight: bold;
+  margin: 20px 4px 0px 20px;}
+
+  .search-music-button {
+    position: relative; top:10px; left:110px;
+    background: url("../../img/musicImg/musicSearch.png") no-repeat; background-size: contain;
+    width: 30px;height: 30px;
+    margin-left: 5px;
+    border:none;
+    background-color: transparent;
+  }
+  .search-music-button-off {
+    position: relative; top:8px; left:110px;
+    background: url("../../img/xbuttonHover.png") no-repeat; background-size: contain;
+    width: 25px;height: 25px;
+    margin-left: 5px;
+    background-color: #c5c9ff;
+    border:none;
+    border-radius: 30px;
+  }
+  
+.music-search-input { /* 리스트 검색란 */
+  position: relative;
+  top:0px; left:20px;
+  width:75%  !important;
+  height: 30px;
+  border: solid 2px #c5c9ff !important;
+  outline: none;
+  transition: right 0.3s ease-in-out;
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 9pt;
+  font-weight: 600;
+  color:rgb(100, 100, 100);
+}
+.music-search-input::placeholder {
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 9pt;
+  font-weight: 600;
+  color:rgb(187, 187, 187);
+}
+
 .music-list ul {
   list-style-type: none;  /* 리스트 아이템 앞의 기본 리스트 마커(불릿)를 제거 */
-  padding: 0;  /* 리스트의 내부 패딩을 제거 */
+  padding: 0px;  /* 리스트의 내부 패딩을 제거 */
   margin: 0;  /* 리스트의 외부 마진을 제거 */
   width: 100%;  /* 리스트가 부모 요소의 너비를 꽉 채우도록 설정 */
 }
 
 .music-list li {
   padding: 10px;  /* 각 리스트 아이템의 내부 여백을 10px로 설정 */
+  margin: 0;
   cursor: pointer;  /* 마우스를 올렸을 때 커서를 포인터로 변경 */
   border-bottom: 1px solid #ddd;  /* 각 리스트 아이템의 하단에 얇은 회색 경계선을 추가 */
   transition: background-color 0.3s ease;  /* 배경색이 부드럽게 변하도록 전환 효과를 설정 */
@@ -31,4 +80,23 @@
 .music-list li.active {
   background-color: #d0d0d0;  /* 현재 선택된 리스트 아이템의 배경색을 더 어둡게 설정 */
   font-weight: bold;  /* 현재 선택된 리스트 아이템의 글자를 굵게 표시 */
+}
+.musicTItle {
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 10pt;
+  font-weight: bold;
+  color:rgb(58, 58, 58);
+  margin: 0px 4px 0px 4px;
+}
+.musicSinger {
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 8pt;
+  font-weight: 500;
+  color:rgb(102, 102, 102);
+  margin: 0px 4px 0px 4px;
+}
+
+.list-blur {
+  max-width: 300px;
+  height: 80vh;
 }

@@ -62,13 +62,12 @@ function MusicPlayerHandle({ currentSong, isPlaying, onPlayPauseClick, onNextPre
 
       {/* 음악 재생 컨트롤 버튼 */}
       <div className="music__progress">
-        <button onClick={() => onNextPrevClick(false)}>⏪</button>  {/* 이전 곡 */}
-        <button onClick={onPlayPauseClick}>{isPlaying ? "⏸" : "▶"}</button>  {/* 재생/일시정지 */}
-        <button onClick={() => onNextPrevClick(true)}>⏩</button>  {/* 다음 곡 */}
-        <button onClick={handleRepeatToggle}>
-          {isRepeating ? "🔂" : "🔁"}  {/* 반복 여부에 따라 아이콘 변경 */}
-        </button>
-        <button onClick={toggleList}>🎵</button>  {/* 리스트 토글 버튼 */}
+        <button onClick={() => onNextPrevClick(false)} className="before-music"/>  {/* 이전 곡 */}
+        <button onClick={onPlayPauseClick} className={isPlaying ? "stop-music" : "play-music"} />  {/* 재생/일시정지 */}
+        <button onClick={() => onNextPrevClick(true)} className="next-music" />  {/* 다음 곡 */}
+        <button onClick={handleRepeatToggle}
+          className={isRepeating ? "repeatOne-music" : "repeat-music"} /> {/* 반복 여부에 따라 아이콘 변경 */}
+        <button onClick={toggleList} className="list-music"/>  {/* 리스트 토글 버튼 */}
       </div>
 
        {/* 오른쪽에 패널처럼 리스트를 표시 */}
