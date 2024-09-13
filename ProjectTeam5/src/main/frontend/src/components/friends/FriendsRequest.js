@@ -25,7 +25,7 @@ function FriendsRequest({ memId = localStorage.getItem('id') }) { // loggedInUse
 
         axios.post('/friends/sendRequest', null, {
           params: {
-            memId: localStorage.getItem('id'), // 실제 로그인된 사용자 ID
+            memId: memId, // 실제 로그인된 사용자 ID
             friendId: friendId, // 입력한 친구의 ID
           },
         })

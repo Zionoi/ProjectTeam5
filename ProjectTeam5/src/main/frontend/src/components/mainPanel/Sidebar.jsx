@@ -14,6 +14,7 @@ import WriteMessage from '../message/WriteMessage';
 import Inbox from '../message/Inbox';
 import MessageDetail from '../message/MessageDetail';
 import ProfileEdit from '../ProfileEdit/ProfileEdit';
+import BoardEdit from './../board/BoardEdit';
 
 
 function Sidebar({hostId, setHostId}) {
@@ -112,6 +113,7 @@ function Sidebar({hostId, setHostId}) {
           {/* 기타 경로 처리 */}
           <Route path="/boardUpload/:hostId" element={<BoardUpload hostId={hostId} setHostId={setHostId} />} />
           <Route path="/boardDetail/:bNum/:hostId" element={<BoardDetail hostId={hostId} setHostId={setHostId}/>} />
+          <Route path="/boardEdit/:bNum" element={<BoardEdit />} />
           <Route path="/inputDiary/:date/:hostId" element={<InputDiary hostId={hostId} setHostId={setHostId}/>} />
           <Route path="/getDiary/:dnum/:hostId" element={<GetDiary hostId={hostId} setHostId={setHostId}/>} />
           <Route path="/GuestbookPage/:hostId" element={<GuestbookPage hostId={hostId} setHostId={setHostId}/>} />
