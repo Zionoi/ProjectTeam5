@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-function FriendsRequest({ memId = 'user02' }) { // loggedInUser로 로그인한 사용자 정보를 전달받음
+function FriendsRequest({ memId = localStorage.getItem('id') }) { // loggedInUser로 로그인한 사용자 정보를 전달받음
   const [friendId, setFriendId] = useState(''); // 친구 ID를 입력받기 위한 상태
   const [message, setMessage] = useState(''); // 요청 결과 메시지를 저장하기 위한 상태
 
@@ -25,7 +25,7 @@ function FriendsRequest({ memId = 'user02' }) { // loggedInUser로 로그인한 
 
         axios.post('/friends/sendRequest', null, {
           params: {
-            memId: localStorage.getItem('id'), // 실제 로그인된 사용자 ID
+            memId: memId, // 실제 로그인된 사용자 ID
             friendId: friendId, // 입력한 친구의 ID
           },
         })
