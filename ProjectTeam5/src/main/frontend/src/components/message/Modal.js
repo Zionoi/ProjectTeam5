@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
+import './Modal.css'; // 스타일 파일
 import WriteMessage from '../message/WriteMessage';
 import Inbox from '../message/Inbox';
 import MessageDetail from '../message/MessageDetail';
-import './Modal.css'; // 스타일 파일
 
-const Modal = ({ isOpen, onClose, content, setContent, selectedMessage, recipient, fetchMessages }) => {
- 
+const Modal = ({ isOpen, onClose, content, setContent, selectedMessage, setSelectedMessage, recipient, fetchMessages }) => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const [offset, setOffset] = useState({ x: 0, y: 0 });
@@ -30,17 +29,17 @@ const Modal = ({ isOpen, onClose, content, setContent, selectedMessage, recipien
   const handleMouseUp = () => {
     setIsDragging(false);
   };
-  
-  if (!isOpen) return null;  // 모달이 열리지 않으면 null 반환
+
+  if (!isOpen) return null; // 모달이 열리지 않으면 null 반환
 
   const renderContent = () => {
     switch (content) {
       case 'writeMessage':
         return <WriteMessage recipient={recipient} />;
       case 'inbox':
-        return <Inbox setContent={setContent} />;
+        return <Inbox setContent={setContent} setSelectedMessage={setSelectedMessage} />; // setSelectedMessage 전달
       case 'messageDetail':
-        return <MessageDetail message={selectedMessage} onClose={onClose} fetchMessages={fetchMessages} />;
+        return <MessageDetail message={selectedMessage} onClose={onClose} setContent={setContent} fetchMessages={fetchMessages} />;
       default:
         return null;
     }
