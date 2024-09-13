@@ -1,31 +1,34 @@
 import React, { useEffect, useState } from 'react';
 import './GuestbookPage.css';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
-function GuestbookPage({hostId, setHostId}) {
-  // 방명록 데이터 상태 관리
+function GuestbookPage({ hostId, setHostId }) {
   const [guestbookEntries, setGuestbookEntries] = useState([]);
   const [newEntry, setNewEntry] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [nickname, setNickname] = useState('');
-  const [page, setPage] = useState(0);  // 현재 페이지 번호
-  const [totalPages, setTotalPages] = useState(0);  // 총 페이지 수
+  const [page, setPage] = useState(0); // 현재 페이지 번호
+  const [totalPages, setTotalPages] = useState(0); // 총 페이지 수
   const memId = localStorage.getItem('id'); // 로그인된 유저의 ID 가져오기
+  const [editMode, setEditMode] = useState(null); // 수정 모드 상태
+  const [editContent, setEditContent] = useState(''); // 수정 중인 내용
+  const [modal, setModal] = useState(null); // 모달창 구분을 위한 상태
+
+  const navigate = useNavigate(); // 페이지 이동을 위한 useNavigate hook
 
   // 방명록 리스트 불러오기
   useEffect(() => {
     axios
-      .get('/guestbook/total', { params: { page, size: 5, memId : hostId } })  // page와 size 파라미터 추가
+      .get('/guestbook/total', { params: { page, size: 5, memId: hostId } })
       .then((response) => {
-        console.log("Fetched guestbook entries:", response.data);
-        setGuestbookEntries(response.data.content);  // Page 객체의 content 부분에 실제 데이터가 있음
-        setTotalPages(response.data.totalPages);  // 총 페이지 수 설정
+        setGuestbookEntries(response.data.content);
+        setTotalPages(response.data.totalPages);
       })
       .catch((error) => {
-        console.error("Error fetching guestbook entries:", error);
-        setErrorMessage('방명록을 불러오는 중 오류가 발생했습니다.');
+        setErrorMessage('');
       });
-  }, [page]);  // 페이지 번호 변경 시마다 데이터 새로 로드
+  }, [page, hostId]);
 
   // 사용자 닉네임 가져오기
   useEffect(() => {
@@ -33,10 +36,9 @@ function GuestbookPage({hostId, setHostId}) {
 
     axios.get(`/member/get/${memId}`)
       .then((response) => {
-        setNickname(response.data.nickname); // 유저의 닉네임을 가져와 상태로 설정
+        setNickname(response.data.nickname);
       })
-      .catch((error) => {
-        console.error('닉네임을 가져오는 중 오류 발생:', error);
+      .catch(() => {
         setErrorMessage('닉네임을 가져오는 중 오류가 발생했습니다.');
       });
   }, [memId]);
@@ -45,18 +47,19 @@ function GuestbookPage({hostId, setHostId}) {
   const handleAddEntry = () => {
     if (!newEntry.trim()) {
       setErrorMessage('내용을 입력해주세요.');
-      return; // 공백 방지
+      return;
     }
     const newEntryObject = {
-      memId: hostId,
-      nickname: nickname,
-      gbContent: newEntry,
+      memId: hostId, // 방명록이 달리는 페이지 주인
+      nickname: nickname, // 방명록 쓴 사람 닉네임
+      commenter: memId, // 방명록을 쓴 사람
+      gbContent: newEntry,//방명록 내용
     };
 
     axios.post('/guestbook/add', newEntryObject)
       .then((response) => {
         if (response.data === 'success') {
-          setGuestbookEntries([...guestbookEntries,newEntryObject]);
+          setGuestbookEntries([...guestbookEntries, newEntryObject]);
           setNewEntry('');
           setErrorMessage('');
           window.location.reload();
@@ -64,16 +67,52 @@ function GuestbookPage({hostId, setHostId}) {
           setErrorMessage('방명록 저장 중 문제가 발생했습니다.');
         }
       })
-      .catch((error) => {
-        console.error("Error saving guestbook entry:", error);
+      .catch(() => {
         setErrorMessage('방명록 저장 중 오류가 발생했습니다.');
       });
   };
 
-  // 날짜 포맷팅 함수
-  const formatDate = (dateString) => {
-    const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
-    return new Date(dateString).toLocaleDateString(undefined, options);
+  // 방명록 수정 기능
+  const handleEditMode = (gbNum, content) => {
+    setEditMode(gbNum);
+    setEditContent(content);
+  };
+
+  const handleSaveEdit = (gbNum) => {
+    axios.put(`/guestbook/update/${gbNum}`, { gbContent: editContent })
+      .then(() => {
+        setGuestbookEntries(
+          guestbookEntries.map((entry) => entry.gbNum === gbNum ? { ...entry, gbContent: editContent } : entry)
+        );
+        setEditMode(null);
+        setEditContent('');
+      })
+      .catch(() => {
+        setErrorMessage('방명록 수정 중 오류가 발생했습니다.');
+      });
+  };
+
+  // 방명록 삭제 기능
+  const handleDeleteEntry = (gbNum) => {
+    if (window.confirm('이 방명록을 삭제하시겠습니까?')) {
+      axios.delete(`/guestbook/delete/${gbNum}`)
+        .then(() => {
+          setGuestbookEntries(guestbookEntries.filter(entry => entry.gbNum !== gbNum));
+        })
+        .catch(() => {
+          setErrorMessage('방명록 삭제 중 오류가 발생했습니다.');
+        });
+    }
+  };
+
+  // "놀러가기" 기능: 해당 사용자의 페이지로 이동
+  const visitFriendPage = (friendId) => {
+    navigate(`/home/${friendId}`); // 해당 사용자의 홈페이지로 이동
+  };
+
+  // "쪽지 보내기" 기능: 해당 사용자에게 쪽지 작성 화면으로 이동
+  const sendMessage = (friendId) => {
+    navigate(`/write/${friendId}`); // 쪽지 작성 화면으로 이동
   };
 
   // 페이지 변경 핸들러
@@ -83,38 +122,78 @@ function GuestbookPage({hostId, setHostId}) {
     }
   };
 
+  // 모달 토글 함수
+  const toggleModal = (gbNum) => {
+    setModal(modal === gbNum ? null : gbNum);
+  };
+
   return (
     <div className="guestbook-container">
       <h2>방명록</h2>
-      <div className="guestbook-input">
-        <textarea
-          value={newEntry}
-          onChange={(e) => setNewEntry(e.target.value)}
-          placeholder="내용을 입력해 주세요."
-        ></textarea>
-        <button className="guestsubmit" onClick={handleAddEntry}>완료</button>
-      </div>
+
+      {/* 글 작성은 memId와 hostId가 다를 때만 가능 */}
+      {memId !== hostId && (
+        <div className="guestbook-input">
+          <textarea
+            value={newEntry}
+            onChange={(e) => setNewEntry(e.target.value)}
+            placeholder="내용을 입력해 주세요."
+          ></textarea>
+          <button className="guestsubmit" onClick={handleAddEntry}>완료</button>
+        </div>
+      )}
+
       {errorMessage && <p className="error-message">{errorMessage}</p>}
       <div className="guestbook-list">
         {guestbookEntries.map((entry) => (
-          <div key={entry.id} className="guestbook-entry">
+          <div key={entry.gbNum} className="guestbook-entry">
             <div className="entry-header">
-              <span className="username">{entry.nickname}</span>
-              <span className="date">{formatDate(entry.createDate)}</span> {/* 작성 날짜 표시 */}
+              {/* 닉네임을 클릭하면 모달 창 생성 */}
+              <span className="username" onClick={() => toggleModal(entry.gbNum)} style={{ cursor: 'pointer' }}>
+                {entry.nickname}
+              </span>
+              {modal === entry.gbNum && (
+                <div className="modal-buttons">
+                  <button onClick={() => visitFriendPage(entry.commenter)}>홈피 가기</button>
+                  <button onClick={() => sendMessage(entry.commenter)}>쪽지 보내기</button>
+                </div>
+              )}
+              <span className="date">{new Date(entry.createDate).toLocaleString()}</span>
             </div>
-            <p className="message">{entry.gbContent}</p>
+
+            {/* 글 내용을 표시 */}
+            {editMode === entry.gbNum ? (
+              <div>
+                <textarea
+                  value={editContent}
+                  onChange={(e) => setEditContent(e.target.value)}
+                />
+                <button onClick={() => handleSaveEdit(entry.gbNum)}>저장</button>
+              </div>
+            ) : (
+              <p className="message">
+                {entry.gbContent}
+              </p>
+            )}
+
+            {/* 수정 버튼은 본인이 작성한 글만 보임 */}
+            {entry.commenter === memId && (
+              <button onClick={() => handleEditMode(entry.gbNum, entry.gbContent)}>수정</button>
+            )}
+
+            {/* 삭제 버튼은 본인이 작성한 글이거나 hostId와 memId가 같을 때 보임 */}
+            {(entry.commenter === memId || hostId === memId) && (
+              <button onClick={() => handleDeleteEntry(entry.gbNum)} className="delete-button">삭제</button>
+            )}
           </div>
         ))}
       </div>
+
       {/* 페이지 네이션 버튼 */}
       <div className="pagination">
-        <button onClick={() => handlePageChange(page - 1)} disabled={page === 0}>
-          이전
-        </button>
+        <button onClick={() => handlePageChange(page - 1)} disabled={page === 0}>이전</button>
         <span>{page + 1} / {totalPages}</span>
-        <button onClick={() => handlePageChange(page + 1)} disabled={page + 1 === totalPages}>
-          다음
-        </button>
+        <button onClick={() => handlePageChange(page + 1)} disabled={page + 1 === totalPages}>다음</button>
       </div>
     </div>
   );
