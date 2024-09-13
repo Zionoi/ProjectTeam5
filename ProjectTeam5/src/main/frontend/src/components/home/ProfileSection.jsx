@@ -72,7 +72,7 @@ function ProfileSection() {
   // 프로필 이미지 삭제 처리
   const handleDeleteProfileImage = async () => {
     try {
-      await axios.post('/member/delete/profileImag', { memId }); // 서버에 이미지 삭제 요청
+      await axios.delete('/member/deleteImage', {params : { memId :memId }}); // 서버에 이미지 삭제 요청
       setProfileImage(defaultProfileImage); // 기본 이미지로 변경
       setSelectedFile(null); // 선택한 파일 초기화
       alert('프로필 사진이 삭제되었습니다.');
