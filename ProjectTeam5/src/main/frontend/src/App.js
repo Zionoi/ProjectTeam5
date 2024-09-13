@@ -15,7 +15,7 @@ function App() {
   const navigate = useNavigate();
   
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [hostId, setHostId] = useState('');
+  const [hostId, setHostId] = useState('a');
   const { paramHostId } = useParams();
 
   // useEffect(() => {
@@ -58,6 +58,8 @@ function App() {
           localStorage.clear(); // 로컬 스토리지 클리어
         }
       })
+
+      
       
   return (
     

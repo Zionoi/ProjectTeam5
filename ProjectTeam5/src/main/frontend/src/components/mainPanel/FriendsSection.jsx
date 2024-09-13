@@ -25,7 +25,7 @@ import PendingRequests from '../friends/PendingRequests'; // 대기중인 요청
 import FriendsList from '../friends/FriendsList'; // 친구 목록 컴포넌트
 import './FriendsSection.css'; // 스타일 파일
 
-function FriendsSection() {
+function FriendsSection({hostId, setHostId}) {
   const [view, setView] = useState(''); // 현재 보여줄 컴포넌트를 관리하는 상태
 
   return (
@@ -47,7 +47,7 @@ function FriendsSection() {
       
       {/* 조건에 따라 컴포넌트 표시 */}
       <div>
-        {view === 'friendsList' && <FriendsList />}
+        {view === 'friendsList' &&  <FriendsList hostId={hostId} setHostId={setHostId}/>}
         {view === 'friendsRequest' && <FriendsRequest />}
         {view === 'pendingRequests' && <PendingRequests />}
       </div>

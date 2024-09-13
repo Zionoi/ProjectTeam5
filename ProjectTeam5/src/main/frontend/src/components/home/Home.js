@@ -41,7 +41,7 @@ function Home({hostId, setHostId}) {
       <div className="">
         <main className="main-content">
 
-          <ProfileSection />
+          <ProfileSection hostId={hostId}/>
           <TopCommnets hostId={hostId} setHostId={setHostId}/>
           
           <StickerSection />

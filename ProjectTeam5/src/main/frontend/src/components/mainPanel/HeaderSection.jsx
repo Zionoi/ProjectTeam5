@@ -51,10 +51,8 @@ function HeaderSection({hostId}) {
 //  }, []);
 useEffect(() => {
   setMemId(hostId);
-  console.log("헤더섹션 : ", memId);
   axios.get(`/member/get/${memId}`) // 
       .then(response => {
-        console.log('방문자 리스폰스',response);
         setTodayVisit(response.data.todayVisit); // 오류 발생 시 null로 설정
         setTotalVisit(response.data.totalVisit); // 오류 발생 시 null로 설정
       })
