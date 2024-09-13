@@ -56,7 +56,7 @@ function BoardEdit({ hostId, setHostId }) {
 
     // 새로 추가된 이미지를 FormData에 추가
     selectedImages.forEach((image, index) => {
-      formData.append(`image`, image.file);
+      formData.append(image, image.file);
     });
 
     // 기존 이미지를 FormData에 포함 (경로만 보냄)
