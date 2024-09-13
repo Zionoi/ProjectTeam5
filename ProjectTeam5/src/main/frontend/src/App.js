@@ -35,6 +35,7 @@ function App() {
         setIsLoggedIn(true);
       }
     }, []);
+   
 
 
     const handleLogin = () =>{
@@ -46,6 +47,15 @@ function App() {
       setIsLoggedIn(false); // 로그인 상태를 false로 설정
       localStorage.clear(); // 로컬 스토리지 클리어
     };
+
+      //서버 로그인한상태로 껐다가 다시켰을때 빈 메인페널만 보이던 문제 수정 코드
+      useEffect(()=>{
+        if(!sessionStorage.getItem('login')){
+          setIsLoggedIn(false); // 로그인 상태를 false로 설정
+          localStorage.clear(); // 로컬 스토리지 클리어
+        }
+      })
+      
   return (
     
       <div className="App">
