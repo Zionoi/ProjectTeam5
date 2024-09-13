@@ -56,7 +56,7 @@ function GuestbookPage({hostId, setHostId}) {
     axios.post('/guestbook/add', newEntryObject)
       .then((response) => {
         if (response.data === 'success') {
-          setGuestbookEntries([newEntryObject, ...guestbookEntries]);
+          setGuestbookEntries([...guestbookEntries,newEntryObject]);
           setNewEntry('');
           setErrorMessage('');
           window.location.reload();

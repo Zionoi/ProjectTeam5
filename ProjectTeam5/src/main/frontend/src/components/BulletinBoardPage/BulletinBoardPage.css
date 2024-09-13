@@ -26,10 +26,10 @@
   background-color: #684cce;
 }
 
-.posts-grid {
+.posts-grid { 
   display: grid;
-  grid-template-columns: repeat(3, minmax(200px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(3, minmax(200px, 1fr)); 
+  gap: 20px; /*게시판 두 번째 줄의 간격*/
 }
 
 .post-card {
@@ -56,14 +56,14 @@
 }
 
 .post-content {
-  padding: 10px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
   gap: 5px;
 }
 
 .post-title {
-  font-size: 16px;
+  font-size: 10px;
   font-weight: bold;
   margin: 0;
   color: #333;
