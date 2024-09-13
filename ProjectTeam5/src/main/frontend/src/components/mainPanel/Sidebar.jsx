@@ -29,6 +29,14 @@ function Sidebar({hostId, setHostId}) {
     setActiveIcon(index); // 클릭된 아이콘의 인덱스를 상태로 저장
   };
 
+    // // hostId가 undefined이면 paramHostId로 값을 세팅
+    // useEffect(() => {
+    //   if (!hostId && paramHostId) {
+    //     console.log(`Setting hostId: ${paramHostId}`); // 디버깅용 콘솔
+    //     setHostId(sessionStorage.getItem(hostId));
+    //   }
+    // }, [hostId, paramHostId, setHostId]);
+
   useEffect(() => {
     setHostId(paramHostId);
     console.log("host아이디 사이드바 : ",paramHostId);
