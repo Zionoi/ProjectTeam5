@@ -4,11 +4,13 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './FriendsList.css';
 
-function FriendsList({hostId, setHostId}) {
+function FriendsList({hostId, setHostId,}) {
   const [friends, setFriends] = useState([]); // 친구 목록을 저장하는 상태
   const navigate = useNavigate();
+      console.log('친구리스트 hostId',hostId);
 
   useEffect(() => {
+    
     // 서버에서 친구 목록 가져오기
     axios.get('/friends/total', {
       params: { memId: localStorage.getItem('id') }, // 실제 로그인된 사용자 ID  // 하드 코딩
@@ -38,7 +40,8 @@ function FriendsList({hostId, setHostId}) {
   };
   // 친구 홈페이지로 이동
   const goFriendHome = (friendId) => {
-   setHostId(friendId)
+    setHostId(friendId);
+   console.log('친구홈페이지 : ',friendId)
     navigate(`/home/${friendId}`); // 친구의 홈으로 이동
   };
 
@@ -48,7 +51,7 @@ function FriendsList({hostId, setHostId}) {
       <ul>
         {friends.map(friend => (
           <li key={friend.fNum}>
-            <span onClick={() => goFriendHome(friend.friendId)}>{friend.friendId}</span> 
+            <span onClick={() => goFriendHome(friend.friendId) }>{friend.friendId}</span> 
             <button onClick={() => deleteFriend(friend.fNum)}>삭제</button>
           </li>
         ))}

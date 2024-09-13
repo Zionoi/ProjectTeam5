@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import "./ProfileSection.css";
 
-function ProfileSection() {
+function ProfileSection({hostId}) {
   const [profileImage, setProfileImage] = useState(''); // 프로필 이미지 경로 상태
   const [selectedFile, setSelectedFile] = useState(null); // 파일 상태
   const [comment, setComment] = useState(''); // 코멘트 상태
-  const [memId, setMemId] = useState(localStorage.getItem('id')); // 사용자 ID 가져오기
+  const [memId, setMemId] = useState(hostId); // 사용자 ID 가져오기
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isEditing, setIsEditing] = useState(false); // 수정 모드 상태
@@ -22,7 +22,8 @@ function ProfileSection() {
       setLoading(false);
       return;
     }
-
+    console.log('홈 :',memId)
+    setMemId(hostId)
     axios.get(`/member/get/${memId}`)
       .then(response => {
         setProfileImage(response.data.imgPath || defaultProfileImage); // 서버에서 받은 이미지 경로 설정
@@ -34,7 +35,7 @@ function ProfileSection() {
         setError('사용자 정보를 가져오는 중 오류가 발생했습니다.');
         setLoading(false);
       });
-  }, [memId]);
+  }, [hostId]);
 
   // 파일 선택 시 미리보기 설정
   const handleFileChange = e => {

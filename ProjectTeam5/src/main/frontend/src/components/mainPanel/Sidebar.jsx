@@ -48,8 +48,7 @@ function Sidebar({hostId, setHostId}) {
     navigate(`/home/${myId}`); // 내 홈페이지로 이동
   };
 
-  console.log('hostId:', hostId);
-  console.log('myId:', myId);
+ 
 
   return (
     <div style={{ display: 'flex' }}>
