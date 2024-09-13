@@ -72,7 +72,7 @@ function BoardEdit({ hostId, setHostId }) {
 
       if (response.ok) {
         alert("게시물이 수정되었습니다.");
-        navigate(`/boardDetail/${bNum}`);
+        navigate(`/boardDetail/${bNum}/${localStorage.getItem("id")}`);
       } else {
         alert("게시물 수정 중 오류가 발생했습니다.");
       }

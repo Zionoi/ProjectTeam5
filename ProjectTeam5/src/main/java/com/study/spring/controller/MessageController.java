@@ -33,6 +33,7 @@ public class MessageController {
     // 특정 메시지 조회 API
     @GetMapping("/detail/{m_num}")
     public Message getMessageDetail(@PathVariable("m_num") Long mNum) {
+    	System.out.println("ddddddddddddddddddddddddd");
         return messageService.getMessageById(mNum);
     }
 
