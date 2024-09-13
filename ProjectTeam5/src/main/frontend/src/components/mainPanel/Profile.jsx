@@ -8,9 +8,7 @@ function Profile() {
 
   // 메뉴 토글 함수
   const toggleMenu = () => {
-    console.log('수정버튼 확인');
-    setMenuOpen(!menuOpen);
-    console.log('menuOpen :',menuOpen);
+    setMenuOpen((prev) => !prev);
   };
   
 
