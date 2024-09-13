@@ -18,7 +18,7 @@ import ProfileEdit from '../ProfileEdit/ProfileEdit';
 
 function Sidebar({hostId, setHostId}) {
   const navigate = useNavigate();
-  const { paramHostId } = useParams(); // 아이디 파라미터 가져오기
+  // const { paramHostId } = useParams(); // 아이디 파라미터 가져오기
   const myId = localStorage.getItem('id'); // 내 아이디 로컬 스토리지에서 가져오기
   // const [hostId, setHostId] = useState(paramHostId);
 
@@ -37,10 +37,10 @@ function Sidebar({hostId, setHostId}) {
     //   }
     // }, [hostId, paramHostId, setHostId]);
 
-  useEffect(() => {
-    setHostId(paramHostId);
-    console.log("host아이디 사이드바 : ",paramHostId);
-  }, [paramHostId, setHostId]);
+  // useEffect(() => {
+  //   setHostId(paramHostId);
+  //   console.log("host아이디 사이드바 : ",paramHostId);
+  // }, [paramHostId, setHostId]);
 
   const goToMyHomePage = () => {
     setHostId(myId);
