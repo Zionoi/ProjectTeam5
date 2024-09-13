@@ -35,7 +35,7 @@ function MainPanel({ onLogout, hostId, setHostId}) { // onLogout props 추가
       if(!sessionStorage.getItem('login')){
         onLogout();
       }
-    },[])
+    })
     
   
     return (
