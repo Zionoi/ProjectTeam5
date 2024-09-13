@@ -1,10 +1,12 @@
 // src/components/FriendsList.js
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './FriendsList.css';
 
-function FriendsList() {
+function FriendsList({hostId, setHostId}) {
   const [friends, setFriends] = useState([]); // 친구 목록을 저장하는 상태
+  const navigate = useNavigate();
 
   useEffect(() => {
     // 서버에서 친구 목록 가져오기
@@ -34,6 +36,11 @@ function FriendsList() {
       console.error('친구 삭제 중 오류가 발생했습니다', error);
     });
   };
+  // 친구 홈페이지로 이동
+  const goFriendHome = (friendId) => {
+    setHostId(friendId)
+    navigate(`/home/${friendId}`); // 친구의 홈으로 이동
+  };
 
   return (
     <div>
@@ -41,7 +48,8 @@ function FriendsList() {
       <ul>
         {friends.map(friend => (
           <li key={friend.fNum}>
-            {friend.friendId} <button onClick={() => deleteFriend(friend.fnum)}>삭제</button>
+            <span onClick={() => goFriendHome(friend.friendId)}>{friend.friendId}</span> 
+            <button onClick={() => deleteFriend(friend.fNum)}>삭제</button>
           </li>
         ))}
       </ul>

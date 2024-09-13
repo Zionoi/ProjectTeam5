@@ -13,7 +13,6 @@ import FriendsList from '../friends/FriendsList.js';
 import { useEffect, useState } from 'react';
 import MusicPlayer from '../music/MusicPlayer.jsx';
 import HeaderSection from './HeaderSection.jsx';
-import Inbox from '../message/Inbox.js';
 
 
 function MainPanel({ onLogout, hostId, setHostId }) { // onLogout props 추가
@@ -43,7 +42,7 @@ function MainPanel({ onLogout, hostId, setHostId }) { // onLogout props 추가
       <div className="app" style={{ display: 'flex' }}>
         <div className="left-panel">
           <Sidebar hostId={hostId} setHostId={setHostId} />
-        <Inbox/>
+ 
         </div>
       
         <div className="right-panel">
