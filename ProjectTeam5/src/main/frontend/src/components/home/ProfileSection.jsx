@@ -22,9 +22,9 @@ function ProfileSection({hostId}) {
       setLoading(false);
       return;
     }
-    console.log('홈 :',memId)
     setMemId(hostId)
-    axios.get(`/member/get/${memId}`)
+    console.log('홈 :',hostId)
+    axios.get(`/member/get/${hostId}`)
       .then(response => {
         setProfileImage(response.data.imgPath || defaultProfileImage); // 서버에서 받은 이미지 경로 설정
         setComment(response.data.comments || ''); // 서버에서 받은 코멘트 설정
