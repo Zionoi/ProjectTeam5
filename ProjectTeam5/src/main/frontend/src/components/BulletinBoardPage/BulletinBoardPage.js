@@ -46,15 +46,18 @@ function BulletinBoardPage({hostId}) {
 
 
   return (
-    <div className="bulletin-board-container">
-      <h2>게시판</h2>
-      {hostId === localStorage.getItem('id') && (
-        <Link to={`/boardUpload/${hostId}`}>
-          <button className="add-post-button">
-            게시글 등록
-          </button>
-        </Link>
-      )}
+    <div>
+      <div className="board-title-box">
+          <h2 className="board-title">스토리</h2>
+          {hostId === localStorage.getItem('id') && (
+            <Link to={`/boardUpload/${hostId}`}>
+              <button className="post-button">
+                게시글 등록
+              </button>
+            </Link>
+          )}
+      </div>
+      <div className="bulletin-board-container">
       <div className="posts-grid">
         {images.map((post) => (
           <div key={post.bNum} className="post-card" onClick={() => handleImageClick(post.bnum)}>
@@ -65,6 +68,7 @@ function BulletinBoardPage({hostId}) {
             </div>
           </div>
         ))}
+        </div>
       </div>
     </div>
   );
