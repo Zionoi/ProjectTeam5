@@ -28,7 +28,7 @@ function GuestbookPage({ hostId, setHostId }) {
       .catch((error) => {
         setErrorMessage('');
       });
-  }, [page, hostId]);
+  }, [page, hostId, guestbookEntries]);
 
   // 사용자 닉네임 가져오기
   useEffect(() => {
@@ -62,7 +62,8 @@ function GuestbookPage({ hostId, setHostId }) {
           setGuestbookEntries([...guestbookEntries, newEntryObject]);
           setNewEntry('');
           setErrorMessage('');
-          window.location.reload();
+          // window.location.reload();
+          console.log('response.data', response.data)
         } else {
           setErrorMessage('방명록 저장 중 문제가 발생했습니다.');
         }

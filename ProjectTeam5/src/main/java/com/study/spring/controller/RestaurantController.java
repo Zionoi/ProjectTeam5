@@ -1,36 +1,30 @@
 package com.study.spring.controller;
 
-import com.study.spring.domain.Restaurant;
-import com.study.spring.repository.RestaurantRepository;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import com.study.spring.service.PoiService;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/restaurants")
 public class RestaurantController {
 
-    @Autowired
-    private RestaurantRepository restaurantRepository;
+    private final PoiService poiService;
 
-    // 맛집 목록 가져오기
-    @GetMapping
-    public List<Restaurant> getRestaurants() {
-        return restaurantRepository.findAll();
+    public RestaurantController(PoiService poiService) {
+        this.poiService = poiService;
     }
 
-    // 맛집에 좋아요 추가
-    @PostMapping("/{restaurantId}/like")
-    public ResponseEntity<String> addLike(@PathVariable Long restaurantId) {
-        Restaurant restaurant = restaurantRepository.findById(restaurantId).orElseThrow(() -> new IllegalArgumentException("음식점을 찾을 수 없습니다."));
-        
-        // 좋아요 수 증가
-        restaurant.setLikeCount(restaurant.getLikeCount() + 1);
-        restaurantRepository.save(restaurant);
-        
-        return ResponseEntity.ok("좋아요!");
+    // 음식점 검색
+    @GetMapping("/search")
+    public String searchRestaurants(@RequestParam String keyword, @RequestParam int page) {
+        return poiService.getRestaurants(keyword, page);
+    }
+
+    // 음식점 순위
+    @GetMapping("/rankings")
+    public String getRestaurantRankings(@RequestParam String area, @RequestParam String foodType) {
+        return poiService.getRestaurantRankings(area, foodType);
     }
 }
