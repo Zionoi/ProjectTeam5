@@ -53,8 +53,8 @@ const MessageDetail = ({ message, onClose, fetchMessages, setContent }) => {
   return (
     <div>
       <h2>{messageDetail.memId}님에게 온 쪽지!</h2>
-      <p><strong>내용:</strong> {messageDetail.mcontent}</p>
-      <p style={{ textAlign: 'right' }}><strong>보낸 시간:</strong> {new Date(messageDetail.createSysdate).toLocaleString()}</p>
+      <p>{messageDetail.mcontent}</p>
+      <p style={{ textAlign: 'right' }}>{new Date(messageDetail.createSysdate).toLocaleString()}</p>
 
       <div>
         {!replyMode ? (
