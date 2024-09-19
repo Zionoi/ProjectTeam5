@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const MessageDetail = ({ message, onClose, fetchMessages }) => {
+const MessageDetail = ({ message, onClose, fetchMessages, setContent }) => {
   const [messageDetail, setMessageDetail] = useState(null); // 메시지 상세 상태
   const [replyMode, setReplyMode] = useState(false); // 답장 모드 상태
   const [replyContent, setReplyContent] = useState(''); // 답장 내용 상태
@@ -35,6 +35,7 @@ const MessageDetail = ({ message, onClose, fetchMessages }) => {
       setReplyContent(''); // 답장 내용 초기화
       setReplyMode(false); // 답장 모드 비활성화
       onClose(); // 모달 닫기
+      if (fetchMessages) fetchMessages(); // 메시지 목록 갱신
     })
     .catch(error => console.error('Error sending reply:', error));
   };
@@ -43,19 +44,17 @@ const MessageDetail = ({ message, onClose, fetchMessages }) => {
     axios.delete(`/api/messages/delete/${message.mnum}`)
       .then(() => {
         alert('쪽지가 삭제되었습니다.');
-        fetchMessages(); // 쪽지 목록 새로고침
-        onClose();        // 모달 닫기
+        if (fetchMessages) fetchMessages(); // 쪽지 목록 새로고침
+        setContent('inbox');  // 삭제 후 쪽지함으로 돌아가기
       })
       .catch(error => console.error("Error deleting message:", error));
   };
 
   return (
     <div>
-      <h2>쪽지 세부 사항</h2>
-      <p><strong>발신자:</strong> {messageDetail.memId}</p>
+      <h2>{messageDetail.memId}님에게 온 쪽지!</h2>
       <p><strong>내용:</strong> {messageDetail.mcontent}</p>
-      <p><strong>수신자:</strong> {messageDetail.friendId}</p>
-      <p><strong>보낸 시간:</strong> {new Date(messageDetail.createSysdate).toLocaleString()}</p>
+      <p style={{ textAlign: 'right' }}><strong>보낸 시간:</strong> {new Date(messageDetail.createSysdate).toLocaleString()}</p>
 
       <div>
         {!replyMode ? (
@@ -73,7 +72,7 @@ const MessageDetail = ({ message, onClose, fetchMessages }) => {
           </div>
         )}
         <button onClick={handleDelete}>삭제</button>  {/* 삭제 버튼 */}
-        <button onClick={onClose}>닫기</button>  {/* 모달 닫기 버튼 */}
+        <button onClick={() => setContent('inbox')}>뒤로가기</button>  {/* 쪽지함으로 돌아가는 버튼 */}
       </div>
     </div>
   );

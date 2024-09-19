@@ -4,8 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -46,5 +49,21 @@ public class GuestbookController {
 	{
 		return guestbookService.detailGuestbook(gNum).get();
 	}
+	
+    // 방명록 삭제 기능
+    @DeleteMapping("/delete/{gbNum}")
+    public String deleteGuestbookEntry(@PathVariable Long gbNum) {
+
+        guestbookService.deleteGuestbookEntry(gbNum);
+        return "success";  // 성공적으로 삭제되면 success 반환
+ 
+    }
+    
+    //방명록을 업데이트 하는 기능
+    @PutMapping("/update/{gbNum}")
+    public String updateGuestbook(@PathVariable Long gbNum, @RequestBody Guestbook updatedGuestbook) {
+        guestbookService.updateGuestbook(gbNum, updatedGuestbook);
+        return "success";
+    }
 	
 }
