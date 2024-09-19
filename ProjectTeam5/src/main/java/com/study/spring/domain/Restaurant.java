@@ -15,9 +15,9 @@ public class Restaurant {
 
     @Id
     @SequenceGenerator(
-    		name = "rSEQ", 
-    		sequenceName = "R_SQ", 
-    		allocationSize = 1
+        name = "rSEQ", 
+        sequenceName = "R_SQ", 
+        allocationSize = 1
     )
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "rSEQ")
     private Long rNum;            // 고유 ID (시퀀스로 생성)
@@ -26,6 +26,12 @@ public class Restaurant {
     private String rAddress;      // 주소
     private String category;      // 카테고리
     private String imageUrl;      // 이미지 경로
+    private Double rating;  	  // 평점 (숫자로 변경)
 
-    private Long likeCount;       // 좋아요 수
+    private Integer rank;         // 음식점 순위
+    private String area;          // 지역 정보 (시군구, 읍면동)
+    private String foodType;      // 음식 종류 (한식, 중식 등)
+    private Integer rankChange;   // 순위 변동
+    private Double visitorRatio;  // 방문객 비율
+    private Integer callCount;    // 통화 고객 수
 }

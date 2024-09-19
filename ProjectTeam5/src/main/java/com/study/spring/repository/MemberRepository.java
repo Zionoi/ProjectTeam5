@@ -19,4 +19,6 @@ public interface MemberRepository extends JpaRepository<Member, String>{
 
 	List<Member> findByMemIdAndNameAndBirthdayAndPhone(String userId, String name, String birthday, String phone);
 
+	// 찜기능 아이디 가져오기
+	Member findByNickname(String nickname);
 }

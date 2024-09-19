@@ -123,7 +123,7 @@ function Sidebar({hostId, setHostId}) {
           <Route path="/getDiary/:dnum/:hostId" element={<GetDiary hostId={hostId} setHostId={setHostId}/>} />
           <Route path="/GuestbookPage/:hostId" element={<GuestbookPage hostId={hostId} setHostId={setHostId}/>} />
 
-          <Route path="/like/:hostId" element={<LikeList hostId={hostId} setHostId={setHostId}/>} />
+          <Route path="/favorites/:hostId" element={<FavoriteList hostId={hostId} setHostId={setHostId}/>} />
 
           <Route path="/write/:hostId" element={<WriteMessage hostId={hostId} setHostId={setHostId}/>} />
           <Route path="/inbox/:hostId" element={<Inbox hostId={hostId} setHostId={setHostId}/>} />
