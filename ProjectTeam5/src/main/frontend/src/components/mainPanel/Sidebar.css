@@ -8,6 +8,7 @@
   align-items: center;
   justify-content: center;
   gap: 22px;
+  z-index: 1000;
 }
 
 .myHomebutton-container {
