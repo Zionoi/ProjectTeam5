@@ -1,16 +1,17 @@
 package com.study.spring.service;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.study.spring.domain.Favorite;
 import com.study.spring.domain.Member;
 import com.study.spring.domain.Restaurant;
 import com.study.spring.repository.FavoriteRepository;
 import com.study.spring.repository.MemberRepository;
 import com.study.spring.repository.RestaurantRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.time.LocalDateTime;
-import java.util.List;
 
 @Service
 public class FavoriteService {
