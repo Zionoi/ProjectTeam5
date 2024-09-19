@@ -1,18 +1,20 @@
 package com.study.spring.controller;
 
-import com.study.spring.service.PoiService;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.study.spring.service.PoiService;
+
 @RestController
 @RequestMapping("/api/restaurants")
 public class RestaurantController {
-
+	
     private final PoiService poiService;
 
-    public RestaurantController(PoiService poiService) {
+   public RestaurantController(PoiService poiService) {
         this.poiService = poiService;
     }
 
