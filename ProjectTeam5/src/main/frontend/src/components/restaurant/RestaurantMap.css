@@ -1,0 +1,62 @@
+/* 네이버 지도 스타일 */
+#map {
+    position: absolute;
+    top: 180px;
+    left: 220px;
+    width: 500px;
+    height: 500px;
+    border: 1px solid green;
+  }
+  
+  /* 음식점 목록 및 검색 기능 스타일 */
+  .restaurant-list {
+    position: absolute;
+    top: 180px;
+    left: 750px;
+    width: 230px;
+    height: 500px;
+    overflow-y: scroll;
+    padding: 10px;
+  }
+  
+  /* 검색어 입력 및 검색 버튼 */
+  .search-bar {
+    position: sticky;
+    top: 0;
+    background: #e0f7f7;
+    z-index: 1;
+    padding-bottom: 10px;
+  }
+  
+  .search-bar input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    border: 1px solid gray;
+  }
+  
+  .search-bar button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  /* 음식점 목록 스타일 */
+  .restaurant-list ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .restaurant-list li {
+    margin-bottom: 10px;
+  }
+  
+  .restaurant-list p {
+    margin: 0;
+  }
+  
