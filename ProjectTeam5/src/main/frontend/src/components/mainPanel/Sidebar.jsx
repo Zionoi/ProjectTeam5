@@ -16,7 +16,7 @@ import MessageDetail from '../message/MessageDetail';
 import ProfileEdit from '../ProfileEdit/ProfileEdit';
 import BoardEdit from './../board/BoardEdit';
 import Restaurant from '../restaurant/Restaurant';
-import LikeList from '../restaurant/LikeList';
+import FavoriteList from '../restaurant/FavoriteList';
 
 
 function Sidebar({hostId, setHostId}) {
