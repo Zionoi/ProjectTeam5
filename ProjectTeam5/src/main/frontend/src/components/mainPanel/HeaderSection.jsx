@@ -5,7 +5,6 @@ import axios from 'axios';
 
 function HeaderSection({hostId}) {
  // 방문자 수 상태 정의
- const [memId, setMemId] = useState(hostId);
  const [todayVisit, setTodayVisit] = useState(0);
  const [totalVisit, setTotalVisit] = useState(0);
 
@@ -50,8 +49,7 @@ function HeaderSection({hostId}) {
 //    incrementtodayVisit();
 //  }, []);
 useEffect(() => {
-  setMemId(hostId);
-  axios.get(`/member/get/${memId}`) // 
+  axios.get(`/member/get/${hostId}`) // 
       .then(response => {
         setTodayVisit(response.data.todayVisit); // 오류 발생 시 null로 설정
         setTotalVisit(response.data.totalVisit); // 오류 발생 시 null로 설정

@@ -20,4 +20,23 @@
     color: white;
     text-align: center;
   }
+
+  @keyframes spiralIn {
+    0% {
+      transform: rotate(100deg) translateX(200px) scale(3); /* 시작: 먼 곳에서 작게 */
+      opacity: 1;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      transform: rotate(360deg) translateX(0px) scale(1); /* 회전하면서 제자리로 오기 */
+      opacity: 1;
+    }
+  }
+  
+  .sticker {
+    animation: spiralIn 2s ease-out forwards; /* 1초 동안 회오리처럼 날아오는 애니메이션 */
+  }
+  
   

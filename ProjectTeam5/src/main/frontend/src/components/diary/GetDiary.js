@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
+import './GetDiary.css';
 
 function GetDiary() {
     const { dnum, hostId } = useParams(); // URL에서 dNum을 추출
@@ -12,8 +13,8 @@ function GetDiary() {
         if (dnum && hostId) {
             axios.get(`/api/events/getDiary/${dnum}/${hostId}`) // dNum을 URL 파라미터로 사용하여 데이터 요청
                 .then(response => {
-                    console.log('겟다이어리',diary)
-                    console.log('리스폰스다이어리',response)
+                    console.log('겟다이어리', diary);
+                    console.log('리스폰스다이어리', response);
                     if (response.data) {
                         console.log('response:', response);
                         setDiary(response.data);
@@ -45,13 +46,16 @@ function GetDiary() {
         return <div>해당 일기를 찾을 수 없습니다.</div>;
     }
 
+    // `diary.start`가 정의되어 있을 때만 substring을 호출
+    const formattedDate = diary.start ? diary.start.substring(0, 10) : '날짜 없음';
+
     return (
-        <div>
-            <h2>{diary.dTitle}</h2>
-            <p>{diary.dContent}</p>
-            <p>{`시작일: ${diary.start}`}</p>
+        <div className="diary-box">
+            <h2 className='title'>{diary.dTitle}</h2>
+            <p className='content'>{diary.dContent}</p>
+            <p className='setDay'>{`작성일: ${formattedDate}`}</p>
             {/* <p>{`종료일: ${diary.end}`}</p> */}
-            <button onClick={handleDelete}>삭제</button>
+            <button onClick={handleDelete} className='deleteButton'>삭제</button>
         </div>
     );
 }

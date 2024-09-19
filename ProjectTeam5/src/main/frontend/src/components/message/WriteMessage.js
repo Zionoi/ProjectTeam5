@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import './WriteMessage.css';
 
 const WriteMessage = ({ recipient }) => {
   const [receiver, setReceiver] = useState(recipient || '');  // 수신자 상태 초기화
@@ -34,7 +35,7 @@ const WriteMessage = ({ recipient }) => {
   };
 
   return (
-    <div>
+    <div className='writeMessageContainer'>
       <h5>쪽지 보내기</h5>
       <input
         type="text"

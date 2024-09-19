@@ -1,5 +1,6 @@
 /* MyCalendar.css */
 
+/* 제목 스타일 */
 .diary-title {
     position:relative;
     top:130px;
@@ -10,6 +11,7 @@
     color:rgb(63, 63, 63);
 }
 
+/* 달력 배경 */
 .calendar-back {
     position:absolute;
     width: 600px;
@@ -18,34 +20,46 @@
     left: 300px;
 }
 
+/* 달력 컨테이너 */
 .calendar-container {
-     /* 달력 컨테이너가 부모 요소의 전체 너비를 차지하도록 설정 */
+    text-align: left;
+    align-items: left;
 }
 
+/* 날짜 셀의 패딩 제거 */
 .fc .fc-daygrid-day-number {
-    padding: 0; /* 날짜 셀 내부의 패딩 제거 */
+    padding: 0;
+    text-decoration: none; /* 밑줄 제거 */
+    color: black;
+}
+.event-content{
+    color:rgb(83, 83, 83)
 }
 
-.fc-event-title {
-    white-space: nowrap; /* 제목이 한 줄로 유지되도록 설정 */
-    overflow: hidden; /* 넘치는 내용 숨기기 */
-    text-overflow: ellipsis; /* 넘치는 내용에 '...' 표시 */
-    font-size: 0.8em; /* 폰트 크기 조정 */
-    line-height: 1.2; /* 줄 높이 조정 */
-    padding: 0 2px; /* 제목 주위에 적절한 패딩 추가 */
-}
-/* MyCalendar.css */
+/* 이벤트 목록 스타일 */
 .fc .fc-daygrid-day-events {
     display: flex;
+    white-space: nowrap;
     flex-direction: column;
-    align-items: center;
+    align-items: left;
     overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    box-sizing: border-box;
 }
 
-.fc .fc-daygrid-day-event {
-    white-space: nowrap; /* 제목이 한 줄로 유지되도록 설정 */
-    overflow: hidden; /* 넘치는 내용 숨기기 */
-    text-overflow: ellipsis; /* 넘치는 내용에 '...' 표시 */
-    width: 100%; /* 너비를 셀에 맞추기 */
-    box-sizing: border-box; /* 패딩과 테두리를 포함하여 너비 계산 */
+/* 요일 스타일링 (일요일: 빨간색, 토요일: 파란색, 나머지 요일: 검정색) */
+.fc .fc-col-header-cell-cushion {
+    color: black; /* 기본 요일 색상 검정 */
+    text-decoration: none; /* 요일 밑줄 제거 */
+}
+
+/* 일요일 스타일 (빨간색) */
+.fc .fc-col-header-cell:nth-child(1) .fc-col-header-cell-cushion {
+    color: red;
+}
+
+/* 토요일 스타일 (파란색) */
+.fc .fc-col-header-cell:nth-child(7) .fc-col-header-cell-cushion {
+    color: blue;
 }
