@@ -1,46 +1,82 @@
 /* BulletinBoardPage.css */
 .bulletin-board-container {
   position:absolute;
-  top: 150px; left:250px;
+  width: 750px;
+  height: 500px;
+  overflow-y: overlay;
+  top: 160px; left:200px;
   margin: 20px;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  max-width: 1200px;
-  background-color: #f9f9f9;
+  padding:60px 20px 20px 20px;
+  border-radius:16px;
+  background-color: #ffffff;
+}
+.bulletin-board-container::-webkit-scrollbar-button {
+  display:none;
+}
+.bulletin-board-container::-webkit-scrollbar {
+  width: 14px;
+}
+.bulletin-board-container::-webkit-scrollbar-thumb {
+  outline: none;
+  border-radius: 10px;
+  border: 4px solid transparent;
+  box-shadow: inset 6px 6px 0 #d6cfff;
 }
 
-.add-post-button {
+.board-title-box {
+  display:flex;
   position:absolute;
-  top:20px; left: 500px;
-  padding: 10px 15px;
-  margin-bottom: 20px;
+  top:180px; left:220px; 
+  width:750px;
+  height: 50px;
+  border-radius: 16px 16px 0px 0px ;
+  background-color: #ffffffc7;
+  padding:20px;
+  z-index: 1;
+}
+
+.board-title { 
+  font-family: "Noto Sans KR", sans-serif;
+  font-size:13pt;
+  font-weight: 600;
+  color:rgb(63, 63, 63);
+}
+
+.post-button {
+  padding: 5px 5px;
+  margin-left:580px;
   border: none;
   border-radius: 5px;
-  background-color: #7a63ff;
-  color: white;
+  font-family: "Noto Sans KR", sans-serif;
+  font-size:10pt;
+  font-weight: 600;
+  color:#7a63ff;
   cursor: pointer;
 }
 
-.add-post-button:hover {
-  background-color: #684cce;
+.post-button:hover {
+  background-color: #7a63ff;
+  color:white;
 }
 
-.posts-grid { 
+.posts-grid {
+  font-family: "Noto Sans KR", sans-serif;
+  color:rgb(63, 63, 63);
   display: grid;
   grid-template-columns: repeat(3, minmax(200px, 1fr)); 
-  gap: 20px; /*게시판 두 번째 줄의 간격*/
+  gap: 40px 10px; /*게시판 두 번째 줄의 간격*/
 }
 
 .post-card {
+  display: flex;
+  justify-content: center;
+  align-content: center;
   background-color: white;
   border: 1px solid #ddd;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 0px;
+  box-shadow: 0 4px 6px rgba(105, 105, 105, 0.1);
   overflow: hidden;
-  display: flex;
   flex-direction: column;
-  justify-content: space-between;
   transition: transform 0.3s;
 }
 
@@ -49,8 +85,11 @@
 }
 
 .post-image {
-  width: 100%;
-  height: 150px;
+  margin:auto;
+  margin-top:8px;
+  align-items: center;
+  width: 200px;
+  height: 200px;
   object-fit: cover;
   border-bottom: 1px solid #ddd;
 }
@@ -63,10 +102,12 @@
 }
 
 .post-title {
-  font-size: 10px;
-  font-weight: bold;
+  position:relative;
+  top:-10px; left:-5px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.2pt;
   margin: 0;
-  color: #333;
 }
 
 .post-description {
