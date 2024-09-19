@@ -7,6 +7,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  
 
   z-index: 999;  /* 모달이 페이지 요소들 위에 보이게 설정 */
 
