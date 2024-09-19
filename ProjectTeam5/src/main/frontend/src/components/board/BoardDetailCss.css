@@ -1,0 +1,22 @@
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
+
+.board-in{
+  display: flex;
+  position:absolute;
+  width: 750px;
+  height: 500px;
+  top: 160px; left:200px;
+  background-color: rgb(158, 158, 158);
+  border-radius: 16px;
+}
+.board-title-in{
+    font-family: "Noto Sans KR", sans-serif;
+    font-size:13pt;
+    font-weight: 600;
+    color:rgb(63, 63, 63);
+}
+.board-img-in{
+    max-width:200px;
+    max-height: 300px;
+}

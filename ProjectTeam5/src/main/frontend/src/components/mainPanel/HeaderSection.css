@@ -1,17 +1,22 @@
 /* src/components/HeaderSection.css */
+@import url('https://fonts.googleapis.com/css2?family=Squada+One&display=swap');
 .header-section {
-    width: 200px; /* 헤더 높이 */
-    height: 250px;
+    position: absolute;
+    top:70px;
+    left: 225px;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
     padding: 10px 20px;
     margin-bottom: 20px;
+    font-family: "Squada One", sans-serif;
+    font-weight: 400;
+    line-height: 5px;
   }
   
-  .today {
-    font-size: 14px;
-    color: #164fa5;
+  .header-visit {
+    font-size: 14pt; 
   }
 
   .total {
