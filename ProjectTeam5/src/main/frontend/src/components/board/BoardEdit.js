@@ -5,6 +5,7 @@ import axios from "axios";
 function BoardEdit({ hostId, setHostId }) {
   const { bNum } = useParams(); // URL 파라미터에서 bNum을 가져옴
   const navigate = useNavigate();
+ 
   const [selectedImages, setSelectedImages] = useState([]);
   const [existingImages, setExistingImages] = useState([]);
   const [bTitle, setBTitle] = useState('');
@@ -14,10 +15,10 @@ function BoardEdit({ hostId, setHostId }) {
     // 기존 게시물 정보를 불러옴
     axios.get(`/board/detail`, { params: { bNum } })
       .then(response => {
-        const { btitle, bcontent, imgPath } = response.data;
-        setBTitle(btitle);
-        setBContent(bcontent);
-        setExistingImages(imgPath); // 기존 이미지 경로를 저장
+        const { bTitle, bContent, imgPath } = response.data;
+        setBTitle(bTitle);
+        setBContent(bContent);
+        setExistingImages(imgPath.map(path => ({ path, isNew: false }))); // 기존 이미지 정보를 객체 형태로 저장
       })
       .catch(error => {
         console.error('게시물 정보를 불러오는 중 오류가 발생했습니다:', error);
@@ -52,16 +53,20 @@ function BoardEdit({ hostId, setHostId }) {
     formData.append("bTitle", bTitle);
     formData.append("bContent", bContent);
     formData.append("bNum", bNum); // 게시물 번호 추가
-    formData.append("memId", hostId);
+    formData.append("member", hostId);
 
     // 새로 추가된 이미지를 FormData에 추가
     selectedImages.forEach((image, index) => {
-      formData.append(image, image.file);
+      
+      formData.append('image', image.file);
     });
 
-    // 기존 이미지를 FormData에 포함 (경로만 보냄)
+    // 기존 이미지와 삭제된 이미지를 FormData에 포함
     existingImages.forEach((image, index) => {
-      formData.append(`existingImage`, image);
+      if (!image.isNew) {
+        console.log('image :', image)
+        formData.append('existingImage', image.path); // 기존 이미지 경로를 전송
+      }
     });
 
     try {
@@ -115,10 +120,10 @@ function BoardEdit({ hostId, setHostId }) {
       {/* 기존 이미지 출력 및 삭제 버튼 */}
       {existingImages.length > 0 && (
         <div style={{ display: "flex", flexWrap: "wrap", marginTop: "20px" }}>
-          {existingImages.map((img, index) => (
+          {existingImages.map((image, index) => (
             <div key={index} style={{ position: "relative", margin: "10px" }}>
               <img
-                src={img}
+                src={image.path}
                 alt={`Existing Image ${index}`}
                 style={{ maxWidth: "150px", maxHeight: "150px", objectFit: "cover" }}
               />

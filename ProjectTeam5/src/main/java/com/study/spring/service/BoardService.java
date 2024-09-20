@@ -62,7 +62,7 @@ public class BoardService {
 
     public List<Board> totalBoard(String memId) {
     	Member member = memberRepository.findById(memId).get();
-        return boardRepository.findByMember(member);
+        return boardRepository.findByMemberOrderByBNumDesc(member);
     }
 
 	public Optional<Board> detailBoard(Long bNum) {
@@ -72,8 +72,27 @@ public class BoardService {
 	}
 	
 	public void deleteBoard(Long bnum) {
-		boardRepository.deleteById(bnum);
-		
+	    // 게시물 정보 가져오기
+	    Board board = boardRepository.findById(bnum)
+	        .orElseThrow(() -> new IllegalArgumentException("Invalid board id"));
+
+	    // 이미지 경로 리스트 가져오기
+	    List<String> imgPaths = board.getImgPath();
+
+	    // 이미지 파일 삭제
+	    for (String imgPath : imgPaths) {
+	        // 실제 파일 시스템 경로로 변환 (기존 저장 경로와 일치하도록)
+	        String realPath = System.getProperty("user.dir") + "/uploadedFiles/" + imgPath.substring(imgPath.lastIndexOf("/") + 1);
+	        
+	        File file = new File(realPath);
+	        if (file.exists()) {
+	            if (file.delete()) {
+	            } 
+	        }
+	    }
+
+	    // DB에서 게시물 삭제
+	    boardRepository.deleteById(bnum);
 	}
 
 	//이미지가 없는 경우 수정
@@ -93,6 +112,8 @@ public class BoardService {
 	//이미지가 있는 경우 수정
 	public void updateBoard(Board board, MultipartFile[] images) throws Exception {
 	    Board beforeBoard = boardRepository.findById(board.getBNum()).get();
+	    
+	    System.out.println("보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드 :" + board);
 
 	    // 기존 데이터를 업데이트
 	    beforeBoard.setBTitle(board.getBTitle());
