@@ -13,7 +13,7 @@ function GuestbookPage({ hostId, setHostId }) {
   const memId = localStorage.getItem('id'); // 로그인된 유저의 ID 가져오기
   const [editMode, setEditMode] = useState(null); // 수정 모드 상태
   const [editContent, setEditContent] = useState(''); // 수정 중인 내용
-  const [modal, setModal] = useState(null); // 모달창 구분을 위한 상태
+  const [menuOpen, setMenuOpen] = useState(false); // 메뉴창 구분을 위한 상태
 
   const navigate = useNavigate(); // 페이지 이동을 위한 useNavigate hook
 
@@ -124,8 +124,8 @@ function GuestbookPage({ hostId, setHostId }) {
   };
 
   // 모달 토글 함수
-  const toggleModal = (gbNum) => {
-    setModal(modal === gbNum ? null : gbNum);
+  const toggleMenu = () => {
+    setMenuOpen((prev) => !prev);
   };
 
   return (
@@ -150,11 +150,11 @@ function GuestbookPage({ hostId, setHostId }) {
           <div key={entry.gbNum} className="guestbook-entry">
             <div className="entry-header">
               {/* 닉네임을 클릭하면 모달 창 생성 */}
-              <span className="username" onClick={() => toggleModal(entry.gbNum)} style={{ cursor: 'pointer' }}>
+              <span className="username" onClick={() => toggleMenu(entry.gbNum)} style={{ cursor: 'pointer' }}>
                 {entry.nickname}
               </span>
-              {modal === entry.gbNum && (
-                <div className="modal-buttons">
+              {menuOpen && (
+                <div className="menu-buttons">
                   <button onClick={() => visitFriendPage(entry.commenter)}>홈피 가기</button>
                   <button onClick={() => sendMessage(entry.commenter)}>쪽지 보내기</button>
                 </div>

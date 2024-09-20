@@ -7,7 +7,7 @@ function StickerSection() {
     return savedStickers ? JSON.parse(savedStickers) : [];
   });
 
-  const [clickIndex, setClickIndex] = useState(0); 
+  const [clickIndex, setClickIndex] = useState(0);
 
   const butterflyImages = [
     "/butterfly1.gif",
@@ -55,7 +55,16 @@ function StickerSection() {
 
   return (
     <div style={{ position: 'relative', width: '500px', height: '500px' }}>
-      <div className="sticker-section" style={{ position: 'relative' }}>
+      <div 
+        className="sticker-section" 
+        style={{ 
+          position: 'relative', 
+          width: '500px', 
+          height: '500px', 
+          overflow: 'hidden',  // 나비가 나무 사진 밖으로 넘어가지 않게 숨김 처리
+          borderRadius: '16px'
+        }}
+      >
         <img
           src="/tree.webp"
           alt="나무사진"
@@ -86,7 +95,6 @@ function StickerSection() {
             }}
           />
         ))}
-
       </div>
 
       {/* 스티커 삭제 버튼을 나무사진 바깥쪽 오른쪽 아래에 위치 */}
@@ -95,7 +103,7 @@ function StickerSection() {
         style={{
           position: 'absolute',
           bottom: '-30px',  // 나무사진 아래쪽으로 위치 조정
-          right: '-421px',     // 나무사진 오른쪽에 맞게 위치 조정
+          right: '-421px',  // 나무사진 오른쪽에 맞게 위치 조정
           padding: '3px 3px',
           fontSize: '9px',
           borderRadius: '5px',
@@ -104,7 +112,6 @@ function StickerSection() {
           border: 'none',
           cursor: 'pointer',
           zIndex: 3,
-
         }}
       >
         스티커 삭제
