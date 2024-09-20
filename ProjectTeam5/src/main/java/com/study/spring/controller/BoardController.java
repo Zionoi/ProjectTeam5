@@ -85,7 +85,8 @@ public class BoardController {
 	public String updateBoard(
 			@ModelAttribute Board board,  // Board 객체로 묶어서 받음
 	        @RequestParam(value = "image", required = false) MultipartFile[] images) throws Exception {
-
+		
+		System.out.println("컨트롤러보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드 :" + board);
 	
 	    // 이미지가 있으면 처리, 없으면 그냥 넘어감
 	    if (images != null && images.length > 0) {
