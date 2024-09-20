@@ -22,5 +22,4 @@ public class Favorite {
     private Restaurant restaurant;
 
     private LocalDateTime favoriteDate;
-
 }
