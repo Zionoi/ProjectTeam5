@@ -6,7 +6,7 @@ import './BoardDetailCss.css';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-function BoardDetail() {
+function BoardDetail({ hostId }) {
   const { bNum } = useParams();  // URL 파라미터에서 bNum을 가져옵니다.
   const [detail, setDetail] = useState(null);
   const navigate = useNavigate();
@@ -28,7 +28,7 @@ function BoardDetail() {
       axios.delete(`/board/delete/${bNum}`)
         .then(() => {
           alert("게시물이 삭제되었습니다.");
-          navigate(`/home`);  // 삭제 후 메인 페이지로 이동
+          navigate(`/bulletin-board/${ hostId }`);  // 삭제 후 게시판으로 이동
         })
         .catch((error) => {
           console.error("Error deleting post:", error);
@@ -39,6 +39,10 @@ function BoardDetail() {
 
   const handleEdit = () => {
     navigate(`/boardEdit/${bNum}`);  // 수정 페이지로 이동
+  };
+
+  const BoardList = () => {
+    navigate(`/bulletin-board/${ hostId }`);  // 수정 페이지로 이동
   };
 
   if (!detail) {
@@ -57,9 +61,9 @@ function BoardDetail() {
 
   return (
     <div className="board-in">
-      <div className="board-in-box">
-        <h1 className="board-count">{bNum}</h1>
-        <h2 className="board-title-in">{detail.btitle}</h2>
+      <div className="board-title-inbox">
+        <button onClick={BoardList}
+        className="board-count" >목록으로 돌아가기</button>
         {/* 수정 및 삭제 버튼 추가 */}
         <div className="board-edit-button">
           <button onClick={handleEdit}>수정하기</button>
@@ -68,6 +72,7 @@ function BoardDetail() {
       </div>
 
       {/* 이미지 슬라이더 */}
+      <div className="board-content-box">
       <Slider {...sliderSettings}>
         {detail.imgPath.map((img, index) => (
           <div key={index}>
@@ -79,10 +84,10 @@ function BoardDetail() {
           </div>
         ))}
       </Slider>
-
+      <h2 className="board-title-in">{detail.btitle}</h2>
       <p className="board-content-in">{detail.bcontent}</p>
       <p>{detail.bNum}</p>
-
+      </div>
     </div>
   );
 }
