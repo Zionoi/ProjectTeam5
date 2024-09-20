@@ -28,6 +28,7 @@ function GuestbookPage({ hostId, setHostId }) {
       .catch((error) => {
         setErrorMessage('');
       });
+
   };
 
   useEffect(() => {
