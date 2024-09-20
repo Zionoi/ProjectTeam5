@@ -32,6 +32,7 @@ function MainPanel({ onLogout, hostId, setHostId}) { // onLogout props 추가
 
     //서버 로그인한상태로 껐다가 다시켰을때 빈 메인페널만 보이던 문제 수정 코드
     useEffect(()=>{
+      console.log("세션로그아웃 유즈이펙트 확인")
       if(!sessionStorage.getItem('login')){
         onLogout();
       }
