@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './Profile.css'; // 스타일 파일
 import { useNavigate } from 'react-router-dom';
 
-function Profile() {
+function Profile({onLogout}) {
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -22,7 +22,8 @@ function Profile() {
   // 로그아웃 핸들러
   const handleLogout = () => {
     alert('로그아웃 되었습니다.');
-    // 로그아웃 처리 로직 추가
+    onLogout();
+    navigate('/');
   };
 
   return (

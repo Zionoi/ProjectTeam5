@@ -31,11 +31,13 @@ function MainPanel({ onLogout, hostId, setHostId}) { // onLogout props 추가
     };
 
     //서버 로그인한상태로 껐다가 다시켰을때 빈 메인페널만 보이던 문제 수정 코드
-    useEffect(()=>{
-      if(!sessionStorage.getItem('login')){
-        onLogout();
-      }
-    })
+    // useEffect(()=>{
+    //   console.log("sessionStorage.getItem('login') :" , sessionStorage.getItem('login'))
+    //   if(sessionStorage.getItem('login') === null){
+    //     onLogout();
+    //     console.log("세션로그아웃 유즈이펙트 확인")
+    //   }
+    // })
     
   
     return (
@@ -52,7 +54,7 @@ function MainPanel({ onLogout, hostId, setHostId}) { // onLogout props 추가
         <HeaderSection hostId={hostId}/>
         <MusicPlayer/>
         <aside className="right-side">
-        <Profile hostId={hostId}/>
+        <Profile onLogout={onLogout} hostId={hostId}/>
        
         <FortuneSection />
           {/* <VisitSection /> */}

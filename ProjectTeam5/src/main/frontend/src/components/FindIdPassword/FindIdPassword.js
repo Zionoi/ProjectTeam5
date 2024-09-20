@@ -141,6 +141,11 @@ function FindIdPassword() {
           </p>
         )}
       </div>
+
+      {/* 홈으로 가기 버튼 추가 */}
+      <button className="go-home-button" onClick={() => {navigate('/')}}>
+        홈으로 가기
+      </button>
     </div>
   );
 }

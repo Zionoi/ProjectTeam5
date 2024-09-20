@@ -62,7 +62,7 @@ public class BoardService {
 
     public List<Board> totalBoard(String memId) {
     	Member member = memberRepository.findById(memId).get();
-        return boardRepository.findByMember(member);
+        return boardRepository.findByMemberOrderByBNumDesc(member);
     }
 
 	public Optional<Board> detailBoard(Long bNum) {
@@ -93,6 +93,8 @@ public class BoardService {
 	//이미지가 있는 경우 수정
 	public void updateBoard(Board board, MultipartFile[] images) throws Exception {
 	    Board beforeBoard = boardRepository.findById(board.getBNum()).get();
+	    
+	    System.out.println("보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드 :" + board);
 
 	    // 기존 데이터를 업데이트
 	    beforeBoard.setBTitle(board.getBTitle());
