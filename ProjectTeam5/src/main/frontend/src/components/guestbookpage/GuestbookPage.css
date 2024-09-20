@@ -1,17 +1,48 @@
-/* GuestbookPage.css */
-.guestbook-container {
-  position:absolute;
-  top: 150px; left:250px;
-  width: 600px;
-  margin: 20px auto;
-  max-width: 800px;
-  padding: 20px;
-  border: 8px solid #ddd;
-  background-color: #f9f9f9;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+ /* GuestbookPage.css */
+ .guestbook-container { /*방명록 컨테이너 스타일*/
+  position:absolute; /*절대 위치 지정 */
+  width: 750px; /*너비*/
+  height: 500px; /*높이*/
+  overflow-y: overlay; /*세로 스크롤을 오버레이 방식으로*/
+  top: 160px; left:200px; /*상단 및 좌측으로부터의 위치*/
+  margin: 20px; /*외부 여백*/
+  padding:60px 20px 20px 20px; /*내부 여백 (위쪽은 60px)*/
+  border-radius:16px; /*모서리를 둥글게*/
+  background-color: #ffffff; /*배경색 흰색*/
 }
-.guestbook-list {
+.guestbook-container::-webkit-scrollbar-button {
+  display:none; /* 스크롤바의 버튼을 숨김 */
+}
+.guestbook-container::-webkit-scrollbar {
+  width: 14px; 
+}
+.guestbook-container::-webkit-scrollbar-thumb {
+  outline: none;
+  border-radius: 10px;
+  border: 4px solid transparent;
+  box-shadow: inset 6px 6px 0 #d6cfff;
+}
+
+.guestbook-title-box {
+  display:flex;
+  position:absolute;
+  top:180px; left:220px; 
+  width:750px;
+  height: 50px;
+  border-radius: 16px 16px 0px 0px ;
+  background-color: #ffffffc7;
+  padding:20px;
+  z-index: 1;
+}
+
+.guestbook-title { 
+  font-family: "Noto Sans KR", sans-serif;
+  font-size:13pt;
+  font-weight: 600;
+  color:rgb(63, 63, 63);
+}
+
+.guestbook-list { /*방명록 배경 크기*/
 margin-bottom: 20px;
 }
 
@@ -37,7 +68,7 @@ border-bottom: 1px solid #ddd;
 margin-bottom: 10px;
 }
 
-.entry-header {
+.entry-header {  /*유저이름1*/
 display: flex;
 justify-content: space-between;
 font-size: 14px;
@@ -48,18 +79,18 @@ color: #555;
 font-weight: bold;
 }
 
-.message {
+.message { /*메세지 공간*/
 margin-top: 5px;
 font-size: 16px;
 }
 
-.guestbook-input {
+.guestbook-input { /*방명록 및 공간*/
 display: flex;
 flex-direction: column;
 margin-top: 20px;
 }
 
-textarea {
+textarea {  /*내용을 입력해주세요*/
 resize: none;
 height: 60px;
 margin-bottom: 10px;
@@ -68,42 +99,24 @@ border: 1px solid #ccc;
 padding: 10px;
 }
 
-.guestsubmit {
-padding: 10px 15px;
-border: none;
-border-radius: 5px;
-background-color: #7a63ff;
-color: white;
-cursor: pointer;
-}
+.guestsubmit { /*완료*/
+  position: relative;
+  left: 620px; top:-50px;
+  width: 60px;
+  padding: 8px 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #7a63ff;
+  color: white;
+  cursor: pointer;
+  }
+  
 
 .guestsubmit:hover {
 background-color: #684cce;
 }
 
-.visitFriendPage {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  border: none;
-  background: none;
-  width: 100%;
-  text-align: left;
-  cursor: pointer;
-}
 
-.sendMessage {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  border: none;
-  background: none;
-  width: 100%;
-  text-align: left;
-  cursor: pointer;
-}
 
 .menu-item:hover {
   background-color: #ddd;
