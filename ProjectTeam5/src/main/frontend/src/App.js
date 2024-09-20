@@ -53,7 +53,7 @@ function App() {
 
       //서버 로그인한상태로 껐다가 다시켰을때 빈 메인페널만 보이던 문제 수정 코드
       useEffect(()=>{
-        if(!sessionStorage.getItem('login')){
+        if(sessionStorage.getItem('login')===null){
           setIsLoggedIn(false); // 로그인 상태를 false로 설정
           localStorage.clear(); // 로컬 스토리지 클리어
         }
@@ -69,7 +69,7 @@ function App() {
          : 
       <div>
         <Routes>
-          <Route path="/" element={<Login onLoginSuccess={handleLogin}/>} />
+          <Route path="*" element={<Login onLoginSuccess={handleLogin}/>} />
           <Route path="/SignUpPage" element={<SignUpPage />}/>
           <Route path="/FindIdPassword" element={<FindIdPassword />}/>
           <Route path="/resetPassword" element={<ResetPassword />} />
