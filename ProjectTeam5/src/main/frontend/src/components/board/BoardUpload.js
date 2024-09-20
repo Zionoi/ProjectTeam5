@@ -1,9 +1,11 @@
 import { useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 
 function BoardUpload({hostId, setHostId}) {
   const [selectedImages, setSelectedImages] = useState([]);
   const [bTitle, setBTitle] = useState('');
   const [bContent, setBContent] = useState('');
+  const navigate = useNavigate();
 
   // 파일 선택 시 처리
   const handleImageChange = (event) => {
@@ -46,7 +48,8 @@ function BoardUpload({hostId, setHostId}) {
         alert("파일 업로드 성공");
         setSelectedImages([]);  // 선택된 이미지 초기화
         setBTitle('');
-        setBContent('');
+        setBContent('')
+        navigate(-1);  // 게시판 이동
       } else {
         alert("파일 업로드 실패");
       }
