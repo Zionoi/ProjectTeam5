@@ -66,6 +66,7 @@ function SignUpPage() {
       memId: formData.userId,
       pass: formData.password,
       nickname: formData.nickname,
+      name: formData.name,
       birthday: formData.birthDate,
       address: formData.address,
       gender: formData.gender,
@@ -191,8 +192,12 @@ function SignUpPage() {
         />
 
         <button className="signup-submit" type="submit" disabled={isSignUpDisabled}>완료</button>
-
       </form>
+
+      {/* 홈으로 가기 버튼 추가 */}
+      <button className="go-home-button" onClick={() => {navigate('/')}}>
+        홈으로 가기
+      </button>
     </div>
   );
 }
