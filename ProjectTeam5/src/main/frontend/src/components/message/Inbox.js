@@ -59,7 +59,7 @@ const Inbox = ({ setContent, setSelectedMessage, checkUnreadMessages }) => {
           <div>쪽지가 없습니다.~(&gt;_&lt;。)＼</div>
         ) : (
           messages.map((message, index) => (
-            <div key={index} style={{ cursor: 'pointer', marginBottom: '10px' }}>
+            <div key={index}>
               <span onClick={() => openMessageDetail(message)}>
                 {message.memId}님이 보낸 쪽지가 도착했습니다!&emsp;
               </span>

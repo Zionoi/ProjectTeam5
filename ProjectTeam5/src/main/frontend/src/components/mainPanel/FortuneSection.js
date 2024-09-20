@@ -20,7 +20,7 @@ function FortuneSection() {
   return (
     <div className="fortune-section">
       <h3>오늘의 운세</h3>
-      <button className="view-more" onClick={fetchFortune}>운세 확인!</button>
+      <button className="fortune-btn" onClick={fetchFortune}>운세 확인!</button>
       {fortune && <p className="fortune-result">{fortune}</p>} {/* 운세 출력 */}
     </div>
   );
