@@ -52,7 +52,7 @@ function FriendsList({hostId, setHostId,}) {
         {friends.map(friend => (
           <li key={friend.fNum}>
             <span onClick={() => goFriendHome(friend.friendId) }>{friend.friendId}</span> 
-            <button onClick={() => deleteFriend(friend.fNum)}>삭제</button>
+            <button onClick={() => deleteFriend(friend.fnum)}>삭제</button>
           </li>
         ))}
       </ul>

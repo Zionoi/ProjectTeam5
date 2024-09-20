@@ -62,7 +62,7 @@ public class BoardService {
 
     public List<Board> totalBoard(String memId) {
     	Member member = memberRepository.findById(memId).get();
-        return boardRepository.findByMember(member);
+        return boardRepository.findByMemberOrderByBNumDesc(member);
     }
 
 	public Optional<Board> detailBoard(Long bNum) {
