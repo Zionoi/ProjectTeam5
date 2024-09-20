@@ -110,7 +110,7 @@ public class BoardService {
 	}
 	
 	//이미지가 있는 경우 수정
-	public void updateBoard(Board board, MultipartFile[] images) throws Exception {
+	public void updateBoard(Board board, MultipartFile[] newImages, MultipartFile[] oldImages ) throws Exception {
 	    Board beforeBoard = boardRepository.findById(board.getBNum()).get();
 	    
 	    System.out.println("보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드 :" + board);
@@ -120,7 +120,7 @@ public class BoardService {
 	    beforeBoard.setBContent(board.getBContent());
 
 	    // 이미지가 있으면 새 이미지 저장
-	    if (images != null && images.length > 0) {
+	    if (newImages != null && newImages.length > 0) {
 	        File dir = new File(uploadDir);
 	        List<String> path = new ArrayList<>();
 	        List<String> name = new ArrayList<>();
@@ -130,7 +130,7 @@ public class BoardService {
 	        }
 	        
 	        // 새 이미지 저장 및 경로 저장
-	        for (MultipartFile image : images) {
+	        for (MultipartFile image : newImages) {
 	            String fileName = UUID.randomUUID().toString() + "_" + image.getOriginalFilename();
 	            File saveFile = new File(dir, fileName);
 	            image.transferTo(saveFile);
