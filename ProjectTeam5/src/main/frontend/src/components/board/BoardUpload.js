@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import './BoardUpload.css';
 
 function BoardUpload({hostId, setHostId}) {
   const [selectedImages, setSelectedImages] = useState([]);
@@ -49,7 +50,7 @@ function BoardUpload({hostId, setHostId}) {
         setSelectedImages([]);  // 선택된 이미지 초기화
         setBTitle('');
         setBContent('')
-        navigate(-1);  // 게시판 이동
+        navigate(`/bulletin-board/${ hostId }`);  // 게시판 이동
       } else {
         alert("파일 업로드 실패");
       }
@@ -61,65 +62,67 @@ function BoardUpload({hostId, setHostId}) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div>
-        <label>
-          제목:
-          <input 
-            type="text" 
-            value={bTitle} 
-            onChange={(e) => setBTitle(e.target.value)} 
-          />
-        </label>
+      <div className="BoardUpload-box">
+        <h6 className="BUTitle">이미지 업로드</h6>
+        <div className="B-ImgPrevBox">
+            <div className="BoardUpload-Imgbox">
+            {selectedImages.length > 0 && (
+          <div style={{ display: "flex",flexDirection: "row", gap:"10px" }}>
+            {selectedImages.map((image, index) => (
+              <div key={index} style={{}}>
+                <img
+                className="board-Imgs"
+                  src={image.preview}
+                  alt={`Selected ${index}`}
+                  style={{ width: "150px", height: "150px", objectFit: "cover"}}
+                />
+                <button
+                  className="board-ImgD"
+                  type="button"
+                  onClick={() => handleRemoveImage(index)}
+                  style={{ display: "flex",flexDirection: "row", gap:"10px" }}/>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
-      <div>
-        <label>
-          내용:
-          <textarea 
-            value={bContent} 
-            onChange={(e) => setBContent(e.target.value)} 
-          />
-        </label>
+      <label className="B-ImgBox">
+              <input
+                className="board-uploadImgBox"
+                type="file" 
+                accept="image/*" 
+                multiple  // 다중 파일 선택 허용
+                onChange={handleImageChange} 
+              />+
+            </label>
       </div>
-      <div>
-        <input 
-          type="file" 
-          accept="image/*" 
-          multiple  // 다중 파일 선택 허용
-          onChange={handleImageChange} 
-        />
-      </div>
-      {selectedImages.length > 0 && (
-        <div style={{ display: "flex", flexWrap: "wrap", marginTop: "20px" }}>
-          {selectedImages.map((image, index) => (
-            <div key={index} style={{ position: "relative", margin: "10px" }}>
-              <img
-                src={image.preview}
-                alt={`Selected ${index}`}
-                style={{ maxWidth: "150px", maxHeight: "150px", objectFit: "cover" }}
-              />
-              <button
-                type="button"
-                onClick={() => handleRemoveImage(index)}
-                style={{
-                  position: "absolute",
-                  top: "5px",
-                  right: "5px",
-                  backgroundColor: "red",
-                  color: "white",
-                  border: "none",
-                  borderRadius: "50%",
-                  cursor: "pointer",
-                }}
-              >
-                X
-              </button>
-            </div>
-          ))}
+      <div className="BoardContentBox">
+          <div>
+            <input
+              className="BoardUploadTitle"
+              placeholder="제목을 입력하세요."
+              type="text" 
+              value={bTitle} 
+              onChange={(e) => setBTitle(e.target.value)} 
+            />
+          </div>
+        <div>
+            <textarea
+              className="BoardUploadContent"
+              placeholder="나의 이야기를 적어보세요."
+              value={bContent} 
+              onChange={(e) => setBContent(e.target.value)} 
+            />
         </div>
-      )}
-      <button type="submit" style={{ marginTop: "20px" }}>
-        업로드
-      </button>
+        <button type="submit">
+          돌아가기
+        </button>
+        <button type="submit"
+        className="BUB">
+          업로드
+        </button>
+        </div>
+        </div>
     </form>
   );
 }

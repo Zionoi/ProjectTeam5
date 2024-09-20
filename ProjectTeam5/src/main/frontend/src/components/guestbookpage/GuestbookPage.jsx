@@ -28,7 +28,7 @@ function GuestbookPage({ hostId, setHostId }) {
       .catch((error) => {
         setErrorMessage('');
       });
-  }, [page, hostId, guestbookEntries]);
+  }, [page, guestbookEntries]);
 
   // 사용자 닉네임 가져오기
   useEffect(() => {
