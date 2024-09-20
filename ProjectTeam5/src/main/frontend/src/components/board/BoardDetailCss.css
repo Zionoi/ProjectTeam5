@@ -1,17 +1,28 @@
-@import "~slick-carousel/slick/slick.css";
-@import "~slick-carousel/slick/slick-theme.css";
+@import 'slick-carousel/slick/slick.css';
+@import 'slick-carousel/slick/slick-theme.css';
 
 .board-in{
-  display: flex;
   position:absolute;
+  top: 160px; left:200px;
+  font-family: "Noto Sans KR", sans-serif;
+}
+.board-title-inbox {
+  position:absolute;
+  display: flex;
+  width:750px; height: 40px;
+  background-color: antiquewhite;
+}
+.board-count {
+  font-size: 10pt;
+}
+.board-content-box{
   width: 750px;
   height: 500px;
-  top: 160px; left:200px;
   background-color: rgb(158, 158, 158);
   border-radius: 16px;
+  padding:50px 0px 0px 0px;
 }
 .board-title-in{
-    font-family: "Noto Sans KR", sans-serif;
     font-size:13pt;
     font-weight: 600;
     color:rgb(63, 63, 63);
@@ -19,4 +30,5 @@
 .board-img-in{
     max-width:200px;
     max-height: 300px;
+    object-fit: contain;
 }
