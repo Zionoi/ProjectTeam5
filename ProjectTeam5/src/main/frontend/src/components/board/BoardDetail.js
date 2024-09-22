@@ -42,12 +42,13 @@ function BoardDetail({ hostId }) {
   };
 
   const BoardList = () => {
-    navigate(`/bulletin-board/${ hostId }`);  // 수정 페이지로 이동
+    navigate(`/bulletin-board/${ hostId }`);  // 방명록 페이지로 이동
   };
 
   if (!detail) {
     return <div>Loading...</div>;  // 데이터를 가져오는 중일 때 로딩 메시지
   }
+  
 
   // 슬라이더 설정 (이미지가 하나일 때 infinite 옵션 끄기)
   const sliderSettings = {
@@ -63,11 +64,11 @@ function BoardDetail({ hostId }) {
     <div className="board-in">
       <div className="board-title-inbox">
         <button onClick={BoardList}
-        className="board-count" >목록으로 돌아가기</button>
+        className="board-listback" >목록으로</button>
         {/* 수정 및 삭제 버튼 추가 */}
-        <div className="board-edit-button">
-          <button onClick={handleEdit}>수정하기</button>
-          <button onClick={handleDelete}>삭제하기</button>
+        <div>
+          <button onClick={handleEdit} className="board-edit-btn">수정</button>
+          <button onClick={handleDelete} className="board-edit-btn">삭제</button>
         </div>
       </div>
 
@@ -84,9 +85,11 @@ function BoardDetail({ hostId }) {
           </div>
         ))}
       </Slider>
-      <h2 className="board-title-in">{detail.btitle}</h2>
-      <p className="board-content-in">{detail.bcontent}</p>
-      <p>{detail.bNum}</p>
+      <div className="board-text-box">
+        <h2 className="board-title-in">{detail.btitle}</h2>
+        <p className="board-content-in">{detail.bcontent}</p>
+        <p>{detail.bNum}</p>
+      </div>
       </div>
     </div>
   );

@@ -26,12 +26,20 @@ public class Restaurant {
     private String rAddress;      // 주소
     private String category;      // 카테고리
     private String imageUrl;      // 이미지 경로
-    private Double rating;  	  // 평점 (숫자로 변경)
+    private Double rating;        // 평점
+    private String telNo;         // 전화번호 추가
 
-    private Integer rank;         // 음식점 순위
-    private String area;          // 지역 정보 (시군구, 읍면동)
-    private String foodType;      // 음식 종류 (한식, 중식 등)
-    private Integer rankChange;   // 순위 변동
-    private Double visitorRatio;  // 방문객 비율
-    private Integer callCount;    // 통화 고객 수
+//    private Integer rank;         // 음식점 순위
+//    private String area;          // 지역 정보 (시군구, 읍면동)
+//    private String foodType;      // 음식 종류 (한식, 중식 등)
+//    private Integer rankChange;   // 순위 변동
+//    private Double visitorRatio;  // 방문객 비율
+//    private Integer callCount;    // 통화 고객 수
+    
+    // 추가 필드
+    private Double latitude;
+    private Double longitude;
+    
+    // 찜 여부
+//    private boolean status;
 }

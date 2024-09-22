@@ -3,7 +3,10 @@ package com.study.spring.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,13 +24,28 @@ public class FavoriteController {
 
     // 찜하기 추가 API
     @PostMapping("/add")
-    public void addFavorite(@RequestParam String nickname, @RequestParam Long restaurantId) {
-        favoriteService.addFavorite(nickname, restaurantId);
+    public void addFavorite(
+        @RequestParam String memId,  
+        @RequestParam Long restaurantId,
+        @RequestParam String name,
+        @RequestParam String address,
+        @RequestParam String foodType,
+        @RequestParam Double latitude,
+        @RequestParam Double longitude,
+        @RequestParam(required = false) String telNo) {
+        favoriteService.addFavorite(memId, restaurantId, name, address, foodType, latitude, longitude, telNo);
     }
 
-    // 찜 리스트 조회 API
+    // 찜 리스트 조회 API (최신순으로 정렬)
     @GetMapping("/list")
-    public List<Favorite> getFavorites(@RequestParam String nickname) {
-        return favoriteService.getFavorites(nickname);
+    public List<Favorite> getFavorites(@RequestParam String memId) {
+        return favoriteService.getFavorites(memId);
+    }
+
+    // 찜 삭제 API
+    @DeleteMapping("/delete")
+    public ResponseEntity<Void> deleteFavorite(@RequestParam String memId, @RequestParam Long restaurantId) {
+        favoriteService.deleteFavorite(memId, restaurantId);
+        return ResponseEntity.noContent().build();
     }
 }

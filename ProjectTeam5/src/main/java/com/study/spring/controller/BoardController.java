@@ -84,12 +84,17 @@ public class BoardController {
 	@PostMapping("/update")
 	public String updateBoard(
 			@ModelAttribute Board board,  // Board 객체로 묶어서 받음
-	        @RequestParam(value = "image", required = false) MultipartFile[] images) throws Exception {
-
+	        @RequestParam(value = "image", required = false) MultipartFile[] newImages,
+	        @RequestParam(value = "existingImageName", required = false) String[] oldImagesName,
+	        @RequestParam(value = "existingImagePath", required = false) String[] oldImagesPath) throws Exception {
+		
+		System.out.println("컨트롤러newImages보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드 :" + newImages);
+		System.out.println("컨트롤러oldImagesname보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드 :" + oldImagesName);
+		System.out.println("컨트롤러oldImagespath보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드 :" + oldImagesPath);
 	
 	    // 이미지가 있으면 처리, 없으면 그냥 넘어감
-	    if (images != null && images.length > 0) {
-	        boardService.updateBoard(board, images);
+	    if (newImages != null && newImages.length > 0) {
+	        boardService.updateBoard(board, newImages, oldImagesName, oldImagesPath);
 	    } else {
 	        boardService.updateBoard(board);  // 이미지가 없는 경우
 	    }

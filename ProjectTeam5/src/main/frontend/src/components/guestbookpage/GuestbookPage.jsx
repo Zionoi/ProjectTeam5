@@ -17,8 +17,8 @@ function GuestbookPage({ hostId, setHostId }) {
 
   const navigate = useNavigate(); // 페이지 이동을 위한 useNavigate hook
 
-  // 방명록 리스트 불러오기
-  useEffect(() => {
+   // 방명록 목록 불러오기 함수
+   const fetchGuestbookEntries = () => {
     axios
       .get('/guestbook/total', { params: { page, size: 5, memId: hostId } })
       .then((response) => {
@@ -28,7 +28,12 @@ function GuestbookPage({ hostId, setHostId }) {
       .catch((error) => {
         setErrorMessage('');
       });
-  }, [page, hostId, guestbookEntries]);
+
+  };
+
+  useEffect(() => {
+    fetchGuestbookEntries(); // 컴포넌트가 처음 렌더링될 때 방명록 목록 불러오기
+  }, [page, hostId]);
 
   // 사용자 닉네임 가져오기
   useEffect(() => {
@@ -62,8 +67,8 @@ function GuestbookPage({ hostId, setHostId }) {
           setGuestbookEntries([...guestbookEntries, newEntryObject]);
           setNewEntry('');
           setErrorMessage('');
-          // window.location.reload();
-          console.log('response.data', response.data)
+          fetchGuestbookEntries();
+          console.log('response.data', response.data);
         } else {
           setErrorMessage('방명록 저장 중 문제가 발생했습니다.');
         }
@@ -129,9 +134,12 @@ function GuestbookPage({ hostId, setHostId }) {
   };
 
   return (
+    <div>
+    <div className="guestbook-title-box">
+          <h2 className="guestbook-title">방명록</h2>
+    </div>
+      
     <div className="guestbook-container">
-      <h2>방명록</h2>
-
       {/* 글 작성은 memId와 hostId가 다를 때만 가능 */}
       {memId !== hostId && (
         <div className="guestbook-input">
@@ -143,7 +151,6 @@ function GuestbookPage({ hostId, setHostId }) {
           <button className="guestsubmit" onClick={handleAddEntry}>완료</button>
         </div>
       )}
-
       {errorMessage && <p className="error-message">{errorMessage}</p>}
       <div className="guestbook-list">
         {guestbookEntries.map((entry) => (
@@ -189,13 +196,14 @@ function GuestbookPage({ hostId, setHostId }) {
           </div>
         ))}
       </div>
-
+        
       {/* 페이지 네이션 버튼 */}
       <div className="pagination">
         <button onClick={() => handlePageChange(page - 1)} disabled={page === 0}>이전</button>
         <span>{page + 1} / {totalPages}</span>
         <button onClick={() => handlePageChange(page + 1)} disabled={page + 1 === totalPages}>다음</button>
       </div>
+    </div>
     </div>
   );
 }
