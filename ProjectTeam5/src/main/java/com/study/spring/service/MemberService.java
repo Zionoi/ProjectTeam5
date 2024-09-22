@@ -170,12 +170,29 @@ public class MemberService {
 	}
 
 	public void deleteImage(String memId) {
-		Member member = memberRepository.findById(memId).get();
-		
-		member.setImgName("");
-		member.setImgPath("");
-		
-		memberRepository.save(member);
+	    Member member = memberRepository.findById(memId).orElseThrow(() -> new IllegalArgumentException("Member not found"));
+
+	    // imgPath에서 파일 경로 가져오기
+	    String imgPath = member.getImgPath();
+	    
+	    // 이미지 경로가 존재할 경우
+	    if (imgPath != null && !imgPath.isEmpty()) {
+	        // 업로드된 파일의 실제 경로 (uploadedFiles/ 폴더 경로로 변환)
+	        String realPath = System.getProperty("user.dir") + "/uploadedFiles" + imgPath.replace("/files/", "/");
+	        
+	        File file = new File(realPath);
+	        if (file.exists()) {
+	            if (file.delete()) {
+	            } 
+	        } 
+	    }
+
+	    // DB의 이미지 정보 삭제
+	    member.setImgName("");
+	    member.setImgPath("");
+
+	    // 변경 사항 저장
+	    memberRepository.save(member);
 	}
 
 	public void updateProfile(Member m) {
