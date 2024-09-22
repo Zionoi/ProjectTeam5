@@ -5,6 +5,7 @@ import axios from "axios";
 function BoardEdit({ hostId, setHostId }) {
   const { bNum } = useParams(); // URL 파라미터에서 bNum을 가져옴
   const navigate = useNavigate();
+ 
   const [selectedImages, setSelectedImages] = useState([]);
   const [existingImages, setExistingImages] = useState([]);
   const [bTitle, setBTitle] = useState('');
@@ -52,17 +53,18 @@ function BoardEdit({ hostId, setHostId }) {
     formData.append("bTitle", bTitle);
     formData.append("bContent", bContent);
     formData.append("bNum", bNum); // 게시물 번호 추가
-    formData.append("memId", hostId);
+    formData.append("member", hostId);
 
     // 새로 추가된 이미지를 FormData에 추가
     selectedImages.forEach((image, index) => {
-      console.log('image :', image)
+      
       formData.append('image', image.file);
     });
 
     // 기존 이미지와 삭제된 이미지를 FormData에 포함
     existingImages.forEach((image, index) => {
       if (!image.isNew) {
+        console.log('image :', image)
         formData.append('existingImage', image.path); // 기존 이미지 경로를 전송
       }
     });
