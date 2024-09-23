@@ -59,6 +59,9 @@ function BoardUpload({ hostId, setHostId }) {
       alert("데이터 업로드 중 오류가 발생했습니다.");
     }
   };
+  const BoardList = () => {
+    navigate(`/bulletin-board/${ hostId }`);  // 방명록 페이지로 이동
+  };
 
   const handleGoBack = () => {
     navigate(-1); // 이전 페이지로 이동
@@ -125,6 +128,16 @@ function BoardUpload({ hostId, setHostId }) {
           <button type="submit" className="BUB">
             업로드
           </button>
+        </div>
+        <button onClick={BoardList}
+        className="BUC">
+          돌아가기
+        </button>
+        <button type="submit"
+        className="BUB">
+          업로드
+        </button>
+        </div>
         </div>
       </div>
     </form>

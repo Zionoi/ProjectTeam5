@@ -70,6 +70,7 @@ function ProfileEdit() {
   };
 
   return (
+    <>
     <div className="profile-edit-container">
       <h2 className="profile-edit-title">나의 정보</h2>
       <form onSubmit={handleSubmit} className="profile-edit-form">
@@ -148,9 +149,10 @@ function ProfileEdit() {
           <button type="submit" className="profile-button save">완료</button>
         </div>
       </form>
+      </div>
       {errorMessage && <p className="error-message">{errorMessage}</p>}
       {successMessage && <p className="success-message">{successMessage}</p>}
-    </div>
+    </>
   );
 }
 

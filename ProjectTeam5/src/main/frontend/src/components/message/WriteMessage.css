@@ -1,0 +1,26 @@
+.writeMessageContainer {
+    padding:10px;
+    background-color: aliceblue;
+    width: 300px;
+    height: 180px;
+}
+.WM-btn {
+    font-size: 10pt;
+}
+.WriteMessage {
+    font-size: 10pt;
+}
+.WM-Sbtn {
+    position:relative;
+    top:-20px; left:200px;
+    border: none;
+    font-family: "Noto Sans KR", sans-serif;
+    font-size:10pt;
+    font-weight: 600;
+    color: rgb(63, 63, 63);
+    background-color: transparent;
+}
+.WM-Sbtn:hover {
+    background-color:#c5c9ff;
+    border-radius: 12px;
+  }

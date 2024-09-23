@@ -1,9 +1,11 @@
 /* ProfileEdit.css */
 .profile-edit-container {
+    position: absolute ;
+    top:130px; left: 150px;
+    height: 600px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     padding: 20px;
     font-family: 'Noto Sans KR', sans-serif;
   }
@@ -67,6 +69,9 @@
   }
   
   .profile-button {
+    position: relative;
+    width: 100px; height: 40px;
+    top:420px; left:-250px;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;

@@ -2,33 +2,37 @@
 .profile-container {
   position: relative;
   display: inline-block;
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 9pt;
 }
 
 .profile-icon {
   position: relative;
-  top:-60px; left:10px;
+  top:-60px; left:-40px;
   width: 50px; /* 아이콘 크기 */
   height: 50px;
   cursor: pointer;
+  border:none;
+  background-color: transparent;
 }
 
-.dropdown-menu {
+.PItem {
   position: absolute;
-  right: 0;
+  top:-64px; left:30px;
   background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(129, 81, 81, 0.2);
+  width: 110px;
+  box-shadow: 0px 4px 4px 0px rgba(126, 126, 126, 0.2);
   z-index: 1;
 }
 
 .menu-item {
   color: black;
-  padding: 12px 16px;
+  padding: 6px 12px;
   text-decoration: none;
   display: block;
   border: none;
+  width:100%;
   background: none;
-  width: 100%;
   text-align: left;
   cursor: pointer;
 }

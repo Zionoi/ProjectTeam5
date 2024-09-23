@@ -2,22 +2,31 @@
 
 /* 제목 스타일 */
 .diary-title {
-    position:relative;
+    position:absolute;
     top:130px;
     left:300px;
     font-family: "Noto Sans KR", sans-serif;
-    font-size:15pt;
+    font-size:11pt;
     font-weight: bold;
     color:rgb(63, 63, 63);
+}
+.calendar-box {
+    position:absolute;
+    width: 750px;
+    height: 500px;
+    top: 185px; left:230px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 16px;
 }
 
 /* 달력 배경 */
 .calendar-back {
-    position:absolute;
-    width: 600px;
+    position:relative;
+    left:80px;
+    width: 580px;
     height: 500px;
-    top: 180px;
-    left: 300px;
+    background-color: rgb(255, 255, 255);
+    font-family: "Noto Sans KR", sans-serif;
 }
 
 /* 달력 컨테이너 */
@@ -37,14 +46,42 @@
     overflow: hidden; /* 셀 넘어가면 안보이게 처리*/
     text-overflow: ellipsis; /* 일정 글자수 넘어가면 ...으로 처리*/
 }
-
+/*헤더 스타일*/
+.fc .fc-toolbar.fc-header-toolbar {
+    padding: 10px 10px;
+    font-size: 12px;
+    font-weight: 500;
+    border-radius: 20px;
+  }
+  /*화살표*/
+  .fc .fc-button {
+    background-color: transparent;
+    color:#c5c9ff;
+    border: none;
+  }
+  /*투데이 버튼*/
+  .fc .fc-today-button {
+    background-color:#c5c9ff;
+    color: #fff;
+  }
+  .fc .fc-today-button:hover,.fc .fc-button-primary:hover {
+    background-color: #7982ff;
+  }
+  .fc .fc-button-primary:focus {
+  border: none;
+  box-shadow: none;
+}
+.fc-content {
+    font-size: 15pt;
+}
 /* 이벤트 목록 스타일 */
 .fc .fc-daygrid-day-events {
     display: flex;
     white-space: nowrap;
     flex-direction: column;
-    align-items: left;
-    
+    align-items: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
     width: 100%;
     box-sizing: border-box;
 }
