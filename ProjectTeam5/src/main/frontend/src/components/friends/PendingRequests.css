@@ -2,7 +2,8 @@
     position: absolute;
     left: 0px; /* 페이지 왼쪽에 고정 위치 */
     background-color: #ffffff; /* 흰색 배경 */
-    max-width: 300px; /* 너비 */
+    width: 200px; /* 너비 */
+    max-width: 200px; /* 높이 */
     max-height: 300px; /* 높이 */
     border-radius: 16px; /* 모서리를 둥글게 */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
