@@ -1,5 +1,6 @@
 package com.study.spring.controller;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
@@ -83,23 +84,26 @@ public class BoardController {
 	
 	@PostMapping("/update")
 	public String updateBoard(
-			@ModelAttribute Board board,  // Board 객체로 묶어서 받음
+	        @ModelAttribute Board board,  // Board 객체로 묶어서 받음
 	        @RequestParam(value = "image", required = false) MultipartFile[] newImages,
 	        @RequestParam(value = "existingImageName", required = false) String[] oldImagesName,
-	        @RequestParam(value = "existingImagePath", required = false) String[] oldImagesPath) throws Exception {
-		
-		System.out.println("컨트롤러newImages보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드 :" + newImages);
-		System.out.println("컨트롤러oldImagesname보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드 :" + oldImagesName);
-		System.out.println("컨트롤러oldImagespath보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드 :" + oldImagesPath);
-	
-	    // 이미지가 있으면 처리, 없으면 그냥 넘어감
-	    if (newImages != null && newImages.length > 0) {
-	        boardService.updateBoard(board, newImages, oldImagesName, oldImagesPath);
-	    } else {
-	        boardService.updateBoard(board);  // 이미지가 없는 경우
+	        @RequestParam(value = "existingImagePath", required = false) String[] oldImagesPath,
+	        @RequestParam(value = "deletedImageName", required = false) String[] deletedImagesName // 삭제된 이미지 이름
+	) throws Exception {
+
+	    // 기존 이미지 삭제 로직
+	    if (deletedImagesName != null) {
+	        for (String imageName : deletedImagesName) {
+	            File file = new File(System.getProperty("user.dir") + "/uploadedFiles/" + imageName);
+	            if (file.exists()) {
+	                file.delete(); // 이미지 파일 삭제
+	            }
+	        }
 	    }
+
+	    // 나머지 수정 로직 처리
+	    boardService.updateBoard(board, newImages, oldImagesName, oldImagesPath);
 
 	    return "업데이트 완료";
 	}
-	
 }

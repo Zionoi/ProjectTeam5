@@ -8,6 +8,7 @@ function BoardEdit({ hostId, setHostId }) {
   const [selectedImages, setSelectedImages] = useState([]);
   const [existingImagesName, setExistingImagesName] = useState([]);
   const [existingImagesPath, setExistingImagesPath] = useState([]);
+  const [deletedImages, setDeletedImages] = useState([]); // 삭제된 이미지를 추적하는 상태
   const [bTitle, setBTitle] = useState('');
   const [bContent, setBContent] = useState('');
 
@@ -16,10 +17,9 @@ function BoardEdit({ hostId, setHostId }) {
     axios.get(`/board/detail`, { params: { bNum } })
       .then(response => {
         const { btitle, bcontent, imgPath, imgName } = response.data;
-        console.log(response.data);
         setBTitle(btitle);
         setBContent(bcontent);
-        setExistingImagesName(imgName); // 기존 이미지 경로를 저장
+        setExistingImagesName(imgName); // 기존 이미지 이름을 저장
         setExistingImagesPath(imgPath); // 기존 이미지 경로를 저장
       })
       .catch(error => {
@@ -41,6 +41,8 @@ function BoardEdit({ hostId, setHostId }) {
   // 이미지 삭제 처리
   const handleRemoveImage = (index, isExisting = false) => {
     if (isExisting) {
+      // 삭제된 기존 이미지를 추적하여 삭제 리스트에 추가
+      setDeletedImages(prevDeleted => [...prevDeleted, existingImagesName[index]]);
       setExistingImagesName(prevImages => prevImages.filter((_, i) => i !== index));
       setExistingImagesPath(prevImages => prevImages.filter((_, i) => i !== index));
     } else {
@@ -59,20 +61,21 @@ function BoardEdit({ hostId, setHostId }) {
     formData.append("memId", hostId);
 
     // 새로 추가된 이미지를 FormData에 추가
-    selectedImages.forEach((image, index) => {
+    selectedImages.forEach((image) => {
       formData.append(`image`, image.file);
     });
 
     // 기존 이미지를 FormData에 포함 (이름, 경로만 보냄)
-    existingImagesPath.forEach((image, index) => {
-      console.log("existingImages 경로: ", existingImagesPath)
-      console.log("existingImages image: ", image)
+    existingImagesPath.forEach((image) => {
       formData.append(`existingImagePath`, image);
     });
-    existingImagesName.forEach((image, index) => {
-      console.log("existingImages 이름: ", existingImagesName)
-      console.log("existingImages image: ", image)
+    existingImagesName.forEach((image) => {
       formData.append(`existingImageName`, image);
+    });
+
+    // 삭제된 이미지를 추가
+    deletedImages.forEach((image) => {
+      formData.append(`deletedImageName`, image); // 삭제된 이미지 이름을 서버로 보냄
     });
 
     try {
@@ -129,7 +132,7 @@ function BoardEdit({ hostId, setHostId }) {
           {existingImagesName.map((img, index) => (
             <div key={index} style={{ position: "relative", margin: "10px" }}>
               <img
-                src={{img}}
+                src={existingImagesPath[index]}
                 alt={`Existing Image ${index}`}
                 style={{ maxWidth: "150px", maxHeight: "150px", objectFit: "cover" }}
               />

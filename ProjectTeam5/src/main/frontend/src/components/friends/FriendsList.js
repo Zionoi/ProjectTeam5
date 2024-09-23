@@ -50,12 +50,12 @@ function FriendsList({ hostId, setHostId }) {
   };
 
   return (
-    <div>
-      <h6 className="list-friends">친구 목록</h6>
+    <div className="friends-section-list">
+      <h3 className="list-friends">친구 목록</h3>
       <ul>
         {friends.map(friend => (
           <li key={friend.fNum}>
-            <span onClick={() => goFriendHome(friend.friendId)}>{friend.friendId}</span>
+            <span className="f-list" onClick={() => goFriendHome(friend.friendId)}>{friend.friendId}</span>
             <button onClick={() => deleteFriend(friend.fnum)}>삭제</button> 
           </li>
         ))}

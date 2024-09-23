@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from 'react-router-dom'; // Link를 사용하기 위해 추가
 import "./RestaurantMap.css"; // 동일한 스타일을 사용
 
 function FavoriteList() {
@@ -165,30 +166,48 @@ function FavoriteList() {
     <div className="container">
       <div id="map" className="map"></div>
 
-      <div className="restaurant-list">
-        {selectedRestaurant ? (
-          <div className="restaurant-details">
-            <h3>{selectedRestaurant.rname}</h3> {/* 음식점 이름 */}
-            <p>주소: {selectedRestaurant.raddress}</p> {/* 음식점 주소 */}
-            <p>전화번호: {selectedRestaurant.telNo || "전화번호 없음"}</p> {/* 전화번호 없을 경우 기본 메시지 */}
-            <button onClick={() => deleteFavorite(selectedRestaurant.rnum)}>찜 삭제</button> {/* 찜 삭제 기능 추가 */}
-            <button onClick={() => setSelectedRestaurant(null)}>뒤로가기</button>
+      <div className="bar">
+        {/* 검색 및 나의 찜 목록 버튼을 나란히 배치하는 컨테이너 */}
+        <div className="search-container">
+          <div className="search-bar">
+            <Link to={`/restaurants/${localStorage.getItem("id")}`}>
+              <button>검색</button>
+            </Link>
           </div>
-        ) : (
-          <ul>
-            {Array.isArray(favorites) && favorites.length === 0 ? (
-              <p>찜한 음식점이 없습니다.</p>
-            ) : (
-              Array.isArray(favorites) &&
-              favorites.map((favorite) => (
-                <li key={favorite.restaurant.rnum} onClick={() => handleRestaurantClick(favorite.restaurant)}>
-                  <strong>{favorite.restaurant.rname}</strong> {/* 음식점 이름 */}
-                  <p>주소: {favorite.restaurant.raddress}</p> {/* 음식점 주소 */}
-                </li>
-              ))
-            )}
-          </ul>
-        )}
+
+          <div className="favorite-button">
+            <Link to={`/favorites/${localStorage.getItem("id")}`}>
+              <button>나의 찜</button>
+            </Link>
+          </div>
+        </div>
+
+        <h3>나의 찜 목록❤️</h3>
+        <div className="restaurant-Flist">
+          {selectedRestaurant ? (
+            <div className="restaurant-details">
+              <h5>{selectedRestaurant.rname}</h5>
+              <p>주소: {selectedRestaurant.raddress}</p>
+              <p>전화번호: {selectedRestaurant.telNo || "전화번호 없음"}</p>
+              <button onClick={() => deleteFavorite(selectedRestaurant.rnum)}>삭제</button>
+              <button onClick={() => setSelectedRestaurant(null)}>뒤로가기</button>
+            </div>
+          ) : (
+            <ul>
+              {favorites.length === 0 ? (
+                <p>찜한 음식점이 없습니다.</p>
+              ) : (
+                favorites.map((favorite) => (
+                  <li key={favorite.restaurant.rnum} onClick={() => handleRestaurantClick(favorite.restaurant)}>
+                    <strong>{favorite.restaurant.rname}</strong>
+                    <p>주소: {favorite.restaurant.raddress}</p>
+                    <p>전화번호: {favorite.restaurant.telNo}</p>
+                  </li>
+                ))
+              )}
+            </ul>
+          )}
+        </div>
       </div>
     </div>
   );

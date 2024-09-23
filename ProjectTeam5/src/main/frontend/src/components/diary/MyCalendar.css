@@ -42,7 +42,9 @@
     color: black;
 }
 .event-content{
-    color:rgb(83, 83, 83)
+    color:rgb(83, 83, 83);
+    overflow: hidden; /* 셀 넘어가면 안보이게 처리*/
+    text-overflow: ellipsis; /* 일정 글자수 넘어가면 ...으로 처리*/
 }
 /*헤더 스타일*/
 .fc .fc-toolbar.fc-header-toolbar {

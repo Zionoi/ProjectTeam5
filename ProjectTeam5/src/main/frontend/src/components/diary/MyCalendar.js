@@ -4,6 +4,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction'; // 날짜와 이벤트 클릭을 처리하기 위해 필요한 플러그인
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import koLocale from '@fullcalendar/core/locales/ko'; // 한국어 로케일 임포트
 import './MyCalendar.css'; // CSS 파일을 임포트합니다.
 
 // 인스톨하기
@@ -41,7 +42,7 @@ function MyCalendar({hostId}) {
     const eventContent = (eventInfo) => {
         return (
             <div className="event-content">
-                <strong>{eventInfo.event.title}</strong>
+                <strong  style={{ cursor: 'pointer' }}>{eventInfo.event.title}</strong>
             </div>
         );
     };
@@ -62,8 +63,10 @@ function MyCalendar({hostId}) {
                         dateClick={handleDateClick} // 날짜 클릭 시 핸들러
                         eventClick={handleEventClick} // 이벤트 클릭 시 핸들러
                         eventContent={eventContent} // 이벤트 내용 커스터마이즈
+                        locale={koLocale} // 한국어 로케일을 설정
                     />
                 </div>
+
             </div>
         </div>
     );

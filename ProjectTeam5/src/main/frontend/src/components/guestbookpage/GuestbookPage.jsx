@@ -113,6 +113,7 @@ function GuestbookPage({ hostId, setHostId }) {
 
   // "놀러가기" 기능: 해당 사용자의 페이지로 이동
   const visitFriendPage = (friendId) => {
+    setHostId(friendId);
     navigate(`/home/${friendId}`); // 해당 사용자의 홈페이지로 이동
   };
 
