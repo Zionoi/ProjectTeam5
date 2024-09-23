@@ -43,7 +43,7 @@ const WriteMessage = ({ recipient }) => {
         value={receiver}
         onChange={e => setReceiver(e.target.value)}  // 수신자 입력 필드
       /><br/>
-      <input
+      <textarea
         type="text"
         placeholder="쪽지를 작성해주세요"
         value={mContent}

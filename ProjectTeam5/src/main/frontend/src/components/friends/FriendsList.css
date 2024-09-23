@@ -33,6 +33,10 @@ div {
   margin-left: 5px;
 }
 
+.friends-section-list p {
+  margin: 10px;
+}
+
 .friends-section-list span {
   margin-right: 10px;
 }

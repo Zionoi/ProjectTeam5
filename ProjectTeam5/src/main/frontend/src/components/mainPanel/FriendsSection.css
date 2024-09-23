@@ -74,7 +74,7 @@
 
   /* 활성화된 버튼 스타일 */
   .request-button.active {
-    background-color: #4c77b8; /* 활성화된 버튼 배경색 */
+    background-color: #a972dd; /* 활성화된 버튼 배경색 */
     color: white; /* 활성화된 버튼 텍스트 색상 */
   }
 

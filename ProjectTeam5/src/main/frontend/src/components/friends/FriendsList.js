@@ -52,14 +52,18 @@ function FriendsList({ hostId, setHostId }) {
   return (
     <div className="friends-section-list">
       <h3 className="list-friends">친구 목록</h3>
-      <ul>
-        {friends.map(friend => (
-          <li key={friend.fNum}>
-            <span className="f-list" onClick={() => goFriendHome(friend.friendId)}>{friend.friendId}</span>
-            <button onClick={() => deleteFriend(friend.fnum)}>삭제</button> 
-          </li>
-        ))}
-      </ul>
+      {friends.length === 0 ? ( // 친구 목록이 없을 때 메시지 표시
+        <p>친구 목록이 없습니다.<br/> 새로운 친구를 추가해주세요!</p>
+      ) : (
+        <ul>
+          {friends.map(friend => (
+            <li key={friend.fNum}>
+              <span className="f-list" onClick={() => goFriendHome(friend.friendId)}>{friend.friendId}</span>
+              <button onClick={() => deleteFriend(friend.fNum)}>삭제</button> 
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }

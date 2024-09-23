@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import MessageDetail from '../message/MessageDetail'; // MessageDetail 컴포넌트 추가
+import './Inbox.css';
 
 const Inbox = ({ setContent, setSelectedMessage, checkUnreadMessages }) => {
   const [messages, setMessages] = useState([]);  // 받은 메시지 상태
@@ -46,25 +47,38 @@ const Inbox = ({ setContent, setSelectedMessage, checkUnreadMessages }) => {
   // 메시지 삭제 함수
   const deleteMessage = (mNum) => {
     axios.delete(`/api/messages/delete/${mNum}`)
-      .then(() => fetchMessages())
+      .then(() => {
+        alert('쪽지가 삭제되었습니다.');
+        if (fetchMessages) fetchMessages(); // 쪽지 목록 새로고침
+      })
       .catch(error => console.error("Error deleting message:", error));
   };
 
   return (
-    <div>
-      <h2>쪽지함</h2>
+    <div className="inbox-container">
+      <h2 className="inbox-header">쪽지함</h2>
 
       <div>
         {messages.length === 0 ? (
           <div>쪽지가 없습니다.~(&gt;_&lt;。)＼</div>
         ) : (
           messages.map((message, index) => (
-            <div key={index}>
-              <span onClick={() => openMessageDetail(message)}>
-                {message.memId}님이 보낸 쪽지가 도착했습니다!&emsp;
+            <div
+              key={index}
+              className={`message-item ${message.isReading === 1 ? 'unread' : ''}`}
+              onClick={() => openMessageDetail(message)}
+            >
+              <span className="message-sender">{message.memId}</span>
+              님이 보낸 쪽지가 도착했습니다!
+              <button
+                className="message-delete-btn"
+                onClick={(e) => { e.stopPropagation(); deleteMessage(message.mnum); }}
+              >
+                삭제
+              </button>
+              <span className="message-status">
+                {message.isReading === 1 ? "읽지 않음" : "읽음"}
               </span>
-              <button onClick={() => deleteMessage(message.mnum)}>삭제</button> &emsp;
-              {message.isReading === 1 ? "읽지 않음" : "읽음"}
             </div>
           ))
         )}
