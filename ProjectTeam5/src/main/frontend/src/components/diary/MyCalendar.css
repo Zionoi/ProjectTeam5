@@ -23,16 +23,19 @@
 .calendar-back {
     position:relative;
     left:80px;
-    width: 580px;
+    width: 560px;
     height: 500px;
     background-color: rgb(255, 255, 255);
     font-family: "Noto Sans KR", sans-serif;
+    
 }
 
 /* 달력 컨테이너 */
 .calendar-container {
     text-align: left;
     align-items: left;
+    overflow: hidden; /* 셀 넘어가면 안보이게 처리*/
+    text-overflow: ellipsis; /* 일정 글자수 넘어가면 ...으로 처리*/
 }
 
 /* 날짜 셀의 패딩 제거 */
@@ -40,11 +43,12 @@
     padding: 0;
     text-decoration: none; /* 밑줄 제거 */
     color: black;
+    
 }
 .event-content{
     color:rgb(83, 83, 83);
-    overflow: hidden; /* 셀 넘어가면 안보이게 처리*/
-    text-overflow: ellipsis; /* 일정 글자수 넘어가면 ...으로 처리*/
+    
+    
 }
 /*헤더 스타일*/
 .fc .fc-toolbar.fc-header-toolbar {
@@ -73,15 +77,16 @@
 }
 .fc-content {
     font-size: 15pt;
+    
 }
 /* 이벤트 목록 스타일 */
 .fc .fc-daygrid-day-events {
     display: flex;
     white-space: nowrap;
     flex-direction: column;
-    align-items: center;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    align-items: left;
+    overflow: hidden; /* 셀 넘어가면 안보이게 처리*/
+    text-overflow: ellipsis; /* 일정 글자수 넘어가면 ...으로 처리*/
     width: 100%;
     box-sizing: border-box;
 }
@@ -100,4 +105,12 @@
 /* 토요일 스타일 (파란색) */
 .fc .fc-col-header-cell:nth-child(7) .fc-col-header-cell-cushion {
     color: blue;
+}
+
+.fc-daygrid-day {
+    transition: background-color 0.3s ease; /* 배경색이 서서히 변하도록 애니메이션 설정 */
+}
+
+.fc-daygrid-day:hover {
+    background-color: #bfdcf7; /* 마우스 오버 시 배경색 설정 */
 }
