@@ -1,8 +1,0 @@
-.board-container {
-    display: flex;
-    justify-content: center; /* 수평 가운데 정렬 */
-    align-items: center; /* 수직 가운데 정렬 */
-    flex-wrap: wrap; /* 여러 줄에 걸쳐 정렬할 경우 */
-    margin: 0 auto; /* 전체 부모 요소에 자동 여백 */
-    width: 90%; /* 필요한 경우 조정 */
-  }

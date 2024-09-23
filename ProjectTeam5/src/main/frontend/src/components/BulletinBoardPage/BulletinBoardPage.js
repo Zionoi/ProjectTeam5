@@ -1,4 +1,3 @@
-// BulletinBoardPage.js
 import React, { useEffect, useState } from 'react';
 import './BulletinBoardPage.css';
 import axios from 'axios';
