@@ -14,9 +14,9 @@ public class WalkingCourseService {
 	@Autowired
 	WalkingCourseRepository walkingCourseRepository;
 
-	public static List<WalkingCourse> totalWalkingCourse() {
-			walkingCourseRepository.
-		return null;
+	public List<WalkingCourse> totalWalkingCourse() {
+			
+		return WalkingCourseRepository.findAll();
 	}
 
 }
