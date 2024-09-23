@@ -36,20 +36,22 @@ const WriteMessage = ({ recipient }) => {
 
   return (
     <div className='writeMessageContainer'>
-      <h5>쪽지 보내기</h5>
+      <h5 className="WM-btn">쪽지 보내기</h5>
       <input
+        className="WriteMessage"
         type="text"
         placeholder="받는 사람"
         value={receiver}
         onChange={e => setReceiver(e.target.value)}  // 수신자 입력 필드
       /><br/>
       <input
+        className="WriteMessage"
         type="text"
         placeholder="쪽지를 작성해주세요"
         value={mContent}
         onChange={e => setmContent(e.target.value)}  // 메시지 내용 입력 필드
       /><br/><br/>
-      <button onClick={sendMessage}>전송</button>  {/* 메시지 전송 버튼 */}
+      <button className="WM-Sbtn"onClick={sendMessage}>전송</button>  {/* 메시지 전송 버튼 */}
     </div>
   );
 }

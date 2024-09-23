@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './Profile.css'; // 스타일 파일
 import { useNavigate } from 'react-router-dom';
+import ProfileImg from "../../img/profile-icon.png";
 
 function Profile({onLogout}) {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -29,14 +30,11 @@ function Profile({onLogout}) {
   return (
     <div className="profile-container">
       
-      <img
-        src="/profile-icon.png"
-        alt="Profile Icon"
+      <button
         className="profile-icon"
-        onClick={toggleMenu}
-      />
+        onClick={toggleMenu}><img src={ProfileImg}/></button>
       {menuOpen && (
-        <div >
+        <div className="PItem">
           <button className="menu-item" onClick={handleEditProfile}>
             회원정보 수정
           </button>

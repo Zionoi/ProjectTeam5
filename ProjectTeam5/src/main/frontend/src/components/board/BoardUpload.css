@@ -1,6 +1,6 @@
 .BoardUpload-box {
     position:absolute;
-    top: 185px; left:220px;
+    top: 185px; left:230px;
     width: 750px;
     height: 500px;
     padding:20px 40px 20px ;
@@ -122,9 +122,7 @@
   .BoardUploadContent::placeholder {
     color: rgb(194, 194, 194);
   }
-  .BUB{
-    position:absolute;
-    left:610px;
+  .BUB,.BUC{
     border: none;
     font-size:10pt;
     font-weight: 500;
@@ -134,7 +132,7 @@
     border-radius: 12px;
     margin-top:5px;
   }
-  .BUB:hover {
+  .BUB:hover,.BUC:hover {
     background-color: #c5c9ff;
     border-radius: 12px;
   }
