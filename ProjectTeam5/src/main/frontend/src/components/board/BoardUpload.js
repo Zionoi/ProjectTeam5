@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import './BoardUpload.css';
 
-function BoardUpload({hostId, setHostId}) {
+function BoardUpload({ hostId, setHostId }) {
   const [selectedImages, setSelectedImages] = useState([]);
   const [bTitle, setBTitle] = useState('');
   const [bContent, setBContent] = useState('');
@@ -50,7 +50,7 @@ function BoardUpload({hostId, setHostId}) {
         setSelectedImages([]);  // 선택된 이미지 초기화
         setBTitle('');
         setBContent('')
-        navigate(`/bulletin-board/${ hostId }`);  // 게시판 이동
+        navigate(`/bulletin-board/${hostId}`);  // 게시판 이동
       } else {
         alert("파일 업로드 실패");
       }
@@ -60,43 +60,48 @@ function BoardUpload({hostId, setHostId}) {
     }
   };
 
+  const handleGoBack = () => {
+    navigate(-1); // 이전 페이지로 이동
+  };
+
   return (
     <form onSubmit={handleSubmit}>
       <div className="BoardUpload-box">
         <h6 className="BUTitle">이미지 업로드</h6>
         <div className="B-ImgPrevBox">
-            <div className="BoardUpload-Imgbox">
+          <div className="BoardUpload-Imgbox">
             {selectedImages.length > 0 && (
-          <div style={{ display: "flex",flexDirection: "row", gap:"10px" }}>
-            {selectedImages.map((image, index) => (
-              <div key={index} style={{}}>
-                <img
-                className="board-Imgs"
-                  src={image.preview}
-                  alt={`Selected ${index}`}
-                  style={{ width: "150px", height: "150px", objectFit: "cover"}}
-                />
-                <button
-                  className="board-ImgD"
-                  type="button"
-                  onClick={() => handleRemoveImage(index)}
-                  style={{ display: "flex",flexDirection: "row", gap:"10px" }}/>
+              <div style={{ display: "flex", flexDirection: "row", gap: "10px" }}>
+                {selectedImages.map((image, index) => (
+                  <div key={index}>
+                    <img
+                      className="board-Imgs"
+                      src={image.preview}
+                      alt={`Selected ${index}`}
+                      style={{ width: "150px", height: "150px", objectFit: "cover" }}
+                    />
+                    <button
+                      className="board-ImgD"
+                      type="button"
+                      onClick={() => handleRemoveImage(index)}
+                      style={{ display: "flex", flexDirection: "row", gap: "10px" }}
+                    />
+                  </div>
+                ))}
               </div>
-            ))}
+            )}
           </div>
-        )}
-      </div>
-      <label className="B-ImgBox">
-              <input
-                className="board-uploadImgBox"
-                type="file" 
-                accept="image/*" 
-                multiple  // 다중 파일 선택 허용
-                onChange={handleImageChange} 
-              />+
-            </label>
-      </div>
-      <div className="BoardContentBox">
+          <label className="B-ImgBox">
+            <input
+              className="board-uploadImgBox"
+              type="file" 
+              accept="image/*" 
+              multiple  // 다중 파일 선택 허용
+              onChange={handleImageChange} 
+            />+
+          </label>
+        </div>
+        <div className="BoardContentBox">
           <div>
             <input
               className="BoardUploadTitle"
@@ -106,23 +111,22 @@ function BoardUpload({hostId, setHostId}) {
               onChange={(e) => setBTitle(e.target.value)} 
             />
           </div>
-        <div>
+          <div>
             <textarea
               className="BoardUploadContent"
               placeholder="나의 이야기를 적어보세요."
               value={bContent} 
               onChange={(e) => setBContent(e.target.value)} 
             />
+          </div>
+          <button type="button" className="goBack" onClick={handleGoBack}>
+            돌아가기
+          </button>
+          <button type="submit" className="BUB">
+            업로드
+          </button>
         </div>
-        <button type="submit">
-          돌아가기
-        </button>
-        <button type="submit"
-        className="BUB">
-          업로드
-        </button>
-        </div>
-        </div>
+      </div>
     </form>
   );
 }

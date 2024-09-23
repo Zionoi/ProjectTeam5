@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import ReactPlayer from 'react-player'; // react-player를 import
 import './MusicPlayer.css';
 
+
+
 function MusicPlayer() {
   const [playing, setPlaying] = useState(false); // 재생 상태를 관리
 
@@ -11,6 +13,7 @@ function MusicPlayer() {
   };
 
   return (
+    
     <div className="music-player">
       {/* react-player 컴포넌트 */}
       <ReactPlayer

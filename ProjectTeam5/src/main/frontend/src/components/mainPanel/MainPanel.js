@@ -6,6 +6,7 @@ import FortuneSection from './FortuneSection';
 import FriendsSection from './FriendsSection';
 import Profile from './Profile';
 import './Logout.css';
+import Draggable from 'react-draggable'; 
 // import MusicPlayer from './MusicPlayer.jsx';
 
 
@@ -46,12 +47,14 @@ function MainPanel({ onLogout, hostId, setHostId}) { // onLogout props 추가
           <Sidebar hostId={hostId} setHostId={setHostId} />
 
         </div>
+        
       
         <div className="left-panel">
           <button onClick={onLogout} className="logout-button">로그아웃</button>
         </div>
 
         <HeaderSection hostId={hostId}/>
+        
         <MusicPlayer/>
         <aside className="right-side">
         <Profile onLogout={onLogout} hostId={hostId}/>

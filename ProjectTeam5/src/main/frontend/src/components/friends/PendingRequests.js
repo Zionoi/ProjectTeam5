@@ -59,7 +59,7 @@ function PendingRequests({ memId }) {
           </div>
         ))
       ) : (
-        <p>요청 목록이 없습니다</p>
+      <p>요청 목록이 없습니다</p>
       )}
     </div>
   );
