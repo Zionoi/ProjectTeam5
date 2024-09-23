@@ -1,16 +1,14 @@
-
-.modal-overlay {
+.modal-box {
   position: fixed;
   top: 0;
   left: 0;
   max-width: 100vw;
   max-height: 100vh;
-
   display: flex;
   justify-content: center;
-  align-items: center;
-  z-index: 999;  /* 모달이 페이지 요소들 위에 보이게 설정 */
-  width:100%;
+  align-items: center; 
+
+  z-index: 1000;  /* 모달이 페이지 요소들 위에 보이게 설정 */
 
   /* 모달 뒤에 있는 요소를 클릭할 수 있게 설정 */
   pointer-events: none;
@@ -20,7 +18,6 @@
   background: rgb(40, 194, 66);
   border-radius: 100px;
   width: 80%;
-
   max-width: 500px;
   max-height: 40vh; /* 모달의 최대 높이를 고정 */
   overflow: auto; /* 콘텐츠가 넘칠 경우 스크롤이 가능하도록 설정 */
@@ -28,22 +25,31 @@
 
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);  /*  그림자 효과 */
 
-
   /* 모달 내용은 여전히 클릭 가능 */
   pointer-events: all;
 }
+
 .MCBtn {
-  position: relative;
-  width:20px;
-  height: 20px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
 }
+
 .modal-close {
   background-image: url(../../img/xbuttonHover.png);
   background-size: 20px;
   background-position-x: center;
   background-position-y: center;
-  border: none;
+  width: 100%;
+  height: 100%;
   cursor: pointer;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: none;
+  outline: none;
 }
 
 /* 음식점 리스트에만 스크롤바 스타일 적용 */

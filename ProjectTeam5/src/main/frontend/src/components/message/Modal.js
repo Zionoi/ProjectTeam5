@@ -47,7 +47,7 @@ const Modal = ({ isOpen, onClose, content, setContent, selectedMessage, setSelec
   };
 
   return (
-    <div className="modal-box">
+    <div className='modal-box'>
       <div className="modal-background" onMouseMove={handleMouseMove} onMouseUp={handleMouseUp}>
         <div
           className="modal-content"
@@ -55,7 +55,8 @@ const Modal = ({ isOpen, onClose, content, setContent, selectedMessage, setSelec
           style={{ transform: `translate(${position.x}px, ${position.y}px)` }}
         >
           <div className="MCBtn">
-          <button className="modal-close" onClick={onClose}></button></div>
+            <button className="modal-close" onClick={onClose}></button>
+          </div>
           {renderContent()}
         </div>
       </div>
