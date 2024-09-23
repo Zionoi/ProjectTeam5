@@ -1,12 +1,12 @@
 .Top-co-input.editing {
-    position:relative;
+    position:absolute;
     width: 400px;
-    left:450px;
-    top:-50px;
+    left:432px;
+    top:-47px;
     font-family: "Noto Sans KR", sans-serif;
-    font-size: 15pt;
+    font-size: 14pt;
     font-weight: bold;
-    color:rgb(109, 109, 109);
+    color:rgb(141, 141, 141);
     border: none;
     background-color: rgb(245, 245, 245);
     outline: none;

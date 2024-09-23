@@ -1,6 +1,6 @@
 .music__inner {
   position: absolute;
-  top:10px; left:500px;
+  top:10px; left:800px;
   width: 300px;  /* 전체 플레이어의 너비를 고정 */
   height: 100px;  /* 전체 플레이어의 높이를 고정 */
   display: flex;

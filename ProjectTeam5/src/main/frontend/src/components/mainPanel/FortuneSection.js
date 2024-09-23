@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './FortuneSection.css'; // 스타일 파일을 추가합니다.
+import ForImg from '../../img/fortune.png';
 
 function FortuneSection() {
   const [fortune, setFortune] = useState(''); // 운세 상태
@@ -19,8 +20,9 @@ function FortuneSection() {
 
   return (
     <div className="fortune-section">
-      <h3>오늘의 운세</h3>
-      <button className="fortune-btn" onClick={fetchFortune}>운세 확인!</button>
+      <div className='iconFor'>
+      <button className="fortune-btn" onClick={fetchFortune}><img src={ForImg} style={{width:"100px"}}/></button>
+      </div>
       {fortune && <p className="fortune-result">{fortune}</p>} {/* 운세 출력 */}
     </div>
   );
