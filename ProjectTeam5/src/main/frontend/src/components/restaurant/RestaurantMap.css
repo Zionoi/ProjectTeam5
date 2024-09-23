@@ -8,24 +8,63 @@
   border: 1px solid green;
 }
 
-/* 음식점 목록 및 검색 기능 스타일 */
-.restaurant-list {
+/* bar를 수직 정렬 */
+.bar {
   position: absolute;
   top: 180px;
   left: 750px;
   width: 230px;
-  height: 500px;
-  overflow-y: scroll;
-  padding: 10px;
+  display: flex;
+  flex-direction: column;
 }
 
-/* 검색어 입력 및 검색 버튼 */
-.search-bar {
-  position: sticky;
-  top: 0;
-  background: #e0f7f7;
-  z-index: 1;
-  padding-bottom: 10px;
+.container h3 {
+  align-content: center;
+}
+
+/* 검색 입력창과 검색 버튼을 나란히 정렬 */
+.search-input-group {
+  display: flex;
+  align-items: center; /* 입력창과 버튼이 수직 중앙에 정렬되도록 설정 */
+  margin-bottom: 10px;
+}
+
+.search-input-group input {
+  flex: 1; /* 입력창이 가능한 넓게 차지하도록 설정 */
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  margin-right: 8px; /* 버튼과의 간격 추가 */
+}
+
+.search-input-group button {
+  padding: 10px 16px; /* 검색 버튼 크기 조정 */
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.search-input-group button:hover {
+  background-color: #45a049; /* 마우스 올렸을 때 색상 변화 */
+}
+
+/* 검색어 입력 및 검색 버튼과 나의 찜 목록 버튼을 나란히 정렬 */
+.search-container {
+  display: flex;
+  justify-content: space-between;  /* 두 버튼을 양쪽 끝에 정렬 */
+  margin-bottom: 10px;
+}
+
+.search-container .search-bar,
+.search-container .favorite-button {
+  flex: 1; /* 두 버튼이 동일한 크기를 가지도록 설정 */
+}
+
+.search-container .search-bar {
+  margin-right: 10px; /* 버튼 간 간격 추가 */
 }
 
 .search-bar input {
@@ -46,17 +85,182 @@
   cursor: pointer;
 }
 
-/* 음식점 목록 스타일 */
-.restaurant-list ul {
+
+estaurant-list {
+  height: 400px; /* 원하는 높이로 설정 (예: 400px) */
+  overflow-y: auto; /* 스크롤 기능 추가 */
+  padding: 10px;
+  border: 1px solid #ddd;
+  background-color: #f9f9f9;
+  margin-top: 20px; /* 상단 여백 */
+}
+
+/* 음식점 목록 및 검색 기능 스타일 */
+.restaurant-list,
+.restaurant-Flist {
+  position: relative;
+  max-height: 350px;  /* 음식점 리스트의 최대 높이 고정 */
+  overflow-y: auto;   /* 스크롤 가능하도록 설정 */
+  padding: 10px;
+  background-color: #f9f9f9; /* 배경색을 밝게 설정 */
+  border: 1px solid #e0e0e0; /* 은은한 테두리 */
+  border-radius: 8px; /* 부드러운 모서리 */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* 가벼운 그림자 효과 */
+  font-family: Arial, sans-serif; /* 심플한 글꼴 */
+}
+
+/* restaurant-list 내부 요소 스타일 */
+.restaurant-list ul,
+.restaurant-Flist ul {
   list-style-type: none;
   padding: 0;
-}
-
-.restaurant-list li {
-  margin-bottom: 10px;
-  cursor: pointer;
-}
-
-.restaurant-list p {
   margin: 0;
+}
+
+.restaurant-list li,
+.restaurant-Flist li {
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #fff; /* 리스트 아이템 배경을 흰색으로 설정 */
+  border-radius: 8px; /* 모서리를 둥글게 */
+  border: 1px solid #ddd; /* 은은한 테두리 */
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* 마우스 호버 시 색상 전환 */
+}
+
+.restaurant-list li:hover {
+  background-color: #f0f0f0; /* 마우스 호버 시 살짝 어두워지게 설정 */
+}
+
+.restaurant-list p,
+.restaurant-Flist p {
+  margin: 0;
+  font-size: 14px;
+  color: #555; /* 텍스트 색상 */
+}
+
+.restaurant-list h5 {
+  font-size: 16px; /* 제목 크기 */
+  color: #333; /* 제목 색상 */
+  display: block; /* 강제로 줄 바꿈을 해서 제목을 강조 */
+  margin-bottom: 5px; /* 제목과 본문 간의 간격 */
+}
+
+/* 찜 목록 스타일 */
+.restaurant-Flist {
+  max-height: 405px;  /* 음식점 리스트의 최대 높이 고정 */
+}
+
+
+/* 기본 버튼 스타일 */
+.tab-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #f1f1f1; /* 기본 비활성화 상태 */
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* 버튼 활성화 상태 */
+.tab-button.active {
+  background-color: #4caf50; /* 활성화된 버튼 */
+  color: white;
+  border-color: #4caf50;
+}
+
+/* 버튼에 마우스를 올렸을 때 */
+.tab-button:hover {
+  background-color: #e0e0e0;
+}
+
+/* 음식점 리스트에만 스크롤바 스타일 적용 */
+.restaurant-list::-webkit-scrollbar,
+.restaurant-Flist::-webkit-scrollbar {
+  width: 7px; /* 스크롤바의 너비를 7px로 설정 */
+  height: 5px; /* 가로 스크롤바의 높이 */
+}
+
+.restaurant-list::-webkit-scrollbar-thumb,
+.restaurant-Flist::-webkit-scrollbar-thumb {
+  background-color: #888; /* 스크롤바의 색상 */
+  border-radius: 10px; /* 스크롤바 둥근 모서리 */
+}
+
+.restaurant-list::-webkit-scrollbar-thumb:hover,
+.restaurant-Flist::-webkit-scrollbar-thumb:hover {
+  background-color: #555; /* 스크롤바에 마우스를 올렸을 때 색상 */
+}
+
+.restaurant-list::-webkit-scrollbar-track,
+.restaurant-Flist::-webkit-scrollbar-track {
+  background-color: #f1f1f1; /* 스크롤 트랙의 배경색 */
+  border-radius: 10px;
+}
+
+/* 스크롤바에 마우스를 올렸을 때 크기를 키움 */
+.restaurant-list::-webkit-scrollbar:hover,
+.restaurant-Flist::-webkit-scrollbar:hover {
+  width: 10px; /* 마우스를 올리면 스크롤바의 너비를 10px로 증가 */
+  height: 10px; /* 가로 스크롤바의 높이 증가 */
+}
+
+/* 음식점 상세보기 스타일 */
+.restaurant-details {
+  padding: 15px; /* 여유로운 패딩을 적용해 콘텐츠 간격 확보 */
+  background-color: #f0f4f8; /* 밝은 배경색으로 심플한 느낌 연출 */
+  border-radius: 8px; /* 부드러운 모서리 */
+  border: 1px solid #ddd; /* 은은한 테두리 추가 */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 살짝 음영 추가 */
+  font-family: Arial, sans-serif; /* 심플한 글꼴 사용 */
+}
+
+.restaurant-details h5 {
+  margin-bottom: 10px; /* 제목과 내용 간격 */
+  color: #333; /* 제목 색상 */
+  font-size: 20px; /* 제목 크기 */
+  font-weight: bold; /* 제목 강조 */
+}
+
+.restaurant-details p {
+  margin-bottom: 8px; /* 각 문단 간의 간격 */
+  color: #555; /* 본문 색상 */
+  font-size: 14px; /* 본문 크기 */
+  line-height: 1.6; /* 가독성을 위한 줄 간격 */
+}
+
+.restaurant-details button {
+  display: inline-block; /* 버튼을 인라인으로 유지 */
+  padding: 8px 16px; /* 버튼 내 텍스트 간격 */
+  margin-top: 10px; /* 상단 여백 추가 */
+  background-color: #4caf50; /* 버튼 배경색 */
+  color: white; /* 버튼 텍스트 색상 */
+  border: none; /* 테두리 제거 */
+  border-radius: 4px; /* 버튼 모서리 둥글게 */
+  cursor: pointer; /* 포인터 커서 */
+  font-size: 14px; /* 텍스트 크기 */
+}
+
+.restaurant-details button:hover {
+  background-color: #45a049; /* 버튼에 마우스 올렸을 때 색상 변화 */
+}
+
+.restaurant-details button + button {
+  margin-left: 10px; /* 찜하기와 뒤로가기 버튼 간의 간격 */
+}
+
+
+
+
+/* 나의 찜 목록 버튼 스타일 */
+.favorite-button button {
+  width: 100%;
+  padding: 10px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }

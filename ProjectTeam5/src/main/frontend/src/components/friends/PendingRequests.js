@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import './PendingRequests.css';
 
-function PendingRequests({ memId }) { // loggedInUser로 로그인한 사용자 정보 전달
-  const [requests, setRequests] = useState([]); // 대기 중인 요청 목록을 저장하는 상태
+function PendingRequests({ memId }) { 
+  const [requests, setRequests] = useState([]); 
 
   useEffect(() => {
-    // 서버에서 대기 중인 친구 요청 목록 가져오기
     axios.get('/friends/pendingReceivedRequests', {
-      params: { friendId: localStorage.getItem('id') }, // 로그인된 사용자 ID
+      params: { friendId: localStorage.getItem('id') }, 
     })
     .then(response => {
       console.log("Received pending requests:", response.data);
-      setRequests(response.data); // 대기 중인 요청 목록 설정
+      setRequests(response.data); 
     })
     .catch(error => {
       console.error('Error fetching requests', error);
@@ -23,7 +23,7 @@ function PendingRequests({ memId }) { // loggedInUser로 로그인한 사용자 
     axios.post(`/friends/accept`, null, { params: { fNum } })
       .then(() => {
         console.log(`Friend request accepted with fNum: ${fNum}`);
-        setRequests(requests.filter(req => req.fNum !== fNum)); // 요청 목록에서 제거
+        setRequests(requests.filter(req => req.fNum !== fNum)); 
         window.location.reload();
       })
       .catch(error => {
@@ -36,7 +36,7 @@ function PendingRequests({ memId }) { // loggedInUser로 로그인한 사용자 
     axios.post(`/friends/reject`, null, { params: { fNum } })
       .then(() => {
         console.log(`Friend request rejected with fNum: ${fNum}`);
-        setRequests(requests.filter(req => req.fNum !== fNum)); // 요청 목록에서 제거
+        setRequests(requests.filter(req => req.fNum !== fNum)); 
         window.location.reload();
       })
       .catch(error => {
@@ -45,15 +45,22 @@ function PendingRequests({ memId }) { // loggedInUser로 로그인한 사용자 
   };
 
   return (
-    <div>
+    <div className='friends-section-pending'>
       <h3>대기 중인 요청</h3>
-      {requests.map(req => (
-        <div key={req.fNum}>
-          <span>{req.member.memId} 님이 친구 요청했습니다!</span>
-          <button onClick={() => acceptRequest(req.fnum)}>수락</button>
-          <button onClick={() => rejectRequest(req.fnum)}>거절</button>
-        </div>
-      ))}
+      {requests.length > 0 ? (
+        requests.map(req => (
+          <div className='request-message' key={req.fnum}>
+            <span><strong>{req.member.memId}</strong> 님이 친구 요청했습니다!</span>
+            <br/>
+            <div>
+              <button onClick={() => rejectRequest(req.fnum)}>거절</button>
+              <button onClick={() => acceptRequest(req.fnum)}>수락</button>
+            </div>
+          </div>
+        ))
+      ) : (
+        <p>요청 목록이 없습니다</p>
+      )}
     </div>
   );
 }
