@@ -132,8 +132,7 @@ public class MemberService {
 	public boolean checkIfMemberExists(String memId) {
 	    return memberRepository.existsByMemId(memId);
 	}
-    // 매일 오전 9시 20분에 일일 방문자 수를 0으로 초기화
-    @Scheduled(cron = "0 20 9 * * ?")
+    //일일방문자 초기화
     public void resetDailyVisits() {
         // 모든 회원의 todayVisit을 0으로 초기화
         List<Member> allMembers = memberRepository.findAll();
