@@ -202,43 +202,57 @@ function RestaurantMap() {
       {/* 네이버 지도 표시 */}
       <div id="map" className="map"></div>
 
-      {/* 음식점 목록 표시 및 지역 검색 기능 */}
-      <div className="restaurant-list">
-        {selectedRestaurant ? (
-          <div className="restaurant-details">
-            <h3>{selectedRestaurant.name}</h3> {/* 음식점 이름에서 [] 제거된 이름 사용 */}
-            <p>주소: {selectedRestaurant.address}</p>
-            <p>전화번호: {selectedRestaurant.telNo}</p>
-            <p>음식종류: {selectedRestaurant.detailBizName}</p>
-            <p>메뉴: {selectedRestaurant.menu}</p>
-            <button onClick={() => handleFavorite(selectedRestaurant)}>찜하기</button>
-            <button onClick={handleBackToList}>뒤로가기</button>
+      <div className="bar">
+        {/* 검색 및 나의 찜 목록 버튼을 나란히 배치하는 컨테이너 */}
+        <div className="search-container">
+          <div className="search-bar">
+            <Link to={`/restaurants/${localStorage.getItem("id")}`}>
+              <button>검색</button>
+            </Link>
           </div>
-        ) : (
-          <>
-            <div className="search-bar">
-              <h3>음식점 검색</h3>
-              <input
-                type="text"
-                value={searchKeyword}
-                onChange={(e) => setSearchKeyword(e.target.value)}
-                placeholder="지역 또는 키워드 검색"
-              />
-              <button onClick={handleSearch}>검색</button>
-            </div>
 
+          <div className="favorite-button">
+            <Link to={`/favorites/${localStorage.getItem("id")}`}>
+              <button>나의 찜</button>
+            </Link>
+          </div>
+        </div>
+
+        <h3>음식점 검색</h3>
+        <div className="search-input-group">
+          <input
+            type="text"
+            value={searchKeyword}
+            onChange={(e) => setSearchKeyword(e.target.value)}
+            pla
+            ceholder="지역 또는 키워드 검색"
+          />
+          <button onClick={handleSearch}>검색</button>
+        </div>
+
+        {/* 음식점 목록 표시 및 지역 검색 기능 */}
+        <div className="restaurant-list">
+          {selectedRestaurant ? (
+            <div className="restaurant-details">
+              <h5>{selectedRestaurant.name}</h5>
+              <p>주소: {selectedRestaurant.address}</p>
+              <p>전화번호: {selectedRestaurant.telNo}</p>
+              <p>음식종류: {selectedRestaurant.detailBizName}</p>
+              <p>메뉴: {selectedRestaurant.menu}</p>
+              <button onClick={() => handleFavorite(selectedRestaurant)}>찜하기</button>
+              <button onClick={handleBackToList}>뒤로가기</button>
+            </div>
+          ) : (
             <ul>
               {restaurants.length === 0 ? (
                 <p>검색 결과가 없습니다.</p>
               ) : (
                 restaurants
-                  .filter((restaurant) => !restaurant.name.includes("주차장")) // 주차장 필터링
                   .map((restaurant) => {
                     const address = `${restaurant.upperAddrName || ''} ${restaurant.middleAddrName || ''} ${restaurant.roadName || ''} ${restaurant.firstBuildNo || ''}`.trim();
-                    const restaurantName = restaurant.name.replace(/\[.*?\]/g, "").trim(); // []와 그 안의 내용 제거
-
+                    const restaurantName = restaurant.name.replace(/\[.*?\]/g, "").trim();
                     return (
-                      <li key={restaurant.id} onClick={() => handleRestaurantClick(restaurant)}> {/* 클릭 시 상세보기 이동 */}
+                      <li key={restaurant.id} onClick={() => handleRestaurantClick(restaurant)}>
                         <strong>{restaurantName}</strong>
                         <p>주소: {address}</p>
                         <p>전화번호: {restaurant.telNo}</p>
@@ -247,18 +261,8 @@ function RestaurantMap() {
                   })
               )}
             </ul>
-
-            {/* 나의 찜 버튼 추가 */}
-            <div style={{ marginTop: '20px' }}>
-              <Link to={`/favorites/${localStorage.getItem("id")}`}>
-                <button style={{ width: '100%', padding: '10px', backgroundColor: '#4caf50', color: 'white', border: 'none', borderRadius: '4px' }}>
-                  나의 찜 목록 보기
-                </button>
-              </Link>
-            </div>
-
-          </>
-        )}
+          )}
+        </div>
       </div>
     </div>
   );

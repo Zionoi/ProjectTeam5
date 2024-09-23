@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import './FriendsRequest.css';
 
 function FriendsRequest({ memId = localStorage.getItem('id') }) { // loggedInUser로 로그인한 사용자 정보를 전달받음
   const [friendId, setFriendId] = useState(''); // 친구 ID를 입력받기 위한 상태
@@ -44,7 +45,7 @@ function FriendsRequest({ memId = localStorage.getItem('id') }) { // loggedInUse
   };
 
   return (
-    <div className="friends-section">
+    <div className="friends-section-request">
       <h3>친구 추가</h3>
       <input
         type="text"
@@ -52,7 +53,9 @@ function FriendsRequest({ memId = localStorage.getItem('id') }) { // loggedInUse
         value={friendId} // 입력 필드와 상태 연결
         onChange={e => setFriendId(e.target.value)} // 입력값을 상태로 저장
       />
-      <button onClick={sendFriendRequest}>친구 요청</button>
+      <div className="button-con">
+        <button onClick={sendFriendRequest}>친구 요청</button>
+      </div>
       {message && <p>{message}</p>}
     </div>
   );

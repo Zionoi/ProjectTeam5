@@ -109,32 +109,32 @@ public class BoardService {
 		
 	}
 	
-	//이미지가 있는 경우 수정
+	// 이미지가 있는 경우 수정
 	public void updateBoard(Board board, MultipartFile[] newImages, String[] oldImagesName, String[] oldImagesPath ) throws Exception {
 	    Board beforeBoard = boardRepository.findById(board.getBNum()).get();
-	    
-	    System.out.println("보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드 :" + board);
 
 	    // 기존 데이터를 업데이트
 	    beforeBoard.setBTitle(board.getBTitle());
 	    beforeBoard.setBContent(board.getBContent());
 
-	    // 이미지가 있으면 새 이미지 저장
+	    // 새 이미지와 기존 이미지 경로 및 이름 리스트
+	    List<String> path = new ArrayList<>();
+	    List<String> name = new ArrayList<>();
+
+	    // 기존 이미지가 존재하는 경우 그대로 유지
+	    if (oldImagesName != null && oldImagesPath != null && oldImagesName.length > 0 && oldImagesPath.length > 0) {
+	        name.addAll(List.of(oldImagesName));
+	        path.addAll(List.of(oldImagesPath));
+	    }
+
+	    // 새 이미지가 있는 경우 새 이미지 추가
 	    if (newImages != null && newImages.length > 0) {
 	        File dir = new File(uploadDir);
-	        List<String> path = new ArrayList<>();
-	        List<String> name = new ArrayList<>();
-	        
+
 	        if (!dir.exists()) {
 	            dir.mkdirs();  // 디렉토리가 없으면 생성
 	        }
-	        // 기존 이미지 정보 저장
-	        for(int i=0; i<oldImagesName.length;i++) {
-	        	name.add(oldImagesName[i]);
-	        	path.add(oldImagesPath[i]);
-	        }
-	        
-	        
+
 	        // 새 이미지 저장 및 경로 저장
 	        for (MultipartFile image : newImages) {
 	            String fileName = UUID.randomUUID().toString() + "_" + image.getOriginalFilename();
@@ -143,13 +143,15 @@ public class BoardService {
 	            path.add("/files/" + fileName);
 	            name.add(fileName);
 	        }
-	        
-	        // 기존 이미지 대체 (기존 이미지를 덮어씌움)
-	        beforeBoard.setImgName(name);
-	        beforeBoard.setImgPath(path);
 	    }
 
+	    // 기존 이미지와 새 이미지를 모두 포함하여 업데이트
+	    beforeBoard.setImgName(name);
+	    beforeBoard.setImgPath(path);
+
+	    // 업데이트된 게시물 저장
 	    boardRepository.save(beforeBoard);
+
 	}
 	
 }

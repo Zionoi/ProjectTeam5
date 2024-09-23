@@ -91,13 +91,10 @@ public class BoardController {
 		System.out.println("컨트롤러newImages보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드 :" + newImages);
 		System.out.println("컨트롤러oldImagesname보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드 :" + oldImagesName);
 		System.out.println("컨트롤러oldImagespath보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드보드 :" + oldImagesPath);
-	
-	    // 이미지가 있으면 처리, 없으면 그냥 넘어감
-	    if (newImages != null && newImages.length > 0) {
-	        boardService.updateBoard(board, newImages, oldImagesName, oldImagesPath);
-	    } else {
-	        boardService.updateBoard(board);  // 이미지가 없는 경우
-	    }
+
+
+        boardService.updateBoard(board, newImages, oldImagesName, oldImagesPath);
+	    
 
 	    return "업데이트 완료";
 	}

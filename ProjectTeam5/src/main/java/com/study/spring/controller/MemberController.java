@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -52,7 +53,8 @@ public class MemberController {
 		    @RequestPart("member") Member member,  // 회원 정보를 JSON으로 받음
 		    @RequestPart(value = "image", required = false) MultipartFile img  // 이미지 파일은 Multipart로 받음
 		) throws Exception {
-
+			member.setTodayVisit(0L);
+			member.setTotalVisit(0L);
 		    // 이미지가 있으면 처리, 없으면 그냥 넘어감
 		    if (img != null && !img.isEmpty()) {
 		        memberService.insertMember(member, img);
@@ -156,6 +158,13 @@ public class MemberController {
         
         // 변경된 정보를 저장
         memberService.updateMember(member);
+    }
+    
+ // 매일 자정에 실행 (cron 표현식: 초, 분, 시, 일, 월, 요일)
+    @Scheduled(cron = "0 20 10 * * *")
+    public void resetDailyVisits() {
+    	System.out.println("방문자수 초기화 함수 실행 확인");
+        memberService.resetDailyVisits();
     }
     
     
