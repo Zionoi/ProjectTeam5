@@ -25,10 +25,10 @@ function MainPanel({ onLogout, hostId, setHostId}) { // onLogout props 추가
     
   // }, [paramHostId, setHostId]);
 
-    const handleLogout = () => {
-      onLogout(); // 부모 컴포넌트의 로그아웃 핸들러 호출
-      navigate('/'); // 로그인 페이지로 리다이렉트
-    };
+    // const handleLogout = () => {
+    //   onLogout(); // 부모 컴포넌트의 로그아웃 핸들러 호출
+    //   navigate('/'); // 로그인 페이지로 리다이렉트
+    // };
 
     //서버 로그인한상태로 껐다가 다시켰을때 빈 메인페널만 보이던 문제 수정 코드
     // useEffect(()=>{
@@ -48,7 +48,7 @@ function MainPanel({ onLogout, hostId, setHostId}) { // onLogout props 추가
         </div>
       
         <div className="left-panel">
-          <button onClick={handleLogout} className="logout-button">로그아웃</button>
+          <button onClick={onLogout} className="logout-button">로그아웃</button>
         </div>
 
         <HeaderSection hostId={hostId}/>
