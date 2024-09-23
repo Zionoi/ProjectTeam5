@@ -16,7 +16,18 @@ public class WalkingCourseService {
 
 	public List<WalkingCourse> totalWalkingCourse() {
 			
-		return WalkingCourseRepository.findAll();
+		return walkingCourseRepository.findAll();
 	}
+	
+	 // 지역에 따른 소속 지역 목록을 반환
+	  // 지역에 따른 소속 지역 목록을 반환
+    public List<String> getSubRegionsByRegion(String region) {
+        return walkingCourseRepository.findSubRegionsByRegion(region);
+    }
+
+    // 소속 지역에 따른 산책로 목록을 반환
+    public List<WalkingCourse> getWalkingCoursesBySubRegion(String subRegion) {
+        return walkingCourseRepository.findWalkingCoursesBySubRegion(subRegion);
+    }
 
 }
