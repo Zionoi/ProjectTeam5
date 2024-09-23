@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import './MessageDetail.css';
 
 const MessageDetail = ({ message, onClose, fetchMessages, setContent }) => {
   const [messageDetail, setMessageDetail] = useState(null); // 메시지 상세 상태
@@ -51,30 +52,38 @@ const MessageDetail = ({ message, onClose, fetchMessages, setContent }) => {
   };
 
   return (
-    <div>
-      <h2>{messageDetail.memId}님에게 온 쪽지!</h2>
-      <p>{messageDetail.mcontent}</p>
-      <p style={{ textAlign: 'right' }}>{new Date(messageDetail.createSysdate).toLocaleString()}</p>
+    <div className="message-detail-container">
 
-      <div>
+      <h2 className="message-detail-header">{messageDetail.memId}님에게 온 쪽지!</h2>
+      <p className="message-detail-content">{messageDetail.mcontent}</p>
+      <p className="message-detail-date">
+        {new Date(messageDetail.createSysdate).toLocaleString()}
+      </p>
+
+      {/* 버튼들을 textarea 위쪽에 위치시킴 */}
+      <div className="message-actions">
+        <button className="delete-button" onClick={() => setContent('inbox')}>뒤로가기</button>
+        <button className="delete-button" onClick={handleDelete}>삭제</button>
+      </div>
+
         {!replyMode ? (
-          <button onClick={handleReplyMode}>답장하기</button>  
+          <button className="reply-button" onClick={() => setReplyMode(true)}>답장하기📩</button>
         ) : (
           <div>
             <textarea
+              className="reply-textarea"
               placeholder="답장 내용을 입력하세요..."
               value={replyContent}
               onChange={e => setReplyContent(e.target.value)}
-              rows="4"
-              style={{ width: '100%' }}
             ></textarea>
-            <button onClick={handleReply}>답장 전송</button>  {/* 답장 전송 버튼 */}
+            <button className="reply-button" onClick={handleReply}>답장 전송</button>
           </div>
+          
         )}
-        <button onClick={handleDelete}>삭제</button>  {/* 삭제 버튼 */}
-        <button onClick={() => setContent('inbox')}>뒤로가기</button>  {/* 쪽지함으로 돌아가는 버튼 */}
+        
+        
       </div>
-    </div>
+    
   );
 };
 

@@ -4,7 +4,7 @@
   width: 750px; /*너비*/
   height: 500px; /*높이*/
   overflow-y: overlay; /*세로 스크롤을 오버레이 방식으로*/
-  top: 160px; left:200px; /*상단 및 좌측으로부터의 위치*/
+  top: 165px; left:210px; /*상단 및 좌측으로부터의 위치*/
   margin: 20px; /*외부 여백*/
   padding:60px 20px 20px 20px; /*내부 여백 (위쪽은 60px)*/
   border-radius:16px; /*모서리를 둥글게*/
@@ -26,7 +26,7 @@
 .guestbook-title-box {
   display:flex;
   position:absolute;
-  top:180px; left:220px; 
+  top:185px; left:230px; 
   width:750px;
   height: 50px;
   border-radius: 16px 16px 0px 0px ;

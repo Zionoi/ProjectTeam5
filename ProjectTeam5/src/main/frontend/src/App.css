@@ -17,11 +17,11 @@
 }
 
 .main-content {
-  position:relative;
+  position:absolute;
   top:185px;
   flex: 3;
   display: flex;
-  left:50px;
+  left:60px;
 }
 
 .left-content {

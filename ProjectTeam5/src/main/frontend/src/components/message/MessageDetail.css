@@ -1,0 +1,80 @@
+/* MessageDetail.css */
+
+.message-detail-container {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    width: 400px;
+    max-width: 600px;
+    margin: 0 auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .message-detail-header {
+    font-size: 1.6rem;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .message-detail-content {
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 20px;
+    white-space: pre-wrap; /* 줄바꿈을 유지 */
+  }
+  
+  .message-detail-date {
+    text-align: right;
+    color: #888;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+  }
+  
+  /* 버튼들을 textarea 위쪽에 위치하도록 수정 */
+    .message-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+        margin-bottom: 10px;
+    }
+
+  
+  .reply-button, .delete-button {
+    padding: 10px 15px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .reply-button {
+    background-color: #28c242;
+    color: white;
+  }
+  
+  .reply-button:hover {
+    background-color: #239a38;
+  }
+  
+  .delete-button {
+    background-color: #ff5c5c;
+    color: white;
+    float: right;
+  }
+  
+  .delete-button:hover {
+    background-color: #ff2b2b;
+  }
+  
+  textarea.reply-textarea {
+    width: 360px;
+    height: 100px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    margin-bottom: 10px;
+    resize: vertical;
+  }
+  
