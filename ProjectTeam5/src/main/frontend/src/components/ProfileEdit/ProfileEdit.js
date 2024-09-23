@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios'; // axios 임포트
 import './ProfileEdit.css'; // 스타일 파일
 import { useNavigate } from 'react-router-dom';
 
 function ProfileEdit() {
-  const [form, setForm] = useState({
+  // 밑에 인풋창 기본값에 넣어줄 빈 유즈스테이트 변수
+  const [form, setForm] = useState({ 
     nickname: '',
     email: '',
     name: '',
@@ -12,13 +13,52 @@ function ProfileEdit() {
     confirmPassword: '',
     phone: '',
     address: '',
+    birthday: '',
+    gender: '',
+    imgName: '',
+    imgPath: '',
+    comments: '',
+    greeting: '',
   });
-
-  const [errorMessage, setErrorMessage] = useState('');
-  const [successMessage, setSuccessMessage] = useState('');
-  const [userId, setUserId] = useState(localStorage.getItem('id'))
+  const [errorMessage, setErrorMessage] = useState(''); // 에러메세지 넣을 깡통
+  const [successMessage, setSuccessMessage] = useState(''); // 성공 메세지 넣을 깡통
+  const [userId, setUserId] = useState(localStorage.getItem('id'))  // 사용자 정보 담을 유즈스테이트
 
   const navigate = useNavigate();
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await axios.get(`/member/get/${userId}`);
+        
+        // 데이터가 성공적으로 받아졌다면 폼에 초기값을 설정
+        const { nickname, email, name, phone, address, birthday, gender, imgName, imgPath, comments, greeting } = response.data;
+
+        setForm({
+          nickname: nickname || '',
+          email: email || '',
+          name: name || '',
+          password: '', // 비밀번호는 보안상 표시하지 않음
+          confirmPassword: '', // 비밀번호 확인도 비워둠
+          phone: phone || '',
+          address: address || '',
+          birthday: birthday || '',
+          gender: gender || '',
+          imgName: imgName || '',
+          imgPath: imgPath || '',
+          comments: comments || '',
+          greeting: greeting || '',
+        });
+
+      } catch (error) {
+        setErrorMessage('사용자 정보를 불러오는 중 오류가 발생했습니다.');
+        console.error('Error fetching user data:', error);
+      }
+    };
+
+    fetchUserData();
+  }, [userId]);
+
+ 
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -51,6 +91,12 @@ function ProfileEdit() {
       pass: form.password,
       phone: form.phone,
       address: form.address,
+      birthday: form.birthday,
+      gender: form.gender,
+      imgName: form.imgName,
+      imgPath: form.imgPath,
+      comments: form.comments,
+      greeting: form.greeting,
     })
     .then((response) => {
       if (response.data === 'success') {
@@ -126,18 +172,26 @@ function ProfileEdit() {
             required
           />
           <input
-            type="tel"
-            name="phone"
-            placeholder="변경하실 전화번호를 입력해주세요."
-            value={form.phone}
+            type="text"
+            name="address"
+            placeholder="변경하실 주소를 입력해주세요."
+            value={form.address}
             onChange={handleChange}
             className="profile-input"
           />
           <input
             type="text"
-            name="address"
-            placeholder="변경하실 주소를 입력해주세요."
-            value={form.address}
+            name="birthday"
+            placeholder="생일을 입력해주세요."
+            value={form.birthday}
+            onChange={handleChange}
+            className="profile-input"
+          />
+          <input
+            type="text"
+            name="gender"
+            placeholder="성별을 입력해주세요."
+            value={form.gender}
             onChange={handleChange}
             className="profile-input"
           />

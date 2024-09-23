@@ -1,12 +1,13 @@
 /* ProfileEdit.css */
 .profile-edit-container {
-    position: absolute ;
-    top:130px; left: 150px;
-    height: 600px;
-    display: flex;
-    flex-direction: column;
+    position:absolute; /*절대 위치 지정 */
+    width: 750px; /*너비*/
+    height: 500px; /*높이*/
+    top: 130px; left:200px; /*상단 및 좌측으로부터의 위치*/
+    /* flex-direction: column;
     align-items: center;
-    padding: 20px;
+    justify-content: center; */
+    padding: 20px; /*내부 여백 (위쪽은 60px)*/
     font-family: 'Noto Sans KR', sans-serif;
   }
   
@@ -63,15 +64,15 @@
   
   .profile-edit-buttons {
     display: flex;
-    gap: 10px;
+    gap: 20px;
     justify-content: center;
-    margin-top: 20px;
+    margin-top: 500px;
   }
   
   .profile-button {
-    position: relative;
-    width: 100px; height: 40px;
-    top:420px; left:-250px;
+    position:absolute; /*절대 위치 지정 */
+    top: 570px; left:650px;
+
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
@@ -81,6 +82,7 @@
   
   .cancel {
     background-color: #ccc;
+    left: 570px;
     color: #fff;
   }
   
