@@ -22,13 +22,16 @@
   .fortune-section li { 
     margin-bottom: 50px;
   }
-  
+  .iconFor{
+    position: absolute;
+    top:-50px; left:-80px;
+  }
   .fortune-btn {
-    background-color: white;
-    color: #a3a3a3;
     border: none;
     cursor: pointer;
-    font-size: 25px;
+    cursor: pointer;
+    border:none;
+    background-color: transparent;
   }
   
   

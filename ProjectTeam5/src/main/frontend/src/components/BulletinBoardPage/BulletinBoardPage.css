@@ -4,7 +4,7 @@
   width: 750px;
   height: 500px;
   overflow-y: overlay;
-  top: 165px; left:200px;
+  top: 165px; left:210px;
   margin: 20px;
   padding:60px 40px 20px 40px;
   border-radius:16px;
@@ -31,7 +31,7 @@
 .board-title-box {
   display:flex;
   position:absolute;
-  top:185px; left:220px; 
+  top:185px; left:230px; 
   width:750px;
   height: 50px;
   border-radius: 16px 16px 0px 0px ;

@@ -3,6 +3,7 @@ import './Modal.css'; // 스타일 파일
 import WriteMessage from '../message/WriteMessage';
 import Inbox from '../message/Inbox';
 import MessageDetail from '../message/MessageDetail';
+import xbtn from '../../img/xbuttonHover.png';
 
 const Modal = ({ isOpen, onClose, content, setContent, selectedMessage, setSelectedMessage, recipient, fetchMessages }) => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -46,14 +47,17 @@ const Modal = ({ isOpen, onClose, content, setContent, selectedMessage, setSelec
   };
 
   return (
-    <div className="modal-overlay" onMouseMove={handleMouseMove} onMouseUp={handleMouseUp}>
-      <div
-        className="modal-content"
-        onMouseDown={handleMouseDown}
-        style={{ transform: `translate(${position.x}px, ${position.y}px)` }}
-      >
-        <button className="modal-close" onClick={onClose}>X</button>
-        {renderContent()}
+    <div className="modal-box">
+      <div className="modal-background" onMouseMove={handleMouseMove} onMouseUp={handleMouseUp}>
+        <div
+          className="modal-content"
+          onMouseDown={handleMouseDown}
+          style={{ transform: `translate(${position.x}px, ${position.y}px)` }}
+        >
+          <div className="MCBtn">
+          <button className="modal-close" onClick={onClose}></button></div>
+          {renderContent()}
+        </div>
       </div>
     </div>
   );

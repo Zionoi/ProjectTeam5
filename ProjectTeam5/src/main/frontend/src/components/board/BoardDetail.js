@@ -65,11 +65,13 @@ function BoardDetail({ hostId }) {
       <div className="board-title-inbox">
         <button onClick={BoardList}
         className="board-listback" >목록으로</button>
-        {/* 수정 및 삭제 버튼 추가 */}
-        <div>
-          <button onClick={handleEdit} className="board-edit-btn">수정</button>
-          <button onClick={handleDelete} className="board-edit-btn">삭제</button>
-        </div>
+        {/* 수정 및 삭제 버튼은 hostId와 loggedInUserId가 같을 때만 표시 */}
+        {hostId === localStorage.getItem("id") && (
+          <div>
+            <button onClick={handleEdit} className="board-edit-btn">수정</button>
+            <button onClick={handleDelete} className="board-edit-btn">삭제</button>
+          </div>
+        )}
       </div>
 
       {/* 이미지 슬라이더 */}
