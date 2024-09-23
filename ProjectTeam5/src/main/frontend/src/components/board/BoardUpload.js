@@ -138,8 +138,6 @@ function BoardUpload({ hostId, setHostId }) {
           업로드
         </button>
         </div>
-        </div>
-      </div>
     </form>
   );
 }
