@@ -130,7 +130,13 @@ function WalkingCourse() {
                                 <td>주소</td><td className='address' colSpan={7}>{selectedCourseDetails.address}</td>
                             </tr>
                             <tr>
-                                <td>산책 경로</td><td className='courseDescription' colSpan={7}>{selectedCourseDetails.courseDescription}</td>
+                                <td>산책 경로</td><td className='courseDescription' colSpan={7}>{selectedCourseDetails.courseDescription.replace(/(\?|\-|\~)/g, match => {
+                                    if (match === '?') return '→';
+                                    if (match === '-') return '→';
+                                    if (match === '~') return '→';
+                                    return match; // 경로간 특수문자를 화살표 하나로 통일후 반환
+                                    })}
+                                </td>
                             </tr>
                             <tr>
                                 <td>설명</td><td className='additionalDescription' colSpan={7}>{selectedCourseDetails.additionalDescription}</td>
