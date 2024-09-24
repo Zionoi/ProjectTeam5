@@ -1,7 +1,7 @@
 .modal-box {
   position: fixed;
-  top: 0;
-  left: 0;
+  top: 500px;
+  left: 500px;
   max-width: 100vw;
   max-height: 100vh;
   display: flex;
@@ -23,7 +23,7 @@
   overflow: auto; /* 콘텐츠가 넘칠 경우 스크롤이 가능하도록 설정 */
   z-index: 1001;
 
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);  /*  그림자 효과 */
+  box-shadow: 0 4px 4px rgba(85, 85, 85, 0.2);  /*  그림자 효과 */
 
   /* 모달 내용은 여전히 클릭 가능 */
   pointer-events: all;
@@ -39,12 +39,13 @@
 
 .modal-close {
   background-image: url(../../img/xbuttonHover.png);
-  background-size: 20px;
+  background-size: 15px;
   background-position-x: center;
   background-position-y: center;
-  width: 100%;
-  height: 100%;
+  width: 20px;
+  height: 20px;
   cursor: pointer;
+  background-color: transparent;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

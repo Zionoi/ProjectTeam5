@@ -7,7 +7,7 @@
     width: 400px;
     max-width: 600px;
     margin: 0 auto;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 4px rgba(73, 73, 73, 0.1);
   }
   
   .message-detail-header {

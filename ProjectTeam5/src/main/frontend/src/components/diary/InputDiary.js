@@ -65,7 +65,6 @@ function InputDiary() {
                         required
                     />
                 </div>
-                <button>전체공개</button>
                 <button type="submit" className="diarysubmit">등록</button>
             </form>
         </div>
