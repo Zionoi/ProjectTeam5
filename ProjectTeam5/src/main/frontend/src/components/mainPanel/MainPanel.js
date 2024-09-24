@@ -49,9 +49,9 @@ function MainPanel({ onLogout, hostId, setHostId}) { // onLogout props 추가
         </div>
         
       
-        <div className="left-panel">
+        {/* <div className="left-panel">
           <button onClick={onLogout} className="logout-button">로그아웃</button>
-        </div>
+        </div> */}
 
         <HeaderSection hostId={hostId}/>
         
