@@ -3,10 +3,10 @@
     display: flex;
     justify-content: space-between;
     max-width: 1200px;
-    margin: 160px 210px ;
+    margin: 185px 230px ;
     padding: 20px;
-    width: 765px;
-    height: 470px;
+    width: 750px;
+    height: 500px;
     background-color: #f9f9f9;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -18,7 +18,7 @@
     flex: 1;
     padding: 20px;
     margin: 10px;
-    height: 420px;
+    height: 440px;
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -27,18 +27,20 @@
 /* 검색 섹션 */
 .walking-search {
     width: 225px;
-    height: 420px;
+    
+    
 }
 
 .walking-search h1, .walking-search h2 {
     color: #333;
+    font-size: 20px;
 }
 
 .walking-search select {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    font-size: 16px;
+    width: 135px;
+    padding: 0px;
+    margin: 5px 0;
+    font-size: 13px;
     border: 1px solid #ccc;
     border-radius: 5px;
 }
@@ -49,7 +51,7 @@
 }
 
 .walking-search ul li {
-    padding: 10px;
+    padding: 5px;
     background-color: #007bff;
     color: #fff;
     margin-bottom: 10px;
@@ -73,13 +75,13 @@
 }
 
 .detailWalking table {
-    width: 100%;
+    width: 460px;
     border-collapse: collapse;
     margin-top: 20px;
 }
 
 .detailWalking td {
-    padding: 10px;
+    padding: 5px;
     border: 1px solid #ddd;
 }
 
@@ -118,6 +120,6 @@ p {
 
     .detailWalking table td {
         padding: 8px;
-        font-size: 14px;
+        font-size: 10px;
     }
 }
