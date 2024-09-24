@@ -1,6 +1,7 @@
 package com.study.spring.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,5 +30,9 @@ public class WalkingCourseService {
     public List<WalkingCourse> getWalkingCoursesBySubRegion(String subRegion) {
         return walkingCourseRepository.findWalkingCoursesBySubRegion(subRegion);
     }
+
+	public Optional<WalkingCourse> findById(String esntlId) {
+		return walkingCourseRepository.findById(esntlId);
+	}
 
 }
