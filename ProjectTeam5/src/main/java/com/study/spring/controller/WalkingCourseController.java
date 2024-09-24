@@ -37,4 +37,11 @@ public class WalkingCourseController {
     public List<WalkingCourse> getWalkingCourses(@RequestParam("subRegion") String subRegion) {
         return walkingCourseService.getWalkingCoursesBySubRegion(subRegion);
     }
+    
+    
+    @GetMapping("/courses/{courseId}")
+    public WalkingCourse findById(@PathVariable("courseId") String esntlId) {
+    	return walkingCourseService.findById(esntlId).get();
+    }
+    
 }
