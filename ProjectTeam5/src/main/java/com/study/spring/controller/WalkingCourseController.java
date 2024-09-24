@@ -38,7 +38,7 @@ public class WalkingCourseController {
         return walkingCourseService.getWalkingCoursesBySubRegion(subRegion);
     }
     
-    
+    // 선택한 산책경로 정보 가져옴
     @GetMapping("/courses/{courseId}")
     public WalkingCourse findById(@PathVariable("courseId") String esntlId) {
     	return walkingCourseService.findById(esntlId).get();
