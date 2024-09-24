@@ -49,15 +49,15 @@
 
 .inbox-container {
 padding: 20px;
-background-color: #f7f7f7;
+background-color: #ffffff;
 border-radius: 10px;
 max-width: 600px;
 margin: 0 auto;
-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+box-shadow: 0 4px 4px rgba(145, 145, 145, 0.1);
 }
 
 .inbox-header {
-font-size: 1.8rem;
+font-size: 11pt;
 text-align: center;
 margin-bottom: 20px;
 color: #333;
@@ -74,7 +74,7 @@ cursor: pointer;
 }
 
 .message-item:hover {
-background-color: #f0f0f0;
+background-color:#c5c9ff;
 }
 
 .message-item.unread {
@@ -83,8 +83,9 @@ background-color: #e7f3ff;
 }
 
 .message-sender {
-font-size: 1.2rem;
-color: #0073e6;
+font-size: 10pt;
+font-weight: 600;
+color: #7982ff;
 }
 
 .message-status {
@@ -98,7 +99,8 @@ background-color: #ff5c5c;
 color: white;
 border: none;
 border-radius: 5px;
-padding: 5px 10px;
+padding: 4px 8px;
+margin:0px 4px 0px 4px;
 cursor: pointer;
 transition: background-color 0.2s;
 }

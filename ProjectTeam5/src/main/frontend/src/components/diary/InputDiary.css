@@ -4,21 +4,22 @@
     height: 500px;
     border-radius: 30px;
     position:absolute;
-    top: 185px; left:300px;
+    top: 185px; left:230px;
+    padding:20px 40px 20px 40px;
 }
 
 .inputdiary-title {
     position:relative;
-    top:-40px;
+    top:10px;
     font-family: "Noto Sans KR", sans-serif;
-    font-size:15pt;
-    font-weight: bold;
+    font-size:11pt;
+    font-weight: 600;
     color:rgb(63, 63, 63);
 }
 
 .input-title{
-    position: absolute;
-    top:10px; left:50px;
+    position: relative;
+    top:0px; left:0px;
     border:none;
     background-color: transparent;
     font-family: "Noto Sans KR", sans-serif;
@@ -40,9 +41,8 @@
 
 .form-content {
     position: relative;
-    margin: 40px 50px 20px ;
     width: 600px;
-    height: 380px;
+    height: 350px;
     background-color: aliceblue;
 }
 
@@ -69,7 +69,7 @@
 
 .diarysubmit {
     position:relative;
-    top:-10px;left:620px;
+    top:5px;left:560px;
     background-color: transparent;
     font-family: "Noto Sans KR", sans-serif;
     font-size:10pt;
@@ -79,5 +79,5 @@
 }
 
 .diarysubmit:hover {
-    color:#7982ff(51, 51, 51);
+    background-color:#7982ff(51, 51, 51);
 }

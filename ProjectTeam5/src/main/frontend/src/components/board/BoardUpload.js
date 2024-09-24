@@ -122,21 +122,13 @@ function BoardUpload({ hostId, setHostId }) {
               onChange={(e) => setBContent(e.target.value)} 
             />
           </div>
-          <button type="button" className="goBack" onClick={handleGoBack}>
+          <button type="button" className="BUC" onClick={handleGoBack}>
             돌아가기
           </button>
           <button type="submit" className="BUB">
             업로드
           </button>
         </div>
-        <button onClick={BoardList}
-        className="BUC">
-          돌아가기
-        </button>
-        <button type="submit"
-        className="BUB">
-          업로드
-        </button>
         </div>
     </form>
   );

@@ -38,6 +38,8 @@ body {
 }
 
 .signUp,.find { /* 회원가입, 아이디/비번 찾기 버튼 테이블 */
+  position: relative;
+  left:20px; top: -70px;
   color: #ffffff;
   font-family: "Noto Sans KR", sans-serif;
   font-weight: 400;
@@ -56,6 +58,8 @@ body {
 
 
 .login-button { /* 로그인 버튼 */
+  position: relative;
+  top:-85px; left:230px;
   padding: 25px 13px;
   background-color: #0397aa;
   font-family: "Roboto", sans-serif;
