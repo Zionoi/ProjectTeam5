@@ -98,60 +98,27 @@ function BoardEdit({ hostId, setHostId }) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div>
-        <label>
-          제목:
-          <input 
-            type="text" 
-            value={bTitle} 
-            onChange={(e) => setBTitle(e.target.value)} 
-          />
-        </label>
-      </div>
-      <div>
-        <label>
-          내용:
-          <textarea 
-            value={bContent} 
-            onChange={(e) => setBContent(e.target.value)} 
-          />
-        </label>
-      </div>
-      <div>
-        <input 
-          type="file" 
-          accept="image/*" 
-          multiple  // 다중 파일 선택 허용
-          onChange={handleImageChange} 
-        />
-      </div>
-
+      <div className="BoardUpload-box">
+      <h6 className="BUTitle">이미지 업로드</h6>
+      <div className="B-ImgPrevBox">
+      <div className="BoardUpload-Imgbox">
       {/* 기존 이미지 출력 및 삭제 버튼 */}
       {existingImagesName.length > 0 && (
-        <div style={{ display: "flex", flexWrap: "wrap", marginTop: "20px" }}>
+        <div style={{ display: "flex", flexDirection: "row", gap: "10px" }}>
           {existingImagesName.map((img, index) => (
-            <div key={index} style={{ position: "relative", margin: "10px" }}>
+            <div key={index} style={{}}>
               <img
                 src={existingImagesPath[index]}
                 alt={`Existing Image ${index}`}
-                style={{ maxWidth: "150px", maxHeight: "150px", objectFit: "cover" }}
+                style={{ width: "150px", height: "150px", objectFit: "cover" }}
               />
               <button
+              className="board-ImgD"
                 type="button"
                 onClick={() => handleRemoveImage(index, true)}
                 style={{
-                  position: "absolute",
-                  top: "5px",
-                  right: "5px",
-                  backgroundColor: "red",
-                  color: "white",
-                  border: "none",
-                  borderRadius: "50%",
-                  cursor: "pointer",
-                }}
-              >
-                X
-              </button>
+                  display: "flex", flexDirection: "row", gap: "10px"
+                }}/>
             </div>
           ))}
         </div>
@@ -159,38 +126,59 @@ function BoardEdit({ hostId, setHostId }) {
 
       {/* 새로 선택된 이미지 출력 및 삭제 버튼 */}
       {selectedImages.length > 0 && (
-        <div style={{ display: "flex", flexWrap: "wrap", marginTop: "20px" }}>
+        <div style={{ display: "flex", flexDirection: "row", gap: "10px" }}>
           {selectedImages.map((image, index) => (
-            <div key={index} style={{ position: "relative", margin: "10px" }}>
+            <div key={index} style={{  }}>
               <img
                 src={image.preview}
                 alt={`New Image ${index}`}
-                style={{ maxWidth: "150px", maxHeight: "150px", objectFit: "cover" }}
+                style={{ width: "150px", height: "150px", objectFit: "cover" }}
               />
               <button
+                className="board-ImgD"
                 type="button"
                 onClick={() => handleRemoveImage(index)}
                 style={{
-                  position: "absolute",
-                  top: "5px",
-                  right: "5px",
-                  backgroundColor: "red",
-                  color: "white",
-                  border: "none",
-                  borderRadius: "50%",
-                  cursor: "pointer",
-                }}
-              >
-                X
-              </button>
+                  display: "flex", flexDirection: "row", gap: "10px"
+                }}/>
             </div>
           ))}
         </div>
       )}
-
-      <button type="submit" style={{ marginTop: "20px" }}>
+      </div>
+      <div>
+      <label className="B-ImgBox">
+            <input
+              className="board-uploadImgBox"
+              type="file" 
+              accept="image/*" 
+              multiple  // 다중 파일 선택 허용
+              onChange={handleImageChange} 
+            />+
+          </label>
+          </div>
+      </div>
+        <div>
+          <input 
+            className="BoardUploadTitle"
+            placeholder="제목을 입력하세요."
+            type="text" 
+            value={bTitle} 
+            onChange={(e) => setBTitle(e.target.value)} 
+          />
+      </div>
+      <div>
+          <textarea
+            className="BoardUploadContent"
+            placeholder="나의 이야기를 적어보세요."
+            value={bContent} 
+            onChange={(e) => setBContent(e.target.value)} 
+          />
+      </div>
+      <button type="submit" style={{ marginTop: "20px" }} className="BUB">
         수정 완료
       </button>
+      </div>
     </form>
   );
 }
