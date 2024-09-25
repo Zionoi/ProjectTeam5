@@ -1,19 +1,14 @@
 package com.study.spring.domain;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.EntityListeners;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Column;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 @Entity
 @Getter
@@ -24,10 +19,13 @@ public class Vote {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;  // 투표 고유 ID
+    private Long voteId;  // 투표 고유 ID
 
     @Column(nullable = false)
-    private String title;  // 투표 제목
+    private String voteTitle;  // 투표 제목
+    
+    @Column(nullable = false)
+    private String memId;  // 투표 생성자 ID
 
     @Column(nullable = false)
     private boolean isOpenToAllFriends;  // 전체 친구 참여 여부
@@ -35,11 +33,15 @@ public class Vote {
     private LocalDateTime endTime;  // 투표 종료 시점 (선택적)
 
     @Column(nullable = false)
-    private String creatorId;  // 투표 생성자 ID (외래키 설정 X)
-
-    private List<String> participantIds;  // 투표 참여 가능한 친구 ID 목록 (외래키 설정 X)
+    private List<String> friends;  // 투표 참여자 ID
 
     @Column(nullable = false)
     private boolean isEnded;  // 투표 종료 여부
 
+    // 산책로별 투표 수를 관리하는 필드
+    @ElementCollection
+    @CollectionTable(name = "vote_course_count", joinColumns = @JoinColumn(name = "vote_id"))
+    @MapKeyColumn(name = "walking_course_esntl_id")
+    @Column(name = "vote_count")
+    private Map<Long, Integer> walkingCourseVoteCounts;  // 산책로 ID와 투표 수를 매핑
 }
