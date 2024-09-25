@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.study.spring.domain.Friends;
 import com.study.spring.domain.Vote;
@@ -83,14 +84,23 @@ public class VoteService {
         return voteCount;
     }
     
+    @Transactional(readOnly = true)
+    public List<Vote> getListMyVote(String memId) {
+    	System.out.println("보트 서비스 내 투표 리스트 memId : "+ memId);
+    	System.out.println("보트 서비스 내 투표 리스트 voteRepository.findByMemIdAndIsEnded(memId, false : "+ voteRepository.findByMemId(memId));
+        List<Vote> votes = voteRepository.findByMemId(memId);
+        // Force initialization of participantIds collection
+        votes.forEach(vote -> vote.getParticipantIds().size());
+        return votes;
+    }
     
-	public List<Vote> getListMyVote(String memId) {
-		
-		return voteRepository.findByMemIdAndIsEnded(memId, false);
-	}
+//	public List<Vote> getListMyVote(String memId) {
+//		
+//		return voteRepository.findByMemId(memId);
+//	}
 	
 	public List<Vote> getListEndedMyVote(String memId){
-		return voteRepository.findByMemIdAndIsEnded(memId, true);
+		return voteRepository.findByMemId(memId);
 	}
 	
 	public List<Vote> getListInvitedVote(String memId){

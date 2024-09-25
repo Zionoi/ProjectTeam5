@@ -1,15 +1,27 @@
 package com.study.spring.domain;
 
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import jakarta.persistence.CollectionTable;
+import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.MapKeyColumn;
+import jakarta.persistence.SequenceGenerator;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Data
 @Entity
 @Getter
 @Setter
@@ -29,8 +41,6 @@ public class Vote {
     @Column(nullable = false)
     private String voteTitle;  // 투표 제목
     
-    @Column(nullable = false)
-    private String walkCourseName; // 산책 코스 이름
     
     @Column(nullable = false)
     private String memId;  // 투표 생성자 ID
@@ -49,7 +59,9 @@ public class Vote {
     private List<String> participantIds; // 참여자 ID 목록
 
     @ElementCollection
-    private List<Long> walkingCourseIds; // 산책로 ID 목록
+    @Column(nullable = false)
+    private List<String> voteEsntlId; // 산책 코스 리스트
+   
 
     // 산책로별 투표 수를 관리하는 필드
     @ElementCollection

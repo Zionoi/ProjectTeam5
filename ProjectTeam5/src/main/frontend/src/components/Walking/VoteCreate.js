@@ -126,8 +126,9 @@ function VoteCreate() {
         e.preventDefault();
     
         // 새로운 투표 객체 생성
+        console.log(localStorage.getItem('id'))
         const newVote = {
-            memId: localStorage.getItem("id"),
+            memId: localStorage.getItem('id'), // 투표 생성자 아이디
             voteTitle: voteTitle || "제목",  // 투표 제목
             isOpenToAllFriends: isOpenToAllFriends,  // 전체 친구 참여 여부
             isAnonymous: isAnonymous,  // 익명 투표 여부
