@@ -1,11 +1,12 @@
 package com.study.spring.controller;
 
-import com.study.spring.domain.Vote;
-import com.study.spring.service.VoteService;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import com.study.spring.domain.Vote;
+import com.study.spring.service.VoteService;
 
 @RestController
 @RequestMapping("/votes")
@@ -14,21 +15,29 @@ public class VoteController {
     @Autowired
     private VoteService voteService;
 
-//    // 투표 생성
-//    @PostMapping("/create/{hostId}")
-//    public Vote createVote(@RequestBody Vote vote, @RequestParam List<Long> walkingCourseEsntlIds, @PathVariable String hostId) {
-//        return voteService.createVote(vote, walkingCourseEsntlIds, hostId);
-//    }
-//
-//    // 투표 종료
-//    @PutMapping("/end/{voteId}")
-//    public Vote endVote(@PathVariable Long voteId) {
-//        return voteService.endVote(voteId);
-//    }
-//
-//    // 투표 목록 조회 (optional)
-//    @GetMapping("/list/{hostId}")
-//    public List<Vote> getAllVotes() {
-//        return voteService.getAllVotes();
-//    }
+    // 투표 정보 가져오기
+    @GetMapping("/{voteId}")
+    public Vote getVote(@PathVariable Long voteId) {
+        return voteService.getVoteById(voteId);
+    }
+
+    // 투표 생성하기
+    @PostMapping("/create")
+    public Vote createVote(@RequestBody Vote vote) {
+        return voteService.createVote(vote);
+    }
+
+    // 투표하기
+    @PostMapping("/{voteId}/vote")
+    public Map<String, Integer> vote(@PathVariable Long voteId, @RequestBody Map<String, String> payload) {
+        String courseId = payload.get("courseId");
+        String userId = payload.get("userId");
+        return voteService.vote(voteId, courseId, userId);
+    }
+
+    // 투표 종료하기
+    @PostMapping("/{voteId}/end")
+    public Vote endVote(@PathVariable Long voteId) {
+        return voteService.endVote(voteId);
+    }
 }

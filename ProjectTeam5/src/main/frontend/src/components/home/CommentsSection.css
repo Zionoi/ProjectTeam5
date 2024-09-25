@@ -39,7 +39,7 @@
   .letterIcon.unread {
     background: url(../../img/letterIcon.png) no-repeat;
     background-size: contain;
-    animation: ringBell 2s ease-in-out infinite;
+    animation: ringBell 1.3s ease-in-out infinite;
   }
   
   /* 모든 메시지를 읽었을 때 회색 아이콘 */
