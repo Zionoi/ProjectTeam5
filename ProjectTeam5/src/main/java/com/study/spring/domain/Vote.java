@@ -46,7 +46,7 @@ public class Vote {
     private boolean isEnded;  // 투표 종료 여부
     
     @ElementCollection
-    private List<Long> participantIds; // 참여자 ID 목록
+    private List<String> participantIds; // 참여자 ID 목록
 
     @ElementCollection
     private List<Long> walkingCourseIds; // 산책로 ID 목록

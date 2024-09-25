@@ -24,7 +24,7 @@ public class VoteController {
 	@Autowired
     private VoteService voteService;
 
-    
+     
 
     // 투표 생성하기
     @PostMapping("/create")
