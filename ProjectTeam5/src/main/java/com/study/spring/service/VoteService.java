@@ -1,21 +1,19 @@
 package com.study.spring.service;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.study.spring.domain.Friends;
 import com.study.spring.domain.Vote;
 import com.study.spring.domain.WalkingCourse;
 import com.study.spring.repository.FriendsRepository;
 import com.study.spring.repository.VoteRepository;
 import com.study.spring.repository.WalkingCourseRepository;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.study.spring.domain.Vote;
-import com.study.spring.repository.VoteRepository;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 @Service
 public class VoteService {
@@ -30,10 +28,7 @@ public class VoteService {
     private FriendsRepository friendsRepository;  // 친구 리포지토리
 
     // 투표 생성
-    // 투표 정보 가져오기
-    public Vote getVoteById(Long voteId) {
-        return voteRepository.findById(voteId).orElseThrow(() -> new RuntimeException("Vote not found"));
-    }
+   
 
     // 투표 생성하기
     public Vote createVote(Vote vote) {
@@ -74,10 +69,10 @@ public class VoteService {
    
     // 투표하기
     public Map<String, Integer> vote(Long voteId, String courseId, String userId) {
-        Vote vote = getVoteById(voteId);
+        Optional<Vote> vote = getVoteById(voteId);
         Map<String, Integer> voteCount = new HashMap<>();
 
-        if (vote.isEnded()) {
+        if (vote.get().isEnded()) {
             throw new RuntimeException("Vote has ended");
         }
 
@@ -88,10 +83,5 @@ public class VoteService {
         return voteCount;
     }
 
-    // 투표 종료하기
-    public Vote endVote(Long voteId) {
-        Vote vote = getVoteById(voteId);
-        vote.setEnded(true);
-        return voteRepository.save(vote);
-    }
+    
 }
