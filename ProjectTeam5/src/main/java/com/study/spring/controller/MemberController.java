@@ -144,7 +144,8 @@ public class MemberController {
     
     //방문자 수 증가
     @GetMapping("/visitCountUp/{memId}")  // userId를 경로에서 받아옴
-    public void visitCountUp(@PathVariable String memId) {
+    public void visitCountUp(@PathVariable("memId") String memId) {
+    	System.out.println("컨트롤러 비짓트 카운트업 memId: " + memId);
         // 회원 정보 가져오기
         Member member = memberService.getMemberById(memId);
         System.out.println("변경전member.getTotalVisit() "+ member.getTotalVisit() );

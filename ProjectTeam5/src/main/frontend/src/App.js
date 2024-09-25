@@ -15,7 +15,7 @@ function App() {
   const navigate = useNavigate();
   
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [hostId, setHostId] = useState('a');
+  const [hostId, setHostId] = useState('');
   const { paramHostId } = useParams();
 
   // useEffect(() => {
@@ -48,7 +48,8 @@ function App() {
     const handleLogout = () => {
     
       setIsLoggedIn(false); // 로그인 상태를 false로 설정
-      localStorage.clear(); // 로컬 스토리지 클리어
+      localStorage.clear(); // 로컬 스토리지 클리어      
+      sessionStorage.clear(); 
     };
 
       //서버 로그인한상태로 껐다가 다시켰을때 빈 메인페널만 보이던 문제 수정 코드
