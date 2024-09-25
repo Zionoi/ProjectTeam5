@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import "./ProfileSection.css";
-
+import defaultProfileImage from '../../img/basicProfile.png'; 
 function ProfileSection({ hostId }) {
   const [profileImage, setProfileImage] = useState(''); // 프로필 이미지 경로 상태
   const [selectedFile, setSelectedFile] = useState(null); // 파일 상태
@@ -11,7 +11,7 @@ function ProfileSection({ hostId }) {
   const [error, setError] = useState(null);
   const [isEditing, setIsEditing] = useState(false); // 수정 모드 상태
 
-  const defaultProfileImage = '../../img/basicProfile.png'; // 기본 이미지 경로
+  // const defaultProfileImage = '../../img/basicProfile.png'; // 기본 이미지 경로
   const [nick, setNick] = useState(localStorage.getItem('nickName')); // 사용자 닉네임 가져오기
 
   // 사용자 프로필 이미지와 코멘트 가져오기

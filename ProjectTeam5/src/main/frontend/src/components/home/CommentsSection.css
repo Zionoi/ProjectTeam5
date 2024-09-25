@@ -39,12 +39,24 @@
   .letterIcon.unread {
     background: url(../../img/letterIcon.png) no-repeat;
     background-size: contain;
+    animation: ringBell 2s ease-in-out infinite;
   }
   
   /* 모든 메시지를 읽었을 때 회색 아이콘 */
   .letterIcon.read {
     background: url(../../img/letterIconB.png) no-repeat;
     background-size: contain;
+
+  }
+
+  @keyframes ringBell {
+    0% { transform: rotate(0deg); }
+    10% { transform: rotate(15deg); }
+    20% { transform: rotate(-10deg); }
+    30% { transform: rotate(5deg); }
+    40% { transform: rotate(-5deg); }
+    50% { transform: rotate(0deg); }
+    100% { transform: rotate(0deg); }
   }
   
   /* .letterIcon {
