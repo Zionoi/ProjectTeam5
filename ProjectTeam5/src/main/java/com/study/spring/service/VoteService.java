@@ -82,6 +82,25 @@ public class VoteService {
 
         return voteCount;
     }
+    
+    
+	public List<Vote> getListMyVote(String memId) {
+		
+		return voteRepository.findByMemIdAndIsEnded(memId, false);
+	}
+	
+	public List<Vote> getListEndedMyVote(String memId){
+		return voteRepository.findByMemIdAndIsEnded(memId, true);
+	}
+	
+	public List<Vote> getListInvitedVote(String memId){
+		
+		return voteRepository.findActiveInvitedVotes(memId, false);
+	}
+	
+	public List<Vote> getListEndedInvitedVote(String memId){
+		return voteRepository.findActiveInvitedVotes(memId, true);
+	}
 
     
 }
