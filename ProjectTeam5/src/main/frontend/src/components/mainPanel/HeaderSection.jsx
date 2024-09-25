@@ -59,7 +59,7 @@ useEffect(() => {
           setTodayVisit(0); // 오류 발생 시 null로 설정
           setTotalVisit(0); // 오류 발생 시 null로 설정
       }); 
-}, [hostId]);
+}, [hostId, todayVisit]);
 
  return (
    <div className="header-section">

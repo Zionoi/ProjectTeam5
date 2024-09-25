@@ -61,7 +61,7 @@ function MainPanel({ onLogout, hostId, setHostId}) { // onLogout props 추가
        
         <FortuneSection />
           {/* <VisitSection /> */}
-          <FriendsSection hostId={hostId} setHostId={setHostId}/>
+          <FriendsSection hostId={paramHostId} setHostId={setHostId}/>
         </aside>
       </div>
      

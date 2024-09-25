@@ -35,7 +35,7 @@ function Home({hostId, setHostId}) {
           console.log('방문자 증가 실패', error);
         });
     }
-  }, [hostId]);
+  }, [hostId, memId]);
 
 
 
