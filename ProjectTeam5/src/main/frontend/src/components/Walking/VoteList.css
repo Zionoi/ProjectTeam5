@@ -1,0 +1,165 @@
+/* 투표 목록 컨테이너 */
+.vote-list-container {
+    position: absolute;
+    width: 750px;
+    height: 500px;
+    overflow-y: overlay;
+    top: 165px;
+    left: 210px;
+    margin: 20px;
+    padding: 60px 40px 20px 40px;
+    border-radius: 16px;
+    background-color: #ffffff;
+    -ms-overflow-style: none;
+}
+
+/* 스크롤바 제거 */
+.vote-list-container::-webkit-scrollbar {
+    display: none;
+}
+
+/* 투표 리스트 타이틀 박스 */
+.vote-title-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 16px 16px 0px 0px;
+}
+
+/* 투표 목록 타이틀 스타일 */
+.vote-title {
+    font-family: "Noto Sans KR", sans-serif;
+    font-size: 16pt;
+    font-weight: 600;
+    color: rgb(63, 63, 63);
+}
+
+/* 필터 라디오 버튼 그룹 */
+.filter-radio-buttons {
+    display: flex;
+    gap: 20px; /* 라디오 버튼 사이 간격 추가 */
+    font-family: "Noto Sans KR", sans-serif;
+    font-size: 12pt;
+    color: rgb(63, 63, 63);
+}
+
+/* 라디오 버튼 스타일 */
+.filter-radio-buttons label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.filter-radio-buttons input {
+    margin-right: 5px;
+}
+
+/* 투표 항목 리스트 */
+.vote-list {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.vote-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* 항목 간의 세로 중앙 정렬 */
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    transition: background-color 0.2s ease;
+}
+
+.vote-item:hover {
+    background-color: #d6cfff;
+}
+
+/* 투표 제목 */
+.vote-title-item {
+    font-family: "Noto Sans KR", sans-serif;
+    font-size: 12pt;
+    font-weight: 500;
+    color: rgb(63, 63, 63);
+    flex: 1; /* 제목이 버튼과 공간을 나눠 가지도록 설정 */
+    text-align: left;
+    margin-right: 20px; /* 버튼과 제목 사이에 간격을 줌 */
+}
+
+/* 투표 버튼 */
+.vote-button {
+    padding: 8px 12px;
+    font-family: "Noto Sans KR", sans-serif;
+    font-size: 10pt;
+    background-color: #7a63ff;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.vote-button:hover {
+    background-color: #5c49d7;
+}
+
+/* 투표 리스트가 없을 때 */
+.no-vote-message {
+    text-align: center;
+    font-family: "Noto Sans KR", sans-serif;
+    font-size: 12pt;
+    color: #666;
+    margin-top: 50px;
+}
+
+/* 종료된 투표 보기 버튼 */
+.closed-votes-button-container {
+    display: flex;
+    justify-content: flex-end;
+    padding: 20px;
+    position: absolute;
+    bottom: 20px;
+    right: 40px;
+}
+
+.closed-votes-button {
+    padding: 10px 20px;
+    font-family: "Noto Sans KR", sans-serif;
+    font-size: 12pt;
+    background-color: #f39c12;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.closed-votes-button:hover {
+    background-color: #e67e22;
+}
+
+/* 투표 리스트로 돌아가는 버튼 */
+.back-to-vote-list-button {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px 20px;
+    position: absolute;
+    bottom: 20px;
+    right: 40px;
+    font-family: "Noto Sans KR", sans-serif;
+    font-size: 12pt;
+    background-color: #f39c12;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.back-to-vote-list-button:hover {
+    background-color: #e67e22;
+}
