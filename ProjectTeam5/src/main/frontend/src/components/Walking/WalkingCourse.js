@@ -90,8 +90,7 @@ function WalkingCourse() {
     };
 
     const VoteList = () => {
-        alert("투표 목록을 표시합니다.");
-        // 투표 목록을 표시하거나 모달을 띄울 수 있습니다.
+        navigate(`/VoteList/${localStorage.getItem("id")}`);
     };
 
     return (
