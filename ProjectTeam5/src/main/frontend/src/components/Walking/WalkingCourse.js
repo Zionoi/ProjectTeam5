@@ -12,6 +12,8 @@ function WalkingCourse() {
         '강원', '경기', '경남', '경북', '광주', '대구', '대전', '부산', '서울', '세종',
         '울산', '인천', '전남', '전북', '제주', '충남', '충북'
     ]);
+    // 투표버튼 드랍
+    const [dropdownVisible, setDropdownVisible] = useState(false);
 
     const handleRegionChange = (e) => {
         const region = e.target.value;
@@ -66,6 +68,20 @@ function WalkingCourse() {
             setFilteredSubRegions(subRegions);
         }
     }, [selectedRegion, subRegions]);
+
+    //투표 드랍 기능
+    const toggleDropdown = () => {
+        setDropdownVisible(!dropdownVisible);
+    };
+
+    const handleVoteCreate = () => {
+        navigate(`/vote-create/${localStorage.getItem("id")}`); // 경로가 정확한지 확인
+    };
+
+    const VoteList = () => {
+        alert("투표 목록을 표시합니다.");
+        // 투표 목록을 표시하거나 모달을 띄울 수 있습니다.
+    };
 
     return (
         <div className='walking-Box'>
@@ -150,6 +166,16 @@ function WalkingCourse() {
                     <p>상세 정보를 선택해 주세요.</p>
                 )}
             </div>
+
+            {/* 투표 버튼과 드롭다운 메뉴 */}
+            <div className="vote">
+                <button className="vote-button" onClick={toggleDropdown}>🗳</button>
+                <div className={`dropdown-menu ${dropdownVisible ? 'show' : ''}`}>
+                    <button onClick={handleVoteCreate}>투표 생성하기</button>
+                    <button onClick={VoteList}>투표 목록</button>
+                </div>
+            </div>
+            
         </div>
     );
 }
