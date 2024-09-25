@@ -1,17 +1,18 @@
 .voteBox {
-    position:absolute;
+    position: absolute;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column; /* 컬럼 방향으로 정렬 */
+    justify-content: flex-start; /* 위쪽부터 채움 */
     max-width: 1200px;
-    margin: 185px 230px ;
+    margin: 185px 230px;
     padding: 20px;
     width: 750px;
-    height: 500px;
+    height: 500px; /* 높이를 약간 늘림 */
     background-color: #f9f9f9;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     font-family: 'Arial', sans-serif;
-
+    overflow: hidden; /* 박스 바깥으로 내용이 넘치지 않도록 설정 */
 }
 
 .voteBox h2 {
@@ -25,12 +26,11 @@
 .voteBox form {
     display: flex;
     flex-direction: column;
-
     flex: 1;
     padding: 20px;
-    margin: 10px;
-    height: 440px;
-    max-height: 440px;
+    margin: 10px 0;
+    max-height: 520px; /* 폼의 최대 높이 제한 */
+    overflow-y: auto; /* 내용이 많을 경우 스크롤 추가 */
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -60,6 +60,9 @@
 .voteBox ul {
     list-style-type: none;
     padding-left: 0;
+    margin: 0; /* 기본 마진 제거 */
+    max-height: 150px; /* 목록 최대 높이 설정 */
+    overflow-y: auto; /* 스크롤 추가 */
 }
 
 .voteBox ul li {
@@ -68,13 +71,9 @@
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 4px;
-    cursor: pointer;
-}
-
-.voteBox ul li label {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
+    display: flex; /* flex 사용으로 삭제 버튼을 오른쪽 끝에 배치 */
+    justify-content: space-between; /* 삭제 버튼을 오른쪽으로 밀어냄 */
+    align-items: center; /* 텍스트와 버튼을 수직으로 가운데 정렬 */
 }
 
 .voteBox ul li:hover {
@@ -90,29 +89,33 @@
     font-size: 16px;
     cursor: pointer;
     margin-top: 20px;
+    align-self: flex-start; /* 버튼을 왼쪽 정렬 */
 }
 
 .voteBox button[type="submit"]:hover {
     background-color: #214e88;
 }
 
-/* 선택 사항 */
-.checklist {
+/* 목록 아이템과 삭제 버튼 */
+.list-item {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 20px;
-}
-
-.checklist div {
-    display: flex;
     align-items: center;
-    margin-right: 20px; /* 각 항목 사이의 간격 */
+    padding: 5px 0;
+    word-wrap: break-word; /* 긴 텍스트가 박스 밖으로 나가지 않도록 줄바꿈 */
 }
 
-.checklist label {
-    margin-right: 10px; /* 라벨과 체크박스 간 간격 */
+.remove-btn {
+    background-image: url(../../img/xbuttonHover.png);
+    background-size: 15px;
+    background-position: center;
+    width: 20px;
+    height: 20px;
+    border: none;
+    cursor: pointer;
 }
 
+/* 모달 스타일 */
 .vote-modal {
     position: fixed;
     top: 0;
@@ -123,7 +126,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 100000; /* z-index를 높여 모달이 다른 요소보다 위에 표시되도록 */
+    z-index: 100000; /* 모달이 다른 요소보다 위에 표시되도록 */
 }
 
 .vote-modal-content {
@@ -132,8 +135,8 @@
     border-radius: 8px;
     width: 400px;
     text-align: center;
-    z-index: 100001; /* 모달의 컨텐츠가 배경보다 위에 표시되도록 */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 모달에 약간의 그림자 추가 */
+    z-index: 100001;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 그림자 추가 */
 }
 
 .vote-modal-content input[type="text"] {
@@ -157,6 +160,8 @@
 .vote-modal-content ul {
     list-style: none;
     padding-left: 0;
+    max-height: 300px; /* 목록 최대 높이 */
+    overflow-y: auto; /* 스크롤 추가 */
 }
 
 .vote-modal-content ul li {
