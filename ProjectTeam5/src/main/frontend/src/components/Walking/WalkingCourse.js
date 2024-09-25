@@ -1,6 +1,7 @@
 import axios from 'axios';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect} from 'react';
 import './WalkingCourse.css';
+import { useNavigate, Navigate  } from 'react-router-dom';
 
 function WalkingCourse() {
     const [selectedRegion, setSelectedRegion] = useState('');
@@ -14,7 +15,7 @@ function WalkingCourse() {
     ]);
     // 투표버튼 드랍
     const [dropdownVisible, setDropdownVisible] = useState(false);
-
+    const navigate = useNavigate();
     const handleRegionChange = (e) => {
         const region = e.target.value;
         setSelectedRegion(region);
