@@ -3,7 +3,7 @@ import axios from 'axios';
 import './VoteCreate.css';
 
 function VoteCreate() {
-    const [isOpenToAllFriends, setIsOpenToAllFriends] = useState(true);  // 전체 친구 참여 여부 (초기값을 전체 참여로 설정)
+    const [isOpenToAllFriends, setIsOpenToAllFriends] = useState(true);  // 전체 친구 참여 여부
     const [isAnonymous, setIsAnonymous] = useState(false);  // 익명 투표 여부
     const [endTime, setEndTime] = useState('');
     const [creatorId, setCreatorId] = useState('');
@@ -13,20 +13,17 @@ function VoteCreate() {
     const [subRegions, setSubRegions] = useState([]); // 소속 지역 목록
     const [filteredSubRegions, setFilteredSubRegions] = useState([]); // 필터링된 소속 지역 목록
     const [walkingCourses, setWalkingCourses] = useState([]); // 산책로 후보 목록
-    const [selectedCourseDetails, setSelectedCourseDetails] = useState(null); // 선택된 산책로 상세 정보
     const [regions] = useState([ // 지역 목록
         '강원', '경기', '경남', '경북', '광주', '대구', '대전', '부산', '서울', '세종',
         '울산', '인천', '전남', '전북', '제주', '충남', '충북'
     ]);
     const [isModalOpen, setIsModalOpen] = useState(false); // 산책로 모달 창 상태
-    const [searchKeyword, setSearchKeyword] = useState(''); // 검색 키워드
-    const [searchResults, setSearchResults] = useState([]); // 산책로 검색 결과 목록
 
     const [isFriendModalOpen, setIsFriendModalOpen] = useState(false); // 친구 선택 모달 창 상태
     const [friends, setFriends] = useState([]); // 친구 목록
     const [selectedFriends, setSelectedFriends] = useState([]); // 선택된 친구 목록
-    const [friendSearchKeyword, setFriendSearchKeyword] = useState(''); // 친구 검색 키워드
-    const [friendSearchResults, setFriendSearchResults] = useState([]); // 친구 검색 결과 목록
+    const [friendSearchResults, setFriendSearchResults] = useState([]); // 친구 검색 목록
+    const [participantIds, setParticipantIds] = useState([]);  // 선택된 친구들의 ID 목록
 
     // 소속 지역 변경 처리 함수
     const handleRegionChange = (e) => {
@@ -66,60 +63,63 @@ function VoteCreate() {
             });
     };
 
-    // 산책로 검색 기능
-    const handleSearch = () => {
-        axios.get(`/api/walking/search?keyword=${searchKeyword}`)
-            .then(response => {
-                setSearchResults(response.data); // 검색 결과 설정
-            })
-            .catch(error => {
-                console.error('산책로 검색 오류:', error);
-            });
-    };
-
     // 산책로 후보 추가
     const handleAddCourse = (course) => {
         if (!selectedWalkingCourses.some(c => c.esntlId === course.esntlId)) {
             setSelectedWalkingCourses([...selectedWalkingCourses, course]);
         }
-        setIsModalOpen(false); // 모달 닫기
     };
 
-    const handleCourseClick = (courseId) => {
-        axios.get(`/api/walking/courses/${courseId}`)
-            .then(response => {
-                setSelectedCourseDetails(response.data);
-            })
-            .catch(error => {
-                console.error('Error fetching course details:', error);
-            });
+    // 산책로 후보 삭제
+    const handleRemoveCourse = (courseId) => {
+        setSelectedWalkingCourses(prevCourses => prevCourses.filter(c => c.esntlId !== courseId));
     };
 
     // 친구 목록 불러오기
     useEffect(() => {
-        axios.get('/friends/total') // API 엔드포인트에 맞게 수정
-            .then(response => {
-                setFriends(response.data);
-            })
-            .catch(error => {
-                console.error('친구 목록 불러오기 오류:', error);
-            });
+        axios.get('/friends/total', {
+            params: { memId: localStorage.getItem('id') }, // 실제 로그인된 사용자 ID
+        })
+        .then(response => {
+            setFriends(response.data); // 친구 목록 설정
+            setFriendSearchResults(response.data); // 기본적으로 친구 목록 전체를 검색 결과로 표시
+        })
+        .catch(error => {
+            console.error('친구 목록 불러오기 오류:', error);
+        });
     }, []);
 
-    // 친구 검색 기능
-    const handleFriendSearch = () => {
-        const filteredFriends = friends.filter(friend =>
-            friend.name.toLowerCase().includes(friendSearchKeyword.toLowerCase())
-        );
-        setFriendSearchResults(filteredFriends); // 검색 결과 설정
-    };
-
-    // 친구 추가
+    // 친구 선택 시 선택된 친구 목록에 추가하는 함수
     const handleAddFriend = (friend) => {
-        if (!selectedFriends.includes(friend.id)) {
-            setSelectedFriends([...selectedFriends, friend.id]);
-        }
-        setIsFriendModalOpen(false); // 친구 모달 닫기
+        setSelectedFriends((prevSelectedFriends) => {
+            // 친구가 이미 목록에 있는지 확인
+            const alreadyAdded = prevSelectedFriends.some((f) => f.id === friend.id);
+            
+            if (!alreadyAdded) {
+                // 친구가 목록에 없으면 추가
+                const updatedFriends = [...prevSelectedFriends, friend];
+                
+                // participantIds도 함께 업데이트
+                setParticipantIds((prevParticipantIds) => {
+                    const updatedParticipantIds = [...new Set([...prevParticipantIds, friend.id])];
+                    return updatedParticipantIds;
+                });
+                
+                return updatedFriends;
+            }
+    
+            return prevSelectedFriends; // 이미 추가된 친구면 상태 유지
+        });
+    };
+    
+    
+    
+
+
+    // 친구 삭제
+    const handleRemoveFriend = (friendId) => {
+        setSelectedFriends(prevFriends => prevFriends.filter(f => f.id !== friendId));
+        setParticipantIds(prevIds => prevIds.filter(id => id !== friendId));
     };
 
     const handleSubmit = (e) => {
@@ -133,8 +133,8 @@ function VoteCreate() {
             isAnonymous: isAnonymous,  // 익명 투표 여부
             endTime: endTime ? `${endTime}T00:00:00` : "2024-09-25T00:00:00",  // 종료 시간을 LocalDateTime 형식으로 변환
             creatorId: creatorId || "user01",  // 생성자 ID
-            walkCourseName: selectedWalkingCourses[0]?.walkCourseName || '기본 산책로',  // 선택된 첫 번째 산책로 이름 또는 기본값
-            friends: selectedFriends.length ? selectedFriends : ['defaultFriend'],  // 친구 목록
+            esntlId: selectedWalkingCourses.map(course => course.esntlId),  // 산책로 ID 리스트
+            participantIds: participantIds,  // 선택된 친구들의 ID
             isEnded: false
         };
     
@@ -177,7 +177,10 @@ function VoteCreate() {
                     {/* 선택된 산책로 목록 */}
                     <ul>
                         {selectedWalkingCourses.map(course => (
-                            <li key={course.esntlId}>{course.walkCourseName}</li>
+                            <li key={course.esntlId} className="list-item">
+                                <span>{course.walkCourseName}</span>
+                                <button onClick={() => handleRemoveCourse(course.esntlId)} className="remove-btn"></button>
+                            </li>
                         ))}
                     </ul>
                     {/* 산책로 후보 추가 버튼 */}
@@ -196,44 +199,52 @@ function VoteCreate() {
                     />
                 </div>
 
-                <div className='checklist'>
-                    {/* 전체 친구 참여 여부 */}
-                    <div>
-                        <label>
-                            <input
-                                type="radio"
-                                checked={isOpenToAllFriends}
-                                onChange={() => setIsOpenToAllFriends(true)}
-                            />
-                            전체 친구 참여
-                        </label>
-                        <label>
-                            <input
-                                type="radio"
-                                checked={!isOpenToAllFriends}
-                                onChange={() => setIsOpenToAllFriends(false)}
-                            />
-                            선택 친구 참여
-                        </label>
-                        {/* 친구 선택하기 버튼 */}
-                        {!isOpenToAllFriends && (
-                            <div>
-                                <button type="button" onClick={() => setIsFriendModalOpen(true)}>
-                                    참여할 친구 선택하기
-                                </button>
-                            </div>
-                        )}
-                    </div>
-
-                    {/* 익명 투표 여부 */}
-                    <div>
-                        <label>익명 투표 여부:</label>
+                {/* 전체 친구 참여 여부 */}
+                <div>
+                    <label>
                         <input
-                            type="checkbox"
-                            checked={isAnonymous}
-                            onChange={(e) => setIsAnonymous(e.target.checked)}
+                            type="radio"
+                            checked={isOpenToAllFriends}
+                            onChange={() => setIsOpenToAllFriends(true)}
                         />
-                    </div>
+                        전체 친구 참여
+                    </label>
+                    <label>
+                        <input
+                            type="radio"
+                            checked={!isOpenToAllFriends}
+                            onChange={() => setIsOpenToAllFriends(false)}
+                        />
+                        선택 친구 참여
+                    </label>
+
+                    {/* 친구 선택하기 버튼 */}
+                    {!isOpenToAllFriends && (
+                        <div>
+                            <label>선택된 친구 목록:</label>
+                            <ul>
+                                {selectedFriends.map(friend => (
+                                    <li key={friend.id} className="list-item">
+                                        <span>{friend.friendId}</span>
+                                        <button onClick={() => handleRemoveFriend(friend.id)} className="remove-btn"></button>
+                                    </li>
+                                ))}
+                            </ul>
+                            <button type="button" onClick={() => setIsFriendModalOpen(true)}>
+                                참여할 친구 선택하기
+                            </button>
+                        </div>
+                    )}
+                </div>
+
+                {/* 익명 투표 여부 */}
+                <div>
+                    <label>익명 투표 여부:</label>
+                    <input
+                        type="checkbox"
+                        checked={isAnonymous}
+                        onChange={(e) => setIsAnonymous(e.target.checked)}
+                    />
                 </div>
 
                 {/* 투표 생성 버튼 */}
@@ -296,26 +307,19 @@ function VoteCreate() {
             {isFriendModalOpen && (
                 <div className="vote-modal">
                     <div className="vote-modal-content">
-                        <h3>친구 검색</h3>
-                        <input
-                            type="text"
-                            value={friendSearchKeyword}
-                            onChange={(e) => setFriendSearchKeyword(e.target.value)}
-                            placeholder="친구 이름 검색"
-                        />
-                        <button onClick={handleFriendSearch}>검색</button>
-                        <ul>
-                            {friendSearchResults.length > 0 ? (
-                                friendSearchResults.map(friend => (
+                        <h3>친구 검색 및 선택</h3>
+                        
+                        <div className="friend-list">
+                            <h4>친구 목록</h4>
+                            <ul>
+                                {friendSearchResults.map(friend => (
                                     <li key={friend.id}>
-                                        {friend.name}
+                                        {friend.friendId}
                                         <button onClick={() => handleAddFriend(friend)}>추가</button>
                                     </li>
-                                ))
-                            ) : (
-                                <li>검색 결과가 없습니다.</li>
-                            )}
-                        </ul>
+                                ))}
+                            </ul>
+                        </div>
                         <button onClick={() => setIsFriendModalOpen(false)}>닫기</button>
                     </div>
                 </div>
