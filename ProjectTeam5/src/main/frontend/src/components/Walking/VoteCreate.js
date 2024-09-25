@@ -97,7 +97,7 @@ function VoteCreate() {
 
     // 친구 목록 불러오기
     useEffect(() => {
-        axios.get('/api/friends') // API 엔드포인트에 맞게 수정
+        axios.get('/friends/total') // API 엔드포인트에 맞게 수정
             .then(response => {
                 setFriends(response.data);
             })

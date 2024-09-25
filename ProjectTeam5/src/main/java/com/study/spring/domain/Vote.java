@@ -17,8 +17,13 @@ import java.util.Map;
 @EntityListeners(AuditingEntityListener.class)
 public class Vote {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
+	@SequenceGenerator (
+			name="voteSEQ",
+			sequenceName = "voteSEQ",
+			allocationSize = 1
+			)	
+	@GeneratedValue(generator="voteSEQ")
     private Long voteId;  // 투표 고유 ID
 
     @Column(nullable = false)
@@ -36,9 +41,6 @@ public class Vote {
     private LocalDateTime endTime;  // 투표 종료 시점 (선택적)
     
     private boolean isAnonymous; // 익명 투표 여부
-
-    @Column(nullable = false)
-    private List<String> friends;  // 투표 참여자 ID
 
     @Column(nullable = false)
     private boolean isEnded;  // 투표 종료 여부
