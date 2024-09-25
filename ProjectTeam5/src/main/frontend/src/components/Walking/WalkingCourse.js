@@ -123,8 +123,8 @@ function WalkingCourse() {
                             </tr>
                             <tr>
                                 <td>난이도</td><td className='courseLevelName'>{selectedCourseDetails.courseLevelName}</td>
-                                <td className='courseLengthContent'>경로길이</td><td >{selectedCourseDetails.courseLengthContent}</td>
-                                <td  className='courseTimeContent'>산책 소요시간</td><td>{selectedCourseDetails.courseTimeContent}</td>
+                                <td className='courseLengthContent'>길이</td><td >{selectedCourseDetails.courseLengthContent}</td>
+                                <td  className='courseTimeContent'>소요 시간</td><td>{selectedCourseDetails.courseTimeContent}</td>
                             </tr>
                             <tr>
                                 <td>주소</td><td className='address' colSpan={7}>{selectedCourseDetails.address}</td>
