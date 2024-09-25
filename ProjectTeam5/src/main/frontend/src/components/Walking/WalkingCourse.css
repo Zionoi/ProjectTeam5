@@ -1,5 +1,6 @@
 /* 전체 레이아웃 */
 .walking-Box {
+    position:absolute;
     display: flex;
     justify-content: space-between;
     max-width: 1200px;
