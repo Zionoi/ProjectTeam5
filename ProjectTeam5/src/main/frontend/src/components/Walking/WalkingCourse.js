@@ -59,6 +59,16 @@ function WalkingCourse() {
             });
     };
 
+    const handleViewVotes = () => {
+        // 투표 목록 창으로 이동하는 로직
+        window.location.href = '/votes'; // 또는 navigate('/votes') 같은 방법으로 이동
+    };
+
+    const handleCreateVote = () => {
+        // 투표 생성 페이지로 이동하는 로직
+        window.location.href = '/create-vote'; // 또는 navigate('/create-vote') 같은 방법으로 이동
+    };
+
     useEffect(() => {
         if (selectedRegion) {
             setFilteredSubRegions(subRegions.filter(subRegion => subRegion !== selectedRegion));
@@ -71,6 +81,7 @@ function WalkingCourse() {
         <div className='walking-Box'>
             <div className='walking-search'>
                 <h1>산책로 검색</h1>
+                
                 <div>
                     <label htmlFor="region-select">지역 선택:</label>
                     <select
@@ -84,6 +95,7 @@ function WalkingCourse() {
                         ))}
                     </select>
                 </div>
+                
                 {selectedRegion && (
                     <div>
                         <label htmlFor="subregion-select">소속 지역 선택:</label>
@@ -112,7 +124,9 @@ function WalkingCourse() {
                         )}
                     </ul>
                 </div>
+                
             </div>
+            
             <div className='detailWalking'>
                 <h2>상세정보</h2>
                 {selectedCourseDetails ? (
@@ -135,8 +149,7 @@ function WalkingCourse() {
                                     if (match === '-') return '→';
                                     if (match === '~') return '→';
                                     return match; // 경로간 특수문자를 화살표 하나로 통일후 반환
-                                    })}
-                                </td>
+                                    })}</td>
                             </tr>
                             <tr>
                                 <td>설명</td><td className='additionalDescription' colSpan={7}>{selectedCourseDetails.additionalDescription}</td>

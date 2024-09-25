@@ -19,6 +19,7 @@ import Restaurant from '../restaurant/Restaurant';
 import FavoriteList from '../restaurant/FavoriteList';
 import WalkingCourse from '../Walking/WalkingCourse';
 import WalkingCourseVote from '../Walking/WalkingCourseVote';
+// import VoteCreate from '../Walking/VoteCreate';
 
 
 function Sidebar({hostId, setHostId}) {
@@ -127,8 +128,11 @@ function Sidebar({hostId, setHostId}) {
           <Route path="/GuestbookPage/:hostId" element={<GuestbookPage hostId={hostId} setHostId={setHostId}/>} />
 
           <Route path="/favorites/:hostId" element={<FavoriteList hostId={hostId} setHostId={setHostId}/>} />
+          
+          {/* 산책로 링크 */}
           <Route path="/WalkingCourse/:hostId" element={<WalkingCourse hostId={hostId} setHostId={setHostId}/>} />
           <Route path="/WalkingCourseVote/:hostId" element={<WalkingCourseVote hostId={hostId} setHostId={setHostId}/>} />
+          {/* <Route path="/VoteCreate/:hostId" element={<VoteCreate hostId={hostId} setHostId={setHostId}/>} /> */}
 
           <Route path="/write/:hostId" element={<WriteMessage hostId={hostId} setHostId={setHostId}/>} />
           <Route path="/inbox/:hostId" element={<Inbox hostId={hostId} setHostId={setHostId}/>} />
