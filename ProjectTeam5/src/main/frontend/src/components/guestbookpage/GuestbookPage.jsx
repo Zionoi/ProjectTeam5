@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import './GuestbookPage.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import defaultProfileImage from '../../img/basicProfile.png';
+import emptyImage from '../../img//basicProfile.png'; // 방명록이 비어 있을 때 표시할 이미지
 
 function GuestbookPage({ hostId, setHostId }) {
   const [guestbookEntries, setGuestbookEntries] = useState([]);
@@ -14,6 +16,9 @@ function GuestbookPage({ hostId, setHostId }) {
   const [editMode, setEditMode] = useState(null); // 수정 모드 상태
   const [editContent, setEditContent] = useState(''); // 수정 중인 내용
   const [menuOpen, setMenuOpen] = useState(false); // 메뉴창 구분을 위한 상태
+
+  const [loading, setLoading] = useState(true);
+  const [profileImages, setProfileImages] = useState({}); // 작성자 프로필 이미지 상태
 
   const navigate = useNavigate(); // 페이지 이동을 위한 useNavigate hook
 
@@ -31,6 +36,36 @@ function GuestbookPage({ hostId, setHostId }) {
 
   };
 
+    // 각 작성자의 프로필 이미지를 가져오는 함수
+    const fetchProfileImage = (commenterId) => {
+      return axios.get(`/member/get/${commenterId}`)
+        .then((response) => {
+          return response.data.imgPath || defaultProfileImage; // 기본 이미지 처리
+        })
+        .catch(() => {
+          return defaultProfileImage; // 오류 시 기본 이미지 반환
+        });
+    };
+     // 모든 작성자의 프로필 이미지를 가져오는 함수
+  const fetchAllProfileImages = async () => {
+    const updatedProfileImages = {};
+    const requests = guestbookEntries.map(async (entry) => {
+      const image = await fetchProfileImage(entry.commenter);
+      updatedProfileImages[entry.commenter] = image;
+    });
+    await Promise.all(requests);
+    setProfileImages(updatedProfileImages); // 모든 프로필 이미지를 상태에 저장
+  };
+
+  useEffect(() => {
+    fetchGuestbookEntries(); // 방명록 목록 불러오기
+  }, [page, hostId]);
+
+  useEffect(() => {
+    if (guestbookEntries.length > 0) {
+      fetchAllProfileImages(); // 방명록 작성자들의 프로필 이미지 불러오기
+    }
+  }, [guestbookEntries]);
   useEffect(() => {
     fetchGuestbookEntries(); // 컴포넌트가 처음 렌더링될 때 방명록 목록 불러오기
   }, [page, hostId]);
@@ -59,16 +94,16 @@ function GuestbookPage({ hostId, setHostId }) {
       nickname: nickname, // 방명록 쓴 사람 닉네임
       commenter: memId, // 방명록을 쓴 사람
       gbContent: newEntry,//방명록 내용
+      createDate: new Date(), // 방명록 작성 시간
     };
 
     axios.post('/guestbook/add', newEntryObject)
       .then((response) => {
         if (response.data === 'success') {
-          setGuestbookEntries([...guestbookEntries, newEntryObject]);
-          setNewEntry('');
-          setErrorMessage('');
-          fetchGuestbookEntries();
-          console.log('response.data', response.data);
+          // 방명록 추가를 성공했을 때, 새 항목을 즉시 상태에 추가
+          setGuestbookEntries(prevEntries => [newEntryObject, ...prevEntries]); // 새 항목을 맨 위에 추가
+          setNewEntry(''); // 입력 필드 초기화
+          setErrorMessage(''); // 오류 메시지 초기화
         } else {
           setErrorMessage('방명록 저장 중 문제가 발생했습니다.');
         }
@@ -135,75 +170,91 @@ function GuestbookPage({ hostId, setHostId }) {
   };
 
   return (
-    <div>
-    <div className="guestbook-title-box">
-          <h2 className="guestbook-title">방명록</h2>
-    </div>
-      
-    <div className="guestbook-container">
-      {/* 글 작성은 memId와 hostId가 다를 때만 가능 */}
-      {memId !== hostId && (
-        <div className="guestbook-input">
-          <textarea
-            value={newEntry}
-            onChange={(e) => setNewEntry(e.target.value)}
-            placeholder="내용을 입력해 주세요."
-          ></textarea>
-          <button className="guestsubmit" onClick={handleAddEntry}>완료</button>
-        </div>
-      )}
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
-      <div className="guestbook-list">
-        {guestbookEntries.map((entry) => (
-          <div key={entry.gbNum} className="guestbook-entry">
-            <div className="entry-header">
-              {/* 닉네임을 클릭하면 모달 창 생성 */}
-              <span className="username" onClick={() => toggleMenu(entry.gbNum)} style={{ cursor: 'pointer' }}>
-                {entry.nickname}
-              </span>
-              {menuOpen && (
-                <div className="menu-buttons">
-                  <button onClick={() => visitFriendPage(entry.commenter)}>홈피 가기</button>
-                  <button onClick={() => sendMessage(entry.commenter)}>쪽지 보내기</button>
-                </div>
-              )}
-              <span className="date">{new Date(entry.createDate).toLocaleString()}</span>
-            </div>
+    <div>   
+      <div className="guestbook-container">
+        <h2 className="guestbook-title">방명록</h2>
 
-            {/* 글 내용을 표시 */}
-            {editMode === entry.gbNum ? (
-              <div>
-                <textarea
-                  value={editContent}
-                  onChange={(e) => setEditContent(e.target.value)}
-                />
-                <button onClick={() => handleSaveEdit(entry.gbNum)}>저장</button>
-              </div>
-            ) : (
-              <p className="message">
-                {entry.gbContent}
-              </p>
-            )}
-
-            {/* 수정 버튼은 본인이 작성한 글만 보임 */}
-            {entry.commenter === memId && (
-              <button onClick={() => handleEditMode(entry.gbNum, entry.gbContent)}>수정</button>
-            )}
-
-            {/* 삭제 버튼은 본인이 작성한 글이거나 hostId와 memId가 같을 때 보임 */}
-            {(entry.commenter === memId || hostId === memId) && (
-              <button onClick={() => handleDeleteEntry(entry.gbNum)} className="delete-button">삭제</button>
-            )}
+        {/* 글 작성은 memId와 hostId가 다를 때만 가능 */}
+        {memId !== hostId && (
+          <div className="guestbook-input">
+            <textarea
+              value={newEntry}
+              onChange={(e) => setNewEntry(e.target.value)}
+              placeholder="내용을 입력해 주세요."
+            ></textarea>
+            <button className="guestsubmit" onClick={handleAddEntry}>완료</button>
           </div>
-        ))}
-      </div>
-        
-      {/* 페이지 네이션 버튼 */}
-      <div className="pagination">
-        <button onClick={() => handlePageChange(page - 1)} disabled={page === 0}>이전</button>
-        <span>{page + 1} / {totalPages}</span>
-        <button onClick={() => handlePageChange(page + 1)} disabled={page + 1 === totalPages}>다음</button>
-      </div>
+        )}
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
+
+                <div className={guestbookEntries.length === 0 ? "guestbook-nolist" : "guestbook-list"}>
+          {guestbookEntries.length === 0 ? (
+            // 방명록에 글이 없을 때 표시할 이미지
+            <div className="empty-guestbook">
+              <img src={emptyImage} alt="방명록이 없습니다." style={{ width: '150px', margin: '0 auto', display: 'block' }} />
+              <p style={{ textAlign: 'center', color: '#888' }}>아직 방명록이 없습니다.</p>
+            </div>
+          ) : (
+            // 방명록 항목이 있을 때의 렌더링
+            guestbookEntries.map((entry) => (
+              <div key={entry.gbNum} className="guestbook-entry">
+                <div className="entry-header">
+                  <span onClick={() => toggleMenu(entry.gbNum)} style={{ cursor: 'pointer' }}>
+                    <img
+                      className="guestbook-img"
+                      src={profileImages[entry.commenter] || defaultProfileImage}
+                      alt="프로필 사진"
+                      style={{ width: "50px", height: "50px", borderRadius: "50px" }}
+                    />
+                  </span>
+                  <span className="username" onClick={() => toggleMenu(entry.gbNum)} style={{ cursor: 'pointer' }}>
+                    {entry.nickname}
+                  </span>
+                  {menuOpen && (
+                    <div className="GMB-box">
+                      <button className="guestmenu-buttons" onClick={() => visitFriendPage(entry.commenter)}>홈피 가기</button>
+                      <button className="guestmenu-buttons" onClick={() => sendMessage(entry.commenter)}>쪽지 보내기</button>
+                    </div>
+                  )}
+                  <span className="date">{new Date(entry.createDate).toLocaleString()}</span>
+                </div>
+
+                {editMode === entry.gbNum ? (
+                  <div className="guestbookEdit-box">
+                    <textarea
+                      placeholder="내용을 입력해 주세요."
+                      value={editContent}
+                      onChange={(e) => setEditContent(e.target.value)}
+                    />
+                    <button className="guestbookEdit-saveBtn" onClick={() => handleSaveEdit(entry.gbNum)}>저장</button>
+                  </div>
+                ) : (
+                  <p className="message">{entry.gbContent}</p>
+                )}
+
+                <div className="guest-DE-box">
+                  {entry.commenter === memId && (
+                    <button onClick={() => handleEditMode(entry.gbNum, entry.gbContent)}
+                    className="guestbookEdit-button">수정</button>
+                  )}
+
+                  {(entry.commenter === memId || hostId === memId) && (
+                    <button onClick={() => handleDeleteEntry(entry.gbNum)} className="guestbookDelete-button">삭제</button>
+                  )}
+                </div>
+              </div>
+            ))
+          )}
+        </div>
+
+        {/* 페이지 네이션 버튼 */}
+        {totalPages > 1 && (
+          <div className="pagination">
+            <button className="pagination-btn" onClick={() => handlePageChange(page - 1)} disabled={page === 0}>&lt;&nbsp;</button>
+            <span>{page + 1} / {totalPages}</span>
+            <button className="pagination-btn" onClick={() => handlePageChange(page + 1)} disabled={page + 1 === totalPages}>&nbsp;&gt;</button>
+          </div>
+        )}
     </div>
     </div>
   );

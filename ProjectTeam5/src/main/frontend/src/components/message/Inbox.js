@@ -69,6 +69,7 @@ const Inbox = ({ setContent, setSelectedMessage, checkUnreadMessages }) => {
               onClick={() => openMessageDetail(message)}
             >
               <span className="message-sender">{message.memId}</span>
+              &nbsp;
               님이 보낸 쪽지가 도착했습니다!
               <button
                 className="message-delete-btn"

@@ -59,7 +59,7 @@ box-shadow: 0 4px 4px rgba(145, 145, 145, 0.1);
 .inbox-header {
 font-size: 11pt;
 text-align: center;
-margin-bottom: 20px;
+margin-bottom: 12px;
 color: #333;
 }
 
@@ -67,10 +67,11 @@ color: #333;
 background-color: #fff;
 border: 1px solid #ddd;
 border-radius: 5px;
-padding: 10px 15px;
-margin-bottom: 10px;
+padding: 4px 12px;
+margin-bottom: 0px;
 transition: background-color 0.2s;
 cursor: pointer;
+font-size: 9pt;
 }
 
 .message-item:hover {
@@ -78,7 +79,8 @@ background-color:#c5c9ff;
 }
 
 .message-item.unread {
-font-weight: bold;
+font-size: 9pt;
+font-weight: 300;
 background-color: #e7f3ff;
 }
 
@@ -89,17 +91,19 @@ color: #7982ff;
 }
 
 .message-status {
-font-size: 0.9rem;
+font-size: 9pt;
 color: #999;
 text-align: right;
 }
 
 .message-delete-btn {
-background-color: #ff5c5c;
-color: white;
+color: #ff5c5c;
+background-color: transparent;
+font-weight: 600;
 border: none;
 border-radius: 5px;
-padding: 4px 8px;
+padding: 4px 7px;
+
 margin:0px 4px 0px 4px;
 cursor: pointer;
 transition: background-color 0.2s;
@@ -107,4 +111,6 @@ transition: background-color 0.2s;
 
 .message-delete-btn:hover {
 background-color: #ff2b2b;
+font-weight: 400;
+color:#fff;
 }
