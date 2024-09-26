@@ -1,0 +1,63 @@
+.signup-container {
+  width: 400px;
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.signup-container h1 {
+  color: #7a63ff;
+  margin-bottom: 20px;
+}
+
+.signup-container p {
+  text-align: left;
+  color: #666;
+  margin: 10px 0;
+}
+
+input {
+  width: calc(100% - 16px);
+  padding: 10px 8px;
+  margin: 5px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.gender-selection {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 10px;
+  gap: 20px; /* 성별 텍스트와 라디오 버튼 사이 간격 */
+}
+
+.gender-label {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.gender-label input {
+  margin-right: 5px;
+}
+
+.signup-submit {
+  width: 100%;
+  padding: 12px;
+  background-color: #7a63ff;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.signup-submit:hover {
+  background-color: #684cce;
+}

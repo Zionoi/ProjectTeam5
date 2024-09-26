@@ -1,0 +1,34 @@
+/* src/components/HeaderSection.css */
+@import url('https://fonts.googleapis.com/css2?family=Viga&display=swap');
+
+.header-section {
+    position: absolute;
+    top:70px;
+    left: 225px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    line-height: 5px;
+  }
+  
+  .header-visit {
+    font-family: "Viga", sans-serif;
+    font-size: 12pt;
+    color: #7982ff;
+  }
+
+  .header-total {
+    font-family: "Viga", sans-serif;
+    font-size: 12pt;
+    color: #777777;
+  }
+  
+  .greeting {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+  }
+  

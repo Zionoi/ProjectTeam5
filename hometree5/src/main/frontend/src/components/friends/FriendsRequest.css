@@ -1,0 +1,56 @@
+.friends-section-request {
+    position: absolute;
+    left: 0px; /* 페이지 왼쪽에 고정 위치 */
+    background-color: #ffffff; /* 흰색 배경 */
+    width: 200px; /* 너비 */
+    max-height: 300px; /* 높이 */
+    border-radius: 16px; /* 모서리를 둥글게 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+  }
+
+
+  .friends-section-request h3 {
+    font-family: "Noto Sans KR", sans-serif; /* 폰트 패밀리 설정 */
+    font-size: 10pt; /* 글자 크기 */
+    font-weight: 600; /* 글자 굵기 */
+    color: rgb(80, 80, 80); /* 글자 색상 */
+    margin: 25px 10px 0px 10px; /* 상단, 좌우, 하단 여백 */
+    padding-bottom: 10px;
+  }
+
+  .friends-section-request input {
+    width: calc(100% - 20px); /* 양쪽 여백을 고려한 너비 설정 */
+    margin: 10px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.friends-section-request .button-con {
+    overflow: auto; /* float로 인한 부모 높이 문제 해결 */
+    display: flex;
+    justify-content: flex-end; /* 버튼을 오른쪽으로 정렬 */
+    margin: 10px;
+    margin-top: 0;
+}
+
+.friends-section-request button {
+    float: right; /* 버튼을 오른쪽으로 정렬 */
+    margin: 10px;
+    margin-top: 0;
+    padding: 5px 10px;
+    background-color: #c5c9ff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.friends-section-request button:hover {
+    background-color: #7a63ff;
+}
+
+.friends-section-request p {
+    margin: 10px;
+   
+}

@@ -47,6 +47,12 @@ public class VoteService {
             vote.setParticipantIds(new ArrayList<>());
         }
 
+        // 중복 제거를 위한 Set 사용
+        List<String> uniqueParticipantIds = vote.getParticipantIds().stream()
+                .distinct()
+                .collect(Collectors.toList());
+        vote.setParticipantIds(uniqueParticipantIds);
+
         // 산책로 투표 수 초기화
         Map<String, Integer> walkingCourseVoteCounts = vote.getVoteEsntlId().stream()
                 .collect(Collectors.toMap(courseId -> courseId, courseId -> 0));  // 투표 수를 0으로 초기화
@@ -61,6 +67,7 @@ public class VoteService {
 
         return savedVote; // 저장된 투표 객체 반환
     }
+
 
     // 투표 쪽지 보내기
     private void sendVoteCreatedMessages(Vote vote, Long voteId) {
@@ -133,7 +140,7 @@ public class VoteService {
         }
 
         // 3. 이미 투표했는지 체크 (중복 투표 방지)
-        if (vote.getParticipantIds().contains(userId)) {
+        if (vote.getVotedUserIds().contains(userId)) { // votedUserIds를 확인
             throw new RuntimeException("User has already voted");
         }
 
@@ -145,8 +152,8 @@ public class VoteService {
             voteCount.put(courseId, 1);  // 처음 투표 시 1로 설정
         }
 
-        // 5. 해당 사용자를 참가자 목록에 추가하여 중복 투표 방지
-        vote.getParticipantIds().add(userId);
+        // 5. 투표한 사용자를 votedUserIds에 추가하여 중복 투표 방지
+        vote.getVotedUserIds().add(userId);
 
         // 6. 투표 정보 저장
         voteRepository.save(vote);

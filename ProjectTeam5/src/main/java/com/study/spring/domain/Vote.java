@@ -57,8 +57,16 @@ public class Vote {
     @Column(nullable = false)
     private boolean isEnded;  // 투표 종료 여부
 
+    // 투표 생성 시 권한을 받은 유저 ID 목록 (기존 컬럼)
     @ElementCollection(fetch = FetchType.EAGER)
-    private List<String> participantIds = new ArrayList<>(); // 참여자 ID 목록
+    @Column(nullable = false)
+    private List<String> participantIds = new ArrayList<>(); // 투표 권한을 받은 유저 ID 목록
+
+    // 실제로 투표를 진행한 유저 ID 목록 (빈 배열로 초기화)
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "vote_participants", joinColumns = @JoinColumn(name = "vote_id"))
+    @Column(name = "voted_user_id")
+    private List<String> votedUserIds = new ArrayList<>(); // 투표를 진행한 유저 ID 목록
 
     @ElementCollection(fetch = FetchType.EAGER)
     @Column(nullable = false)

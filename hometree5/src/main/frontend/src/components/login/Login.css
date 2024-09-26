@@ -1,0 +1,207 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.loginBox{
+  background-color:transparent ; /* 배경색 설정 */
+  width: 100vw;
+  height: 100vh;
+}
+
+.loginAccount { /* Login Account */
+  font-family: "Asap", sans-serif;
+  font-weight: 900;
+  font-size:22pt;
+  color: #ffffff;
+  margin-bottom: 50px;
+  margin-top: 150px;
+}
+
+.login-form {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input-field { /* 아이디/비밀번호 입력 칸 */
+  flex: 1;
+  padding: 7px 22px;
+  margin-top:2px;
+  margin-right:9px;
+  border: 1px solid #ffffff;
+  border-radius: 15px;
+  outline: none;
+  color:#ffffff;
+  background-color: transparent;
+}
+.input-field::placeholder { /* 아이디/비밀번호 홀더 폰트 */
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  color:#ffffff;
+}
+input:focus::placeholder{
+  color:transparent;
+}
+.signUp,.find { /* 회원가입, 아이디/비번 찾기 버튼 테이블 */
+  position: relative;
+  left:20px; top: -70px;
+  color: #ffffff;
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 400;
+  font-size:9pt;
+  text-decoration: none;
+}
+
+.bu { /* 회원가입, 아이디/비번 찾기 버튼 테이블 공백 */
+  margin-top: -8px;
+  margin-right: 90px;
+}
+
+.signUp:hover,.find:hover { /* 회원가입, 아이디/비번 찾기 버튼 호버 */
+  color: #fffb00;
+}
+
+
+.login-button { /* 로그인 버튼 */
+  position: relative;
+  top:-85px; left:230px;
+  padding: 25px 13px;
+  background-color: transparent;
+  font-family: "Roboto", sans-serif;
+  font-weight: 600;
+  font-size: 12pt;
+  color: rgb(255, 255, 255);
+  letter-spacing: 1px;
+  border: 1px solid #ffffff;
+  border-radius: 20px;
+  cursor: pointer;
+}
+.login-button:hover { /* 로그인 버튼 마우스 호버 */
+  background-color: #00000088;
+}
+
+
+.loginImg-box {
+  position: absolute;
+  display: flex;
+  width: 800px;
+  transform: translate(-40%,-0%);
+}
+
+.light {
+  position: relative;
+  top: 500px; left:800px;
+  border-radius: 50%;
+  position: absolute;
+  animation: infinity 10s infinite linear;
+  box-shadow: 0px 0px 5px 5px white;
+  z-index: 10;
+}
+
+@keyframes infinity {
+  0% {
+      transform: translate(0, 0) rotate(0deg);
+  }
+  12.5% {
+      transform: translate(100px, 50px) rotate(45deg);
+  }
+  25% {
+      transform: translate(150px, 100px) rotate(90deg);
+  }
+  37.5% {
+      transform: translate(100px, 150px) rotate(135deg);
+  }
+  50% {
+      transform: translate(0, 100px) rotate(180deg);
+  }
+  62.5% {
+      transform: translate(-100px, 50px) rotate(225deg);
+  }
+  75% {
+      transform: translate(-150px, 100px) rotate(270deg);
+  }
+  87.5% {
+      transform: translate(-100px, 150px) rotate(315deg);
+  }
+  100% {
+      transform: translate(0, 0) rotate(360deg);
+  }
+}
+/* 소개글에 애니메이션 추가 */
+.description {
+  margin-top: -50px;
+  font-family: "Noto Sans KR", sans-serif;
+  font-size:12pt;
+  line-height: 250%;
+  color: #ffffff;
+  text-align: center;
+
+  /* 애니메이션 설정 */
+  opacity: 0; /* 처음엔 보이지 않게 설정 */
+  transform: translateY(100px); /* 처음에 아래쪽에 위치 */
+  animation: slideUp 1.5s ease-out forwards; /* 애니메이션 실행 */
+}
+
+/* 애니메이션 정의 */
+@keyframes slideUp {
+  to {
+    opacity: 1; /* 최종적으로 보이게 설정 */
+    transform: translateY(0); /* 제자리에 위치 */
+  }
+}
+/* 별 컨테이너 */
+.stars-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: #000; /* 배경은 어두운 하늘을 표현 */
+}
+
+/* 별 스타일 */
+.star {
+  width: 3px;
+  height: 3px;
+  background-color: white;
+  border-radius: 50%;
+  position: absolute;
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+  animation: twinkle 2s infinite ease-in-out;
+}
+
+/* 반짝이는 애니메이션 */
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 1; /* 밝을 때 */
+    transform: scale(1); /* 원래 크기 */
+  }
+  50% {
+    opacity: 0.3; /* 어두울 때 */
+    transform: scale(1.5); /* 살짝 커짐 */
+  }
+}
+
+
+/* Login.css */
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+  100% { transform: translateX(0); }
+}
+
+.loginErrorMessage {
+  position:absolute;
+  top:200px;
+  color: #fffb00;
+  animation: shake 0.5s;
+  text-align: center;
+}
+
+.loginErrorMessage.hidden {
+  display: none;
+}
