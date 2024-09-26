@@ -86,8 +86,9 @@ input:focus::placeholder{
 
 .loginImg-box {
   position: absolute;
-  top:470px; left:600px;
+  display: flex;
   width: 800px;
+  transform: translate(-40%,-0%);
 }
 
 .light {
