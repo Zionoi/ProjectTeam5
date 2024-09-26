@@ -98,7 +98,7 @@ public class MemberService {
     
     //memId로 맴버 객체를 찾는 서비스
     public Member getMemberById(String memId) {
-    	System.out.println("멤버레파지토리 겟 바이 멤아이디 : " + memId);
+    	System.out.println("멤버레파지토리 겟 바이 멤아이디lllllll : " + memId);
         return memberRepository.findById(memId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 사용자를 찾을 수 없습니다."));
     }
