@@ -1,0 +1,62 @@
+@import 'slick-carousel/slick/slick.css';
+@import 'slick-carousel/slick/slick-theme.css';
+
+.board-in{
+  position:absolute;
+  top: 185px; left:230px;
+  font-family: "Noto Sans KR", sans-serif;
+}
+.board-title-inbox {
+  position:absolute;
+  display: flex;
+  align-items: center;
+  width:750px; height: 50px;
+  padding-left:20px;
+}
+.board-listback, 
+.board-edit-btn{
+  font-size: 9pt;
+  font-weight: 600;
+  color:rgb(107, 107, 107);
+  border:none;
+  background-color: transparent;
+}
+.board-edit-btn{
+  position: relative;
+  left:580px;
+}
+.board-listback:hover,
+.board-edit-btn:hover {
+  background-color:#d6cfff;
+  border-radius: 30px;
+}
+
+.board-content-box{
+  border : solid 2px #7a63ff49;
+  width: 750px;
+  height: 500px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 16px;
+  padding:50px 0px 0px 0px;
+}
+.board-text-box {
+  padding:50px;
+}
+.board-title-in{
+    font-size:11pt;
+    font-weight:600;
+    color:rgb(63, 63, 63);
+    padding-bottom: 8px;
+}
+.board-content-in {
+  font-size:10pt;
+    font-weight: 500;
+    color:rgb(87, 87, 87);
+    line-height: 18pt;
+}
+.board-img-in{
+    align-items: center;
+    margin:auto;
+    max-width:300px;
+    max-height: 300px;
+}

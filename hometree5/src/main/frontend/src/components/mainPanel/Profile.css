@@ -1,0 +1,43 @@
+/* Profile.css */
+.profile-container {
+  position: relative;
+  display: inline-block;
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 9pt;
+}
+
+.profile-icon {
+  position: relative;
+  top:-60px; left:-40px;
+  width: 50px; /* 아이콘 크기 */
+  height: 50px;
+  cursor: pointer;
+  border:none;
+  background-color: transparent;
+}
+
+.PItem {
+  position: absolute;
+  top:-64px; left:30px;
+  background-color: #f9f9f9;
+  width: 110px;
+  border-radius: 12px;
+  border : solid 2px #7a63ff49;
+  z-index: 1;
+}
+
+.menu-item {
+  color: black;
+  padding: 6px 12px;
+  text-decoration: none;
+  display: block;
+  border: none;
+  width:100%;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+}
+
+.menu-item:hover {
+  background-color: #ddd;
+}

@@ -1,0 +1,76 @@
+.writeMessageContainer {
+    padding: 20px 20px 10px 20px;
+    border-radius: 10px;
+    width: 300px; height: 220px;
+    margin: 0 auto;
+    background-color: #ffffff;
+  }
+  
+  .writeMessageContainer h5 {
+    font-size: 11pt;
+    font-weight: 600;
+    color:rgb(63, 63, 63);
+    text-align: center;
+  }
+  
+  .writeMessageContainer input[type="text"] {
+    width: 100%; height: 30px;
+    padding: 10px;
+    margin-bottom: 4px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 10pt;
+    font-weight: 600;
+    color:rgb(63, 63, 63);
+    outline-color:#7982ff;
+    outline-width:thin;
+  }
+
+  .writeMessageContainer textarea {
+    width: 100%;
+    padding: 10px;
+    height: 80px;  /* 쪽지 작성 칸의 높이 설정 */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 10pt;
+    font-weight: 400;
+    color:rgb(63, 63, 63);
+    outline-color:#7982ff;
+    outline-width:thin;
+    resize: none; 
+  }
+  .writeMessageContainer input[type="text"]::placeholder,
+  .writeMessageContainer textarea::placeholder {
+    color:rgb(199, 199, 199);
+  }
+
+  .writeMessageContainer button {
+    position: relative;
+    top:-16px;
+    width: 100%;
+    padding: 4px;
+    background-color:#c5c9ff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 10pt;
+  }
+  
+  .writeMessageContainer button:hover {
+    background-color: #7982ff; 
+  }
+
+.writeMessageContainer textarea::-webkit-scrollbar-button{
+    display:none;
+  }
+.writeMessageContainer textarea::-webkit-scrollbar {
+    width: 14px;
+  }
+.writeMessageContainer textarea::-webkit-scrollbar-thumb {
+    outline: none;
+    border-radius: 10px;
+    border: 4px solid transparent;
+    box-shadow: inset 6px 6px 0 #d6cfff;
+  }
+

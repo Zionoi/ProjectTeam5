@@ -1,0 +1,83 @@
+   /* 친구 관리 섹션의 스타일 */
+   .friends-section {
+    position: absolute;
+    left: -70px;
+    background-color: #ffffff;
+    width: 105px;
+    height: 245px;
+    border-radius: 16px;
+    border : solid 2px #7a63ff49;
+
+  }
+  
+  /* 친구 관리 섹션의 제목 스타일 */
+  .friends-section h3 {
+    font-family: "Noto Sans KR", sans-serif; /* 폰트 패밀리 설정 */
+    font-size: 10pt; /* 글자 크기 */
+    font-weight: 600; /* 글자 굵기 */
+    color: rgb(80, 80, 80); /* 글자 색상 */
+    margin: 25px 10px 0px 10px; /* 상단, 좌우, 하단 여백 */
+  }
+
+  /* 버튼 컨테이너: 버튼들을 수직으로 정렬하는 스타일 */
+  .button-container {
+    position: relative; /* 컨테이너 내에서 위치 지정 */
+    top: 20px; /* 위치 조정 */
+    width: 100px; height: 150px; /* 너비와 높이 설정 */
+    display: flex; /* 플렉스박스 레이아웃 사용 */
+    flex-direction: column; /* 버튼들을 수직으로 배치 */
+    align-items: center; /* 수평 가운데 정렬 */
+    gap: 20px; /* 버튼 간의 간격 */
+  }
+  
+  /* 친구 관리 버튼 스타일 */
+  .request-button {
+    background-color: #c5c9ff; /* 버튼 배경색 */
+    color: white; /* 버튼 텍스트 색상 */
+    border: none; /* 테두리 제거 */
+    cursor: pointer; /* 마우스 커서가 포인터 모양으로 변경 */
+    width: 80px; /* 버튼 너비 */
+    height: 30px; /* 버튼 높이 */
+    border-radius: 4px; /* 모서리를 둥글게 */
+    font-family: "Noto Sans KR", sans-serif; /* 폰트 설정 */
+    font-size: 10pt; /* 텍스트 크기 */
+  }
+  
+  /* 버튼에 마우스를 올렸을 때 색상 변화 */
+  .request-button:hover {
+    color: rgb(63, 63, 63); /* 텍스트 색상 변경 */
+    cursor: pointer; /* 포인터 모양 유지 */
+  } 
+  
+  /* ul 목록 스타일 */
+  ul {
+    list-style-type: none; /* 기본 목록 스타일 제거 */
+  }
+  
+  /* ul 목록의 항목 스타일 */
+  ul li {
+    margin: 5px 0; /* 항목 간의 간격 설정 */
+  }
+ 
+  /* 폼 컨테이너의 초기 상태: 화면 밖에 숨겨진 상태 */
+  .form-container {
+    position: absolute;
+    top: 0; /* 상단에 고정 */
+    right: -300px; /* 화면 오른쪽 바깥에 위치 */
+    width: 300px; /* 폼의 너비 */
+    transition: transform 0.3s ease; /* 부드러운 전환 애니메이션 */
+  }
+  
+  /* 폼이 열릴 때: 오른쪽으로 슬라이드 되어 나타남 */
+  .form-container.open {
+    transform: translateX(10px); /* 화면 안쪽으로 이동하여 나타남 */
+  }
+
+  /* 활성화된 버튼 스타일 */
+  .request-button.active {
+    background-color: #7a63ff; /* 활성화된 버튼 배경색 */
+    color: white; /* 활성화된 버튼 텍스트 색상 */
+  }
+
+
+  

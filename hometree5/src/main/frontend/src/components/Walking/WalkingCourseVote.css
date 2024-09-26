@@ -1,0 +1,119 @@
+/* .WalkingCourseVoteBox{
+    position:absolute;
+  width: 750px;
+  height: 500px;
+  overflow-y: overlay;
+  top: 165px; left:210px;
+  margin: 20px;
+  padding:60px 40px 20px 40px;
+  border-radius:16px;
+  background-color: #ffffff;
+  -ms-overflow-style: none;
+} */
+
+/* WalkingCourseVote.css */
+.WalkingCourseVoteBox {
+  position: relative;
+  width: 750px;
+  height: 500px;
+  top: 165px; left:210px;
+  margin: 20px auto;
+  padding: 30px 40px;
+  border-radius: 16px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.WalkingCourseVoteBox h2 {
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: rgb(63, 63, 63);
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.vote-ended-message {
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgb(150, 150, 150);
+}
+
+.course-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.course-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  transition: background-color 0.3s, transform 0.3s;
+  cursor: pointer;
+}
+
+.course-item:hover {
+  background-color: #f0f0ff;
+  transform: translateY(-3px);
+}
+
+.course-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: rgb(63, 63, 63);
+}
+
+.vote-button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  background-color: #7a63ff;
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.vote-button:hover {
+  background-color: #6a53ff;
+  transform: translateY(-2px);
+}
+
+.vote-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.selected-course {
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f7f7f7;
+  margin-bottom: 20px;
+}
+
+.selected-course h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: rgb(63, 63, 63);
+  margin: 0;
+}
+
+.selected-course p {
+  font-size: 14px;
+  color: rgb(100, 100, 100);
+  margin: 5px 0 0;
+}
+
+.bar-chart-container {
+  margin-top: 20px;
+}

@@ -1,0 +1,58 @@
+/* src/components/StickerSection.css */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+.sticker-section {
+    position:absolute;
+    left:420px;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 500px;
+    height: 500px;
+    background-color: #a0c4ff; /* 파란색 배경 */
+    border-radius: 16px;
+    
+  }
+
+  
+  .sticker-content {
+    font-size: 1.5rem;
+    color: white;
+    text-align: center;
+  }
+
+  @keyframes spiralIn {
+    0% {
+      transform: rotate(100deg) translateX(200px) scale(3); /* 시작: 먼 곳에서 작게 */
+      opacity: 1;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      transform: rotate(360deg) translateX(0px) scale(1); /* 회전하면서 제자리로 오기 */
+      opacity: 1;
+    }
+  }
+  
+  .sticker {
+    animation: spiralIn 2s ease-out forwards; /* 1초 동안 회오리처럼 날아오는 애니메이션 */
+  }
+  .stickerDelete {
+      position: absolute;
+      bottom: -30px;
+      right: -421px;  
+      padding: 3px 3px;
+      font-size: 9pt;
+      font-weight:500;
+      border-radius: 5px;
+      background-color: transparent;
+      color: #7982ff;
+      border: none;
+      cursor: pointer;
+      z-Index: 3;
+  }
+  .stickerDelete:hover{
+    background-color: #c5c9ff;
+    color:white;
+  }

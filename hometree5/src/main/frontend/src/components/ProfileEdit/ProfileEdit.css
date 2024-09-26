@@ -1,0 +1,93 @@
+/* ProfileEdit.css */
+.profile-edit-container {
+    position:absolute; /*절대 위치 지정 */
+    width: 750px; /*너비*/
+    height: 500px; /*높이*/
+    top: 130px; left:200px; /*상단 및 좌측으로부터의 위치*/
+    /* flex-direction: column;
+    align-items: center;
+    justify-content: center; */
+    padding: 20px; /*내부 여백 (위쪽은 60px)*/
+    font-family: 'Noto Sans KR', sans-serif;
+  }
+  
+  .profile-edit-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #6a5acd;
+    margin-bottom: 20px;
+  }
+  
+  .profile-edit-form {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+    width: 80%;
+  }
+  
+  .profile-image-upload {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .image-placeholder {
+    width: 250px;
+    height: 250px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .image-note {
+    font-size: 12px;
+    color: #999;
+    margin-top: 10px;
+  }
+  
+  .profile-edit-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .profile-input {
+    width: 400px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+  
+  .profile-edit-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 500px;
+  }
+  
+  .profile-button {
+    position:absolute; /*절대 위치 지정 */
+    top: 570px; left:650px;
+
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .cancel {
+    background-color: #ccc;
+    left: 570px;
+    color: #fff;
+  }
+  
+  .save {
+    background-color: #6a5acd;
+    color: #fff;
+  }
+  

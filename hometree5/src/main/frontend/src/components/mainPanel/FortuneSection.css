@@ -1,0 +1,88 @@
+.Fortune-section {
+  position:absolute;
+  top:350px;
+  width: 120px; /* 프로필 이미지의 너비 조정 */
+  height: 150px; /* 방문 섹션 높이 조정 */
+  background-color: #fff;
+  border-radius: 30px;
+  padding: 15px;
+  margin-top: 10px;
+  margin: 0.01px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.fortune-section { /* 오늘의 운세*/
+  position: absolute;
+  top:300px;
+  width: 200px;
+  font-size: 12px;
+}
+.Fmodal-content h4 {
+  font-size: 10pt;
+  font-weight: 600;
+}
+
+
+.fortune-section li { 
+  margin-bottom: 50px;
+}
+.iconFor{
+  position: absolute;
+  top:-50px; left:-80px;
+}
+.fortune-btn {
+  cursor: pointer;
+  border:none;
+  background-color: transparent;
+}
+.fortune-btn:hover {
+  animation: vibration 0.5s infinite;
+}
+
+@keyframes vibration {
+  from {
+    transform: rotate(15deg);
+  }
+  to {
+    transform: rotate(-10deg);
+  }
+}
+
+
+/* ----------------------- */
+
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css");
+.fortune-btn:active {
+  animation: vibration 0.1s infinite;
+}
+.fortune-btnB {
+  cursor: pointer;
+  border:none;
+  background-color: transparent;
+}
+
+.Fmodal-background {
+  font-family: "Noto Sans KR", sans-serif;
+  position: absolute;
+  top: 60px;
+  left: -70px;
+  width: 200px;
+  height: 80px;
+  background-color: rgba(109, 109, 109, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999; /* 다른 요소들 위에 보이게 */
+}
+.Fmodal-content {
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  border : solid 2px #7a63ff49;
+  text-align: center;
+}
+
+.Fmodal-close {
+  cursor: pointer;
+  border:none;
+}

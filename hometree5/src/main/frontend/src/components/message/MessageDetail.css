@@ -1,0 +1,112 @@
+/* MessageDetail.css */
+
+.message-detail-container {
+  width: 15vw;
+  height: auto;
+    background-color: #ffffff;
+    padding: 20px 20px 10px 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 0 auto;
+    border : solid 2px #7a63ff49;
+  }
+  
+  .message-detail-header {
+    position: relative;
+    top: 20px;
+    font-size:11pt;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .message-detail-content {
+    position: relative;
+    padding:4px;
+    top: 20px;
+    width: 100%;
+    height: 50px;
+    font-size: 10pt;
+    color: #555;
+    margin-bottom: 20px;
+    white-space: pre-wrap; /* 줄바꿈을 유지 */
+    overflow-y: scroll;
+    background-color: #c5c9ff4b;
+  }
+  .message-detail-content::-webkit-scrollbar-button,
+  textarea.reply-textarea::-webkit-scrollbar-button{
+    display:none;
+  }
+  .message-detail-content::-webkit-scrollbar,
+  textarea.reply-textarea::-webkit-scrollbar {
+    width: 14px;
+  }
+  .message-detail-content::-webkit-scrollbar-thumb,
+  textarea.reply-textarea::-webkit-scrollbar-thumb {
+    outline: none;
+    border-radius: 10px;
+    border: 4px solid transparent;
+    box-shadow: inset 6px 6px 0 #d6cfff;
+  }
+  
+  .message-detail-date {
+    margin-top: 20px;
+    text-align: left;
+    color: #888;
+    font-size: 8pt;
+  }
+  
+  /* 버튼들을 textarea 위쪽에 위치하도록 수정 */
+    .message-actions {
+        display: flex;
+        justify-content: flex-start;
+        gap: 10px;
+        margin-bottom: 14px;
+    }
+
+  
+  .reply-button, .delete-button {
+    padding: 4px 8px;
+    font-size: 9pt;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .reply-button {
+    position: absolute;
+    top: 152px; left:200px;
+    background-color: #c5c9ff;
+    color: white;
+  }
+  
+  .reply-button:hover {
+    background-color: #7982ff;
+  }
+  
+  .delete-button {
+    color: #535353;
+    background-color:transparent;
+    float: right;
+  }
+  
+  .delete-button:hover {
+    color: white;
+    background-color: #7982ff;
+  }
+  
+  textarea.reply-textarea {
+    outline-color:#7982ff;
+    outline-width:thin;
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 10pt;
+    color: #555;
+    margin-bottom: 10px;
+    resize: none;
+    overflow-y: scroll;
+  }
+  

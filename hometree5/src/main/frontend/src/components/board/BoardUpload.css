@@ -1,0 +1,140 @@
+.BoardUpload-box {
+    position:absolute;
+    top: 185px; left:230px;
+    width: 750px;
+    height: 500px;
+    padding:20px 40px 20px ;
+    background-color: rgb(255, 255, 255);
+    border-radius: 16px;
+    font-family: "Noto Sans KR", sans-serif;
+    border : solid 2px #7a63ff49;
+}
+.BUTitle {
+    font-size:9pt;
+    font-weight: 600;
+    color:rgb(90, 90, 90);
+    margin-bottom: 13px;
+    margin-top: 5px;
+}
+.B-ImgPrevBox {
+    display: flex;
+    width: 670px;
+    height: 200px;
+    border-color:#d6cfff;
+}
+.BoardUpload-Imgbox {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 510px;
+    height: 170px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    direction: rtl;
+}
+.B-ImgBox {
+    position:absolute;
+    left:560px; top:50px;
+    width:150px; height: 150px;
+    font-size: 40pt;
+    font-weight: 100;
+    text-align: center;
+    align-content: center;
+    color: rgb(199, 199, 199);
+    border: solid 2px rgb(199, 199, 199);
+}
+.B-ImgBox:hover {
+    background-color: #a3a3a3;
+    color: rgb(255, 255, 255);
+    border: solid 2px  #a3a3a3;
+}
+.board-uploadImgBox {
+    display: none;
+}
+
+.board-ImgD {
+    background:url(../../img/xbuttonHover.png) no-repeat;
+    width: 20px; height: 20px;
+    border:none; border-radius: 30px;
+    background-position-x: center;
+    background-position-y: center;
+    background-size: 20px;
+    background-color: #ffffff;
+    transform: translate(-20%,-140%);
+}
+.board-ImgD:hover{
+    background:url(../../img/xbutton.png) no-repeat;
+    width: 20px; height: 20px;
+    border:none;
+    background-position-x: center;
+    background-position-y: center;
+    background-size: 20px;
+    background-color: #646464;
+  }
+.board-Imgs {
+    margin-top:5px;
+    flex-basis: auto;
+}
+.BoardContentBox {
+    border-top: solid 1px  #d6cfff;
+    position: absolute;
+    top:240px;
+    width: 670px; height: 220px;
+}
+.BoardUpload-Imgbox::-webkit-scrollbar-button,
+.BoardUploadContent::-webkit-scrollbar-button {
+    display:none;
+  }
+  .BoardUpload-Imgbox::-webkit-scrollbar,
+  .BoardUploadContent::-webkit-scrollbar {
+    width: 14px;
+  }
+  .BoardUpload-Imgbox::-webkit-scrollbar-thumb,
+  .BoardUploadContent::-webkit-scrollbar-thumb {
+    outline: none;
+    border-radius: 10px;
+    border: 4px solid transparent;
+    box-shadow: inset 6px 6px 0 #d6cfff;
+  }
+  .BoardUploadTitle {
+    margin-top: 20px;
+    font-size:11pt;
+    font-weight:500;
+    color:rgb(63, 63, 63);
+    resize: none;
+    border: none;
+    outline: none;
+    width: 670px; height: 30px;
+  }
+  .BoardUploadTitle::placeholder {
+    color: rgb(160, 160, 160);
+  }
+  .BoardUploadTitle:focus, .BoardUploadContent:focus { background-color:#f8f7ff;}
+
+  .BoardUploadContent {
+    padding:10px;
+    font-size: 10pt;
+    font-weight: 500;
+    color:rgb(63, 63, 63);
+    resize: none;
+    border: none;
+    outline: none;
+    width: 670px; height: 140px;
+  }
+  .BoardUploadContent::placeholder {
+    color: rgb(194, 194, 194);
+  }
+  .BUB,.BUC{
+    border: none;
+    font-size:10pt;
+    font-weight: 500;
+    background-color:white;
+    border:solid 2px #c5c9ff;
+    color: rgb(63, 63, 63);
+    border-radius: 12px;
+    margin-top:5px;
+  }
+  .BUB:hover,.BUC:hover {
+    background-color: #c5c9ff;
+    border-radius: 12px;
+  }

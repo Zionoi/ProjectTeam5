@@ -1,0 +1,118 @@
+/* MyCalendar.css */
+
+/* 제목 스타일 */
+.diary-title {
+    position:absolute;
+    top:190px !important;
+    left:310px;
+    font-family: "Noto Sans KR", sans-serif;
+    font-size:11pt;
+    font-weight: bold;
+    color:rgb(63, 63, 63);
+    z-index: 1;
+}
+.calendar-box {
+    border : solid 2px #7a63ff49;
+    position:absolute;
+    width: 750px;
+    height: 500px;
+    top: 185px; left:230px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 16px;
+}
+
+/* 달력 배경 */
+.calendar-back {
+    position:relative;
+    left:80px;
+    width: 560px;
+    height: 480px;
+    background-color: rgb(255, 255, 255);
+    font-family: "Noto Sans KR", sans-serif;
+    
+}
+
+/* 달력 컨테이너 */
+.calendar-container {
+    text-align: left;
+    align-items: left;
+    overflow: hidden; /* 셀 넘어가면 안보이게 처리*/
+    text-overflow: ellipsis; /* 일정 글자수 넘어가면 ...으로 처리*/
+}
+
+/* 날짜 셀의 패딩 제거 */
+.fc .fc-daygrid-day-number {
+    padding: 0;
+    text-decoration: none; /* 밑줄 제거 */
+    color: black;
+    
+}
+.event-content{
+    color:rgb(83, 83, 83);
+    
+    
+}
+/*헤더 스타일*/
+.fc .fc-toolbar.fc-header-toolbar {
+    padding: 20px 10px 0px 0px;
+    font-size: 12px;
+    font-weight: 500;
+    border-radius: 20px;
+  }
+  /*화살표*/
+  .fc .fc-button {
+    background-color: transparent;
+    color:#c5c9ff;
+    border: none;
+  }
+  /*투데이 버튼*/
+  .fc .fc-today-button {
+    background-color:#c5c9ff;
+    color: #fff;
+  }
+  .fc .fc-today-button:hover,.fc .fc-button-primary:hover {
+    background-color: #7982ff;
+  }
+  .fc .fc-button-primary:focus {
+  border: none;
+  box-shadow: none;
+}
+.fc-content {
+    font-size: 15pt;
+    
+}
+/* 이벤트 목록 스타일 */
+.fc .fc-daygrid-day-events {
+    display: flex;
+    white-space: nowrap;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden; /* 셀 넘어가면 안보이게 처리*/
+    text-overflow: ellipsis; /* 일정 글자수 넘어가면 ...으로 처리*/
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* 요일 스타일링 (일요일: 빨간색, 토요일: 파란색, 나머지 요일: 검정색) */
+.fc .fc-col-header-cell-cushion {
+    color: black; /* 기본 요일 색상 검정 */
+    text-decoration: none; /* 요일 밑줄 제거 */
+}
+
+/* 일요일 스타일 (빨간색) */
+.fc .fc-col-header-cell:nth-child(1) .fc-col-header-cell-cushion {
+    color: red;
+}
+
+/* 토요일 스타일 (파란색) */
+.fc .fc-col-header-cell:nth-child(7) .fc-col-header-cell-cushion {
+    color: blue;
+}
+
+.fc-daygrid-day {
+    transition: background-color 0.3s ease; /* 배경색이 서서히 변하도록 애니메이션 설정 */
+}
+
+.fc-daygrid-day:hover {
+    background-color: #7a63ff49; /* 마우스 오버 시 배경색 설정 */
+}
