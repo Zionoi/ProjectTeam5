@@ -26,13 +26,24 @@ public class VoteController {
 
      
 
-    // 투표 생성하기
-    @PostMapping("/create")
-    public Vote createVote(@RequestBody Vote vote) {
-    	System.out.println("컨트롤러 투표생성 : vote :"+vote.getVoteTitle());
-        return voteService.createVote(vote);
-    }
- // 모든 산책로 목록 가져오기
+	// 투표 생성하기
+	@PostMapping("/create")
+	public Vote createVote(@RequestBody Vote vote) {
+	    // 프론트엔드에서 전달된 데이터 출력
+	    System.out.println("Received vote data: " + vote);
+	    
+	    // vote 객체가 올바르게 생성되어 있는지 확인
+	    if (vote.getParticipantIds() == null || vote.getParticipantIds().isEmpty()) {
+	        System.out.println("No participant IDs provided");
+	    } else {
+	        System.out.println("Participant IDs: " + vote.getParticipantIds());
+	    }
+
+	    Vote savedVote = voteService.createVote(vote); // 저장된 투표 반환
+	    return savedVote; // 저장된 투표 객체 반환
+	}
+    
+    // 모든 산책로 목록 가져오기
     @GetMapping("/walking/courses")
     public List<WalkingCourse> getAllWalkingCourses() {
         return voteService.getAllWalkingCourses();
@@ -53,7 +64,6 @@ public class VoteController {
     // 특정 투표 조회
     @GetMapping("/{id}")
     public Vote getVoteById(@PathVariable Long id) {
-    	System.out.println("특정 투표 조회 id, getVoteById(id)"+ id+ voteService.getVoteById(id).get());
         return voteService.getVoteById(id).get();
     }
 
