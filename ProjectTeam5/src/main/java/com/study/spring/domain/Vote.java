@@ -11,6 +11,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -55,16 +56,16 @@ public class Vote {
     @Column(nullable = false)
     private boolean isEnded;  // 투표 종료 여부
     
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     private List<String> participantIds; // 참여자 ID 목록
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @Column(nullable = false)
     private List<String> voteEsntlId; // 산책 코스 리스트
    
 
     // 산책로별 투표 수를 관리하는 필드
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "vote_course_count", joinColumns = @JoinColumn(name = "vote_id"))
     @MapKeyColumn(name = "walking_course_esntl_id")
     @Column(name = "vote_count")

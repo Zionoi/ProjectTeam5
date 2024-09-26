@@ -134,7 +134,7 @@ function VoteCreate() {
             isAnonymous: isAnonymous,  // 익명 투표 여부
             endTime: endTime ? `${endTime}T00:00:00` : "2024-09-25T00:00:00",  // 종료 시간을 LocalDateTime 형식으로 변환
             creatorId: creatorId || "user01",  // 생성자 ID
-            esntlId: selectedWalkingCourses.map(course => course.esntlId),  // 산책로 ID 리스트
+            voteEsntlId: selectedWalkingCourses.map(course => course.esntlId),  // 산책로 ID 리스트
             participantIds: isOpenToAllFriends ? [] : participantIds,  // 선택된 친구들의 ID. 전체 친구일 경우 빈 배열로 전달
             isEnded: false
         };
