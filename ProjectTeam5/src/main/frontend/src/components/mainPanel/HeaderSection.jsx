@@ -64,7 +64,7 @@ useEffect(() => {
  return (
    <div className="header-section">
      <p className="header-visit">TODAY : {todayVisit}</p>
-     <h2 className="header-visit">TOTAL : {totalVisit}</h2>
+     <h2 className="header-total">TOTAL : {totalVisit}</h2>
 
     </div>
   );
