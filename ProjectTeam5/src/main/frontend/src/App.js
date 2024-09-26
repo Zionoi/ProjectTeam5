@@ -46,9 +46,8 @@ function App() {
 
   return (
     <div className="App">
-      {/* 로그인 페이지에서만 별 효과를 렌더링 */}
-      {location.pathname === "/" || location.pathname === "*" ? <Stars /> : null}
-
+      {/* {location.pathname === "/" || location.pathname === "*" ? <Stars /> : null} */}
+      <Stars /> 
       {isLoggedIn ? (
         <MainPanel onLogout={handleLogout} hostId={hostId} setHostId={setHostId} />
       ) : (

@@ -38,5 +38,21 @@
   .sticker {
     animation: spiralIn 2s ease-out forwards; /* 1초 동안 회오리처럼 날아오는 애니메이션 */
   }
-  
-  
+  .stickerDelete {
+      position: absolute;
+      bottom: -30px;
+      right: -421px;  
+      padding: 3px 3px;
+      font-size: 9pt;
+      font-weight:500;
+      border-radius: 5px;
+      background-color: transparent;
+      color: #7982ff;
+      border: none;
+      cursor: pointer;
+      z-Index: 3;
+  }
+  .stickerDelete:hover{
+    background-color: #c5c9ff;
+    color:white;
+  }

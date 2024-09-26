@@ -1,5 +1,4 @@
- /* GuestbookPage.css */
- .guestbook-container {
+.guestbook-container {
   position: absolute; /* 여전히 absolute 위치를 유지 */
   width: 750px;
   height: auto; /* 자동으로 높이가 조절되도록 설정 */
@@ -10,11 +9,12 @@
   border-radius: 16px;
   background-color: #ffffff;
   overflow: visible; /* 전체 컨테이너에서 overflow를 없앰 */
+  border : solid 2px #7a63ff49;
 }
 
 .guestbook-list {
   position: relative;
-  top:-50px;
+  top:0px;
   width: 100%; /* 너비를 100%로 설정 */
   height: auto; /* 리스트 높이를 자동으로 조정 */
   max-height: 320px; /* 일정 높이를 넘으면 스크롤 발생 */
@@ -96,7 +96,6 @@ line-height: 1.6em;
 }
 
 .guestbook-input { /*방명록 및 공간*/
-position: absolute;
 display: flex;
 flex-direction: column;
 margin-top: 20px;
@@ -217,7 +216,4 @@ background-color: #684cce;
 .guestbookEdit-saveBtn:hover{
   background-color: #7a63ff;
   color:white;
-}
-.empty-guestbook{
-  margin-top: 110px;
 }

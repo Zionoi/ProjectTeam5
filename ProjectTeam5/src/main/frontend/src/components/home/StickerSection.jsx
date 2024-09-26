@@ -111,22 +111,10 @@ function StickerSection() {
         ))}
       </div>
 
-      {/* 스티커 삭제 버튼, 나무 사진 바깥쪽 오른쪽 아래 위치 */}
-      <button 
+      {/* 스티커 삭제 버튼을 나무사진 바깥쪽 오른쪽 아래에 위치 */}
+      <button className="stickerDelete"
         onClick={clearStickers} 
-        style={{
-          position: 'absolute',
-          bottom: '-30px',  // 나무 사진 아래쪽에 위치
-          right: '-421px',  // 나무 사진 오른쪽에 맞게 위치
-          padding: '3px 3px',
-          fontSize: '9px',
-          borderRadius: '5px',
-          backgroundColor: 'skyblue',
-          color: 'white',
-          border: 'none',
-          cursor: 'pointer',
-          zIndex: 3,
-        }}
+
       >
         스티커 삭제
       </button>

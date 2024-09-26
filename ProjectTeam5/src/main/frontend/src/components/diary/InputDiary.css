@@ -1,16 +1,17 @@
 .note {
     background-color: rgb(255, 255, 255);
-    width: 700px;
+    width: 750px;
     height: 500px;
-    border-radius: 30px;
+    border-radius: 16px;
     position:absolute;
     top: 185px; left:230px;
     padding:20px 40px 20px 40px;
+    border : solid 2px #7a63ff49;
 }
 
 .inputdiary-title {
     position:relative;
-    top:10px;
+    top:4px;
     font-family: "Noto Sans KR", sans-serif;
     font-size:11pt;
     font-weight: 600;
@@ -40,8 +41,9 @@
 }
 
 .form-content {
+    padding:10px;
     position: relative;
-    width: 600px;
+    width: 665px;
     height: 350px;
     background-color: aliceblue;
 }
@@ -69,7 +71,7 @@
 
 .diarysubmit {
     position:relative;
-    top:5px;left:560px;
+    top:5px;left:600px;
     background-color: transparent;
     font-family: "Noto Sans KR", sans-serif;
     font-size:10pt;

@@ -183,3 +183,25 @@ input:focus::placeholder{
     transform: scale(1.5); /* 살짝 커짐 */
   }
 }
+
+
+/* Login.css */
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+  100% { transform: translateX(0); }
+}
+
+.loginErrorMessage {
+  position:absolute;
+  top:200px;
+  color: #fffb00;
+  animation: shake 0.5s;
+  text-align: center;
+}
+
+.loginErrorMessage.hidden {
+  display: none;
+}
