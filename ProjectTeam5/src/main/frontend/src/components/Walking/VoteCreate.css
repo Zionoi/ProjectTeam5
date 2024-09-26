@@ -123,9 +123,9 @@
 
 /* 버튼 스타일 */
 .voteBox button[type="submit"] {
-    background-color: #286aa7;
+    background-color: #7a63ff;
     color: white;
-    padding: 12px;
+    padding: 8px;
     border: none;
     border-radius: 4px;
     font-size: 16px;
@@ -135,7 +135,39 @@
 }
 
 .voteBox button[type="submit"]:hover {
-    background-color: #214e88;
+    background-color: #684cce;
+}
+.walkLbtn {    
+    position: a;
+    top: -55px;
+    left: 0px;
+    background-color: #7a63ff;
+    color: white;
+    padding: 8px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+    align-self: flex-start; /* 버튼을 왼쪽 정렬 */
+}
+.voteBox button[type="button"] {
+    position: relative;
+    top: -55px;
+    left: 550px;
+    background-color: #7a63ff;
+    color: white;
+    padding: 8px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+    align-self: flex-start; /* 버튼을 왼쪽 정렬 */
+}
+
+.voteBox button[type="button"]:hover {
+    background-color: #684cce;
 }
 
 /* 목록 아이템과 삭제 버튼 */
@@ -206,7 +238,7 @@
 
 .vote-modal-content button {
     padding: 10px 20px;
-    margin-top: 10px;
+    margin-top: 0px;
     border: none;
     background-color: #28a745;
     color: white;

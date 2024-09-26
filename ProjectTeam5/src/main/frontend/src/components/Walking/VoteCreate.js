@@ -195,7 +195,7 @@ function VoteCreate() {
                         ))}
                     </ul>
                     {/* 산책로 후보 추가 버튼 */}
-                    <button type="button" onClick={() => setIsModalOpen(true)}>
+                    <button className="walkLbtn" type="button" onClick={() => setIsModalOpen(true)}>
                         산책로 후보 추가
                     </button>
                 </div>

@@ -130,7 +130,7 @@
     padding: 10px 20px;
     font-family: "Noto Sans KR", sans-serif;
     font-size: 12pt;
-    background-color: #f39c12;
+    background-color: #7a63ff;
     color: #ffffff;
     border: none;
     border-radius: 8px;
@@ -139,7 +139,7 @@
 }
 
 .closed-votes-button:hover {
-    background-color: #e67e22;
+    background-color: #7a63ff;
 }
 
 /* 투표 리스트로 돌아가는 버튼 */
@@ -152,7 +152,7 @@
     right: 40px;
     font-family: "Noto Sans KR", sans-serif;
     font-size: 12pt;
-    background-color: #f39c12;
+    background-color: 7a63ff;
     color: #ffffff;
     border: none;
     border-radius: 8px;
@@ -161,5 +161,5 @@
 }
 
 .back-to-vote-list-button:hover {
-    background-color: #e67e22;
+    background-color: #5c49d7;
 }
