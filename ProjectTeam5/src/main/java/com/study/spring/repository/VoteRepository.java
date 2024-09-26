@@ -12,11 +12,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface VoteRepository extends JpaRepository<Vote, Long> {
 
+    @Query("SELECT v FROM Vote v WHERE :memId IN elements(v.participantIds) AND v.isEnded = :isEnded AND v.participantIds IS NOT EMPTY")
+    List<Vote> findActiveInvitedVotes(@Param("memId") String memId, @Param("isEnded") boolean isEnded);
 
-
-	
-	@Query("SELECT v FROM Vote v WHERE :memId IN elements(v.participantIds) AND v.isEnded = :isEnded")
-	List<Vote> findActiveInvitedVotes(@Param("memId") String memId, @Param("isEnded") boolean isEnded);
-
-	List<Vote> findByMemId(String memId);
+    List<Vote> findByMemId(String memId);
 }

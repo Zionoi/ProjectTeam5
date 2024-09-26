@@ -142,7 +142,7 @@ function VoteCreate() {
             voteTitle: voteTitle,  // 투표 제목
             isOpenToAllFriends: isOpenToAllFriends,  // 전체 친구 참여 여부
             isAnonymous: isAnonymous,  // 익명 투표 여부
-            endTime: endTime ? endTime : `${endTime}T00:00:00` ,  // 종료 시간을 LocalDateTime 형식으로 변환
+            endTime: endTime ? endTime : `${endTime}` ,  // 종료 시간을 LocalDateTime 형식으로 변환
             creatorId: creatorId,  // 생성자 ID
             voteEsntlId: selectedWalkingCourses.map(course => course.esntlId),  // 산책로 ID 리스트
             participantIds: isOpenToAllFriends ? friends.map(friend => friend.friendId) : participantIds,  // 선택된 친구들의 ID. 전체 친구일 경우 모든 친구의 ID 추가  
