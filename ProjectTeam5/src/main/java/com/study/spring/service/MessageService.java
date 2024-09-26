@@ -1,5 +1,6 @@
 package com.study.spring.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,5 +43,19 @@ public class MessageService {
     // 메시지 삭제
     public void deleteMessage(Long mNum) {
         messageRepository.deleteById(mNum);
+    }
+    
+    // 메시지를 발송하는 메서드(투표)
+    public void sendMessage(String memId, String friendId, String content) {
+        // 메시지 엔티티 생성
+        Message message = new Message();
+        message.setMemId(memId);  // 발신자 ID 설정
+        message.setFriendId(friendId);  // 수신자 ID 설정
+        message.setMcontent(content);  // 메시지 내용 설정
+        message.setCreateSysdate(LocalDateTime.now());  // 메시지 생성 시간 설정
+        message.setIsReading(1);  // 읽음 여부 기본값 (1: 읽지 않음)
+
+        // 메시지 저장
+        messageRepository.save(message);
     }
 }

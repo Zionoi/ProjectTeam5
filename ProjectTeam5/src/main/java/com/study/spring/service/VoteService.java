@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,13 +28,52 @@ public class VoteService {
     
     @Autowired
     private FriendsRepository friendsRepository;  // 친구 리포지토리
-
-    // 투표 생성
-   
+    
+    @Autowired
+    private MessageService messageService;  // 쪽지 서비스
 
     // 투표 생성하기
     public Vote createVote(Vote vote) {
-        return voteRepository.save(vote);
+    	
+    	// 받은 데이터 확인을 위한 로그 출력
+        System.out.println("서비스 레이어에서 받은 투표 데이터: " + vote.toString());
+        
+        // 산책로 투표 수 초기화
+        Map<String, Integer> walkingCourseVoteCounts = vote.getVoteEsntlId().stream()
+                .collect(Collectors.toMap(courseId -> courseId, courseId -> 0));  // 투표 수를 0으로 초기화
+
+        vote.setWalkingCourseVoteCounts(walkingCourseVoteCounts);  // 산책로별 투표 수 설정
+        
+        // 투표 저장
+        Vote savedVote = voteRepository.save(vote);
+
+        // 참여자들에게 메시지 전송
+        sendVoteCreatedMessages(vote, savedVote.getVoteId());
+
+        return savedVote; // 저장된 투표 객체 반환
+    }
+    
+    // 투표 쪽지보내기
+    private void sendVoteCreatedMessages(Vote vote, Long voteId) {
+        String voteUrl = "/votes/" + voteId + "/vote";
+        String messageContent = String.format(
+            "투표 '%s'이(가) 생성되었습니다. 마감기한은 %s입니다.\n 투표하러 가기: %s",
+            vote.getVoteTitle(), vote.getEndTime(), voteUrl
+        );
+
+        // 모든 참여자에게 메시지 전송
+        List<String> recipientIds = vote.isOpenToAllFriends() ? getAllFriendIds(vote.getMemId()) : vote.getParticipantIds();
+        for (String recipientId : recipientIds) {
+            messageService.sendMessage(vote.getMemId(), recipientId, messageContent);
+        }
+    }
+    
+    // 친구 목록을 가져오는 메서드 (status가 '친구'인 관계만 가져옴)
+    private List<String> getAllFriendIds(String memId) {
+        List<Friends> friends = friendsRepository.findByMemberMemIdAndStatus(memId, "친구");
+        return friends.stream()
+                      .map(Friends::getFriendId)
+                      .collect(Collectors.toList());
     }
 
     // 모든 산책로 가져오기
@@ -52,13 +92,11 @@ public class VoteService {
     }
 
     // 특정 투표 조회
-    @Transactional
     public Optional<Vote> getVoteById(Long voteId) {
         return voteRepository.findById(voteId);
     }
 
     // 투표 종료
-    @Transactional
     public Vote endVote(Long voteId) {
         Optional<Vote> optionalVote = voteRepository.findById(voteId);
         if (optionalVote.isPresent()) {
@@ -71,7 +109,6 @@ public class VoteService {
 	
    
     // 투표하기
-    @Transactional
     public Map<String, Integer> vote(Long voteId, String courseId, String userId) {
         Optional<Vote> vote = getVoteById(voteId);
         Map<String, Integer> voteCount = new HashMap<>();
@@ -101,16 +138,16 @@ public class VoteService {
 //		
 //		return voteRepository.findByMemId(memId);
 //	}
-    @Transactional
+	
 	public List<Vote> getListEndedMyVote(String memId){
 		return voteRepository.findByMemId(memId);
 	}
-    @Transactional
+	
 	public List<Vote> getListInvitedVote(String memId){
 		
 		return voteRepository.findActiveInvitedVotes(memId, false);
 	}
-    @Transactional
+	
 	public List<Vote> getListEndedInvitedVote(String memId){
 		return voteRepository.findActiveInvitedVotes(memId, true);
 	}
