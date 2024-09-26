@@ -69,5 +69,5 @@ public class Vote {
     @CollectionTable(name = "vote_course_count", joinColumns = @JoinColumn(name = "vote_id"))
     @MapKeyColumn(name = "walking_course_esntl_id")
     @Column(name = "vote_count")
-    private Map<Long, Integer> walkingCourseVoteCounts;  // 산책로 ID와 투표 수를 매핑
+    private Map<String, Integer> walkingCourseVoteCounts;  // 산책로 ID와 투표 수를 매핑
 }
