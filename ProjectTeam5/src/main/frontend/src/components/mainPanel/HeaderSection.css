@@ -1,5 +1,6 @@
 /* src/components/HeaderSection.css */
-@import url('https://fonts.googleapis.com/css2?family=Squada+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Viga&display=swap');
+
 .header-section {
     position: absolute;
     top:70px;
@@ -10,18 +11,19 @@
     align-items: center;
     padding: 10px 20px;
     margin-bottom: 20px;
-    font-family: "Squada One", sans-serif;
-    font-weight: 400;
     line-height: 5px;
   }
   
   .header-visit {
-    font-size: 14pt; 
+    font-family: "Viga", sans-serif;
+    font-size: 12pt;
+    color: #7982ff;
   }
 
-  .total {
-    font-size: 14px;
-    color: #333;
+  .header-total {
+    font-family: "Viga", sans-serif;
+    font-size: 12pt;
+    color: #777777;
   }
   
   .greeting {

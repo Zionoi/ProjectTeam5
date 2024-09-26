@@ -52,11 +52,13 @@ public class VoteService {
     }
 
     // 특정 투표 조회
+    @Transactional
     public Optional<Vote> getVoteById(Long voteId) {
         return voteRepository.findById(voteId);
     }
 
     // 투표 종료
+    @Transactional
     public Vote endVote(Long voteId) {
         Optional<Vote> optionalVote = voteRepository.findById(voteId);
         if (optionalVote.isPresent()) {
@@ -69,6 +71,7 @@ public class VoteService {
 	
    
     // 투표하기
+    @Transactional
     public Map<String, Integer> vote(Long voteId, String courseId, String userId) {
         Optional<Vote> vote = getVoteById(voteId);
         Map<String, Integer> voteCount = new HashMap<>();
@@ -98,16 +101,16 @@ public class VoteService {
 //		
 //		return voteRepository.findByMemId(memId);
 //	}
-	
+    @Transactional
 	public List<Vote> getListEndedMyVote(String memId){
 		return voteRepository.findByMemId(memId);
 	}
-	
+    @Transactional
 	public List<Vote> getListInvitedVote(String memId){
 		
 		return voteRepository.findActiveInvitedVotes(memId, false);
 	}
-	
+    @Transactional
 	public List<Vote> getListEndedInvitedVote(String memId){
 		return voteRepository.findActiveInvitedVotes(memId, true);
 	}

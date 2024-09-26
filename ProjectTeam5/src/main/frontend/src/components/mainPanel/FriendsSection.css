@@ -38,7 +38,7 @@
     cursor: pointer; /* 마우스 커서가 포인터 모양으로 변경 */
     width: 80px; /* 버튼 너비 */
     height: 30px; /* 버튼 높이 */
-    border-radius: 12px; /* 모서리를 둥글게 */
+    border-radius: 4px; /* 모서리를 둥글게 */
     font-family: "Noto Sans KR", sans-serif; /* 폰트 설정 */
     font-size: 10pt; /* 텍스트 크기 */
   }
@@ -75,7 +75,7 @@
 
   /* 활성화된 버튼 스타일 */
   .request-button.active {
-    background-color: #a972dd; /* 활성화된 버튼 배경색 */
+    background-color: #7a63ff; /* 활성화된 버튼 배경색 */
     color: white; /* 활성화된 버튼 텍스트 색상 */
   }
 

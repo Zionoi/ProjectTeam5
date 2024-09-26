@@ -3,7 +3,7 @@ import './GuestbookPage.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import defaultProfileImage from '../../img/basicProfile.png';
-import emptyImage from '../../img//basicProfile.png'; // 방명록이 비어 있을 때 표시할 이미지
+import emptyImage from '../../img/characterImg/guestbookImg.png'; // 방명록이 비어 있을 때 표시할 이미지
 
 function GuestbookPage({ hostId, setHostId }) {
   const [guestbookEntries, setGuestbookEntries] = useState([]);
@@ -191,8 +191,8 @@ function GuestbookPage({ hostId, setHostId }) {
           {guestbookEntries.length === 0 ? (
             // 방명록에 글이 없을 때 표시할 이미지
             <div className="empty-guestbook">
-              <img src={emptyImage} alt="방명록이 없습니다." style={{ width: '150px', margin: '0 auto', display: 'block' }} />
-              <p style={{ textAlign: 'center', color: '#888' }}>아직 방명록이 없습니다.</p>
+              <img src={emptyImage} alt="방명록이 없습니다." style={{ width: '500px', margin: '0 auto', display: 'block' }} />
+              <p style={{ textAlign: 'center', color: '#888', fontSize:"11pt", fontWeight:"500"}}>방명록을 남겨주세요!</p>
             </div>
           ) : (
             // 방명록 항목이 있을 때의 렌더링
