@@ -96,7 +96,7 @@ function VoteCreate() {
     const handleAddFriend = (friend) => {
         setSelectedFriends((prevSelectedFriends) => {
             // 친구가 이미 목록에 있는지 확인
-            const alreadyAdded = prevSelectedFriends.some((f) => f.id === friend.id);
+            const alreadyAdded = prevSelectedFriends.some((f) => f.friendId === friend.friendId);
             
             if (!alreadyAdded) {
                 // 친구가 목록에 없으면 추가
@@ -104,7 +104,7 @@ function VoteCreate() {
                 
                 // participantIds도 함께 업데이트
                 setParticipantIds((prevParticipantIds) => {
-                    const updatedParticipantIds = [...new Set([...prevParticipantIds, friend.id])];
+                    const updatedParticipantIds = [...new Set([...prevParticipantIds, friend.friendId])];
                     return updatedParticipantIds;
                 });
                 
@@ -116,13 +116,10 @@ function VoteCreate() {
     };
     
     
-    
-
-
     // 친구 삭제
     const handleRemoveFriend = (friendId) => {
-        setSelectedFriends(prevFriends => prevFriends.filter(f => f.id !== friendId));
-        setParticipantIds(prevIds => prevIds.filter(id => id !== friendId));
+        setSelectedFriends(prevFriends => prevFriends.filter(f => f.friendId !== friendId));
+        setParticipantIds(prevIds => prevIds.filter(friendId => friendId !== friendId));
     };
 
     const handleSubmit = (e) => {
@@ -138,7 +135,7 @@ function VoteCreate() {
             endTime: endTime ? `${endTime}T00:00:00` : "2024-09-25T00:00:00",  // 종료 시간을 LocalDateTime 형식으로 변환
             creatorId: creatorId || "user01",  // 생성자 ID
             esntlId: selectedWalkingCourses.map(course => course.esntlId),  // 산책로 ID 리스트
-            participantIds: participantIds,  // 선택된 친구들의 ID
+            participantIds: isOpenToAllFriends ? [] : participantIds,  // 선택된 친구들의 ID. 전체 친구일 경우 빈 배열로 전달
             isEnded: false
         };
     
@@ -323,7 +320,7 @@ function VoteCreate() {
                             <h4>친구 목록</h4>
                             <ul>
                                 {friendSearchResults.map(friend => (
-                                    <li key={friend.id}>
+                                    <li key={friend.friendId}>
                                         {friend.friendId}
                                         <button onClick={() => handleAddFriend(friend)}>추가</button>
                                     </li>
