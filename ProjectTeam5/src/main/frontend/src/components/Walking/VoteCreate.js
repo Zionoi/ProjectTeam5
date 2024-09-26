@@ -184,8 +184,12 @@ function VoteCreate() {
 
                 {/* 산책로 선택 */}
                 <div className='voteBox-div'>
-                    <label>산책로 후보 선택</label>
+                    <label>산책로 후보 </label>
                     {/* 선택된 산책로 목록 */}
+                    {/* 산책로 후보 추가 버튼 */}
+                    <button className="walkLbtn" type="button" onClick={() => setIsModalOpen(true)}>
+                        추가
+                    </button>
                     <ul>
                         {selectedWalkingCourses.map(course => (
                             <li key={course.esntlId} className="list-item">
@@ -194,10 +198,6 @@ function VoteCreate() {
                             </li>
                         ))}
                     </ul>
-                    {/* 산책로 후보 추가 버튼 */}
-                    <button className="walkLbtn" type="button" onClick={() => setIsModalOpen(true)}>
-                        산책로 후보 추가
-                    </button>
                 </div>
 
                 {/* 투표 종료 시간 */}
@@ -212,29 +212,35 @@ function VoteCreate() {
 
                 {/* 전체 친구 참여 여부 */}
                 <div className="voteBox-div voteBox-friend-selection">
-                    <label>
-                        <input
-                            type="radio"
-                            checked={isOpenToAllFriends}
-                            onChange={() => setIsOpenToAllFriends(true)}
-                        />
-                        전체 친구 참여
-                    </label>
-                    <label>
-                        <input
-                            type="radio"
-                            checked={!isOpenToAllFriends}
-                            onChange={() => setIsOpenToAllFriends(false)}
-                        />
-                        선택 친구 참여
-                    </label>
+                    <table>
+                        <tr>
+                            <td>전체 친구 참여
+                                <input
+                                type="radio"
+                                checked={isOpenToAllFriends}
+                                onChange={() => setIsOpenToAllFriends(true)}
+                                />
+                            </td>
+                            <td> 선택 친구 참여
+                            
+                                <input
+                                type="radio"
+                                checked={!isOpenToAllFriends}
+                                onChange={() => setIsOpenToAllFriends(false)}
+                                />
+                            </td>
+                        </tr>
+                    </table>
                 </div>
 
                 <div className='voteBox-div'>
                     {/* 친구 선택하기 버튼 */}
                     {!isOpenToAllFriends && (
                         <div>
-                            <label>선택된 친구 목록:</label>
+                            <label>선택된 친구 목록</label>
+                            <button type="button" className="walkLbtn" onClick={() => setIsFriendModalOpen(true)}>
+                               친구추가
+                            </button>
                             <ul>
                                 {selectedFriends.map(friend => (
                                     <li key={friend.id} className="list-item">
@@ -243,9 +249,6 @@ function VoteCreate() {
                                     </li>
                                 ))}
                             </ul>
-                            <button type="button" onClick={() => setIsFriendModalOpen(true)}>
-                                참여할 친구 선택하기
-                            </button>
                         </div>
                     )}
                 </div>

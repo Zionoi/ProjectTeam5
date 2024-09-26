@@ -138,7 +138,6 @@
     background-color: #684cce;
 }
 .walkLbtn {    
-    position: a;
     top: -55px;
     left: 0px;
     background-color: #7a63ff;
@@ -150,9 +149,10 @@
     cursor: pointer;
     margin-top: 20px;
     align-self: flex-start; /* 버튼을 왼쪽 정렬 */
-}
+ }
+/*
 .voteBox button[type="button"] {
-    position: relative;
+    position: absolute;
     top: -55px;
     left: 550px;
     background-color: #7a63ff;
@@ -163,8 +163,9 @@
     font-size: 16px;
     cursor: pointer;
     margin-top: 20px;
-    align-self: flex-start; /* 버튼을 왼쪽 정렬 */
-}
+    align-self: flex-start; 
+} 
+*/
 
 .voteBox button[type="button"]:hover {
     background-color: #684cce;
