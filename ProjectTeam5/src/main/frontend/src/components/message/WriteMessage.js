@@ -27,7 +27,7 @@ const WriteMessage = ({ recipient }) => {
       mcontent: mContent   // 메시지 내용
     })
     .then(() => {
-      alert('Message sent');
+      alert(`${receiver} 님에게 메세지를 발송했습니다`);
       setmContent('');  // 입력 필드 초기화
       setReceiver('');  // 수신자 필드 초기화
     })

@@ -148,14 +148,9 @@ public class MemberController {
     	System.out.println("컨트롤러 비짓트 카운트업 memId: " + memId);
         // 회원 정보 가져오기
         Member member = memberService.getMemberById(memId);
-        System.out.println("변경전member.getTotalVisit() "+ member.getTotalVisit() );
-        System.out.println("변경전member.getTodayVisit() "+ member.getTodayVisit() );
         // todayVisit과 totalVisit 값 증가
         member.setTodayVisit(member.getTodayVisit() + 1);
         member.setTotalVisit(member.getTotalVisit() + 1);
-        
-        System.out.println("변경후member.getTodayVisit() "+ member.getTodayVisit() );
-        System.out.println("변경후member.getTotalVisit() "+ member.getTotalVisit() );
         
         // 변경된 정보를 저장
         memberService.updateMember(member);
@@ -164,7 +159,6 @@ public class MemberController {
  // 매일 자정에 실행 (cron 표현식: 초, 분, 시, 일, 월, 요일)
     @Scheduled(cron = "0 20 10 * * *")
     public void resetDailyVisits() {
-    	System.out.println("방문자수 초기화 함수 실행 확인");
         memberService.resetDailyVisits();
     }
     
