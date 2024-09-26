@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './VoteCreate.css';
+import { useNavigate } from 'react-router-dom';
 
 function VoteCreate() {
+    let navigate = useNavigate();
+
     const [isOpenToAllFriends, setIsOpenToAllFriends] = useState(true);  // 전체 친구 참여 여부
     const [isAnonymous, setIsAnonymous] = useState(false);  // 익명 투표 여부
     const [endTime, setEndTime] = useState('');
@@ -156,6 +159,11 @@ function VoteCreate() {
         });
     };
 
+
+    const goBack = () => {
+        navigate(-1); // 이전 페이지로 이동
+      };
+
     return (
         <div className='voteBox'>
             <form onSubmit={handleSubmit}>
@@ -250,6 +258,7 @@ function VoteCreate() {
 
                 {/* 투표 생성 버튼 */}
                 <button type="submit">투표 생성하기</button>
+                <button type="button" onClick={goBack}>돌아가기</button>
             </form>
 
             {/* 산책로 후보 추가 모달 */}
