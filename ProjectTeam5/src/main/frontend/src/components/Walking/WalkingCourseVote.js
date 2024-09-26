@@ -16,10 +16,8 @@ const WalkingCourseVote = () => {
 
     // 컴포넌트 마운트 시 또는 voteId, userId 변경 시 투표 정보 및 산책로 목록 가져오기
     useEffect(() => {
-        console.log("보트아이디 : ", voteId)
         axios.get(`/votes/${voteId}`)
             .then(response => {
-                console.log("특정 투표 불러오기 통신 테스트", response)
                 const data = response.data;
                 const courseIds = data.voteEsntlId || [];  // 기본값 빈 배열로 설정
                 setWalkingCourses(courseIds.map(id => ({ esntlId: id, name: `산책로 ${id}` })));
@@ -35,15 +33,26 @@ const WalkingCourseVote = () => {
 
     // 투표하기 버튼 클릭 시 투표 처리
     const handleVote = (courseId) => {
-        if (!hasVoted) {
-            axios.post(`/votes/${voteId}/vote`, { courseId, userId })
-                .then(response => {
-                    const updatedVoteCount = response.data.walkingCourseVoteCounts || {};
-                    setVoteCount(updatedVoteCount);  // 업데이트된 투표 수 설정
-                    setHasVoted(true);  // 사용자가 투표했음을 설정
-                })
-                .catch(error => console.error(error));
+        if (hasVoted) {
+            alert('이미 투표하셨습니다.');
+            return;
         }
+
+        axios.post(`/votes/${voteId}/vote`, { courseId, userId })
+            .then(response => {
+                const updatedVoteCount = response.data;  // 서버에서 반환된 데이터 확인
+                if (updatedVoteCount) {
+                    setVoteCount(prevVoteCount => {
+                        const newVoteCount = { ...prevVoteCount, ...updatedVoteCount };
+                        return newVoteCount;
+                    });  // 업데이트된 투표 수 설정
+                    setHasVoted(true);  // 사용자가 투표했음을 설정
+                }
+            })
+            .catch(error => {
+                console.error('투표 처리 중 오류 발생:', error);
+                alert('투표 처리 중 오류가 발생했습니다.');
+            });
     };
 
     // 투표 종료 버튼 클릭 시 투표 종료 처리
@@ -52,7 +61,10 @@ const WalkingCourseVote = () => {
             .then(() => {
                 setIsVoteEnded(true);  // 투표 종료 상태로 변경
             })
-            .catch(error => console.error(error));
+            .catch(error => {
+                console.error('투표 종료 처리 중 오류 발생:', error);
+                alert('투표 종료 처리 중 오류가 발생했습니다.');
+            });
     };
 
     // 산책로 상세정보 보기
