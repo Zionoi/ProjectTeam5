@@ -3,14 +3,16 @@
 /* 제목 스타일 */
 .diary-title {
     position:absolute;
-    top:130px;
-    left:300px;
+    top:190px !important;
+    left:310px;
     font-family: "Noto Sans KR", sans-serif;
     font-size:11pt;
     font-weight: bold;
     color:rgb(63, 63, 63);
+    z-index: 1;
 }
 .calendar-box {
+    border : solid 2px #7a63ff49;
     position:absolute;
     width: 750px;
     height: 500px;
@@ -24,7 +26,7 @@
     position:relative;
     left:80px;
     width: 560px;
-    height: 500px;
+    height: 480px;
     background-color: rgb(255, 255, 255);
     font-family: "Noto Sans KR", sans-serif;
     
@@ -52,7 +54,7 @@
 }
 /*헤더 스타일*/
 .fc .fc-toolbar.fc-header-toolbar {
-    padding: 10px 10px;
+    padding: 20px 10px 0px 0px;
     font-size: 12px;
     font-weight: 500;
     border-radius: 20px;
@@ -84,7 +86,7 @@
     display: flex;
     white-space: nowrap;
     flex-direction: column;
-    align-items: left;
+    align-items: center;
     overflow: hidden; /* 셀 넘어가면 안보이게 처리*/
     text-overflow: ellipsis; /* 일정 글자수 넘어가면 ...으로 처리*/
     width: 100%;
@@ -112,5 +114,5 @@
 }
 
 .fc-daygrid-day:hover {
-    background-color: #bfdcf7; /* 마우스 오버 시 배경색 설정 */
+    background-color: #7a63ff49; /* 마우스 오버 시 배경색 설정 */
 }

@@ -9,6 +9,7 @@
   border-radius: 16px;
   background-color: #ffffff;
   overflow: visible; /* 전체 컨테이너에서 overflow를 없앰 */
+  border : solid 2px #7a63ff49;
 }
 
 .guestbook-list {
