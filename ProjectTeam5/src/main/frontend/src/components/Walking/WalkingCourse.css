@@ -52,7 +52,7 @@
 
 .walking-search ul li {
     padding: 10px;
-    background-color: #007bff;
+    background-color: #7a63ff;
     color: #fff;
     margin-bottom: 10px;
     border-radius: 5px;
@@ -61,7 +61,7 @@
 }
 
 .walking-search ul li:hover {
-    background-color: #0056b3;
+    background-color: #5c49d7;
 }
 
 /* 상세 정보 섹션 */
@@ -130,12 +130,12 @@ p {
 /* 투표 버튼 스타일 */
 .vote {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 50px;
+    right: 50px;
 }
 
 .vote-button {
-    background-color: #007bff;
+    background-color: #5c49d7;
     color: #fff;
     border: none;
     border-radius: 50%;
@@ -148,7 +148,7 @@ p {
 }
 
 .vote-button:hover {
-    background-color: #0056b3;
+    background-color: #5c49d7;
 }
 
 /* 드롭다운 스타일 */
