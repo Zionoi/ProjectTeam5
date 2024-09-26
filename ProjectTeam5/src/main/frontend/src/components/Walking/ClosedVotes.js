@@ -37,8 +37,8 @@ function ClosedVotes({ hostId, setHostId }) {
     };
 
     // 투표 클릭 핸들러 (투표 상세 페이지 이동)
-    const handleVoteClick = (voteId) => {
-        navigate(`/vote/${voteId}`);
+    const handleVoteClick = (vote) => {
+        navigate(`/WalkingCourseVote/${localStorage.getItem('id')}/${vote.voteId}`);
     };
 
     // 투표 리스트로 돌아가는 버튼 핸들러
@@ -82,7 +82,7 @@ function ClosedVotes({ hostId, setHostId }) {
                     {votes.map((vote) => (
                         <li key={vote.id} className="vote-item">
                             <span className="vote-title-item">{vote.voteTitle}</span>
-                            <button className="vote-button" onClick={() => handleVoteClick(vote.id)}>결과 보기</button>
+                            <button className="vote-button" onClick={() => handleVoteClick(vote)}>결과 보기</button>
                         </li>
                     ))}
                 </ul>

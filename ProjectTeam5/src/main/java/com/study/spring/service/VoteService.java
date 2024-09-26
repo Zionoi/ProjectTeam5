@@ -157,14 +157,14 @@ public class VoteService {
 
     @Transactional(readOnly = true)
     public List<Vote> getListMyVote(String memId) {
-        List<Vote> votes = voteRepository.findByMemId(memId);
+        List<Vote> votes = voteRepository.findByMemIdAndIsEnded(memId, false);
         // Force initialization of participantIds collection
         votes.forEach(vote -> vote.getParticipantIds().size());
         return votes;
     }
 
     public List<Vote> getListEndedMyVote(String memId) {
-        return voteRepository.findByMemId(memId);
+        return voteRepository.findByMemIdAndIsEnded(memId, true);
     }
 
     public List<Vote> getListInvitedVote(String memId) {
