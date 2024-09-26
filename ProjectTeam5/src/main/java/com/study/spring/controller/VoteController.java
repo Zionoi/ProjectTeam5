@@ -53,6 +53,7 @@ public class VoteController {
     // 특정 투표 조회
     @GetMapping("/{id}")
     public Vote getVoteById(@PathVariable Long id) {
+    	System.out.println("특정 투표 조회 id, getVoteById(id)"+ id+ voteService.getVoteById(id).get());
         return voteService.getVoteById(id).get();
     }
 

@@ -3,6 +3,8 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
 import MainPanel from '../mainPanel/MainPanel';
+import CharacterImg from '../../img/characterImg/loginImg2.png';
+import Stars from './Stars';  // 별 효과 컴포넌트 추가
 
 const Login = ({ onLoginSuccess }) => {
   const [userid, setUserid] = useState('');
@@ -42,7 +44,7 @@ const Login = ({ onLoginSuccess }) => {
   };
 
   return (
-    <div>
+    <div className="loginBox">
       {localStorage.getItem('token') ? (
         <div>
           <MainPanel />
@@ -89,6 +91,8 @@ const Login = ({ onLoginSuccess }) => {
             <br />
             함께 웃고, 함께 공유하는 행복한 순간을 만끽하세요 !
           </p>
+          <div class="light"></div>
+          <div><img className="loginImg-box" src={CharacterImg}/></div>
         </div>
       )}
       <p>{message}</p>
