@@ -1,8 +1,10 @@
+/* 기본적인 박스 스타일 */
 .voteBox {
     position: absolute;
     display: flex;
     flex-direction: column; /* 컬럼 방향으로 정렬 */
-    justify-content: flex-start; /* 위쪽부터 채움 */
+    align-items: center; /* 수평 가운데 정렬 */
+    justify-content: center; /* 수직 가운데 정렬 */
     max-width: 1200px;
     margin: 185px 230px;
     padding: 20px;
@@ -15,6 +17,42 @@
     overflow: hidden; /* 박스 바깥으로 내용이 넘치지 않도록 설정 */
 }
 
+.voteBox-div {
+    width: 550px;
+    margin-bottom: 20px;
+}
+
+/* 익명 투표 여부 체크박스와 레이블이 한 줄에 나란히 위치하도록 수정 */
+.voteBox-anonymous {
+    display: flex;
+    align-items: center;
+}
+
+.voteBox-anonymous label {
+    margin-right: 10px;
+}
+
+/* 친구 선택 영역을 가운데 정렬 */
+.voteBox-friend-selection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* 전체 친구 참여와 선택 친구 참여 라디오 버튼을 나란히 정렬 */
+.voteBox-friend-selection div {
+    display: flex;
+    flex-direction: row; /* 버튼들을 가로로 나란히 정렬 */
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.voteBox-friend-selection label {
+    margin-right: 20px; /* 라벨 간 간격 추가 */
+}
+
+
+/* 제목 스타일 */
 .voteBox h2 {
     text-align: center;
     color: #333;
@@ -23,6 +61,7 @@
     font-weight: bold;
 }
 
+/* 폼 스타일 */
 .voteBox form {
     display: flex;
     flex-direction: column;
@@ -34,12 +73,15 @@
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    align-items: flex; 
 }
 
+/* 레이블 및 인풋 스타일 */
 .voteBox label {
     font-weight: 500;
     margin-bottom: 8px;
     color: #555;
+    width: 100px;
 }
 
 .voteBox input[type="text"],
@@ -57,12 +99,11 @@
     margin-right: 8px;
 }
 
+/* 리스트 스타일 */
 .voteBox ul {
     list-style-type: none;
     padding-left: 0;
     margin: 0; /* 기본 마진 제거 */
-    max-height: 150px; /* 목록 최대 높이 설정 */
-    overflow-y: auto; /* 스크롤 추가 */
 }
 
 .voteBox ul li {
@@ -80,6 +121,7 @@
     background-color: #f0f0f0;
 }
 
+/* 버튼 스타일 */
 .voteBox button[type="submit"] {
     background-color: #286aa7;
     color: white;
@@ -89,7 +131,7 @@
     font-size: 16px;
     cursor: pointer;
     margin-top: 20px;
-    align-self: flex-start; /* 버튼을 왼쪽 정렬 */
+    align-self: flex; /* 버튼을 왼쪽 정렬 */
 }
 
 .voteBox button[type="submit"]:hover {
@@ -139,12 +181,27 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 그림자 추가 */
 }
 
+/* 모달 내 인풋과 리스트 스타일 */
 .vote-modal-content input[type="text"] {
     width: 100%;
     padding: 8px;
     margin-bottom: 10px;
     border: 1px solid #ddd;
     border-radius: 4px;
+}
+
+.vote-modal-content ul {
+    list-style: none;
+    padding: 0;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.vote-modal-content ul li {
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #eee;
 }
 
 .vote-modal-content button {
@@ -169,4 +226,10 @@
     display: flex;
     justify-content: space-between;
     border-bottom: 1px solid #eee;
+}
+
+/* 체크박스 및 라디오 버튼 */
+.voteBox input[type="radio"],
+.voteBox input[type="checkbox"] {
+    margin-right: 5px;
 }
