@@ -19,16 +19,16 @@ const WalkingCourseVote = () => {
         console.log("보트아이디 : ", voteId)
         axios.get(`/votes/${voteId}`)
             .then(response => {
-                // 산책로 ID 리스트를 사용해서 산책로 목록 설정
                 console.log("특정 투표 불러오기 통신 테스트", response)
-                const courseIds = response.data.voteEsntlId;
-                setWalkingCourses(courseIds.map(id => ({ esntlId: id, name: `산책로 ${id}` })));  // 필요한 경우에 맞게 이름을 수정해야 함
+                const data = response.data;
+                const courseIds = data.voteEsntlId || [];  // 기본값 빈 배열로 설정
+                setWalkingCourses(courseIds.map(id => ({ esntlId: id, name: `산책로 ${id}` })));
 
-                setEndTime(response.data.endTime); // 투표 종료 시점 설정
-                setIsVoteEnded(response.data.isEnded); // 투표 종료 여부 설정
-                setIsCreator(response.data.memId === userId); // 현재 사용자가 투표 생성자인지 여부 설정
-                setVoteCount(response.data.walkingCourseVoteCounts); // 산책로별 투표 수 설정
-                setHasVoted(response.data.participantIds.includes(userId)); // 사용자가 이미 투표했는지 확인
+                setEndTime(data.endTime); 
+                setIsVoteEnded(data.isEnded); 
+                setIsCreator(data.memId === userId); 
+                setVoteCount(data.walkingCourseVoteCounts || {}); // 기본값 빈 객체로 설정
+                setHasVoted(data.participantIds?.includes(userId) || false); // 기본값 false 설정
             })
             .catch(error => console.error(error));
     }, [voteId, userId]);
@@ -38,7 +38,8 @@ const WalkingCourseVote = () => {
         if (!hasVoted) {
             axios.post(`/votes/${voteId}/vote`, { courseId, userId })
                 .then(response => {
-                    setVoteCount(response.data.walkingCourseVoteCounts);  // 업데이트된 투표 수 설정
+                    const updatedVoteCount = response.data.walkingCourseVoteCounts || {};
+                    setVoteCount(updatedVoteCount);  // 업데이트된 투표 수 설정
                     setHasVoted(true);  // 사용자가 투표했음을 설정
                 })
                 .catch(error => console.error(error));
