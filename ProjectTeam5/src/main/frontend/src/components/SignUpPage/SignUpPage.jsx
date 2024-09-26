@@ -153,8 +153,8 @@ function SignUpPage() {
           required
         />
         <div className="gender-selection">
-          <label>
-            성별
+          <label>성별:</label>
+          <label className="gender-label">
             <input
               type="radio"
               name="gender"
@@ -164,6 +164,8 @@ function SignUpPage() {
               required
             />
             남성
+          </label>
+          <label className="gender-label">
             <input
               type="radio"
               name="gender"
