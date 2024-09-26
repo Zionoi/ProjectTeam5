@@ -29,13 +29,13 @@ const WalkingCourseVote = () => {
                 setWalkingCourses(courseIds.map(id => ({ esntlId: id }))); // 초기에는 산책로 ID만 설정
 
                 setEndTime(data.endTime);
-                setIsVoteEnded(data.isEnded);
+                setIsVoteEnded(data.ended);
                 setIsCreator(data.memId === userId);  // 생성자 여부 확인
                 setVoteCount(data.walkingCourseVoteCounts || {}); // 기본값 빈 객체로 설정
                 setHasVoted(data.participantIds?.includes(userId) || false); // 기본값 false 설정
 
                 // 로그 추가
-                console.log('투표 종료 여부: ', data.isEnded);
+                console.log('투표 종료 여부: ', data.ended);
                 console.log('투표 생성자 여부: ', data.memId === userId);
                 console.log('투표 수: ', data.walkingCourseVoteCounts);
                 console.log('이미 투표 여부: ', data.participantIds?.includes(userId) || false);
