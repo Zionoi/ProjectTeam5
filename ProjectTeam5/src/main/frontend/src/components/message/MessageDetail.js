@@ -54,7 +54,7 @@ const MessageDetail = ({ message, onClose, fetchMessages, setContent }) => {
   return (
     <div className="message-detail-container">
 
-      <h2 className="message-detail-header">{messageDetail.memId}님에게 온 쪽지!</h2>
+      <h2 className="message-detail-header">{messageDetail.memId}&nbsp;님에게 온 쪽지!</h2>
       <p className="message-detail-content">{messageDetail.mcontent}</p>
       <p className="message-detail-date">
         {new Date(messageDetail.createSysdate).toLocaleString()}
@@ -67,7 +67,7 @@ const MessageDetail = ({ message, onClose, fetchMessages, setContent }) => {
       </div>
 
         {!replyMode ? (
-          <button className="reply-button" onClick={() => setReplyMode(true)}>답장하기📩</button>
+          <button className="reply-button" onClick={() => setReplyMode(true)}>답장하기</button>
         ) : (
           <div>
             <textarea
