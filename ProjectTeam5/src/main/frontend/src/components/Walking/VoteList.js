@@ -29,6 +29,7 @@ function VoteList({ hostId, setHostId }) {
         axios.get(apiEndpoint)
             .then(response => {
                 setVotes(response.data);
+                console.log('보트리스트 votes:', votes)
                 setLoading(false);
             })
             .catch(error => {
@@ -39,7 +40,8 @@ function VoteList({ hostId, setHostId }) {
 
     // 투표 클릭 핸들러 (투표 상세 페이지 이동)
     const handleVoteClick = (voteId) => {
-        navigate(`/votes/${voteId}`);
+        console.log('보트아이디 : ', voteId)
+        navigate(`/WalkingCourseVote/${localStorage.getItem('id')}/${voteId}`);
     };
 
     // 종료된 투표 목록 보기 버튼 핸들러

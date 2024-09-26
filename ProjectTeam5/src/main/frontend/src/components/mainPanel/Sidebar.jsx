@@ -95,7 +95,7 @@ function Sidebar({hostId, setHostId}) {
             onClick={() => handleIconClick(3)}
           ></div>
         </Link>
-        <Link to={`/WalkingCourse/${hostId}`}>
+        <Link to={`/WalkingCourse/${hostId}/`}>
         <div
           className={`icon walk ${activeIcon === 4 ? 'active' : ''}`}
           onClick={() => handleIconClick(4)}
@@ -135,7 +135,7 @@ function Sidebar({hostId, setHostId}) {
           {/* 산책로 링크 */}
           <Route path="/WalkingCourse/:hostId" element={<WalkingCourse hostId={hostId} setHostId={setHostId}/>} />
           <Route path="/vote-create/:hostId" element={<VoteCreate hostId={hostId} setHostId={setHostId}/>} />
-          <Route path="/WalkingCourseVote/:hostId" element={<WalkingCourseVote hostId={hostId} setHostId={setHostId}/>} />
+          <Route path="/WalkingCourseVote/:hostId/:voteId" element={<WalkingCourseVote hostId={hostId} setHostId={setHostId}/>} />
           <Route path="/VoteList/:hostId" element={<VoteList hostId={hostId} setHostId={setHostId}/>} />
           <Route path="/ClosedVotes/:hostId" element={<ClosedVotes hostId={hostId} setHostId={setHostId}/>} />
 
