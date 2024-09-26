@@ -1,53 +1,106 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './WalkingCourseVote.css';
+import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
-// npm install react-chartjs-2 chart.js
-// 인스톨 해야함
+import { useParams } from 'react-router-dom';
 
+// Chart.js 등록
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-const WalkingCourseVote = ({ userId, voteId }) => {
-    const [walkingCourses, setWalkingCourses] = useState([{name:'산책로1', esntlId:1},{name:'산책로2', esntlId:2},{name:'산책로3', esntlId:3}]);  // 산책로 목록
-    const [selectedCourse, setSelectedCourse] = useState(null);  // 선택된 산책로
-    const [voteCount, setVoteCount] = useState({});  // 산책로별 투표 수
-    const [isVoteEnded, setIsVoteEnded] = useState(false);  // 투표 종료 여부
-    const [endTime, setEndTime] = useState(null);  // 투표 종료 시점
-    const [hasVoted, setHasVoted] = useState(false);  // 유저가 투표했는지 여부
-    const [isCreator, setIsCreator] = useState(false);  // 투표 생성자인지 여부
+const WalkingCourseVote = () => {
+    const { voteId } = useParams();
+    const [walkingCourses, setWalkingCourses] = useState([]); // 산책로 목록
+    const [selectedCourse, setSelectedCourse] = useState(null); // 선택된 산책로
+    const [voteCount, setVoteCount] = useState({}); // 산책로별 투표 수
+    const [isVoteEnded, setIsVoteEnded] = useState(false); // 투표 종료 여부
+    const [endTime, setEndTime] = useState(null); // 투표 종료 시점
+    const [hasVoted, setHasVoted] = useState(false); // 유저가 투표했는지 여부
+    const [isCreator, setIsCreator] = useState(false); // 투표 생성자인지 여부
+    const [userId, setUserId] = useState(localStorage.getItem('id'));
 
     // 컴포넌트 마운트 시 또는 voteId, userId 변경 시 투표 정보 및 산책로 목록 가져오기
     useEffect(() => {
         axios.get(`/votes/${voteId}`)
             .then(response => {
-                setWalkingCourses(response.data.walkingCourses);  // 산책로 목록 설정
-                setEndTime(response.data.endTime);  // 투표 종료 시점 설정
-                setIsVoteEnded(response.data.isEnded);  // 투표 종료 여부 설정
-                setIsCreator(response.data.creatorId === userId);  // 현재 사용자가 투표 생성자인지 여부 설정
-                setVoteCount(response.data.voteCount);  // 각 산책로의 투표 수 설정
-                setHasVoted(response.data.votedUsers.includes(userId));  // 사용자가 이미 투표했는지 확인
+                console.log('response.data : ', response.data);
+                const data = response.data;
+                const courseIds = data.voteEsntlId || [];  // 기본값 빈 배열로 설정
+                setWalkingCourses(courseIds.map(id => ({ esntlId: id }))); // 초기에는 산책로 ID만 설정
+
+                setEndTime(data.endTime);
+                setIsVoteEnded(data.isEnded);
+                setIsCreator(data.memId === userId);  // 생성자 여부 확인
+                setVoteCount(data.walkingCourseVoteCounts || {}); // 기본값 빈 객체로 설정
+                setHasVoted(data.participantIds?.includes(userId) || false); // 기본값 false 설정
+
+                // 로그 추가
+                console.log('투표 종료 여부: ', data.isEnded);
+                console.log('투표 생성자 여부: ', data.memId === userId);
+                console.log('투표 수: ', data.walkingCourseVoteCounts);
+                console.log('이미 투표 여부: ', data.participantIds?.includes(userId) || false);
+
+                // 산책로 정보 가져오기
+                fetchWalkingCourseDetails(courseIds);
             })
             .catch(error => console.error(error));
     }, [voteId, userId]);
 
+    // 산책로 정보 가져오기
+    const fetchWalkingCourseDetails = (courseIds) => {
+        const fetchPromises = courseIds.map(id => 
+            axios.get(`/api/walking/courses/${id}`)
+                .then(response => response.data)
+                .catch(error => {
+                    console.error(`Error fetching course details for ${id}: `, error);
+                    return null;
+                })
+        );
+
+        // 모든 산책로 정보 가져온 후 상태 업데이트
+        Promise.all(fetchPromises)
+            .then(results => {
+                const validCourses = results.filter(course => course !== null); // 유효한 결과만 필터링
+                setWalkingCourses(validCourses); // 상태 업데이트
+            })
+            .catch(error => console.error('Error fetching all course details: ', error));
+    };
+
     // 투표하기 버튼 클릭 시 투표 처리
     const handleVote = (courseId) => {
-        if (!hasVoted) {
-            axios.post(`/votes/${voteId}/vote`, { courseId, userId })
-                .then(response => {
-                    setVoteCount(response.data.voteCount);  // 업데이트된 투표 수 설정
-                    setHasVoted(true);  // 사용자가 투표했음을 설정
-                })
-                .catch(error => console.error(error));
+        if (hasVoted) {
+            alert('이미 투표하셨습니다.');
+            return;
         }
+
+        axios.post(`/votes/${voteId}/vote`, { courseId, userId })
+            .then(response => {
+                const updatedVoteCount = response.data;  // 서버에서 반환된 데이터 확인
+                if (updatedVoteCount) {
+                    setVoteCount(prevVoteCount => {
+                        const newVoteCount = { ...prevVoteCount, ...updatedVoteCount };
+                        return newVoteCount;
+                    });  // 업데이트된 투표 수 설정
+                    setHasVoted(true);  // 사용자가 투표했음을 설정
+                }
+            })
+            .catch(error => {
+                console.error('투표 처리 중 오류 발생:', error);
+                alert('투표 처리 중 오류가 발생했습니다.');
+            });
     };
 
     // 투표 종료 버튼 클릭 시 투표 종료 처리
     const handleEndVote = () => {
-        axios.post(`/api/vote/${voteId}/end`)
-            .then(response => {
+        axios.post(`/votes/${voteId}/end`)
+            .then(() => {
                 setIsVoteEnded(true);  // 투표 종료 상태로 변경
+                alert('투표가 종료되었습니다.');
             })
-            .catch(error => console.error(error));
+            .catch(error => {
+                console.error('투표 종료 처리 중 오류 발생:', error);
+                alert('투표 종료 처리 중 오류가 발생했습니다.');
+            });
     };
 
     // 산책로 상세정보 보기
@@ -57,7 +110,7 @@ const WalkingCourseVote = ({ userId, voteId }) => {
 
     // 투표 결과 그래프 데이터 생성
     const chartData = {
-        labels: walkingCourses.map(course => course.name),  // 산책로 이름을 레이블로 사용
+        labels: walkingCourses.map(course => course.walkCourseName),  // 산책로 이름을 레이블로 사용
         datasets: [
             {
                 label: '투표수',  // 데이터셋 라벨
@@ -74,33 +127,53 @@ const WalkingCourseVote = ({ userId, voteId }) => {
             {/* 투표 종료 여부 확인 */}
             {isVoteEnded ? (
                 <div>
-                    <p>투표가 종료되었습니다.</p>
-                    <Bar data={chartData} />  {/* 투표 결과를 막대 그래프로 표시 */}
+                    <p className="vote-ended-message">투표가 종료되었습니다.</p>
+                    {/* 데이터가 있을 때만 Bar 차트를 렌더링 */}
+                    {chartData.labels.length > 0 ? (
+                        <div className="bar-chart-container">
+                            <Bar data={chartData} />  
+                        </div>
+                    ) : (
+                        <p className="vote-ended-message">투표 데이터가 없습니다.</p>
+                    )}
                 </div>
             ) : (
                 <div>
                     {/* 산책로 목록과 상세정보 표시 */}
-                    <ul>
+                    <div className="course-list">
                         {walkingCourses.map(course => (
-                            <li key={course.esntlId} onClick={() => handleShowDetails(course)}>
-                                {course.name}
-                            </li>
+                            <div 
+                                key={course.esntlId} 
+                                className="course-item" 
+                                onClick={() => handleShowDetails(course)}
+                            >
+                                <span className="course-name">{course.walkCourseName}</span>
+                            </div>
                         ))}
-                    </ul>
+                    </div>
 
                     {selectedCourse && (
-                        <div>
-                            <h3>{selectedCourse.name}</h3>
-                            <p>{selectedCourse.description}</p>
-                            <button onClick={() => handleVote(selectedCourse.esntlId)}>
-                                투표하기
+                        <div className="selected-course">
+                            <h3>{selectedCourse.walkCourseName}</h3>
+                            <p>경로 설명: {selectedCourse.courseDescription}</p>
+                            <p>위치 : {selectedCourse.signguName} / 소요시간 : {selectedCourse.courseTimeContent}</p>
+                            <button
+                                className="vote-button"
+                                onClick={() => handleVote(selectedCourse.esntlId)}
+                                disabled={hasVoted}  // 이미 투표한 경우 버튼 비활성화
+                            >
+                                {hasVoted ? '이미 투표하셨습니다' : '투표하기'}
                             </button>
                         </div>
                     )}
 
                     {/* 투표 종료 버튼 (생성자만 보임) */}
                     {isCreator && (
-                        <button onClick={handleEndVote}>
+                        <button
+                            className="vote-button"
+                            onClick={handleEndVote}
+                            disabled={isVoteEnded}  // 투표가 이미 종료된 경우 버튼 비활성화
+                        >
                             투표 종료
                         </button>
                     )}

@@ -38,8 +38,9 @@ function VoteList({ hostId, setHostId }) {
     };
 
     // 투표 클릭 핸들러 (투표 상세 페이지 이동)
-    const handleVoteClick = (voteId) => {
-        navigate(`/votes/${voteId}`);
+    const handleVoteClick = (vote) => {
+        
+        navigate(`/WalkingCourseVote/${localStorage.getItem('id')}/${vote.voteId}`);
     };
 
     // 종료된 투표 목록 보기 버튼 핸들러
@@ -86,7 +87,7 @@ function VoteList({ hostId, setHostId }) {
                     {votes.map((vote) => (
                         <li key={vote.id} className="vote-item">
                             <span className="vote-title-item">{vote.voteTitle}</span>
-                            <button className="vote-button" onClick={() => handleVoteClick(vote.id)}>투표하기</button>
+                            <button className="vote-button" onClick={() => handleVoteClick(vote)}>투표하기</button>
                         </li>
                     ))}
                 </ul>

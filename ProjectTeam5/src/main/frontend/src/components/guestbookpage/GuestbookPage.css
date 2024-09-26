@@ -96,6 +96,7 @@ line-height: 1.6em;
 }
 
 .guestbook-input { /*방명록 및 공간*/
+position: absolute;
 display: flex;
 flex-direction: column;
 margin-top: 20px;
@@ -216,4 +217,7 @@ background-color: #684cce;
 .guestbookEdit-saveBtn:hover{
   background-color: #7a63ff;
   color:white;
+}
+.empty-guestbook{
+  margin-top: 110px;
 }

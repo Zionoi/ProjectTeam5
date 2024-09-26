@@ -8,6 +8,7 @@ function RestaurantMap() {
   const [map, setMap] = useState(null);
   const [markers, setMarkers] = useState([]); // 마커들을 저장할 상태
   const [searchKeyword, setSearchKeyword] = useState(""); // 기본 검색 키워드 설정
+  const [isAddingFavorite, setIsAddingFavorite] = useState(false); // 찜하기 버튼 비활성화 상태
 
   // 네이버 지도 스크립트를 비동기적으로 로드하는 함수
   const loadNaverMapScript = () => {
@@ -59,8 +60,10 @@ function RestaurantMap() {
       .then((data) => {
         console.log("API 응답 데이터:", data);
 
-        const restaurantData = data?.searchPoiInfo?.pois?.poi;
+        let restaurantData = data?.searchPoiInfo?.pois?.poi;
         if (Array.isArray(restaurantData)) {
+          // "주차장"이 포함된 음식점 이름을 제외하고 목록 필터링
+          restaurantData = restaurantData.filter(restaurant => !restaurant.name.includes("주차장"));
           setRestaurants(restaurantData);
           displayMarkersOnMap(restaurantData); // 데이터를 지도에 마커로 표시
           moveMapToCenter(restaurantData); // 검색된 음식점들의 중간 위치로 지도 중심 이동
@@ -172,12 +175,13 @@ function RestaurantMap() {
       detailBizName: restaurant.detailBizName || "정보 없음",
       frontLat: restaurant.frontLat || 0,
       frontLon: restaurant.frontLon || 0,
-      telNo: restaurant.telNo || "전화번호 없음",
+      telNo: restaurant.telNo? restaurant.telNo : "전화번호 없음", // 전화번호가 없을 경우 기본값 설정
       menu: restaurant.menu || "메뉴 정보 없음",
     });
   };
-  
-  // 찜하기 버튼
+
+
+  // 찜하기 버튼 클릭 시 호출
   const handleFavorite = (restaurant) => {
     if (!restaurant || !restaurant.id || !restaurant.name || !restaurant.frontLat || !restaurant.frontLon) {
       alert("선택된 음식점 정보가 올바르지 않습니다.");
@@ -185,10 +189,23 @@ function RestaurantMap() {
       return;
     }
 
-    fetch(`/api/favorites/add?memId=${localStorage.getItem("id")}&restaurantId=${restaurant.id}&name=${restaurant.name}&address=${restaurant.address}&foodType=${restaurant.detailBizName}&latitude=${restaurant.frontLat}&longitude=${restaurant.frontLon}`, {
-      method: "POST",               // memId를 동적으로 사용
+    setIsAddingFavorite(true); // 찜 추가 버튼을 비활성화
+
+    fetch(`/api/favorites/add?memId=${localStorage.getItem("id")}&restaurantId=${restaurant.id}&name=${restaurant.name}&address=${restaurant.address}&foodType=${restaurant.detailBizName}&latitude=${restaurant.frontLat}&longitude=${restaurant.frontLon}&telNo=${restaurant.telNo}`, {
+      method: "POST",
     })
-      .then(() => alert("찜한 음식점에 추가되었습니다!"))
+      .then((response) => {
+        if (response.ok) {
+          alert("찜한 음식점에 추가되었습니다!");
+        } else {
+          return response.json().then((data) => {
+            alert(data.message);  // 서버에서 온 오류 메시지 표시
+          });
+        }
+      })
+      .finally(() => {
+        setIsAddingFavorite(false); // 응답 후 버튼 다시 활성화
+      })
       .catch((error) => console.error("Error adding favorite:", error));
   };
 
@@ -224,8 +241,7 @@ function RestaurantMap() {
             type="text"
             value={searchKeyword}
             onChange={(e) => setSearchKeyword(e.target.value)}
-            pla
-            ceholder="지역 또는 키워드 검색"
+            placeholder="지역 또는 키워드 검색"
           />
           <button onClick={handleSearch}>검색</button>
         </div>
@@ -239,7 +255,9 @@ function RestaurantMap() {
               <p>전화번호: {selectedRestaurant.telNo}</p>
               <p>음식종류: {selectedRestaurant.detailBizName}</p>
               <p>메뉴: {selectedRestaurant.menu}</p>
-              <button onClick={() => handleFavorite(selectedRestaurant)}>찜하기</button>
+              <button onClick={() => handleFavorite(selectedRestaurant)} disabled={isAddingFavorite}>
+                 찜하기
+              </button>
               <button onClick={handleBackToList}>뒤로가기</button>
             </div>
           ) : (
