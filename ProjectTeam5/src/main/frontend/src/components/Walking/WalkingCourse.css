@@ -8,8 +8,9 @@
     padding: 20px;
     width: 750px;
     height: 500px;
-    background-color: #f9f9f9;
+    background-color: #ffffff;
     border-radius: 10px;
+    border : solid 2px #7a63ff49;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     font-family: 'Arial', sans-serif;
 }
@@ -19,9 +20,10 @@
     flex: 1;
     padding: 20px;
     margin: 10px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #f3f3f377;
+    border : solid 2px #7a63ff49;
+    /* border-radius: 10px; */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     overflow-y: auto; /* 각각의 섹션에서 스크롤이 가능하도록 */
 }
 
@@ -130,7 +132,7 @@ p {
 /* 투표 버튼 스타일 */
 .vote {
     position: absolute;
-    top: 50px;
+    top: 45px;
     right: 50px;
 }
 
