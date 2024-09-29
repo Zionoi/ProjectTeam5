@@ -1,0 +1,206 @@
+/* 전체 레이아웃 */
+.walking-Box {
+    position: absolute; 
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 185px 230px;
+    padding: 20px;
+    width: 750px;
+    height: 500px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    border : solid 2px #7a63ff49;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+}
+
+/* 검색 섹션과 상세 섹션 */
+.walking-search, .detailWalking {
+    flex: 1;
+    padding: 20px;
+    margin: 10px;
+    background-color: #f3f3f377;
+    border : solid 2px #7a63ff49;
+    /* border-radius: 10px; */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    overflow-y: auto; /* 각각의 섹션에서 스크롤이 가능하도록 */
+}
+
+/* 검색 섹션 */
+.walking-search {
+    min-width: 225px; /* 최소 너비 설정 */
+    max-width: 225px; /* 최대 너비 설정 */
+}
+
+.walking-search h1, .walking-search h2 {
+    color: #333;
+    font-size: 20px;
+}
+
+.walking-search select {
+    width: 100%; /* 전체 너비 사용 */
+    padding: 5px;
+    margin: 5px 0;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.walking-search ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.walking-search ul li {
+    padding: 10px;
+    background-color: #7a63ff;
+    color: #fff;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.walking-search ul li:hover {
+    background-color: #5c49d7;
+}
+
+/* 상세 정보 섹션 */
+.detailWalking {
+    flex: 1;
+    text-align: left;
+}
+
+.detailWalking h2 {
+    color: #333;
+}
+
+.detailWalking table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.detailWalking td {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+.detailWalking td:first-child {
+    font-weight: bold;
+    background-color: #f1f1f1;
+}
+
+p {
+    color: #555;
+}
+
+.courseLengthContent, .courseTimeContent {
+    background-color: #f2f2f2; /* 연한 회색 배경 */
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .walking-Box {
+        flex-direction: column;
+        margin: 20px; /* 모바일에서는 여백을 줄여서 화면에 맞춤 */
+    }
+
+    .walking-search, .detailWalking {
+        flex-basis: 100%;
+        min-width: 100%; /* 모바일 화면에서 최소 너비 설정 */
+    }
+
+    .walking-search select {
+        font-size: 16px;
+        padding: 10px;
+    }
+
+    .walking-search ul li {
+        font-size: 16px;
+        padding: 10px;
+    }
+
+    .detailWalking table td {
+        padding: 10px;
+        font-size: 12px;
+    }
+}
+
+
+/* 투표 버튼 스타일 */
+.vote {
+    position: absolute;
+    top: 45px;
+    right: 50px;
+}
+
+.vote-button {
+    background-color: #5c49d7;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+}
+
+.vote-button:hover {
+    background-color: #5c49d7;
+}
+
+/* 드롭다운 스타일 */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 60px;
+    right: 10px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 150px;
+}
+
+.dropdown-menu.show {
+    display: block;
+}
+
+.dropdown-menu button {
+    width: 100%;
+    padding: 10px;
+    background-color: #fff;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.dropdown-menu button:hover {
+    background-color: #f1f1f1;
+}
+/* 미니멀 스크롤바 스타일 */
+.walking-search::-webkit-scrollbar,
+.detailWalking::-webkit-scrollbar {
+    width: 6px;
+}
+
+.walking-search::-webkit-scrollbar-thumb,
+.detailWalking::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 6px;
+}
+
+.walking-search::-webkit-scrollbar-thumb:hover,
+.detailWalking::-webkit-scrollbar-thumb:hover {
+    background-color: #999;
+}
+
+.walking-search::-webkit-scrollbar-track,
+.detailWalking::-webkit-scrollbar-track {
+    background-color: transparent;
+}

@@ -1,0 +1,219 @@
+.guestbook-container {
+  position: absolute; /* 여전히 absolute 위치를 유지 */
+  width: 750px;
+  height: auto; /* 자동으로 높이가 조절되도록 설정 */
+  top: 165px; 
+  left: 210px;
+  margin: 20px;
+  padding: 25px 40px 20px 40px;
+  border-radius: 16px;
+  background-color: #ffffff;
+  overflow: visible; /* 전체 컨테이너에서 overflow를 없앰 */
+  border : solid 2px #7a63ff49;
+}
+
+.guestbook-list {
+  position: relative;
+  top:0px;
+  width: 100%; /* 너비를 100%로 설정 */
+  height: auto; /* 리스트 높이를 자동으로 조정 */
+  max-height: 320px; /* 일정 높이를 넘으면 스크롤 발생 */
+  overflow-y: auto; /* 세로 스크롤 */
+  overflow-x: hidden;
+  padding: 5px;
+  background-color: #f3f3f377;
+}
+
+
+.guestbook-list::-webkit-scrollbar-button {
+  display:none; /* 스크롤바의 버튼을 숨김 */
+}
+.guestbook-list::-webkit-scrollbar {
+  width: 14px; 
+}
+.guestbook-list::-webkit-scrollbar-thumb {
+  outline: none;
+  border-radius: 10px;
+  border: 4px solid transparent;
+  box-shadow: inset 6px 6px 0 #d6cfff;
+}
+
+.guestbook-title {
+  position: relative;
+  font-family: "Noto Sans KR", sans-serif;
+  font-size:11pt;
+  font-weight: 600;
+  color:rgb(63, 63, 63);
+}
+
+
+.sort-options {
+display: flex;
+justify-content: flex-end;
+font-size: 14px;
+cursor: pointer;
+}
+
+.sort-options span {
+margin: 0 5px;
+color: #684cce;
+}
+
+.sort-options span:hover {
+text-decoration: underline;
+}
+
+.guestbook-entry {
+height:auto;
+padding: 10px;
+border-bottom: 1px solid #ddd;
+}
+.guestbook-img {
+  position: relative;
+  top:10px;
+}
+.entry-header {  /*유저이름1*/
+margin-left: 20px;
+display: flex;
+font-size: 14px;
+color: #555;
+}
+
+.username {
+margin-top: 10px;
+font-weight: bold;
+margin-left: 20px;
+}
+
+.message { /*메세지 공간*/
+position: relative;
+height:80%;
+background-color: transparent;
+margin:0px 15px 0px 90px;
+font-size: 10pt;
+font-weight: 500;
+line-height: 1.6em;
+}
+
+.guestbook-input { /*방명록 및 공간*/
+display: flex;
+flex-direction: column;
+margin-top: 20px;
+}
+.date {
+  position: relative;
+  left:-24px; top: 28px;
+  font-size: 7pt;
+  color:rgb(139, 139, 139);
+}
+.guestbook-input textarea {  /*내용을 입력해주세요*/
+resize: none;
+width: 610px;
+height: 60px;
+border-radius: 5px;
+border: 1px solid #ccc;
+outline-color:  #d6cfff;
+padding: 10px;
+}
+.guestbook-input textarea::placeholder,
+.guestbookEdit-box textarea::placeholder {
+  color:#aaaaaa;
+}
+.guestsubmit { /*완료*/
+  position: relative;
+  left: 620px; top:-60px;
+  width: 60px;
+  padding: 20px 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #7a63ff;
+  color: white;
+  cursor: pointer;
+  }
+  
+
+.guestsubmit:hover {
+background-color: #684cce;
+}
+
+
+
+.menu-item:hover {
+  background-color: #ddd;
+}
+
+.guestbookDelete-button, .guestbookEdit-button{
+  border:none;
+  font-size:9pt;
+  font-weight: 400;
+  color:rgb(131, 131, 131);
+  background-color: transparent;
+}
+.guestbookEdit-button:hover,.guestbookDelete-button:hover {
+  background-color: #d6cfff;
+  }
+
+.GMB-box {
+  position: absolute;
+  transform: translate(65%,10%);
+  background-color: #ffffff;
+  border-radius: 5px;
+  border: solid 1px #d6cfff;
+}
+.guestmenu-buttons {
+  width: 75px;height: 25px;
+  border:none;
+  background-color: transparent;
+  font-size:9pt;
+  font-weight: 400;
+  color:rgb(63, 63, 63);
+}
+
+.guestmenu-buttons:hover {
+  background-color: #d6cfff;
+}
+.guest-DE-box {
+  position: relative;
+  left:550px;
+  width: 100px;
+}
+.pagination-btn{
+  border:none;
+  background-color: transparent;
+}
+
+.pagination {
+  position:absolute;
+  top:475px; left:330px;
+}
+.pagination-btn:hover{
+  background-color: #d6cfff;
+}
+
+.guestbookEdit-box textarea{ 
+  resize: none;
+  width: 75%;
+  margin:0px 0px 0px 90px;
+  height:80%;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  outline-color:  #d6cfff;
+  padding: 10px;
+}
+
+.guestbookEdit-saveBtn{
+  position: relative;
+  top: -25px;
+  border:none;
+  border-radius: 5px;
+  width: 40px; height: 60px;
+  margin-left: 10px;
+  background-color:#d6cfff;
+  font-size:9pt;
+  font-weight: 400;
+  color:rgb(131, 131, 131);
+}
+.guestbookEdit-saveBtn:hover{
+  background-color: #7a63ff;
+  color:white;
+}
