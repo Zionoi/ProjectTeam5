@@ -163,7 +163,7 @@ function SignUpPage() {
               onChange={handleChange}
               required
             />
-            남성
+            남
           </label>
           <label className="gender-label">
             <input
@@ -173,7 +173,7 @@ function SignUpPage() {
               checked={formData.gender === '여성'}
               onChange={handleChange}
             />
-            여성
+            여
           </label>
         </div>
         <input

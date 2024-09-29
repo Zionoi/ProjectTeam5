@@ -156,7 +156,7 @@ const WalkingCourseVote = () => {
                         </button>
                     )}
                     {/* 산책로 목록과 상세정보 표시 */}
-                    {`투표 진행 현황 ${votedUsers.length}/${participantIds.length}`}
+                    {`투표 진행 현황 ${votedUsers.length}/${participantIds.length+1}`}
                     <div className="course-list">
                         {walkingCourses.map(course => (
                             <div 
