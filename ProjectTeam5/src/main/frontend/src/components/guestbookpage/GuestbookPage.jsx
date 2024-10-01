@@ -144,8 +144,27 @@ function GuestbookPage({ hostId, setHostId }) {
 
   // "놀러가기" 기능: 해당 사용자의 페이지로 이동
   const visitFriendPage = (friendId) => {
-    setHostId(friendId);
-    navigate(`/home/${friendId}`); // 해당 사용자의 홈페이지로 이동
+    axios
+    .get('/friends/isBlocked', {
+      params: {
+        memId: memId,       // 로그인한 사용자 ID
+        targetId: friendId  // 이동하려는 사용자 ID
+      }
+    })
+    .then((response) => {
+      // 차단된 경우
+      if (response.data === true) {
+        alert('차단되었거나 차단한 홈피는 들어갈 수 없습니다.');
+      } else {
+        // 차단되지 않은 경우 홈피로 이동
+        setHostId(friendId);
+        navigate(`/home/${friendId}`);
+      }
+    })
+    .catch((error) => {
+      console.error('차단 여부 확인 중 오류가 발생했습니다:', error);
+      alert('차단 여부를 확인할 수 없습니다.');
+    });
   };
 
   // "쪽지 보내기" 기능: 해당 사용자에게 쪽지 작성 화면으로 이동

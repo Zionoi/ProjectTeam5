@@ -16,4 +16,6 @@ public interface VoteRepository extends JpaRepository<Vote, Long> {
     List<Vote> findActiveInvitedVotes(@Param("memId") String memId, @Param("isEnded") boolean isEnded);
 
     List<Vote> findByMemIdAndIsEnded(String memId, boolean b);
+    
+  
 }
