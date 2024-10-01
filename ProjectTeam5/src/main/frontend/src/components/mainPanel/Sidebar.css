@@ -28,7 +28,7 @@ display: inline-block;
   cursor: pointer;
   transition: background-color 0.3s;
 }
-.btn-myhome{
+/* .btn-myhome{
 background:url(../../img/myhomeIcon.png) no-repeat;
 background-size: 100px;
 background-position-x: center;
@@ -55,7 +55,7 @@ border: none;
 .myHomebutton-container:hover.myHometooltip {
 visibility: visible;
 opacity: 1;
-}
+} */
 
 .icon.home {
 background:url(../../img/home.png) no-repeat;
