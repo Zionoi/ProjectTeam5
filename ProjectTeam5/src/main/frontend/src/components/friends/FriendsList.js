@@ -1,4 +1,3 @@
-// src/components/FriendsList.js
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -10,8 +9,9 @@ function FriendsList({ hostId, setHostId }) {
 
   // 친구 목록을 가져오는 함수
   const fetchFriends = () => {
+    console.log('친구목록 hostId :', hostId);
     axios.get('/friends/total', {
-      params: { memId: localStorage.getItem('id') }, // 실제 로그인된 사용자 ID
+      params: { memId: hostId }, // 현재 홈페이지 주인의 ID로 요청
     })
       .then(response => {
         console.log('친구 목록을 받았습니다:', response.data); // 서버에서 받은 데이터 확인
@@ -21,8 +21,10 @@ function FriendsList({ hostId, setHostId }) {
   };
 
   useEffect(() => {
-    fetchFriends(); // 컴포넌트가 마운트될 때 친구 목록을 가져옴
-  }, []);
+    if (hostId) { // hostId가 있을 때만 친구 목록을 가져옴
+      fetchFriends(); // 컴포넌트가 마운트될 때 친구 목록을 가져옴
+    }
+  }, [hostId]); // hostId가 변경될 때마다 친구 목록을 다시 가져옴
 
   // 친구 삭제
   const deleteFriend = (fNum) => {
@@ -51,7 +53,7 @@ function FriendsList({ hostId, setHostId }) {
 
   return (
     <div className="friends-section-list">
-      <h3 className="list-friends">친구 목록</h3>
+      <h3 className="list-friends">{hostId}님의 친구 목록</h3>
       {friends.length === 0 ? ( // 친구 목록이 없을 때 메시지 표시
         <p>친구 목록이 없습니다.<br/> 새로운 친구를 추가해주세요!</p>
       ) : (
