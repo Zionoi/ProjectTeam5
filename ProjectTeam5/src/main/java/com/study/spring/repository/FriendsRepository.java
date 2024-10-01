@@ -18,6 +18,10 @@ public interface FriendsRepository extends JpaRepository<Friends, Long> {
 	 List<Friends> findByFriendIdAndStatus(String friendId, String status);
 
 	Optional<Friends> findByMember_MemIdAndFriendId(String memId, String friendId);
+	
+	Optional<Friends> findByMember_MemIdAndFriendIdAndStatus(String memId, String friendId, String status);
+
+	boolean existsByMember_MemIdAndFriendIdAndStatus(String memId, String targetId, String string);
 
 
 }
