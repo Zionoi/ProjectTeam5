@@ -9,37 +9,26 @@ import org.springframework.stereotype.Service;
 import com.study.spring.domain.Friends;
 import com.study.spring.domain.Member;
 import com.study.spring.repository.FriendsRepository;
-import com.study.spring.repository.MemberRepository;
 
 @Service
 public class FriendsService {
 
     @Autowired
     private FriendsRepository friendsRepository;
-    
-    @Autowired
-    private MemberRepository memberRepository;
 
      // 친구 요청을 보내는 메서드
     public boolean addFriendRequest(Friends friends) {
         // memId와 friendId로 이미 친구 요청이 있는지 확인
         Optional<Friends> existingFriendRequest = friendsRepository.findByMember_MemIdAndFriendId(
                 friends.getMember().getMemId(), friends.getFriendId());
-        
-        Optional<Friends> blockFriendRequest = friendsRepository.findByMember_MemIdAndFriendIdAndStatus(
-        		friends.getMember().getMemId(), friends.getFriendId(), "차단");
-        Optional<Friends> blockedFriendRequest = friendsRepository.findByMember_MemIdAndFriendIdAndStatus(
-        		friends.getFriendId(), friends.getMember().getMemId(), "차단");
 
         // 이미 친구 요청이 있으면 false 반환, 없으면 요청을 저장
-        if (existingFriendRequest.isPresent() || blockFriendRequest.isPresent()||
-        		blockedFriendRequest.isPresent()) {
-        	return false; 
-
-        } else {
+        if (!existingFriendRequest.isPresent()) {
             friends.setStatus("대기"); // 요청 상태를 '대기'로 설정
             friendsRepository.save(friends); // DB에 저장
             return true;
+        } else {
+            return false; // 이미 친구 요청이 존재
         }
     }
 
@@ -55,7 +44,7 @@ public class FriendsService {
 
     // 친구 요청을 수락하는 메서드
     public void acceptFriendRequest(Long fNum) {
-    	Optional<Friends> friendRequest = friendsRepository.findById(fNum);
+       Optional<Friends> friendRequest = friendsRepository.findById(fNum);
         if (friendRequest.isPresent()) {
             Friends friends = friendRequest.get();
             
@@ -110,35 +99,4 @@ public class FriendsService {
     public Optional<Friends> detailFriend(Long fNum) {
         return friendsRepository.findById(fNum);
     }
-
-	public String blockUser(String memId, String blockId) {
-		Optional<Friends> existingFriend = friendsRepository.findByMember_MemIdAndFriendIdAndStatus(memId, blockId, "수락");
-		Optional<Friends> existingBlock = friendsRepository.findByMember_MemIdAndFriendIdAndStatus(memId, blockId, "차단");
-		//이미 친구 상태라면
-		if(existingFriend.isPresent())
-		{
-			return "친구를 차단할 수 없습니다.";
-		}
-		else if(existingBlock.isPresent()) {
-			return "이미 차단 중입니다";
-		}
-		else {
-			Friends block = new Friends();
-			
-			// 내 아이디
-			Member m = memberRepository.findById(memId).get();
-			block.setMember(m);
-			block.setFriendId(blockId);
-			block.setStatus("차단");
-			friendsRepository.save(block);
-			
-			return "해당 사용자를 차단되었습니다";
-		}
-		
-	}
-
-	public boolean isBlock(String memId, String targetId) {
-		return friendsRepository.existsByMember_MemIdAndFriendIdAndStatus(memId, targetId, "차단") || 
-				friendsRepository.existsByMember_MemIdAndFriendIdAndStatus(targetId, memId, "차단");
-	}
 }

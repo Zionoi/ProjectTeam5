@@ -20,7 +20,7 @@ public class MessageController {
     // 메시지 전송 API
     @PostMapping("/send")
     public Message sendMessage(@RequestBody Message message) {
-    	
+       
         return messageService.sendMessage(message);
     }
 
@@ -33,21 +33,21 @@ public class MessageController {
     // 특정 메시지 조회 API
     @GetMapping("/detail/{m_num}")
     public Message getMessageDetail(@PathVariable("m_num") Long mNum) {
-    	System.out.println("ddddddddddddddddddddddddd");
+       System.out.println("ddddddddddddddddddddddddd");
         return messageService.getMessageById(mNum);
     }
 
     // 메시지 읽음 처리 API
     @PostMapping("/read/{mNum}")
     public void markMessageAsRead(@PathVariable Long mNum) {
-    	System.out.println("컨컨컨컨컨컨 메시지 읽음 : "  + mNum);
+       System.out.println("컨컨컨컨컨컨 메시지 읽음 : "  + mNum);
         messageService.markMessageAsRead(mNum);
     }
 
     // 메시지 삭제 API
     @DeleteMapping("/delete/{mNum}")
     public void deleteMessage(@PathVariable String mNum) {
-    	System.out.println("컨컨컨컨컨컨 메시지 삭제 : "  + mNum);
+       System.out.println("컨컨컨컨컨컨 메시지 삭제 : "  + mNum);
         messageService.deleteMessage(Long.valueOf(mNum));
     }
 }
