@@ -5,8 +5,14 @@ import './FriendsList.css';
 
 function FriendsList({ hostId, setHostId }) {
   const [friends, setFriends] = useState([]); // 친구 목록을 저장하는 상태
+  const [isFriendListOpen, setIsFriendListOpen] = useState(false); // 친구 목록 공개 여부
+  const [isOwner, setIsOwner] = useState(false); // 현재 페이지의 소유자인지 여부
   const navigate = useNavigate();
 
+  // 로컬 스토리지에서 사용자 ID를 가져옴
+  const localUserId = localStorage.getItem('id');
+
+  
   // 친구 목록을 가져오는 함수
   const fetchFriends = () => {
     console.log('친구목록 hostId :', hostId);
@@ -15,16 +21,44 @@ function FriendsList({ hostId, setHostId }) {
     })
       .then(response => {
         console.log('친구 목록을 받았습니다:', response.data); // 서버에서 받은 데이터 확인
-        setFriends(response.data); // 친구 목록 설정
+        if (response.data === '비공개') {
+          setFriends('비공개'); // 비공개 처리
+        } else {
+          setFriends(response.data); // 친구 목록 설정
+        }
       })
       .catch(error => console.error('친구 목록을 불러오는 중 오류가 발생했습니다', error)); // 에러 처리
   };
 
+// 친구 목록 공개 여부 상태를 가져오는 함수
+const fetchFriendListOpenStatus = () => {
+  axios.get('/member/friendListOpen/status', { params: { memId: hostId } }) // GET 요청은 params로 보냄
+    .then(response => {
+      console.log('친구 목록 공개 여부:', response.data);
+      setIsFriendListOpen(response.data); // response.data는 boolean 값이므로 그대로 사용
+    })
+    .catch(error => console.error('친구 목록 공개 여부를 불러오는 중 오류가 발생했습니다', error));
+};
+
+// 친구 목록 공개 여부를 변경하는 함수 (소유자만 변경 가능)
+const toggleFriendListOpen = () => {
+  axios.post('/member/friendListOpen', null, { // POST 요청, 추가 파라미터 필요 없음
+    params: { memId: hostId } // memId만 전송
+  })
+    .then(() => {
+      fetchFriendListOpenStatus(); // 변경 후 상태 다시 가져옴
+      console.log('친구 목록 공개 여부를 변경했습니다');
+    })
+    .catch(error => console.error('친구 목록 공개 여부를 변경하는 중 오류가 발생했습니다', error));
+};
+
   useEffect(() => {
-    if (hostId) { // hostId가 있을 때만 친구 목록을 가져옴
-      fetchFriends(); // 컴포넌트가 마운트될 때 친구 목록을 가져옴
+    if (hostId) {
+      setIsOwner(hostId === localUserId); // 현재 페이지의 소유자 여부 판단
+      fetchFriends(); // 친구 목록 가져오기
+      fetchFriendListOpenStatus(); // 친구 목록 공개 여부 가져오기
     }
-  }, [hostId]); // hostId가 변경될 때마다 친구 목록을 다시 가져옴
+  }, [hostId, localUserId]);
 
   // 친구 삭제
   const deleteFriend = (fNum) => {
@@ -47,25 +81,59 @@ function FriendsList({ hostId, setHostId }) {
   // 친구 홈페이지로 이동
   const goFriendHome = (friendId) => {
     setHostId(friendId);
-    console.log('친구홈페이지 : ', friendId);
     navigate(`/home/${friendId}`); // 친구의 홈으로 이동
   };
 
   return (
     <div className="friends-section-list">
       <h3 className="list-friends">{hostId}님의 친구 목록</h3>
-      {friends.length === 0 ? ( // 친구 목록이 없을 때 메시지 표시
-        <p>친구 목록이 없습니다.<br/> 새로운 친구를 추가해주세요!</p>
-      ) : (
-        <ul>
-          {friends.map(friend => (
-            <li key={friend.fnum}>
-              <span className="f-list" onClick={() => goFriendHome(friend.friendId)}>{friend.friendId}</span>
-              <button onClick={() => deleteFriend(friend.fnum)}>삭제</button> 
-            </li>
-          ))}
-        </ul>
+
+      {/* 친구 목록 공개 여부 토글 버튼 (소유자일 때만 표시) */}
+      {isOwner && (
+        <div>
+          <label>
+            친구 목록 공개 여부: {isFriendListOpen ? "공개" : "비공개"}
+            <input
+              type="checkbox"
+              checked={isFriendListOpen}
+              onChange={toggleFriendListOpen} // 토글 버튼 클릭 시 상태 변경
+            />
+          </label>
+        </div>
       )}
+
+     {/* 홈페이지 주인일때와 방문자일때를 나눠서 출력 및 친구 목록이 비공개이거나 친구가 없을 때 처리 */}
+      {hostId !== localUserId ? (
+        // 방문자일 때
+        !isFriendListOpen ? (
+          <p>친구 목록이 비공개입니다.</p>
+        ) : friends.length === 0 ? (
+          <p>친구 목록이 없습니다.<br /> 당신이 첫 친구가 되어주세요!</p>
+        ) : (
+          <ul>
+            {friends.map(friend => (
+              <li key={friend.fnum}>
+                <span className="f-list" onClick={() => goFriendHome(friend.friendId)}>{friend.friendId}</span>
+              </li>
+            ))}
+          </ul>
+        )
+      ) : (
+        // 홈페이지 주인일 때
+        friends.length === 0 ? (
+          <p>친구 목록이 없습니다.<br /> 친구를 추가해주세요!</p>
+        ) : (
+          <ul>
+            {friends.map(friend => (
+              <li key={friend.fnum}>
+                <span className="f-list" onClick={() => goFriendHome(friend.friendId)}>{friend.friendId}</span>
+                <button onClick={() => deleteFriend(friend.fnum)}>삭제</button>
+              </li>
+            ))}
+          </ul>
+        )
+      )}
+
     </div>
   );
 }

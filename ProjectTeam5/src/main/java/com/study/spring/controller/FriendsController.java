@@ -1,6 +1,9 @@
 package com.study.spring.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.study.spring.domain.Friends;
 import com.study.spring.domain.Member;
+import com.study.spring.repository.MemberRepository;
 import com.study.spring.service.FriendsService;
 
 @RestController
@@ -19,6 +23,8 @@ import com.study.spring.service.FriendsService;
 public class FriendsController {
     @Autowired
     private FriendsService friendsService;
+    @Autowired
+    private MemberRepository memberRepository;
 
     // 친구 요청을 보내는 엔드포인트
     @PostMapping("/sendRequest")
@@ -76,7 +82,22 @@ public class FriendsController {
         friendsService.deleteFriend(fNum);
         return "success";
     }
-
+    
+//    @GetMapping("/total")
+//    public List<?> totalFriend(@RequestParam String memId) {
+//        Optional<Member> optionalMember = memberRepository.findById(memId);
+//        Member member = optionalMember.get();
+//        
+//        // 친구 목록 공개 여부에 따른 처리
+//        if (member.isFriendListOpen()) {
+//            List<Friends> friends = friendsService.totalFriend(memId);
+//            return friendsService.totalFriend(memId);
+//        } else {
+//            Map<String, String> response = new HashMap<>();
+//            response.put("친구목록", "비공개");
+//            return (List<?>) ResponseEntity.ok(response); // JSON 형식으로 반환
+//        }
+//    }
     // 친구 목록을 조회하는 엔드포인트
     @GetMapping("/total")
     public List<Friends> totalFriend(@RequestParam String memId) {
