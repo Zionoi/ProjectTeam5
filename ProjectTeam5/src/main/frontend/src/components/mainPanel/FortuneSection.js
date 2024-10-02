@@ -9,8 +9,7 @@ function FortuneSection() {
   const [isClicked, setIsClicked] = useState(false); // 이미지 전환 상태
   const [isModalOpen, setIsModalOpen] = useState(false); // 모달 열림 상태
 
-  // 6시간(21600000밀리초) 설정
-  const sixHours = 6 * 6 * 6* 1;
+  const memId = localStorage.getItem('id'); // 사용자 ID를 로컬 스토리지에서 가져옴
 
   // 페이지가 로드될 때 localStorage에서 이미지 상태와 저장된 시간을 확인
   useEffect(() => {
@@ -22,35 +21,30 @@ function FortuneSection() {
       const timeDifference = currentTime - parseInt(savedTime);
 
       // 6시간이 지나지 않았으면 상태 유지, 지났으면 초기화
-      if (timeDifference < sixHours) {
-        setIsClicked(true);
-      } else {
-        localStorage.removeItem('fortuneImageState');
-        localStorage.removeItem('fortuneTime');
-      }
+      // if (timeDifference < sixHours) {
+      //   setIsClicked(true);
+      // } else {
+      //   localStorage.removeItem('fortuneImageState');
+      //   localStorage.removeItem('fortuneTime');
+      // }
     }
   }, []);
 
-  // 운세를 가져오는 함수
+  // 운세 뽑기 요청 함수
   const fetchFortune = () => {
-    axios.get('/fortune/today')
+    axios.get(`/fortune/today?memId=${memId}`)
       .then(response => {
-        setFortune(response.data.fortuneText); // 서버에서 받은 운세 텍스트 설정
-        setIsClicked(true); // 버튼 클릭 시 이미지 상태 변경
-        setIsModalOpen(true); // 모달 열기
-
-        // 5초 후에 모달 닫기
-        setTimeout(() => {
-          setIsModalOpen(false);
-          setFortune(''); // 운세 초기화
-        }, 5000);
-
-        const currentTime = new Date().getTime();
-        localStorage.setItem('fortuneImageState', 'clicked'); // 상태를 localStorage에 저장
-        localStorage.setItem('fortuneTime', currentTime); // 현재 시간을 localStorage에 저장
+        const data = response.data;
+        if (data === "오늘은 이미 운세를 뽑았습니다.") {
+          alert(data); // 이미 뽑았으면 알림
+        } else {
+          setFortune(data); // 운세 결과 설정
+          setIsClicked(true); // 이미지 전환
+          setIsModalOpen(true); // 모달 열기
+        }
       })
       .catch(error => {
-        console.error("Error fetching fortune:", error);
+        console.error("운세를 불러오는 중 오류 발생:", error);
         alert("운세를 가져오는 중 오류가 발생했습니다.");
       });
   };

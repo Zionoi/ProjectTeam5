@@ -46,4 +46,7 @@ public class Member {
 	private Long todayVisit;
 	//토탈방문자수
 	private Long totalVisit;
+	
+	// 일일 운세 뽑기 (날짜변경시 false로 초기화)
+	private boolean todayfortune = false;
 }

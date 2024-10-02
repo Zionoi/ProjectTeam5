@@ -125,14 +125,13 @@ public class MemberService {
     public void updateMember(Member member) {
         memberRepository.save(member);  // 변경된 값을 저장
     }
-    
-    
 
 	    
 	// 친구 요청시 아이디 존재여부 
 	public boolean checkIfMemberExists(String memId) {
 	    return memberRepository.existsByMemId(memId);
 	}
+	
     //일일방문자 초기화
     public void resetDailyVisits() {
         // 모든 회원의 todayVisit을 0으로 초기화
@@ -142,6 +141,32 @@ public class MemberService {
             memberRepository.save(member);  // 변경된 정보 저장
         }
     }
+    
+ // 오늘 운세를 뽑을 수 있는지 확인하고, 운세를 뽑았다면 todayfortune 값을 true로 설정
+    public boolean canDrawFortune(String memId) {
+        Member member = memberRepository.findById(memId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 사용자를 찾을 수 없습니다."));
+
+        // 오늘 운세를 이미 뽑았는지 확인
+        if (member.isTodayfortune()) {
+            return false; // 이미 오늘 운세를 뽑음
+        } else {
+            member.setTodayfortune(true); // 오늘 운세를 뽑았다고 표시
+            memberRepository.save(member);
+            return true; // 운세를 뽑을 수 있음
+        }
+    }
+
+    // 매일 자정에 todayfortune 값을 초기화하는 메서드
+    @Scheduled(cron = "0 15 13 * * *")  // 매일 자정에 실행
+    public void resetTodayFortune() {
+        List<Member> allMembers = memberRepository.findAll();
+        for (Member member : allMembers) {
+            member.setTodayfortune(false); // 운세 뽑기 가능하도록 초기화
+            memberRepository.save(member);
+        }
+    }
+    
     
 	public Member findId(String name, String birthday, String phone) {
 		return memberRepository.findByNameAndBirthdayAndPhone(name, birthday, phone).get(0);
