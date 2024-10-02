@@ -92,7 +92,7 @@ const toggleFriendListOpen = () => {
       {isOwner && (
         <div>
           <label>
-            친구 목록 공개 여부: {isFriendListOpen ? "공개" : "비공개"}
+             친구 목록 {isFriendListOpen ? " 공개" : " 비공개"}
             <input
               type="checkbox"
               checked={isFriendListOpen}
