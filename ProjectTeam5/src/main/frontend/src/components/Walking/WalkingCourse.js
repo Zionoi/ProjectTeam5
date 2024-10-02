@@ -176,7 +176,7 @@ function WalkingCourse() {
                         </tbody>
                     </table>
                 ) : (
-                    <p>상세 정보를 선택해 주세요.</p>
+                    <p>산책로를 선택해 주세요.</p>
                 )}
             </div>
 
