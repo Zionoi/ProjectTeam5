@@ -90,18 +90,18 @@ const toggleFriendListOpen = () => {
 
       {/* 친구 목록 공개 여부 토글 버튼 (소유자일 때만 표시) */}
       {isOwner && (
-        <div>
-          <label>
-             친구 목록 {isFriendListOpen ? " 공개" : " 비공개"}
-            <input
-              type="checkbox"
-              checked={isFriendListOpen}
-              onChange={toggleFriendListOpen} // 토글 버튼 클릭 시 상태 변경
-            />
-          </label>
-        </div>
-      )}
-
+      <div>
+        <label style={{ display: 'inline-flex', alignItems: 'center', whiteSpace: 'nowrap' }}>
+          친구 목록 {isFriendListOpen ? " 공개" : " 비공개"}
+          <input
+            type="checkbox"
+            checked={isFriendListOpen}
+            onChange={toggleFriendListOpen} // 토글 버튼 클릭 시 상태 변경
+            style={{ marginLeft: '8px' }} // 체크박스와 텍스트 사이 간격 조정
+          />
+        </label>
+      </div>
+    )}
      {/* 홈페이지 주인일때와 방문자일때를 나눠서 출력 및 친구 목록이 비공개이거나 친구가 없을 때 처리 */}
       {hostId !== localUserId ? (
         // 방문자일 때
