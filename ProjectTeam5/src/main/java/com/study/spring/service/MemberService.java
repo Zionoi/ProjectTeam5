@@ -4,13 +4,12 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -22,7 +21,7 @@ public class MemberService {
 	@Autowired
 	private MemberRepository memberRepository;
 	
-	private final String uploadDir = System.getProperty("user.dir") + "/uploadedFiles";
+	 private final String uploadDir = System.getProperty("user.dir") + "/uploadedFiles";
 
 	//사진이 없는 경우 저장
 	public void insertMember(Member member) {
@@ -221,5 +220,18 @@ public class MemberService {
 		return memberRepository.findById(memId).get().isFriendListOpen();
 		
 	}
+
+	public List<String> saveProfileImage(MultipartFile image) throws Exception {
+    String uploadDir = System.getProperty("user.dir") + "/uploadedFiles/";
+    String fileName = UUID.randomUUID().toString() + "_" + image.getOriginalFilename();    
+    List<String> list = new ArrayList<>();
+    File imgPath = new File(uploadDir + fileName);
+    // 파일 저장
+    list.add(fileName);
+    list.add("/files/"+imgPath.getAbsolutePath());
+    image.transferTo(imgPath);
+    
+    return list; // 저장된 이미지 이름 또는 경로를 반환
+}
 
 }
