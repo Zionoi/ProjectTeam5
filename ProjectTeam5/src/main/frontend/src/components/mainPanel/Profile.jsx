@@ -3,7 +3,7 @@ import './Profile.css'; // 스타일 파일
 import { useNavigate } from 'react-router-dom';
 import ProfileImg from "../../img/profile-icon.png";
 
-function Profile({ onLogout }) {
+function Profile({ onLogout, setHostId }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
   const userId = localStorage.getItem('id'); // 사용자 ID를 localStorage에서 가져옴
@@ -16,6 +16,7 @@ function Profile({ onLogout }) {
   // 나의 홈페이지로 이동
   const handleMyhomepage = () => {
     if (userId) {
+      setHostId(userId);
       navigate(`/home/${userId}`);
     } else {
       console.error('사용자 ID가 없습니다.');
