@@ -58,7 +58,7 @@ function MainPanel({ onLogout, hostId, setHostId}) { // onLogout props 추가
         
         <MusicPlayer/>
         <aside className="right-side">
-        <Profile onLogout={onLogout} hostId={hostId}/>
+        <Profile onLogout={onLogout} hostId={hostId} setHostId={setHostId}/>
        
         <FortuneSection />
           {/* <VisitSection /> */}
