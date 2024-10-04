@@ -24,7 +24,7 @@ public class FavoriteController {
 
     // 찜하기 추가 API
     @PostMapping("/add")
-    public ResponseEntity<Void> addFavorite(
+    public void addFavorite(
         @RequestParam String memId,  
         @RequestParam Long restaurantId,
         @RequestParam String name,
@@ -34,14 +34,12 @@ public class FavoriteController {
         @RequestParam Double longitude,
         @RequestParam(required = false) String telNo) {
         favoriteService.addFavorite(memId, restaurantId, name, address, foodType, latitude, longitude, telNo);
-        return ResponseEntity.ok().build(); // 응답 상태를 OK로 설정
     }
 
     // 찜 리스트 조회 API (최신순으로 정렬)
     @GetMapping("/list")
-    public ResponseEntity<List<Favorite>> getFavorites(@RequestParam String memId) {
-        List<Favorite> favorites = favoriteService.getFavorites(memId);
-        return ResponseEntity.ok(favorites);
+    public List<Favorite> getFavorites(@RequestParam String memId) {
+        return favoriteService.getFavorites(memId);
     }
 
     // 찜 삭제 API
@@ -50,5 +48,4 @@ public class FavoriteController {
         favoriteService.deleteFavorite(memId, restaurantId);
         return ResponseEntity.noContent().build();
     }
-
 }

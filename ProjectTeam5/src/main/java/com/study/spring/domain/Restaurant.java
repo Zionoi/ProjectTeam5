@@ -22,7 +22,7 @@ public class Restaurant {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "rSEQ")
     private Long rNum;            // 고유 ID (시퀀스로 생성)
 
-    private String rname;         // 맛집 이름
+    private String rName;         // 맛집 이름
     private String rAddress;      // 주소
     private String category;      // 카테고리
     private String imageUrl;      // 이미지 경로

@@ -22,8 +22,4 @@ public class Favorite {
     private Restaurant restaurant;
 
     private LocalDateTime favoriteDate;
-    
-    // 찜한 상태를 0과 1로 구분
-    @Column(nullable = false)
-    private boolean isFavorite;
 }

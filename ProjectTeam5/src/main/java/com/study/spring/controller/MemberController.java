@@ -156,7 +156,7 @@ public class MemberController {
         memberService.updateMember(member);
     }
     
-    // 매일 자정에 실행 (cron 표현식: 초, 분, 시, 일, 월, 요일)
+ // 매일 자정에 실행 (cron 표현식: 초, 분, 시, 일, 월, 요일)
     @Scheduled(cron = "0 15 13 * * *")
     public void resetDailyVisits() {
         memberService.resetDailyVisits();
