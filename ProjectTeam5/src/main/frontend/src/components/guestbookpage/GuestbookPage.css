@@ -64,13 +64,16 @@ text-decoration: underline;
 }
 
 .guestbook-entry {
-height:auto;
-padding: 10px;
-border-bottom: 1px solid #ddd;
+  width: 100%; /* 방명록 항목의 너비를 전체로 확장 */
+  padding: 15px; /* 패딩 추가 */
+  margin-bottom: 10px; /* 항목 간 간격을 주기 위해 마진 추가 */
+  background-color: #f9f9f9; /* 배경색을 더 가시적으로 변경 */
+  border-radius: 10px; /* 부드러운 모서리를 위해 테두리 추가 */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 가벼운 그림자 효과 */
 }
 .guestbook-img {
   position: relative;
-  top:10px;
+  top:15px;
 }
 .entry-header {  /*유저이름1*/
 margin-left: 20px;

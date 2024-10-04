@@ -39,6 +39,9 @@ public class Member {
 	//인삿말
 	private String greeting;
 	
+	//친구목록 공개여부
+	private boolean friendListOpen;
+	
 	//일일방문자수 (날짜변경시 0으로 초기화)
 	private Long todayVisit;
 	//토탈방문자수

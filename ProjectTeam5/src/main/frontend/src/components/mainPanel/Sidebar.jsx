@@ -60,12 +60,12 @@ function Sidebar({hostId, setHostId}) {
 
   return (
     <div style={{ display: 'flex' }}>
-      {hostId !== myId && (
+      {/* {hostId !== myId && (
         <div className=".myHomebutton-container">
           <button onClick={goToMyHomePage} className="btn-myhome"></button>
           <div className="myHometooltip">내 홈페이지로 이동</div>
         </div>
-      )}
+      )} */}
 
       <nav className="sidebar">
         <Link to={`/home/${hostId}`}>

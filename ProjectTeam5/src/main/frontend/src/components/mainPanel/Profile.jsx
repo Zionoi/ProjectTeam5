@@ -3,21 +3,33 @@ import './Profile.css'; // 스타일 파일
 import { useNavigate } from 'react-router-dom';
 import ProfileImg from "../../img/profile-icon.png";
 
-function Profile({onLogout}) {
+function Profile({ onLogout, setHostId }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
+  const userId = localStorage.getItem('id'); // 사용자 ID를 localStorage에서 가져옴
 
   // 메뉴 토글 함수
   const toggleMenu = () => {
     setMenuOpen((prev) => !prev);
   };
-  
+
+  // 나의 홈페이지로 이동
+  const handleMyhomepage = () => {
+    if (userId) {
+      setHostId(userId);
+      navigate(`/home/${userId}`);
+    } else {
+      console.error('사용자 ID가 없습니다.');
+    }
+  };
 
   // 회원 정보 수정 핸들러
   const handleEditProfile = () => {
-    navigate(`/ProfileEdit/${localStorage.getItem('id')}`);
-   
-    // 회원정보 수정 페이지로 이동하는 로직 추가
+    if (userId) {
+      navigate(`/ProfileEdit/${userId}`);
+    } else {
+      console.error('사용자 ID가 없습니다.');
+    }
   };
 
   // 로그아웃 핸들러
@@ -29,12 +41,16 @@ function Profile({onLogout}) {
 
   return (
     <div className="profile-container">
-      
       <button
         className="profile-icon"
-        onClick={toggleMenu}><img src={ProfileImg}/></button>
+        onClick={toggleMenu}>
+        <img src={ProfileImg} alt="프로필 아이콘" />
+      </button>
       {menuOpen && (
         <div className="PItem">
+          <button className="menu-item" onClick={handleMyhomepage}>
+            나의 홈피가기
+          </button>
           <button className="menu-item" onClick={handleEditProfile}>
             회원정보 수정
           </button>

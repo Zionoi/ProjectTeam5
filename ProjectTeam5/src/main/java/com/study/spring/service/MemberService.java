@@ -210,4 +210,16 @@ public class MemberService {
 		
 	}
 
+	public void setFriendListOpen(String memId) {
+		Member member = memberRepository.findById(memId).get();
+		member.setFriendListOpen(!member.isFriendListOpen());
+		memberRepository.save(member);
+		
+	}
+
+	public boolean getFriendListOpen(String memId) {
+		return memberRepository.findById(memId).get().isFriendListOpen();
+		
+	}
+
 }

@@ -1,8 +1,12 @@
 package com.study.spring.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.study.spring.domain.Friends;
 import com.study.spring.domain.Member;
+import com.study.spring.repository.MemberRepository;
 import com.study.spring.service.FriendsService;
 
 @RestController
@@ -18,6 +23,8 @@ import com.study.spring.service.FriendsService;
 public class FriendsController {
     @Autowired
     private FriendsService friendsService;
+    @Autowired
+    private MemberRepository memberRepository;
 
     // 친구 요청을 보내는 엔드포인트
     @PostMapping("/sendRequest")
@@ -35,7 +42,7 @@ public class FriendsController {
         if(friendsService.addFriendRequest(friends))// 친구 요청 추가
         	return "친구 요청 성공!";
         else
-        	return "이미 친구 요청하였습니다";
+        	return "이미 친구 요청하였거나 블락된 아이디입니다.";
     }
 
     // 내가 보낸 대기 상태의 친구 요청을 조회하는 엔드포인트
@@ -75,11 +82,39 @@ public class FriendsController {
         friendsService.deleteFriend(fNum);
         return "success";
     }
-
+    
+//    @GetMapping("/total")
+//    public List<?> totalFriend(@RequestParam String memId) {
+//        Optional<Member> optionalMember = memberRepository.findById(memId);
+//        Member member = optionalMember.get();
+//        
+//        // 친구 목록 공개 여부에 따른 처리
+//        if (member.isFriendListOpen()) {
+//            List<Friends> friends = friendsService.totalFriend(memId);
+//            return friendsService.totalFriend(memId);
+//        } else {
+//            Map<String, String> response = new HashMap<>();
+//            response.put("친구목록", "비공개");
+//            return (List<?>) ResponseEntity.ok(response); // JSON 형식으로 반환
+//        }
+//    }
     // 친구 목록을 조회하는 엔드포인트
     @GetMapping("/total")
     public List<Friends> totalFriend(@RequestParam String memId) {
         System.out.println("친구 목록 조회: memId = " + memId); // 데이터 확인용 로그
         return friendsService.totalFriend(memId);
+    }
+    
+    @PostMapping("/blockUser")
+    public String blockUser(@RequestParam String memId, @RequestParam String blockId) {
+    	
+    	return friendsService.blockUser(memId, blockId);
+    }
+    
+    
+    @GetMapping("/isBlocked")
+    public Boolean isBlocked(@RequestParam String memId, @RequestParam String targetId) {
+        boolean isBlocked = friendsService.isBlock(memId, targetId);
+        return isBlocked;
     }
 }

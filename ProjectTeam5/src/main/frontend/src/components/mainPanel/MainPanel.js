@@ -19,6 +19,7 @@ import HeaderSection from './HeaderSection.jsx';
 function MainPanel({ onLogout, hostId, setHostId}) { // onLogout props 추가
   const navigate = useNavigate();
   const { paramHostId } = useParams(); // 아이디 파라미터 가져오기
+  console.log('메인패널 hostId :',hostId);
   //  // hostId가 undefined이면 paramHostId로 값을 세팅
   //  useEffect(() => {
   //    setHostId(paramHostId);
@@ -57,11 +58,11 @@ function MainPanel({ onLogout, hostId, setHostId}) { // onLogout props 추가
         
         <MusicPlayer/>
         <aside className="right-side">
-        <Profile onLogout={onLogout} hostId={hostId}/>
+        <Profile onLogout={onLogout} hostId={hostId} setHostId={setHostId}/>
        
         <FortuneSection />
           {/* <VisitSection /> */}
-          <FriendsSection hostId={paramHostId} setHostId={setHostId}/>
+          <FriendsSection hostId={hostId} setHostId={setHostId}/>
         </aside>
       </div>
      

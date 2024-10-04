@@ -162,6 +162,16 @@ public class MemberController {
         memberService.resetDailyVisits();
     }
     
+    @PostMapping("/friendListOpen")
+    public void setFriendListOpen(@RequestParam String memId) {
+    	memberService.setFriendListOpen(memId);
+    }
+    
+    @GetMapping("/friendListOpen/status")
+    public boolean getFriendListOpen(@RequestParam String memId) {
+    	System.out.println("컨트롤러 친구목록 공개여부 : "+ memberService.getFriendListOpen(memId));
+    	return memberService.getFriendListOpen(memId);
+    }
     
     // 친구 아이디 존재 여부 확인 엔드포인트
     @GetMapping("/exists")

@@ -22,6 +22,7 @@ function App() {
     if (token && id) {
       setHostId(localStorage.getItem('id'))
       setIsLoggedIn(true);
+      console.log('app.js hostid : ', hostId)
     }
   }, []);
 
