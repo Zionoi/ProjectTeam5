@@ -68,6 +68,13 @@ public class Vote {
     @Column(name = "voted_user_id")
     private List<String> votedUserIds = new ArrayList<>(); // 투표를 진행한 유저 ID 목록
 
+ // 유저가 선택한 코스 ID 목록 (유저 ID와 일대일 대응)
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "vote_participants_course", joinColumns = @JoinColumn(name = "vote_id"))
+    @MapKeyColumn(name = "voted_user_id") // 키는 유저 ID
+    @Column(name = "selected_course_id")
+    private Map<String, String> userSelectedCourseIds = new HashMap<>(); // 유저 ID와 선택한 코스 ID 매핑
+
     @ElementCollection(fetch = FetchType.EAGER)
     @Column(nullable = false)
     private List<String> voteEsntlId = new ArrayList<>(); // 산책 코스 리스트

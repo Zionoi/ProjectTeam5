@@ -78,15 +78,20 @@ public class VoteController {
     public Map<String, Integer> vote(@PathVariable Long voteId, @RequestBody Map<String, String> payload) {
         String courseId = payload.get("courseId");
         String userId = payload.get("userId");
-        
+
         // 이미 투표한 유저인지 확인
         Vote vote = voteService.getVoteById(voteId).orElseThrow(() -> new RuntimeException("투표를 찾을 수 없습니다."));
         if (vote.getVotedUserIds().contains(userId)) {
             throw new IllegalArgumentException("이미 투표를 하셨습니다.");
         }
-        
-        // 투표 진행
-        return voteService.vote(voteId, courseId, userId);
+
+        // 투표 진행 및 사용자 선택한 코스 ID 저장
+        Map<String, Integer> result = voteService.vote(voteId, courseId, userId);
+
+        // 사용자가 선택한 코스 ID 저장
+        voteService.vote(voteId, userId, courseId);
+
+        return result;
     }
 
     // 투표 종료하기
