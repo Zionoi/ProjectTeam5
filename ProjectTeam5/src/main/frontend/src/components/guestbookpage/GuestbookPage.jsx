@@ -15,15 +15,15 @@ function GuestbookPage({ hostId, setHostId }) {
   const memId = localStorage.getItem('id'); // 로그인된 유저의 ID 가져오기
   const [editMode, setEditMode] = useState(null); // 수정 모드 상태
   const [editContent, setEditContent] = useState(''); // 수정 중인 내용
-  const [menuOpen, setMenuOpen] = useState(false); // 메뉴창 구분을 위한 상태
+  const [menuOpen, setMenuOpen] = useState({}); // 항목별 메뉴창 구분을 위한 상태
 
   const [loading, setLoading] = useState(true);
   const [profileImages, setProfileImages] = useState({}); // 작성자 프로필 이미지 상태
 
   const navigate = useNavigate(); // 페이지 이동을 위한 useNavigate hook
 
-   // 방명록 목록 불러오기 함수
-   const fetchGuestbookEntries = () => {
+  // 방명록 목록 불러오기 함수
+  const fetchGuestbookEntries = () => {
     axios
       .get('/guestbook/total', { params: { page, size: 5, memId: hostId } })
       .then((response) => {
@@ -33,20 +33,20 @@ function GuestbookPage({ hostId, setHostId }) {
       .catch((error) => {
         setErrorMessage('');
       });
-
   };
 
-    // 각 작성자의 프로필 이미지를 가져오는 함수
-    const fetchProfileImage = (commenterId) => {
-      return axios.get(`/member/get/${commenterId}`)
-        .then((response) => {
-          return response.data.imgPath || defaultProfileImage; // 기본 이미지 처리
-        })
-        .catch(() => {
-          return defaultProfileImage; // 오류 시 기본 이미지 반환
-        });
-    };
-     // 모든 작성자의 프로필 이미지를 가져오는 함수
+  // 각 작성자의 프로필 이미지를 가져오는 함수
+  const fetchProfileImage = (commenterId) => {
+    return axios.get(`/member/get/${commenterId}`)
+      .then((response) => {
+        return response.data.imgPath || defaultProfileImage; // 기본 이미지 처리
+      })
+      .catch(() => {
+        return defaultProfileImage; // 오류 시 기본 이미지 반환
+      });
+  };
+
+  // 모든 작성자의 프로필 이미지를 가져오는 함수
   const fetchAllProfileImages = async () => {
     const updatedProfileImages = {};
     const requests = guestbookEntries.map(async (entry) => {
@@ -66,9 +66,6 @@ function GuestbookPage({ hostId, setHostId }) {
       fetchAllProfileImages(); // 방명록 작성자들의 프로필 이미지 불러오기
     }
   }, [guestbookEntries]);
-  useEffect(() => {
-    fetchGuestbookEntries(); // 컴포넌트가 처음 렌더링될 때 방명록 목록 불러오기
-  }, [page, hostId]);
 
   // 사용자 닉네임 가져오기
   useEffect(() => {
@@ -100,7 +97,6 @@ function GuestbookPage({ hostId, setHostId }) {
     axios.post('/guestbook/add', newEntryObject)
       .then((response) => {
         if (response.data === 'success') {
-          // 방명록 추가를 성공했을 때, 새 항목을 즉시 상태에 추가
           setGuestbookEntries(prevEntries => [newEntryObject, ...prevEntries]); // 새 항목을 맨 위에 추가
           setNewEntry(''); // 입력 필드 초기화
           setErrorMessage(''); // 오류 메시지 초기화
@@ -184,12 +180,15 @@ function GuestbookPage({ hostId, setHostId }) {
   };
 
   // 모달 토글 함수
-  const toggleMenu = () => {
-    setMenuOpen((prev) => !prev);
+  const toggleMenu = (gbNum) => {
+    setMenuOpen((prev) => ({
+      ...prev,
+      [gbNum]: !prev[gbNum],
+    }));
   };
 
   return (
-    <div>   
+    <div>
       <div className="guestbook-container">
         <h2 className="guestbook-title">방명록</h2>
 
@@ -206,35 +205,35 @@ function GuestbookPage({ hostId, setHostId }) {
         )}
         {errorMessage && <p className="error-message">{errorMessage}</p>}
 
-                <div className={guestbookEntries.length === 0 ? "guestbook-nolist" : "guestbook-list"}>
+        <div className={guestbookEntries.length === 0 ? "guestbook-nolist" : "guestbook-list"}>
           {guestbookEntries.length === 0 ? (
-            // 방명록에 글이 없을 때 표시할 이미지
             <div className="empty-guestbook">
               <img src={emptyImage} alt="방명록이 없습니다." style={{ width: '500px', margin: '0 auto', display: 'block' }} />
               <p style={{ textAlign: 'center', color: '#888', fontSize:"11pt", fontWeight:"500"}}>방명록을 남겨주세요!</p>
             </div>
           ) : (
-            // 방명록 항목이 있을 때의 렌더링
             guestbookEntries.map((entry) => (
               <div key={entry.gbNum} className="guestbook-entry">
                 <div className="entry-header">
-                  <span onClick={() => toggleMenu(entry.gbNum)} style={{ cursor: 'pointer' }}>
-                    <img
-                      className="guestbook-img"
-                      src={profileImages[entry.commenter] || defaultProfileImage}
-                      alt="프로필 사진"
-                      style={{ width: "50px", height: "50px", borderRadius: "50px" }}
-                    />
-                  </span>
-                  <span className="username" onClick={() => toggleMenu(entry.gbNum)} style={{ cursor: 'pointer' }}>
-                    {entry.nickname}
-                  </span>
-                  {menuOpen && (
-                    <div className="GMB-box">
-                      <button className="guestmenu-buttons" onClick={() => visitFriendPage(entry.commenter)}>홈피 가기</button>
-                      <button className="guestmenu-buttons" onClick={() => sendMessage(entry.commenter)}>쪽지 보내기</button>
-                    </div>
-                  )}
+
+                      <span onClick={() => toggleMenu(entry.gbNum)} style={{ cursor: 'pointer' }}>
+                        <img
+                          className="guestbook-img"
+                          src={profileImages[entry.commenter] || defaultProfileImage}
+                          alt="프로필 사진"
+                          style={{ width: "50px", height: "50px", borderRadius: "50px" }}
+                        />
+                      </span>
+                      <span className="username" onClick={() => toggleMenu(entry.gbNum)} style={{ cursor: 'pointer' }}>
+                        {entry.nickname}
+                      </span>
+                      {menuOpen[entry.gbNum] && (
+                        <div className="GMB-box">
+                          <button className="guestmenu-buttons" onClick={() => visitFriendPage(entry.commenter)}>홈피 가기</button>
+                          <button className="guestmenu-buttons" onClick={() => sendMessage(entry.commenter)}>쪽지 보내기</button>
+                        </div>
+                      )}
+
                   <span className="date">{new Date(entry.createDate).toLocaleString()}</span>
                 </div>
 
@@ -274,9 +273,10 @@ function GuestbookPage({ hostId, setHostId }) {
             <button className="pagination-btn" onClick={() => handlePageChange(page + 1)} disabled={page + 1 === totalPages}>&nbsp;&gt;</button>
           </div>
         )}
-    </div>
+      </div>
     </div>
   );
 }
 
 export default GuestbookPage;
+
