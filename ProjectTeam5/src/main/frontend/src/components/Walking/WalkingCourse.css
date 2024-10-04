@@ -9,10 +9,9 @@
     width: 750px;
     height: 500px;
     background-color: #ffffff;
-    border-radius: 10px;
+    border-radius: 16px;
     border : solid 2px #7a63ff49;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    font-family: 'Arial', sans-serif;
+    font-family: "Noto Sans KR", sans-serif;
 }
 
 /* 검색 섹션과 상세 섹션 */
@@ -20,10 +19,9 @@
     flex: 1;
     padding: 20px;
     margin: 10px;
-    background-color: #f3f3f377;
+    background-color: #ffffff;
     border : solid 2px #7a63ff49;
     /* border-radius: 10px; */
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     overflow-y: auto; /* 각각의 섹션에서 스크롤이 가능하도록 */
 }
 
@@ -72,8 +70,10 @@
     text-align: left;
 }
 
-.detailWalking h2 {
+.detailWalking h2,.walking-search h1 {
     color: #333;
+    font-size: 13pt;
+    font-weight: 600;
 }
 
 .detailWalking table {
