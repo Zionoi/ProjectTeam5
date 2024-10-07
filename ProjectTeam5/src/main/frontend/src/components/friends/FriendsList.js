@@ -110,27 +110,28 @@ const toggleFriendListOpen = () => {
         ) : friends.length === 0 ? (
           <p>친구 목록이 없습니다.<br /> 당신이 첫 친구가 되어주세요!</p>
         ) : (
-          <ul>
-            {friends.map(friend => (
-              <li key={friend.fnum}>
-                <span className="f-list" onClick={() => goFriendHome(friend.friendId)}>{friend.friendId}</span>
-              </li>
-            ))}
-          </ul>
+          <ul className="friends-list-container">
+  {friends.map(friend => (
+    <li key={friend.fnum}>
+      <span className="f-list" onClick={() => goFriendHome(friend.friendId)}>{friend.friendId}</span>
+      {isOwner && <button onClick={() => deleteFriend(friend.fnum)}>삭제</button>}
+    </li>
+  ))}
+</ul>
         )
       ) : (
         // 홈페이지 주인일 때
         friends.length === 0 ? (
           <p>친구 목록이 없습니다.<br /> 친구를 추가해주세요!</p>
         ) : (
-          <ul>
-            {friends.map(friend => (
-              <li key={friend.fnum}>
-                <span className="f-list" onClick={() => goFriendHome(friend.friendId)}>{friend.friendId}</span>
-                <button onClick={() => deleteFriend(friend.fnum)}>삭제</button>
-              </li>
-            ))}
-          </ul>
+          <ul className="friends-list-container">
+  {friends.map(friend => (
+    <li key={friend.fnum}>
+      <span className="f-list" onClick={() => goFriendHome(friend.friendId)}>{friend.friendId}</span>
+      {isOwner && <button onClick={() => deleteFriend(friend.fnum)}>삭제</button>}
+    </li>
+  ))}
+</ul>
         )
       )}
 
