@@ -19,9 +19,9 @@ public class MessageController {
 
     // 메시지 전송 API
     @PostMapping("/send")
-    public Message sendMessage(@RequestBody Message message) {
+    public boolean sendMessage(@RequestBody Message message) {
     	
-        return messageService.sendMessage(message);
+        return messageService.sendMessage(message.getMemId(), message.getFriendId(), message.getMcontent());
     }
 
     // 특정 사용자가 받은 메시지 조회 API
