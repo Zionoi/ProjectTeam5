@@ -21,15 +21,22 @@ const WriteMessage = ({ recipient }) => {
       return;
     }
 
+    // 메시지 전송 요청을 백엔드에 보냄
     axios.post('/api/messages/send', {
       memId: senderId,  // 발신자 ID
       friendId: receiver,  // 수신자 ID
       mcontent: mContent   // 메시지 내용
     })
-    .then(() => {
-      alert(`${receiver} 님에게 메세지를 발송했습니다`);
-      setmContent('');  // 입력 필드 초기화
-      setReceiver('');  // 수신자 필드 초기화
+    .then((response) => {
+      if (response.data) {
+        // 친구라면 메시지 전송 성공
+        alert(`${receiver} 님에게 메세지를 발송했습니다.`);
+        setmContent('');  // 입력 필드 초기화
+        setReceiver('');  // 수신자 필드 초기화
+      } else {
+        // 친구가 아니라면 메시지 전송 불가
+        alert("친구가 아닌 사람에게는 메시지를 보낼 수 없습니다.");
+      }
     })
     .catch(error => console.error("Error sending message:", error));
   };
@@ -50,7 +57,7 @@ const WriteMessage = ({ recipient }) => {
         value={mContent}
         onChange={e => setmContent(e.target.value)}  // 메시지 내용 입력 필드
       /><br/><br/>
-      <button className="WM-Sbtn"onClick={sendMessage}>전송</button>  {/* 메시지 전송 버튼 */}
+      <button className="WM-Sbtn" onClick={sendMessage}>전송</button>  {/* 메시지 전송 버튼 */}
     </div>
   );
 }
