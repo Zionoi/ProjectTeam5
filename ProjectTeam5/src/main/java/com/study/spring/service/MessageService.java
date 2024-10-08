@@ -21,10 +21,16 @@ public class MessageService {
     @Autowired
     private FriendsRepository friendsRepository;
 
+    // 메시지 전송
+    public Message sendMessage(Message message) {
+       System.out.println("서비스 메시지 전송 : "  + message);
+       
+        return messageRepository.save(message);
+    }
 
     // 수신자가 받은 메시지 리스트 조회 (내림차순 정렬)
     public List<Message> getReceivedMessages(String friendId) {
-    	// 메시지 번호(mNum)를 기준으로 내림차순(DESC) 정렬
+       // 메시지 번호(mNum)를 기준으로 내림차순(DESC) 정렬
         return messageRepository.findByFriendId(friendId, Sort.by(Sort.Direction.DESC, "mNum"));
     }
     

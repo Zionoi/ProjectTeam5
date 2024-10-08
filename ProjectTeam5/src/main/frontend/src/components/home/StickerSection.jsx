@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './StickerSection.css';
+import axios from 'axios';
 
-function StickerSection() {
+function StickerSection({hostId}) {
   // 클릭 위치와 이미지를 저장하는 상태 변수 초기화, 세션 스토리지에 저장된 값 불러옴
   const [clickArr, setClickArr] = useState(() => {
     const savedStickers = sessionStorage.getItem('stickers');
@@ -10,6 +11,22 @@ function StickerSection() {
 
   // 현재 선택된 나비 이미지 인덱스 상태 변수
   const [clickIndex, setClickIndex] = useState(0);
+  const [backGround, setBackGround] = useState(0);
+  const [memId, setMemId] = useState(localStorage.getItem('id'));
+
+  useEffect(() => {
+    // 기존 게시물 정보를 불러옴
+    axios.get(`/member/get/${memId}`)
+      .then(response => {
+        console.log("home사진 불러오기", response.data);
+        const back = response.data.homeImgPath;
+        console.log("home사진 불러오기 back:", back);
+        setBackGround(`${back}`);
+      })
+      .catch(error => {
+        console.error('home 사진 불러오기 오류:', error);
+      });
+  }, []);
 
   // 나비 이미지 배열
   const butterflyImages = [
@@ -79,7 +96,7 @@ function StickerSection() {
       >
         {/* 나무 이미지, 클릭 시 RecordClick 함수 실행 */}
         <img
-          src="/tree.webp"
+          src={backGround}
           alt="나무사진"
           width="500px"
           height="500px"
