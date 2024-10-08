@@ -12,15 +12,16 @@ function StickerSection({hostId}) {
   // 현재 선택된 나비 이미지 인덱스 상태 변수
   const [clickIndex, setClickIndex] = useState(0);
   const [backGround, setBackGround] = useState(0);
+  const [memId, setMemId] = useState(localStorage.getItem('id'));
 
   useEffect(() => {
     // 기존 게시물 정보를 불러옴
-    axios.get(`/member/get/${hostId}`)
+    axios.get(`/member/get/${memId}`)
       .then(response => {
         console.log("home사진 불러오기", response.data);
-        const back = response.data.imgPath;
+        const back = response.data.homeImgPath;
         console.log("home사진 불러오기 back:", back);
-        setBackGround(`../../../uploadedFiles/${back}`);
+        setBackGround(`${back}`);
       })
       .catch(error => {
         console.error('home 사진 불러오기 오류:', error);

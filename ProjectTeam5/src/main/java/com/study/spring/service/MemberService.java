@@ -223,13 +223,15 @@ public class MemberService {
 
 	public List<String> saveProfileImage(MultipartFile image) throws Exception {
     String uploadDir = System.getProperty("user.dir") + "/uploadedFiles/";
+    File dir = new File(uploadDir);
     String fileName = UUID.randomUUID().toString() + "_" + image.getOriginalFilename();    
     List<String> list = new ArrayList<>();
-    File imgPath = new File(uploadDir + fileName);
+    File imgPath = new File(dir, fileName);
+    image.transferTo(imgPath);
+    
     // 파일 저장
     list.add(fileName);
-    list.add("/files/"+imgPath.getAbsolutePath());
-    image.transferTo(imgPath);
+    list.add("/files/"+ fileName);
     
     return list; // 저장된 이미지 이름 또는 경로를 반환
 }

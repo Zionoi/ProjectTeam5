@@ -226,8 +226,8 @@ public class MemberController {
             
             // 리스트에서 파일 이름과 경로를 안전하게 가져오기
             if (fileData.size() >= 2) { // 리스트의 크기를 확인
-                member.setImgName(fileData.get(0)); // 파일 이름을 멤버 객체에 설정
-                member.setImgPath(fileData.get(1)); // 파일 경로를 멤버 객체에 설정
+                member.setHomeImgName(fileData.get(0)); // 파일 이름을 멤버 객체에 설정
+                member.setHomeImgPath(fileData.get(1)); // 파일 경로를 멤버 객체에 설정
             } else {
                 throw new Exception("파일 데이터를 가져오는 데 실패했습니다.");
             }
@@ -236,7 +236,8 @@ public class MemberController {
         // 회원 정보 수정 로직
         memberService.updateMember(member);
 
-        return "회원정보가 성공적으로 수정되었습니다.";
+        return "success";
     }
+    
     
 }

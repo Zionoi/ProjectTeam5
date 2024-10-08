@@ -46,4 +46,8 @@ public class Member {
 	private Long todayVisit;
 	//토탈방문자수
 	private Long totalVisit;
+	
+	//사진 추가 경로
+	private String homeImgName;
+	private String homeImgPath;	
 }
