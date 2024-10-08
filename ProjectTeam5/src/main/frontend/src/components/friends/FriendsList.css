@@ -53,3 +53,27 @@ div {
 .friends-section-list button:hover {
   background-color: #aaa5a5;
 }
+
+
+.friends-list-container {
+  max-height: 220px; /* 스크롤을 할 높이를 설정 */
+  overflow-y: auto;  /* 세로 스크롤 활성화 */
+  padding: 5px; /* 리스트 내부 여백 추가 */
+  background-color: #ffffff77; /* 연한 배경 색상 */
+  border-radius: 10px; /* 모서리를 부드럽게 */
+}
+
+/* 스크롤바 스타일 적용 */
+.friends-list-container::-webkit-scrollbar {
+  width: 14px; /* 스크롤바 너비 설정 */
+}
+
+.friends-list-container::-webkit-scrollbar-thumb {
+  border-radius: 10px; /* 스크롤바 모서리 둥글게 */
+  border: 4px solid transparent; /* 스크롤바 주위 간격 */
+  box-shadow: inset 6px 6px 0 #d6cfff; /* 스크롤바 색상 */
+}
+
+.friends-list-container::-webkit-scrollbar-button {
+  display: none; /* 스크롤바 버튼 숨김 */
+}

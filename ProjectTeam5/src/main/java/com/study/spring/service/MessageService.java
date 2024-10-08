@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Sort;
 
+import com.study.spring.domain.Friends;
 import com.study.spring.domain.Message;
+import com.study.spring.repository.FriendsRepository;
 import com.study.spring.repository.MessageRepository;
 
 @Service
@@ -16,6 +18,8 @@ public class MessageService {
 
     @Autowired
     private MessageRepository messageRepository;
+    @Autowired
+    private FriendsRepository friendsRepository;
 
     // 메시지 전송
     public Message sendMessage(Message message) {
@@ -46,16 +50,27 @@ public class MessageService {
     }
     
     // 메시지를 발송하는 메서드(투표)
-    public void sendMessage(String memId, String friendId, String content) {
-        // 메시지 엔티티 생성
-        Message message = new Message();
-        message.setMemId(memId);  // 발신자 ID 설정
-        message.setFriendId(friendId);  // 수신자 ID 설정
-        message.setMcontent(content);  // 메시지 내용 설정
-        message.setCreateSysdate(LocalDateTime.now());  // 메시지 생성 시간 설정
-        message.setIsReading(1);  // 읽음 여부 기본값 (1: 읽지 않음)
+    public boolean sendMessage(String memId, String friendId, String content) {
+    	Optional<Friends> checkFriend = friendsRepository.findByMember_MemIdAndFriendIdAndStatus(memId, friendId, "수락");
+    	
+    	if(checkFriend.isPresent()) {
+    		
+        	// 메시지 엔티티 생성
+            Message message = new Message();
+            message.setMemId(memId);  // 발신자 ID 설정
+            message.setFriendId(friendId);  // 수신자 ID 설정
+            message.setMcontent(content);  // 메시지 내용 설정
+            message.setCreateSysdate(LocalDateTime.now());  // 메시지 생성 시간 설정
+            message.setIsReading(1);  // 읽음 여부 기본값 (1: 읽지 않음)
 
-        // 메시지 저장
-        messageRepository.save(message);
+            // 메시지 저장
+            messageRepository.save(message);
+    		
+    		return true;
+    	}else
+    	{
+    		return false;
+    	}
+
     }
 }

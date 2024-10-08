@@ -1,6 +1,7 @@
 package com.study.spring.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -31,6 +32,9 @@ public class VoteService {
 
     @Autowired
     private MessageService messageService;  // 쪽지 서비스
+
+    // 사용자가 선택한 코스 ID를 저장하기 위한 맵
+    private Map<Long, Map<String, String>> userSelectedCourses = new HashMap<>(); // voteId -> (userId, courseId)
 
     // 투표 생성하기
     @Transactional
@@ -67,7 +71,6 @@ public class VoteService {
 
         return savedVote; // 저장된 투표 객체 반환
     }
-
 
     // 투표 쪽지 보내기
     private void sendVoteCreatedMessages(Vote vote, Long voteId) {
@@ -130,18 +133,18 @@ public class VoteService {
         // 1. 해당 투표 조회
         Optional<Vote> voteOptional = getVoteById(voteId);
         if (!voteOptional.isPresent()) {
-            throw new RuntimeException("Vote not found");
+            throw new RuntimeException("투표를 찾을 수 없습니다.");
         }
         Vote vote = voteOptional.get();
 
         // 2. 투표가 종료되었는지 체크
         if (vote.isEnded()) {
-            throw new RuntimeException("Vote has ended");
+            throw new RuntimeException("투표가 종료되었습니다.");
         }
 
         // 3. 이미 투표했는지 체크 (중복 투표 방지)
         if (vote.getVotedUserIds().contains(userId)) { // votedUserIds를 확인
-            throw new RuntimeException("User has already voted");
+            throw new RuntimeException("이미 투표를 하셨습니다.");
         }
 
         // 4. 투표 수 업데이트 로직
@@ -154,11 +157,14 @@ public class VoteService {
 
         // 5. 투표한 사용자를 votedUserIds에 추가하여 중복 투표 방지
         vote.getVotedUserIds().add(userId);
+        
+        // 6. 선택한 코스를 기록 (유저와 코스 ID 매핑)
+        userSelectedCourses.computeIfAbsent(voteId, k -> new HashMap<>()).put(userId, courseId); // 유저가 선택한 코스 ID 저장
 
-        // 6. 투표 정보 저장
+        // 7. 투표 정보 저장
         voteRepository.save(vote);
 
-        // 7. 변경된 투표 수를 반환
+        // 8. 변경된 투표 수를 반환
         return voteCount;
     }
 
