@@ -119,6 +119,7 @@
 
 .bar-chart-container {
   margin-top: 20px;
+  width:600px;
 }
 .voted-course {
   border: 2px solid blue;
