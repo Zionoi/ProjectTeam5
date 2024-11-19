@@ -4,10 +4,8 @@ import './WalkingCourseVote.css';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 import { useParams } from 'react-router-dom';
-import ChartDataLabels from 'chartjs-plugin-datalabels';  // 플러그인 임포트
-//npm install chartjs-plugin-datalabels --save 설치
 
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend,ChartDataLabels);
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 const WalkingCourseVote = () => {
     const { voteId } = useParams();
@@ -22,10 +20,6 @@ const WalkingCourseVote = () => {
     const [userId, setUserId] = useState(localStorage.getItem('id'));
     const [selectedCourseId, setSelectedCourseId] = useState(null); // 내가 투표한 산책로 ID
     const [voteTitle, setVoteTitle] = useState(''); // 투표 제목 상태 추가
-    
-    const [isModalOpen, setIsModalOpen] = useState(false); // 모달 열림 상태
-    const [modalTitle, setModalTitle] = useState(''); // 모달 제목 상태
-    const [modalUsers, setModalUsers] = useState([]); // 모달에 표시할 유저 목록 상태
     useEffect(() => {
         axios.get(`/votes/${voteId}`)
             .then(response => {
@@ -38,7 +32,6 @@ const WalkingCourseVote = () => {
                 setIsCreator(data.memId === userId); 
                 setVoteCount(data.walkingCourseVoteCounts || {}); 
                 setVotedUsers(data.votedUserIds || []);
-                setVoteTitle(data.voteTitle);  
     
                 const uniqueParticipantIds = [...new Set(data.participantIds || [])]; 
                 setParticipantIds(uniqueParticipantIds); 
@@ -53,27 +46,6 @@ const WalkingCourseVote = () => {
             })
             .catch(error => console.error(error));
     }, [voteId, userId]);
-
-    const handleBarClick = (event) => {
-        const chart = event.chart; 
-        const activePoints = chart.getElementsAtEventForMode(event.native, 'nearest', { intersect: true }, false);
-
-        if (activePoints.length > 0) {
-            const { index } = activePoints[0]; // 클릭된 막대의 인덱스
-            const course = walkingCourses[index]; // 클릭된 막대에 해당하는 코스
-            
-            // 해당 코스에 투표한 유저 목록을 설정
-            const usersWhoVoted = votedUsers.filter(user => user === course.esntlId); // userId와 courseId를 비교
-            
-            setModalTitle(`${course.walkCourseName}에 투표한 유저들`);
-            setModalUsers(usersWhoVoted);
-            setIsModalOpen(true); // 모달 열기
-        }
-    };
-
-    const handleCloseModal = () => {
-        setIsModalOpen(false); // 모달 닫기
-    };
 
     const fetchWalkingCourseDetails = (courseIds) => {
         const fetchPromises = courseIds.map(id => 
@@ -136,19 +108,14 @@ const WalkingCourseVote = () => {
             {
                 label: '투표수',
                 data: walkingCourses.map(course => voteCount[course.esntlId] || 0),
-                fill: false, // line 형태일 때, 선 안쪽을 채우는지 여부
-                backgroundColor: '#c5c9ff', // dataset 배경색
-                borderColor: 'white', // dataset 테두리 색상
-                borderWidth: 2, // dataset 테두리 두께
-                maxBarThickness: 30, // 최대 bar의 두께 설정
-                borderRadius: 16, // 모서리를 둥글게 설정 (0~50 픽셀)
+                backgroundColor: 'rgba(75, 192, 192, 0.6)',
             },
         ],
     };
 
     return (
         <div className='WalkingCourseVoteBox'>
-            <h2>{voteTitle} 투표</h2>
+            <h2>{voteId} 투표</h2>
             <div className="selected-course-id">
             </div>
             {isVoteEnded ? (
@@ -156,71 +123,7 @@ const WalkingCourseVote = () => {
                     <p className="vote-ended-message">투표가 종료되었습니다.</p>
                     {chartData.labels.length > 0 ? (
                         <div className="bar-chart-container">
-                <Bar
-                    data={chartData}
-                    options={{
-                        indexAxis: 'y', // 수평 막대 그래프 설정
-                        onClick: handleBarClick, // 클릭 이벤트 핸들러 추가
-                        scales: {
-                            x: {
-                                grid: {
-                                    display: false,
-                                },
-                                title: {
-                                    display: true,
-                                },
-                                min: 0,
-                                ticks: {
-                                    stepSize: 1,
-                                    display: false,
-                                },
-                            },
-                            y: {
-                                grid: {
-                                    display: false,
-                                },
-                                title: {
-                                    display: true,
-                                },
-                            },
-                        },
-                        plugins: {
-                            datalabels: {
-                                align: 'end', // 레이블이 막대 옆에 위치
-                                anchor: 'end', // 막대 끝에 맞춤
-                                color:  (context) => {
-                                    const value = context.dataset.data[context.dataIndex];
-                                    return value === 0 ? '#7a63ff' : 'white'; 
-                                },
-                                
-                                formatter: (value) => `${value}표`,
-                                offset: (context) => {
-                                    const value = context.dataset.data[context.dataIndex];
-                                    return value === 0 ? 10 : -40; // 0표인 경우 offset을 양수(10)로 설정, 그 외는 음수(-40)
-                                },
-                        
-                                clip: false, // 레이블이 잘리지 않도록 설정
-                            },
-                        },
-                        datasets: {
-                                    label: 'Dataset', // 축의 제목
-                        },
-                    }}
-                />
-                                {/* 모달 UI 추가 */}
-            {isModalOpen && (
-                <div className="modal-overlay">
-                    <div className="modal-content">
-                        <button className="close-button" onClick={handleCloseModal}>X</button>
-                        <h2>{modalTitle}</h2>
-                        <ul>
-                            {modalUsers.map(user => (
-                                <li key={user}>{user}</li>
-                            ))}
-                        </ul>
-                    </div>
-                </div>
-            )}
+                            <Bar data={chartData} />  
                         </div>
                     ) : (
                         <p className="vote-ended-message">투표 데이터가 없습니다.</p>
