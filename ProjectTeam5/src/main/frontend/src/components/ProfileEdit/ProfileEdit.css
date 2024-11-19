@@ -40,15 +40,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
   }
-
-  .image-placeholder img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: cover; /* Ensure image scales properly */
-  }
-
+  
   .image-note {
     font-size: 12px;
     color: #999;
@@ -67,14 +60,8 @@
     border: 1px solid #ddd;
     border-radius: 5px;
     font-size: 14px;
-    transition: border-color 0.3s;
   }
   
-  .profile-input:focus {
-    border-color: #6a5acd; 
-    outline: none;
-  }
-
   .profile-edit-buttons {
     display: flex;
     gap: 20px;
@@ -102,9 +89,5 @@
   .save {
     background-color: #6a5acd;
     color: #fff;
-  }
-  
-  .save:hover {
-    background-color: #5b4cb8; /* Darken on hover */
   }
   

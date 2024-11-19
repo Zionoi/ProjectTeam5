@@ -46,7 +46,7 @@ function Home({hostId, setHostId}) {
           <ProfileSection hostId={hostId}/>
           <TopCommnets hostId={hostId} setHostId={setHostId}/>
           
-          <StickerSection hostId={hostId}/>
+          <StickerSection/>
           <CommentsSection hostId={hostId} setHostId={setHostId}/>
         </main>
 

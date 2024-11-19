@@ -56,7 +56,7 @@ function FriendsBlock({ memId = localStorage.getItem('id') }) {
       <h3>사용자 차단</h3>
       <input
         type="text"
-        placeholder="차단할 ID를 입력해주세요"
+        placeholder="차단할 사용자 ID를 입력해주세요"
         value={blockId} // 입력 필드와 상태 연결
         onChange={e => setBlockId(e.target.value)} // 입력값을 상태로 저장
       />

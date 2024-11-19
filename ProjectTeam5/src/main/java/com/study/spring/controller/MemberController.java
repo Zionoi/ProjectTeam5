@@ -1,6 +1,5 @@
 package com.study.spring.controller;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -8,9 +7,9 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -213,31 +212,10 @@ public class MemberController {
     }
     
     @PostMapping("/updateProfile")
-    public String updateProfile(
-            @ModelAttribute Member member,  // 수정할 회원 정보를 받습니다.
-            @RequestParam(value = "profileImage", required = false) MultipartFile profileImage) throws Exception {
-
-        System.out.println("프로필 사진 수정 테스트 profileImage: " + profileImage);
-        
-        // 프로필 이미지가 있는 경우 처리
-        if (profileImage != null && !profileImage.isEmpty()) {
-            // 이미지 파일 저장 메소드 호출
-            List<String> fileData = memberService.saveProfileImage(profileImage); // 이미지 저장 후 경로 반환
-            
-            // 리스트에서 파일 이름과 경로를 안전하게 가져오기
-            if (fileData.size() >= 2) { // 리스트의 크기를 확인
-                member.setHomeImgName(fileData.get(0)); // 파일 이름을 멤버 객체에 설정
-                member.setHomeImgPath(fileData.get(1)); // 파일 경로를 멤버 객체에 설정
-            } else {
-                throw new Exception("파일 데이터를 가져오는 데 실패했습니다.");
-            }
-        }
-
-        // 회원 정보 수정 로직
-        memberService.updateMember(member);
-
-        return "success";
+    public String updateProfile(@RequestBody Member m) {
+    	memberService.updateProfile(m);
+    	
+    	return "success";
     }
-    
     
 }
