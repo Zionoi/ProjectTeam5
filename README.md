@@ -1,9 +1,13 @@
-# Todo List Application
+# HomeTree
 
-간단한 할 일 관리 애플리케이션으로, 사용자가 작업을 추가, 삭제, 완료 표시할 수 있습니다.
+너와 나만의 작은 커뮤니티 공간, 홈트리
+
 
 ## 데모
-![Todo List 데모](images/demo.gif)
+![image](https://github.com/user-attachments/assets/843e5942-de7a-4dde-b2ee-10d7ca7eed23)
+![Uploading image.png…]()
+
+
 
 ## 설치 및 실행
 
