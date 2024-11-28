@@ -10,9 +10,9 @@
 
 > **HomeTree의 주요 화면**  
 > 아래는 HomeTree의 대표적인 화면입니다.  
-> *스크린샷 이미지를 아래 경로에 추가해주세요!*
 
-### 로그 페이지
+
+### 로그인 페이지
 ![로그 페이지](https://github.com/user-attachments/assets/366b38f1-e693-41e5-bc04-8484bf69b934)
 
 ---
