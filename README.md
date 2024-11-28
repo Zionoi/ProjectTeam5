@@ -13,7 +13,7 @@
 
 
 ### 로그인 페이지
-![로그 페이지](https://github.com/user-attachments/assets/366b38f1-e693-41e5-bc04-8484bf69b934)
+![로그인인 페이지](https://github.com/user-attachments/assets/366b38f1-e693-41e5-bc04-8484bf69b934)
 
 ---
 
@@ -27,72 +27,39 @@
 
 ---
 
-### 추가 스크린샷
-![추가 스크린샷](https://github.com/user-attachments/assets/example.png)
+### 다이어리
+![HomeTreeDiary](https://github.com/user-attachments/assets/323c3a18-75c5-4c0b-93fa-a775c237a637)
 
 ---
+
+### 산책로 검색
+![HomeTreeWalking](https://github.com/user-attachments/assets/e756c35f-0b59-457a-a176-1202f114c038)
+
+---
+
+### 산책로 투표및 결과페이지
+![HomeTreeWalkingVote](https://github.com/user-attachments/assets/537758b8-667e-4b49-813d-0eb4e2aca31a)
+
+---
+
+### 맛집 검색
+![HomeTreeRestaurant](https://github.com/user-attachments/assets/cb1dc3b4-4a71-494b-9e6b-2eeb619e1646)
+
+---
+
+### 방명록
+![HomeTreeGuestBook](https://github.com/user-attachments/assets/8bef0f7d-d614-4f65-9691-45966db9452e)
+
+---
+
+
 
 ## 🔗 프로젝트 소개
 
 - **프로젝트 이름:** HomeTree
 - **프로젝트 목적:**  
   너와 나만의 공간을 만들어주는 **미니홈페이지** 서비스.  
-  사용자는 자신의 홈페이지를 꾸미고, 친구들 홈페이지에 방문하며 서로의 개성을 공유할 수 있습니다.
-  
-- **프로젝트 의미:**  
-  "HomeTree"는 뿌리에서 시작해 가지로 이어지는 나무처럼,  
-  너와 나만의 작은 공간 홈트리를 통해 서로 연결될 수 있음을 상징합니다.
-
----
-
-## 🧑‍🤝‍🧑 팀원 소개
-
-| 이름         | 역할       |
-| ------------ | ---------- |
-| **김요한**   | 팀장       |
-| **임성훈**   | 팀원       |
-| **엄이슬**   | 팀원       |
-| **김주영**   | 팀원       |
-| **정승연**   | 팀원       |
-
----
-
-## ⚙️ 기술 스택
-
-- **Frontend:** React  
-- **Backend:** Spring Boot (STS), JPA  
-- **Database:** Oracle  
-- **Deployment:** AWS
-
----
-
-## 주요 기능 🌟
-
-1. **친구와의 소통**
-   - 친구 추가 및 메시지 주고받기
-   - 친구의 미니홈페이지 방문 및 방명록 남기기
-
-2. **다이어리**
-   - 일기 작성 및 기록 관리
-   - 작성된 일기를 미니홈페이지에서 확인 가능
-
-3. **게시판**
-   - 게시글 작성 및 이미지 등록
-   - 다양한 콘텐츠를 친구들과 공유
-
-4. **산책로 기능**
-   - 산책로 검색 및 정보 확인
-   - 친구들과 산책로 투표 기능을 통해 목적지 결정
-   - 투표 결과 확인 기능
-
-5. **맛집 검색**
-   - api 기반 맛집 검색 기능
-   - 맛집 정보를 공유하며 서로의 취향을 나눌 수 있음
-
-6. **MP3 플레이어**
-   - 홈페이지에서 음악 재생
-   - mp3컨트롤러는 드래그를 통해 원하는 위치에 배치 가능
-
+  사용자는 자신의 홈페이지를 꾸미고, 친구들 홈페이지에 방문하며 서로의 개성을 공유할 수 음
 ---
 
 ## 🚀 설치 및 실행
