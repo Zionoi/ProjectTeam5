@@ -68,7 +68,7 @@
 ### 로그인 페이지  
 <img src="https://github.com/user-attachments/assets/366b38f1-e693-41e5-bc04-8484bf69b934" width="66%" />
 
-- **설명:** JWT 토큰을 발행하여 기존 로컬 스토리지에 저장하던 방법에서 Httponly cookie 설정후 API 요청시 withCredentials:true 설정 및 서버단에서 쿠키확인하는 방법으로 로그인 구현
+- **설명:** JWT 토큰을 발행하여 기존 로컬 스토리지에 토큰을 저장하던 방법에서 HttpOnly Cookie로 JWT 저장후 API 요청시 withCredentials:true 설정 및 서버단에서 쿠키확인하는 방법으로 XSS공격을 대비한 로그인방법 구현
 ---
 
 ### 메인 페이지  
