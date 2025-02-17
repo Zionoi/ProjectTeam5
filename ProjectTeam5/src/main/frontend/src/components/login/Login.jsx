@@ -19,7 +19,8 @@ const Login = ({ onLoginSuccess }) => {
       const result = await axios.post('/member/login', {
         memId: userid,
         pass: pass,
-      });
+      },
+      { withCredentials: true });
       if (result.data && result.data.length >= 2 && result.data[0]) {
         localStorage.clear();
         localStorage.setItem('id', result.data[1]); // memId 저장
