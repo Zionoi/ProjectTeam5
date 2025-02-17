@@ -6,8 +6,11 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseCookie;
+import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -65,28 +68,60 @@ public class MemberController {
 		    return "성공하였습니다."; // 등록 성공 메시지
 		}
 
-    @PostMapping("/login")
-    public List<String> login(@RequestBody Member loginRequest) {
-    	
-        Optional<Member> member = memberRepository.findById(loginRequest.getMemId()); // 사용자 조회
-        System.out.println("loginRequest :" + loginRequest);
-        
-        if (member.isPresent() && member.get().getPass().equals(loginRequest.getPass())) {
-            List<String> list = new ArrayList<>();  // ArrayList로 초기화
-            
-            // JwtUtil을 사용하여 JWT 생성
-            String token = JwtUtil.generateToken(member.get().getMemId());
-            System.out.println("token :" + token);
-            
-            // 리스트에 토큰과 아이디를 추가
-            list.add(token);
-            list.add(member.get().getMemId());
-            
-            return list; // JWT와 아이디가 담긴 리스트 반환
-        }
-        
-        return Collections.singletonList("Invalid credentials"); // 잘못된 인증 정보
-    }	
+//    @PostMapping("/login")
+//    public List<String> login(@RequestBody Member loginRequest) {
+//    	
+//        Optional<Member> member = memberRepository.findById(loginRequest.getMemId()); // 사용자 조회
+//        System.out.println("loginRequest :" + loginRequest);
+//        
+//        if (member.isPresent() && member.get().getPass().equals(loginRequest.getPass())) {
+//            List<String> list = new ArrayList<>();  // ArrayList로 초기화
+//            
+//            // JwtUtil을 사용하여 JWT 생성
+//            String token = JwtUtil.generateToken(member.get().getMemId());
+//            System.out.println("token :" + token);
+//            
+//            // 리스트에 토큰과 아이디를 추가
+//            list.add(token);
+//            list.add(member.get().getMemId());
+//            
+//            return list; // JWT와 아이디가 담긴 리스트 반환
+//        }
+//        
+//        return Collections.singletonList("Invalid credentials"); // 잘못된 인증 정보
+//    }	
+
+	
+	@PostMapping("/login")
+	public ResponseEntity<List<String>> login(@RequestBody Member loginRequest) {
+	    Optional<Member> member = memberRepository.findById(loginRequest.getMemId());
+
+	    if (member.isPresent() && member.get().getPass().equals(loginRequest.getPass())) {
+	        List<String> list = new ArrayList<>();
+
+	        // JWT 생성
+	        String token = JwtUtil.generateToken(member.get().getMemId());
+
+	        // JWT를 HttpOnly 쿠키로 설정 **기존 로컬스토리지 저장방식이 보안 취약하다해서 Http쿠키 사용방법 적용해보는중
+	        ResponseCookie jwtCookie = ResponseCookie.from("token", token)
+	                .httpOnly(true)   // JavaScript에서 접근 불가능 (XSS 방어)
+	                .secure(true)     // HTTPS에서만 전송 (로컬 테스트 시 false로 변경 가능)
+	                .path("/")        // 모든 경로에서 쿠키 사용 가능
+	                .maxAge(24 * 60 * 60) // 1일 유지
+	                .build();
+
+	        
+	        list.add(token);  // 토큰을 리스트에 포함
+	        list.add(member.get().getMemId()); // 사용자 ID 포함
+
+	        return ResponseEntity.ok()
+	                .header(HttpHeaders.SET_COOKIE, jwtCookie.toString()) // 쿠키 설정 추가
+	                .body(list); // 기존 반환 방식 유지
+	    }
+
+	    return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+	            .body(Collections.singletonList("Invalid credentials"));
+	}
 
     
     @GetMapping("/search")
