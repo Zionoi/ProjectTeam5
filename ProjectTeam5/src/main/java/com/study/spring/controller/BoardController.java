@@ -5,6 +5,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -17,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.study.spring.domain.Board;
 import com.study.spring.service.BoardService;
+import com.study.spring.util.JwtUtil;
 
 @RestController
 @RequestMapping("/board")
@@ -69,10 +73,21 @@ public class BoardController {
 	
 	//특정 board 1개를 가져옴
 	@GetMapping("/detail")
-	public Board detailBoard(@RequestParam("bNum") Long bNum)
-	{
-		System.out.println("보드 디테일 가져오기 bnum : " + bNum);
-		return boardService.detailBoard(bNum).get();
+	public ResponseEntity<?> detailBoard(@RequestParam("bNum") Long bNum, 
+	                                     @CookieValue(value = "token", required = false) String token) {
+	    // 1. 쿠키에서 JWT 토큰 확인
+	    if (token == null || !JwtUtil.validateToken(token)) {
+	        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Unauthorized request");
+	    }
+
+	    // 2. JWT에서 사용자 ID 추출 (로그인된 사용자 검증)
+	    String memId = JwtUtil.getUsername(token);
+
+	    // 3. 게시글 정보 가져오기
+	    System.out.println("보드 디테일 가져오기 bnum : " + bNum);
+	    return boardService.detailBoard(bNum)
+	            .map(ResponseEntity::ok) // 게시글이 존재하면 200 OK 응답
+	            .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body(null));
 	}
 	
 	
