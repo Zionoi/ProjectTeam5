@@ -113,12 +113,12 @@ public class MemberController {
 	        
 	        list.add(token);  // 토큰을 리스트에 포함
 	        list.add(member.get().getMemId()); // 사용자 ID 포함
-
+	        System.out.println("로그인 header 쿠키 토큰 : " + jwtCookie);
 	        return ResponseEntity.ok()
 	                .header(HttpHeaders.SET_COOKIE, jwtCookie.toString()) // 쿠키 설정 추가
 	                .body(list); // 기존 반환 방식 유지
 	    }
-
+	    System.out.println("로그인 header 쿠키 토큰 : aaaaaaaaa");
 	    return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
 	            .body(Collections.singletonList("Invalid credentials"));
 	}
